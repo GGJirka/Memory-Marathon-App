@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <jimmy.gg.flashingnumbers.preferences.CustomPreference
+        android:title="@string/settings_number_title"
+        android:key="settings_numbers_title">
+    <ListPreference
+        android:key="settings_group"
+        android:title="@string/settings_number_group_title"
+        android:summary="@string/settings_number_group_summary"
+        android:dialogTitle="@string/settings_number_group_dialogtitle"
+        android:entries="@array/array_entries"
+        android:entryValues="@array/array_entries"
+        android:defaultValue="2"
+        />
+    <ListPreference
+        android:key="settings_row"
+        android:title="@string/settings_number_row_title"
+        android:summary="@string/settings_number_row_summary"
+        android:dialogTitle="@string/settings_number_row_dialogtitle"
+        android:entries="@array/array_entries"
+        android:entryValues="@array/array_entries"
+        android:defaultValue="2"/>
+    </jimmy.gg.flashingnumbers.preferences.CustomPreference>
+    <jimmy.gg.flashingnumbers.preferences.CustomPreference
+        android:title="@string/settings_timer_title">
+        <ListPreference
+            android:key="settings_timer"
+            android:title="@string/settings_timer_top"
+            android:summary="@string/settings_timer_summary"
+            android:dialogTitle="@string/settings_timer_dialogtitle"
+            android:entries="@array/array_time"
+            android:entryValues="@array/array_time_id"
+            android:defaultValue="3"/>
+    </jimmy.gg.flashingnumbers.preferences.CustomPreference>
+</PreferenceScreen>
