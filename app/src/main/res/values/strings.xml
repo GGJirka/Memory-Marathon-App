@@ -105,4 +105,6 @@
     <string name="numbers_button_remember">REMEMBER</string>
     <string name="numbers_remember_done">DONE</string>
     <string name="numbers_fast_mode">QUICK</string>
+
+    <string name="quick_button_done">DONE</string>
 </resources>
