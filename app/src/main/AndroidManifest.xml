@@ -32,7 +32,8 @@
         <activity
             android:name=".LevelManager.NumbersRemember"
             android:noHistory="true" />
-        <activity android:name=".quicklevel.QuickLevel"></activity>
+        <activity android:name=".quicklevel.QuickLevel">
+        </activity>
     </application>
 
 </manifest>

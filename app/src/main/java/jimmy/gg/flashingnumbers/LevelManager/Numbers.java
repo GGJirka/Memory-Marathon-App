@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class Numbers extends AppCompatActivity{
     private TextView timeRemain, numbers;
@@ -84,6 +86,25 @@ public class Numbers extends AppCompatActivity{
             }
         };
         screenTimer.start();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch(menuItem.getItemId()){
+            case R.id.action_settings:
+                Intent intent = new Intent(this,NumbersSettings.class);
+                startActivity(intent);
+                return true;
+            default:
+                this.finish();
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 
     public void revealNumbers(){
@@ -192,11 +213,6 @@ public class Numbers extends AppCompatActivity{
     @Override
     public void onResume(){
         super.onResume();
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        finish();
-        return super.onOptionsItemSelected(item);
     }
 
     public void numbersDone(){

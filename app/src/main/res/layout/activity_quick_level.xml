@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/quick_progressBar"
         android:progress="100"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:visibility="invisible"/>
 </LinearLayout>
 
@@ -66,22 +66,15 @@
         android:visibility="invisible"
         android:inputType="numberDecimal"/>
 
-    <TextView
-        android:text="What was the number?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quick_on_end_view"
-        android:layout_alignBaseline="@+id/quick_numbers"
-        android:layout_alignBottom="@+id/quick_numbers"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="30sp"
         android:gravity="center"
-        android:id="@+id/quick_linear_result">
+        android:id="@+id/quick_linear_result"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
     </LinearLayout>
 
     <Button
@@ -93,7 +86,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="10sp"
-        android:id="@+id/button2"
+        android:id="@+id/quick_button_done"
         android:visibility="invisible"
         android:onClick="numbersRemembered"/>
+
+    <TextView
+        android:text="What was the number?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quick_on_end_view"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/quick_count_down"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
 </RelativeLayout>
