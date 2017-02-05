@@ -18,6 +18,11 @@ public class Level {
     public String getDifficult(){
         return difficult;
     }
+
+    public void setDifficult(String difficult){
+        this.difficult = difficult;
+    }
+
     public String getLevel() {
         return level;
     }

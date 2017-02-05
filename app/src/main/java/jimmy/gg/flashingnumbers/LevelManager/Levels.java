@@ -1,6 +1,8 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,21 +11,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
+import jimmy.gg.flashingnumbers.menu.HighScore;
 
 public class Levels extends AppCompatActivity {
     public final static String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
     public final static String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
     public final static String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
-    private ListView levels;
+    public final static String LEVEL_KEY = "HIGHEST_LEVEL1";
+    public static SharedPreferences sharedPreferences;
+    public static ListView levels;
     public static ArrayList<Level> levelList;
 
-    public Levels(){
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -32,6 +36,7 @@ public class Levels extends AppCompatActivity {
         setTitle("Levels");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         levelList = new ArrayList<>();
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         levels = (ListView) findViewById(R.id.levels);
         levels.setItemsCanFocus(false);
         levelList.add(new Level("Level 1", "numbers: 5   ", "time: 10s   ", "easy"));
@@ -50,18 +55,36 @@ public class Levels extends AppCompatActivity {
         levelList.add(new Level("Level 14", "numbers: 100", "time: 180s", "hard"));
 
         levels.setAdapter(new LevelAdapter(getApplicationContext(), levelList));
-
         levels.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String level = levelList.get(position).getLevel();
-                String numbers = levelList.get(position).getNumbers();
-                String time = levelList.get(position).getTime();
-                gameStarted(level, numbers, time);
+                if(levelList.get(position).getDifficult()!="locked") {
+                    String level = levelList.get(position).getLevel();
+                    String numbers = levelList.get(position).getNumbers();
+                    String time = levelList.get(position).getTime();
+                    gameStarted(level, numbers, time);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Level locked, complete "+levelList.get(position-1).getLevel()
+                            +" to unlock.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.popup_menu,menu);
+        return true;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        int index = sharedPreferences.getInt(LEVEL_KEY,1);
+        for(int i=index;i<levelList.size();i++) {
+            levelList.get(i).setDifficult("locked");
+        }
+        levels.setAdapter(new LevelAdapter(getApplicationContext(), levelList));
+    }
     public void gameStarted(String level, String numbers, String time){
         Intent intent = new Intent(this, Numbers.class);
         intent.putExtra(EXTRA_LEVEL,level);
@@ -79,17 +102,19 @@ public class Levels extends AppCompatActivity {
     public void onPause(){
         super.onPause();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        this.finish();
+        switch(item.getItemId()){
+            case R.id.high_score:
+                startActivity(new Intent(this, HighScore.class));
+                break;
+            default:
+                this.finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        //getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
     public List<Level> getLevelList(){
         return levelList;
     }

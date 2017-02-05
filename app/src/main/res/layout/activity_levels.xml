@@ -4,7 +4,6 @@
     android:id="@+id/activity_levels"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="jimmy.gg.flashingnumbers.LevelManager.Levels">
     <ListView
         android:layout_width="match_parent"

@@ -1,8 +1,10 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ObbInfo;
 import android.graphics.PorterDuff;
 import android.os.CountDownTimer;
@@ -181,6 +183,24 @@ public class NumbersRemember extends AppCompatActivity {
     }
 
     public void dialogPassed(){
+        SharedPreferences sharedPreferences = Levels.sharedPreferences;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String level= getIntent().getStringExtra(Numbers.EXTRA_LEVEL);
+        String[] data = level.split(" ");
+        int acLevel = Integer.parseInt(data[1]);
+        Toast.makeText(getApplicationContext(),sharedPreferences.getInt(Levels.LEVEL_KEY,1)+" == "+acLevel, Toast.LENGTH_LONG).show();
+        if(sharedPreferences.getInt(Levels.LEVEL_KEY,1)==acLevel){
+            acLevel++;
+            if(acLevel>=6 && acLevel<=10){
+                Levels.levelList.get(acLevel).setDifficult("medium");
+            }else if(acLevel>=11 && acLevel<=14){
+                Levels.levelList.get(acLevel).setDifficult("hard");
+            }else{
+                Levels.levelList.get(acLevel).setDifficult("easy");
+            }
+            editor.putInt(Levels.LEVEL_KEY, acLevel);
+            editor.commit();
+        }
         new AlertDialog.Builder(NumbersRemember.this)
                 .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" passed")
                 .setMessage("You have successfuly remembered " + numberCount + " numbers")

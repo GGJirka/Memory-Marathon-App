@@ -1,6 +1,7 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,9 +16,11 @@ import jimmy.gg.flashingnumbers.R;
  */
 
 public class LevelAdapter extends BaseAdapter{
+    public final static String LEVEL_KEY = "HIGHEST_LEVEL1";
     private Context context;
     private ArrayList<Level> levels;
     private View v;
+
     public LevelAdapter(Context context, ArrayList<Level> levels) {
         this.context = context;
         this.levels = levels;
@@ -59,6 +62,9 @@ public class LevelAdapter extends BaseAdapter{
                 v.setBackgroundResource(R.drawable.lw_hard);
                 break;
             case "extreme":
+                break;
+            case "locked":
+                v.setBackgroundResource(R.drawable.lw_locked);
                 break;
         }
         v.setTag(position);

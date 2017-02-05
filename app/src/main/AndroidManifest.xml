@@ -32,8 +32,9 @@
         <activity
             android:name=".LevelManager.NumbersRemember"
             android:noHistory="true" />
-        <activity android:name=".quicklevel.QuickLevel">
-        </activity>
+        <activity android:name=".quicklevel.QuickLevel" />
+        <activity android:name=".menu.HighScore" />
+        <activity android:name=".menu.Score"></activity>
     </application>
 
 </manifest>

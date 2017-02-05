@@ -72,6 +72,13 @@ public class QuickLevel extends AppCompatActivity {
                             timerBetweenLevels();
                         }
                     })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            timerBetweenLevels();
+                        }
+                    })
+
                     .show();
         }
     }
@@ -112,7 +119,15 @@ public class QuickLevel extends AppCompatActivity {
         startTimer();
     }
 
-
+    public void onPause(){
+        super.onPause();
+    }
+    public void onResume(){
+        super.onResume();
+    }
+    public void onStop(){
+        super.onStop();
+    }
     public void startTimer(){
         progress.setVisibility(View.VISIBLE);
 
@@ -251,6 +266,13 @@ public class QuickLevel extends AppCompatActivity {
         layout.addView(next);
         editText.setText("");
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        this.finish();
+        return  super.onOptionsItemSelected(menu);
+    }
+
     public void numbersRemembered(View view){
         firstTimer.cancel();
         secondTimer.cancel();
