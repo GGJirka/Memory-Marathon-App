@@ -18,22 +18,22 @@ import jimmy.gg.flashingnumbers.R;
 public class HighScoreAdapter extends BaseAdapter{
     public final static String LEVEL_KEY = "HIGHEST_LEVEL1";
     private Context context;
-    private ArrayList<Score> levels;
+    private ArrayList<Score> scores;
     private View v;
 
-    public HighScoreAdapter(Context context, ArrayList<Score> levels) {
+    public HighScoreAdapter(Context context, ArrayList<Score> scores) {
         this.context = context;
-        this.levels = levels;
+        this.scores= scores;
     }
 
     @Override
     public int getCount() {
-        return levels.size();
+        return scores.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return levels.get(position);
+        return scores.get(position);
     }
 
     @Override
@@ -44,10 +44,10 @@ public class HighScoreAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         v = View.inflate(context, R.layout.activity_score,null);
-        TextView level = (TextView) v.findViewById(R.id.high_score_score);
-        TextView numbers = (TextView) v.findViewById(R.id.high_score_level);
-        numbers.setText(levels.get(position).getLevel());
-        level.setText(levels.get(position).getHighScore());
+        TextView time = (TextView) v.findViewById(R.id.high_score_score);
+        TextView level = (TextView) v.findViewById(R.id.high_score_level);
+        level.setText(scores.get(position).getLevel());
+        time.setText(scores.get(position).getHighScore()+"s");
         v.setTag(position);
         return v;
     }

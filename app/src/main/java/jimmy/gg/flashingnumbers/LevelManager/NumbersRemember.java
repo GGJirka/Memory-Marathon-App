@@ -195,27 +195,27 @@ public class NumbersRemember extends AppCompatActivity {
         String tm = String.valueOf(timerRemain);
         StringBuilder builder = new StringBuilder();
 
-        for(int i=0;i<tm.length();i++) {
+        for(int i=0;i<tm.length();i++){
             char c = tm.charAt(i);
+            if(tm.length()==2){
+                builder.append("0");
+            }
             if (i == tm.length() - 2) {
                 builder.append(".");
             }
             builder.append(c);
         }
 
-        //SharedPreferences.Editor edit = highScore.edit();
-        if(Levels.highScore.getInt(HighScore.KEY_HIGH_SCORE+data[1],0)!=0){
-            if(timerRemain>Integer.parseInt(Levels.highScore.getString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel),"0"))){
-                SharedPreferences.Editor edit = Levels.highScore.edit();
-                edit.putString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel),builder.toString());
-                edit.commit();
-                Toast.makeText(getApplicationContext(),timerRemain,Toast.LENGTH_SHORT).show();
+        if(highScore.getString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel-1),"0")!="0") {
+            double time = Double.parseDouble(highScore.getString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), "0"));
+            if (time > Double.parseDouble(builder.toString())) {
+                highScoreEditor.putString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), builder.toString());
+                highScoreEditor.commit();
             }
-        }/*else{
-            highScoreEditor.putString(HighScore.KEY_HIGH_SCORE,builder.toString());
+        }else {
+            highScoreEditor.putString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel-1), builder.toString());
             highScoreEditor.commit();
-        }*/
-
+        }
         if(sharedPreferences.getInt(Levels.LEVEL_KEY,1)==acLevel){
             acLevel++;
             if(acLevel>=6 && acLevel<=10){

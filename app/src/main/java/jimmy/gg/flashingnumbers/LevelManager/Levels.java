@@ -31,7 +31,6 @@ public class Levels extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.NumbersStyle);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
         setTitle("Levels");

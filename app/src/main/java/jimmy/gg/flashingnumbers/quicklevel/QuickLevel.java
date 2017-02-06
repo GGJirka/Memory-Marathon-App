@@ -44,7 +44,7 @@ public class QuickLevel extends AppCompatActivity {
     private CountDownTimer firstTimer = null;
     private CountDownTimer secondTimer = null;
     private CountDownTimer thirdTimer = null;
-
+    private int sec = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -86,11 +86,15 @@ public class QuickLevel extends AppCompatActivity {
     public void timerBetweenLevels(){
         final TextView countDown = (TextView) findViewById(R.id.quick_count_down);
         countDown.setVisibility(View.VISIBLE);
-        firstTimer =  new CountDownTimer(3000,1000) {
+        firstTimer =  new CountDownTimer(2500,100) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                countDown.setText("" + millisUntilFinished / 1000);
+                if (Math.round((float)millisUntilFinished/ 1000.0f) != sec)
+                {
+                    sec = Math.round((float)millisUntilFinished / 1000.0f);
+                    countDown.setText("" + (sec+1 ));
+                }
             }
 
             @Override

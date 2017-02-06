@@ -24,13 +24,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:id="@+id/high_score_score"
         android:text="test"
         android:textColor="@color/black"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/high_score_level"
         android:layout_toEndOf="@+id/high_score_level"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 </RelativeLayout>

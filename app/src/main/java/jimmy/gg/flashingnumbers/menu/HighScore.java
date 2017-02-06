@@ -29,12 +29,13 @@ public class HighScore extends AppCompatActivity {
         scores = new ArrayList<>();
         levelList = new ArrayList<>();
         highScores = (ListView) findViewById(R.id.high_scores);
-            /*scores.add(new Score(level.getLevel()+"("+level.getNumbers()+"): ",
-                    Levels.highScore.getString(KEY_HIGH_SCORE,"0")));*/
+
         for(int i=0;i<Levels.levelList.size();i++){
             Level lv = Levels.levelList.get(i);
-            scores.add(new Score(lv.getLevel()+" ("+lv.getNumbers()+"): ",
-                    Levels.highScore.getString(KEY_HIGH_SCORE+String.valueOf(i),"0")));
+            if(Levels.highScore.getString(KEY_HIGH_SCORE+String.valueOf(i),"0")!="0") {
+                scores.add(new Score(lv.getLevel() + " (" + lv.getNumbers()+"): ",
+                        Levels.highScore.getString(KEY_HIGH_SCORE + String.valueOf(i), "0")));
+            }
         }
         highScores.setAdapter(new HighScoreAdapter(getApplicationContext(),scores));
     }

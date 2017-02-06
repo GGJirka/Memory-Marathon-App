@@ -32,9 +32,10 @@ public class Numbers extends AppCompatActivity{
     private ArrayList<String> numbersInRow;
     private ArrayList<ImageView> images = new ArrayList<>();
     private CountDownTimer screenTimer=null, countDownTimer=null;
-    private int actualIndex=0, countRow=0;
+    private int actualIndex=0, countRow=0,timeRemain1,sec = 0;
     private StringBuilder numbersToSend = new StringBuilder();
-    private int timeRemain1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         setTheme(R.style.NumbersStyle);
@@ -69,14 +70,15 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void gameStart(){
-        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_TIMER,""))*1000+1000,1000){
+        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_TIMER,""))*1000+1000,100){
             TextView countDown = (TextView)findViewById(R.id.count_down);
             @Override
             public void onTick(long millisUntilFinished) {
-                countDown.setText(""+millisUntilFinished/1000);
-                if(millisUntilFinished<=1){
-                    onFinish();
+                if (Math.round((float)millisUntilFinished/ 1000.0f) != sec) {
+                    sec = Math.round((float)millisUntilFinished / 1000.0f);
+                    countDown.setText("" + (sec+1 ));
                 }
+
             }
             @Override
             public void onFinish(){
