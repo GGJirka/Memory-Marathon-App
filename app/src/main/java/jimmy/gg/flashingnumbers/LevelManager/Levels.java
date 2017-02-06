@@ -24,6 +24,7 @@ public class Levels extends AppCompatActivity {
     public final static String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
     public final static String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
     public final static String LEVEL_KEY = "HIGHEST_LEVEL1";
+    public static SharedPreferences highScore;
     public static SharedPreferences sharedPreferences;
     public static ListView levels;
     public static ArrayList<Level> levelList;
@@ -37,6 +38,7 @@ public class Levels extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         levelList = new ArrayList<>();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        highScore = this.getPreferences(Context.MODE_PRIVATE);
         levels = (ListView) findViewById(R.id.levels);
         levels.setItemsCanFocus(false);
         levelList.add(new Level("Level 1", "numbers: 5   ", "time: 10s   ", "easy"));

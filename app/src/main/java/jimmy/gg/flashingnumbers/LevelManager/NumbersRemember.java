@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.menu.HighScore;
 
 public class NumbersRemember extends AppCompatActivity {
     private ArrayList<EditText> texts = new ArrayList<>();
@@ -39,7 +40,7 @@ public class NumbersRemember extends AppCompatActivity {
     private int numberCount;
     private CountDownTimer countDownTimer = null;
     private String numbers;
-
+    private int timerRemain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -51,6 +52,7 @@ public class NumbersRemember extends AppCompatActivity {
         Intent intent = getIntent();
         numberCount = intent.getIntExtra(Numbers.EXTRA_NUMBERS_COUNT,0);
         numbers = intent.getStringExtra(Numbers.EXTRA_NUMBERS);
+        timerRemain = intent.getIntExtra(Numbers.EXTRA_TIME_REMAIN,0);
         createRow();
         startTimer();
     }
@@ -184,11 +186,36 @@ public class NumbersRemember extends AppCompatActivity {
 
     public void dialogPassed(){
         SharedPreferences sharedPreferences = Levels.sharedPreferences;
+        SharedPreferences highScore = Levels.highScore;
+        SharedPreferences.Editor highScoreEditor = highScore.edit();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String level= getIntent().getStringExtra(Numbers.EXTRA_LEVEL);
         String[] data = level.split(" ");
         int acLevel = Integer.parseInt(data[1]);
-        Toast.makeText(getApplicationContext(),sharedPreferences.getInt(Levels.LEVEL_KEY,1)+" == "+acLevel, Toast.LENGTH_LONG).show();
+        String tm = String.valueOf(timerRemain);
+        StringBuilder builder = new StringBuilder();
+
+        for(int i=0;i<tm.length();i++) {
+            char c = tm.charAt(i);
+            if (i == tm.length() - 2) {
+                builder.append(".");
+            }
+            builder.append(c);
+        }
+
+        //SharedPreferences.Editor edit = highScore.edit();
+        if(Levels.highScore.getInt(HighScore.KEY_HIGH_SCORE+data[1],0)!=0){
+            if(timerRemain>Integer.parseInt(Levels.highScore.getString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel),"0"))){
+                SharedPreferences.Editor edit = Levels.highScore.edit();
+                edit.putString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel),builder.toString());
+                edit.commit();
+                Toast.makeText(getApplicationContext(),timerRemain,Toast.LENGTH_SHORT).show();
+            }
+        }/*else{
+            highScoreEditor.putString(HighScore.KEY_HIGH_SCORE,builder.toString());
+            highScoreEditor.commit();
+        }*/
+
         if(sharedPreferences.getInt(Levels.LEVEL_KEY,1)==acLevel){
             acLevel++;
             if(acLevel>=6 && acLevel<=10){
@@ -201,9 +228,10 @@ public class NumbersRemember extends AppCompatActivity {
             editor.putInt(Levels.LEVEL_KEY, acLevel);
             editor.commit();
         }
+
         new AlertDialog.Builder(NumbersRemember.this)
                 .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" passed")
-                .setMessage("You have successfuly remembered " + numberCount + " numbers")
+                .setMessage("You have successfuly remembered " + numberCount + " numbers in time: "+builder.toString()+"s")
                 .setPositiveButton("NEXT", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which){

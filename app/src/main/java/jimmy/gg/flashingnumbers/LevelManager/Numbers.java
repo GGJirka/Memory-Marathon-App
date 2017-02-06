@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,6 +34,7 @@ public class Numbers extends AppCompatActivity{
     private CountDownTimer screenTimer=null, countDownTimer=null;
     private int actualIndex=0, countRow=0;
     private StringBuilder numbersToSend = new StringBuilder();
+    private int timeRemain1;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         setTheme(R.style.NumbersStyle);
@@ -180,10 +183,12 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void startTimer(){
+        final int time = Integer.parseInt(timer())*1000;
         countDownTimer = new CountDownTimer(Integer.parseInt(timer()) * 1000, 1){
             @Override
             public void onTick(long millisUntilFinished){
                 timer.setProgress((int) (millisUntilFinished/(Integer.parseInt(timer()) * 1000/100)));
+                timeRemain1 = (int) ((time-millisUntilFinished)/10);
             }
             @Override
             public void onFinish() {
@@ -206,6 +211,7 @@ public class Numbers extends AppCompatActivity{
         //screenTimer.cancel();
         //countDownTimer.cancel();
     }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
@@ -216,14 +222,15 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void numbersDone(){
-        countDownTimer.cancel();
         Intent intent = new Intent(this,NumbersRemember.class);
         intent.putExtra(EXTRA_NUMBERS, numbersToSend.toString());
         intent.putExtra(EXTRA_NUMBERS_COUNT, countRow);
         intent.putExtra(EXTRA_LEVEL, getIntent().getStringExtra("jimmy.gg.flashingnumbers.LEVEL"));
         intent.putExtra(EXTRA_TIME, getIntent().getStringExtra("jimmy.gg.flashingnumbers.TIME"));
+        intent.putExtra(EXTRA_TIME_REMAIN,timeRemain1);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        countDownTimer.cancel();
     }
 
     static class Keys{
@@ -235,4 +242,5 @@ public class Numbers extends AppCompatActivity{
     public static final String EXTRA_NUMBERS_COUNT = "jimmy.gg.flashingnumbers.NUMBERS_COUNT";
     public static final String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
     public static final String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
+    public static final String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
 }

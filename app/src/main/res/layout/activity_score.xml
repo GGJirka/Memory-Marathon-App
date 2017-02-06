@@ -10,4 +10,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jimmy.gg.flashingnumbers.menu.Score">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Level 1 (15numbers): "
+        android:id="@+id/high_score_level"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/high_score_score"
+        android:text="test"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/high_score_level"
+        android:layout_toEndOf="@+id/high_score_level"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp" />
 </RelativeLayout>
