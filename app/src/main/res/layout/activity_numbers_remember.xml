@@ -28,6 +28,14 @@
         android:layout_height="wrap_content"
         android:progress="100"
         android:id="@+id/remember_timer"/>
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="20"
+            android:inputType="textMultiLine|numberDecimal"
+            android:textSize="27dp"
+            android:digits="0123456789"
+            android:textAlignment="center"
+            android:id="@+id/numbers_remember"/>
     </LinearLayout>
 </RelativeLayout>

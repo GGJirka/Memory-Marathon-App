@@ -3,15 +3,15 @@ package jimmy.gg.flashingnumbers.LevelManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
-import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,14 @@ import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.HighScore;
 
 public class NumbersRemember extends AppCompatActivity {
-    private ArrayList<EditText> texts = new ArrayList<>();
+    private EditText number;
     private LinearLayout layout;
     private int numberCount;
     private CountDownTimer countDownTimer = null;
     private String numbers;
     private int timerRemain;
-    private int editTextIndex;
-    
+    private int c=20;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -53,26 +54,15 @@ public class NumbersRemember extends AppCompatActivity {
     }
 
     protected void createRow(){
-        int numberLength = numberCount;
-        for(int i=0;i<numberLength;i++) {
-            if (numberLength > 20) {
-                if(i == 0)
-                    append(20,true);
-                else
-                    append(20,false);
+        number = (EditText) findViewById(R.id.numbers_remember);
+        number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(numberCount)});
 
-                numberLength-=20;
-            }else{
-                append(numberLength,false);
-                numberLength=0;
-            }
-        }
-        ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
-        Button button = new Button(newContext);
-        button.setText(R.string.numbers_remember_done);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(600,40,0,0);
+        ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
+        Button button = new Button(newContext);
+        button.setText(R.string.numbers_remember_done);
         button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         button.setLayoutParams(params);
         layout.addView(button);
@@ -85,22 +75,6 @@ public class NumbersRemember extends AppCompatActivity {
         });
     }
 
-    public void append(int size, boolean isUpper){
-        EditText number = new EditText(NumbersRemember.this);
-        number.setInputType(InputType.TYPE_CLASS_NUMBER);
-        number.setFocusable(true);
-        number.setFocusableInTouchMode(true);
-        number.getBackground().setColorFilter(getResources().getColor(R.color.numbers_title_bot), PorterDuff.Mode.SRC_ATOP);
-        LinearLayout.LayoutParams par = new LinearLayout.LayoutParams((27 * size) * 2 - 27, ViewGroup.LayoutParams.WRAP_CONTENT);
-        number.setLayoutParams(par);
-        number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(size)});
-        number.setTextSize(27);
-        if(isUpper) {
-            par.setMargins(0,20,0,0);
-        }
-        texts.add(number);
-        layout.addView(number);
-    }
     public void startTimer(){
         final ProgressBar timer = (ProgressBar) findViewById(R.id.remember_timer);
         countDownTimer = new CountDownTimer(180*1000, 1){
@@ -117,21 +91,31 @@ public class NumbersRemember extends AppCompatActivity {
     }
 
     public void done(){
-        StringBuilder build = new StringBuilder();
-        for(EditText text:this.texts){
-            build.append(text.getText().toString()+" ");
-        }
+        EditText txt = (EditText) findViewById(R.id.numbers_remember);
+        String numbToStr = txt.getText().toString();
+        int check = numberCount/21;
+
+        int b = numbToStr.length();//25
+        String[] lines = new String[numbToStr.length()/21+1];
         layout.removeAllViews();
+        for(int i=0;i<lines.length;i++){
+            if(b >= 21) {
+                lines[i] = numbToStr.substring(i*21, i*21+21);
+                b-=21;
+            }else{
+                lines[i] = numbToStr.substring(i*21,numbToStr.length());
+            }
+        }
         int i = 0;
         int count = 0;
-        int check = numberCount/20;
         int passed = 0;
-        for(EditText text:this.texts) {
+
+        for(String s:lines){
             try {
                 TextView numEntered = new TextView(NumbersRemember.this);
                 numEntered.setTextSize(27);
                 int k = 0;
-                for (char c : text.getText().toString().toCharArray()) {
+                for (char c : s.toCharArray()) {
                     if (c == numbers.charAt(k+count)) {
                         String a = "<font color='#37FF8B'>"+c+"</font>";
                         numEntered.append(Html.fromHtml(a));
@@ -145,8 +129,8 @@ public class NumbersRemember extends AppCompatActivity {
                 TextView numRight = new TextView(NumbersRemember.this);
                 numRight.setTextSize(27);
                 if (i != check) {
-                    numRight.setText(numbers.substring(count, count+20));
-                    count += 20;
+                    numRight.setText(numbers.substring(count, count+21));
+                    count += 21;
                 } else {
                     numRight.setText(numbers.substring(count, count+(numberCount-count)));
                 }
@@ -156,6 +140,7 @@ public class NumbersRemember extends AppCompatActivity {
             }catch (Exception e){
             }
         }
+
         if(passed == numberCount) {
             dialogPassed();
         }else{
