@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,7 +40,7 @@ public class Numbers extends AppCompatActivity{
         setContentView(R.layout.activity_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        setTitle(getIntent().getStringExtra("jimmy.gg.flashingnumbers.LEVEL"));
+        setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         timer = (ProgressBar) findViewById(R.id.progressBar);
         timeRemain = (TextView) findViewById(R.id.time_remain);
         remember = (Button)findViewById(R.id.remember);
@@ -59,7 +56,7 @@ public class Numbers extends AppCompatActivity{
     }
 
     public String timer(){
-        String[] seconds = getIntent().getStringExtra("jimmy.gg.flashingnumbers.TIME").split(" ");
+        String[] seconds = getIntent().getStringExtra(EXTRA_TIME).split(" ");
         StringBuilder builder = new StringBuilder();
         for(char c:seconds[1].toCharArray()){
             if(c!='s'){
@@ -70,15 +67,14 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void gameStart(){
-        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_TIMER,""))*1000+1000,100){
+        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_TIMER,""))*1000-500,100){
             TextView countDown = (TextView)findViewById(R.id.count_down);
             @Override
             public void onTick(long millisUntilFinished) {
                 if (Math.round((float)millisUntilFinished/ 1000.0f) != sec) {
                     sec = Math.round((float)millisUntilFinished / 1000.0f);
-                    countDown.setText("" + (sec+1 ));
+                    countDown.setText("" + (sec+1));
                 }
-
             }
             @Override
             public void onFinish(){
@@ -86,12 +82,12 @@ public class Numbers extends AppCompatActivity{
                 timeRemain.setVisibility(View.VISIBLE);
                 timer.setVisibility(View.VISIBLE);
                 remember.setVisibility(View.VISIBLE);
-                revealNumbers();
-                startTimer();
+                revealNumbers();startTimer();
             }
         };
         screenTimer.start();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -106,6 +102,14 @@ public class Numbers extends AppCompatActivity{
                 Intent intent = new Intent(this,NumbersSettings.class);
                 startActivity(intent);
                 return true;
+            case R.id.retry_icon:
+                Intent retry = new Intent(this,Numbers.class)
+                    .putExtra(EXTRA_LEVEL,getIntent().getStringExtra(EXTRA_LEVEL))
+                    .putExtra(EXTRA_NUMBERS,getIntent().getStringExtra(EXTRA_NUMBERS))
+                        .putExtra(EXTRA_TIME,getIntent().getStringExtra(EXTRA_TIME))
+                    .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                this.startActivity(retry);
+                return true;
             default:
                 this.finish();
                 return super.onOptionsItemSelected(menuItem);
@@ -116,7 +120,7 @@ public class Numbers extends AppCompatActivity{
         LinearLayout layout = (LinearLayout) findViewById(R.id.numbers_numbers_config);
         int groupSize = Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_GROUP,""));
         int row = Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_ROW,""));
-        String extraNumbers = getIntent().getStringExtra("jimmy.gg.flashingnumbers.NUMBERS");
+        String extraNumbers = getIntent().getStringExtra(EXTRA_NUMBERS);
         LinearLayout dots = (LinearLayout) findViewById(R.id.dots);
         numbers = (TextView)findViewById(R.id.revealed_numbers);
         StringBuilder build_number = new StringBuilder();
@@ -203,19 +207,27 @@ public class Numbers extends AppCompatActivity{
     @Override
     public void onPause(){
         super.onPause();
-        screenTimer.cancel();
-        countDownTimer.cancel();
+        if(screenTimer != null) {
+            screenTimer.cancel();
+        }
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     @Override
     public void onStop(){
         super.onStop();
-        //screenTimer.cancel();
-        //countDownTimer.cancel();
     }
 
     @Override
     public void onDestroy(){
+        if(screenTimer != null) {
+         screenTimer.cancel();
+        }
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
         super.onDestroy();
     }
     @Override
@@ -227,10 +239,9 @@ public class Numbers extends AppCompatActivity{
         Intent intent = new Intent(this,NumbersRemember.class);
         intent.putExtra(EXTRA_NUMBERS, numbersToSend.toString());
         intent.putExtra(EXTRA_NUMBERS_COUNT, countRow);
-        intent.putExtra(EXTRA_LEVEL, getIntent().getStringExtra("jimmy.gg.flashingnumbers.LEVEL"));
-        intent.putExtra(EXTRA_TIME, getIntent().getStringExtra("jimmy.gg.flashingnumbers.TIME"));
+        intent.putExtra(EXTRA_LEVEL, getIntent().getStringExtra(EXTRA_LEVEL));
+        intent.putExtra(EXTRA_TIME, getIntent().getStringExtra(EXTRA_TIME));
         intent.putExtra(EXTRA_TIME_REMAIN,timeRemain1);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         countDownTimer.cancel();
     }

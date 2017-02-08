@@ -1,15 +1,10 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ObbInfo;
 import android.graphics.PorterDuff;
 import android.os.CountDownTimer;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +12,6 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -26,7 +20,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +34,14 @@ public class NumbersRemember extends AppCompatActivity {
     private CountDownTimer countDownTimer = null;
     private String numbers;
     private int timerRemain;
+    private int editTextIndex;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        setTitle("Numbers remember");
+        setTitle(R.string.numbers_remembered_title);
         setContentView(R.layout.activity_numbers_remember);
         layout = (LinearLayout) findViewById(R.id.linear_layout);
         Intent intent = getIntent();
@@ -159,7 +154,6 @@ public class NumbersRemember extends AppCompatActivity {
                 layout.addView(numRight);
                 i++;
             }catch (Exception e){
-
             }
         }
         if(passed == numberCount) {
@@ -205,10 +199,14 @@ public class NumbersRemember extends AppCompatActivity {
             }
             builder.append(c);
         }
+        StringBuilder highestScore = new StringBuilder();
+        highestScore.append(getString(R.string.dialog_passed_message1)+" "+numberCount
+                +" "+getString(R.string.dialog_passed_message2)+" "+builder.toString()+"s\n");
 
         if(highScore.getString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel-1),"0")!="0") {
             double time = Double.parseDouble(highScore.getString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), "0"));
             if (time > Double.parseDouble(builder.toString())) {
+                highestScore.append(getString(R.string.numbers_remembered_highest_score));
                 highScoreEditor.putString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), builder.toString());
                 highScoreEditor.commit();
             }
@@ -219,20 +217,20 @@ public class NumbersRemember extends AppCompatActivity {
         if(sharedPreferences.getInt(Levels.LEVEL_KEY,1)==acLevel){
             acLevel++;
             if(acLevel>=6 && acLevel<=10){
-                Levels.levelList.get(acLevel).setDifficult("medium");
+                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.medium));
             }else if(acLevel>=11 && acLevel<=14){
-                Levels.levelList.get(acLevel).setDifficult("hard");
+                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.hard));
             }else{
-                Levels.levelList.get(acLevel).setDifficult("easy");
+                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.easy));
             }
             editor.putInt(Levels.LEVEL_KEY, acLevel);
             editor.commit();
         }
 
         new AlertDialog.Builder(NumbersRemember.this)
-                .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" passed")
-                .setMessage("You have successfuly remembered " + numberCount + " numbers in time: "+builder.toString()+"s")
-                .setPositiveButton("NEXT", new DialogInterface.OnClickListener(){
+                .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" "+getApplicationContext().getResources().getString(R.string.numbers_remembered_passed))
+                .setMessage(highestScore.toString())
+                .setPositiveButton(R.string.button_next, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         List<Level> levels = Levels.levelList;
@@ -246,7 +244,7 @@ public class NumbersRemember extends AppCompatActivity {
                         NumbersRemember.this.startActivity(intent);
                     }
                 })
-                .setNegativeButton("MENU", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.button_menu, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -259,13 +257,13 @@ public class NumbersRemember extends AppCompatActivity {
             new AlertDialog.Builder(NumbersRemember.this)
                     .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" failed")
                     .setMessage("Remembered "+numbersRight+"/"+numberCount)
-                    .setPositiveButton("MENU", new DialogInterface.OnClickListener(){
+                    .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setNegativeButton("RETRY", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.button_retry, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             List<Level> levels = Levels.levelList;
@@ -274,7 +272,7 @@ public class NumbersRemember extends AppCompatActivity {
                             int levell = Integer.parseInt(data[1]);
                             Intent intent = new Intent(NumbersRemember.this,Numbers.class);
                             intent.putExtra(EXTRA_NUMBERS,levels.get((levell-1)).getNumbers());
-                            intent.putExtra(EXTRA_LEVEL,levels.get((levell-1)).getLevel()) ;
+                            intent.putExtra(EXTRA_LEVEL,levels.get((levell-1)).getLevel());
                             intent.putExtra(EXTRA_TIME, levels.get((levell-1)).getTime());
                             NumbersRemember.this.startActivity(intent);
                         }

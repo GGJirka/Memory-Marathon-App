@@ -2,7 +2,6 @@ package jimmy.gg.flashingnumbers.quicklevel;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +20,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.Random;
-
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class QuickLevel extends AppCompatActivity {
-
     public ProgressBar progress;
-    public EditText editText;
-    private Button done;
-    public TextView numbers;
     public TextView onEndView;
     private StringBuilder builder;
     private int level = 1;
@@ -45,6 +33,7 @@ public class QuickLevel extends AppCompatActivity {
     private CountDownTimer secondTimer = null;
     private CountDownTimer thirdTimer = null;
     private int sec = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -54,10 +43,7 @@ public class QuickLevel extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progress = (ProgressBar) findViewById(R.id.quick_progressBar);
         onEndView = (TextView) findViewById(R.id.quick_on_end_view);
-        done = (Button) findViewById(R.id.quick_button_done);
         rulesExplain(false);
-        numbers = (TextView) findViewById(R.id.quick_numbers);
-        editText = (EditText) findViewById(R.id.quick_edit_text);
     }
 
     public void rulesExplain(boolean userDenied){
@@ -108,6 +94,7 @@ public class QuickLevel extends AppCompatActivity {
 
 
     public void displayNumbers(){
+        TextView numbers = (TextView) findViewById(R.id.quick_numbers);
         TextView timeRemain = (TextView) findViewById(R.id.quick_time_remain);
         timeRemain.setVisibility(View.VISIBLE);
         numbers.setVisibility(View.VISIBLE);
@@ -132,6 +119,7 @@ public class QuickLevel extends AppCompatActivity {
     public void onStop(){
         super.onStop();
     }
+
     public void startTimer(){
         progress.setVisibility(View.VISIBLE);
 
@@ -151,14 +139,19 @@ public class QuickLevel extends AppCompatActivity {
     }
 
     public void levelRemember(){
-        done.setVisibility(View.VISIBLE);
+
+        EditText editText = (EditText) findViewById(R.id.quick_edit_text);
+        findViewById(R.id.quick_button_done).setVisibility(View.VISIBLE);
+
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         editText.getBackground().setColorFilter(getResources().getColor(R.color.numbers_title_bot), PorterDuff.Mode.SRC_ATOP);
-        numbers.setVisibility(View.INVISIBLE);
+
+        findViewById(R.id.quick_numbers).setVisibility(View.INVISIBLE);
         editText.setVisibility(View.VISIBLE);
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
         editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(level)});
+
         onEndView.setVisibility(View.VISIBLE);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
@@ -173,22 +166,26 @@ public class QuickLevel extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-
                 numberFinish();
             }
         };
         thirdTimer.start();
     }
-    public void numberFinish(){
+    public void numberFinish() {
+        EditText editText = (EditText) findViewById(R.id.quick_edit_text);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         thirdTimer.cancel();
+
         TextView timeRemain = (TextView) findViewById(R.id.quick_time_remain);
+
         timeRemain.setVisibility(View.INVISIBLE);
         progress.setVisibility(View.INVISIBLE);
         onEndView.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
-        done.setVisibility(View.INVISIBLE);
+
+        findViewById(R.id.quick_button_done).setVisibility(View.INVISIBLE);
 
         String numberText = editText.getText().toString();
         ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
@@ -196,31 +193,46 @@ public class QuickLevel extends AppCompatActivity {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0,30,0,0);
+        params.setMargins(0, 30, 0, 0);
 
         layout.setGravity(Gravity.CENTER);
+
         TextView textView1 = new TextView(QuickLevel.this);
-        TextView textView2 = new TextView(QuickLevel.this);
-        TextView number = new TextView(QuickLevel.this);
-        TextView answer = new TextView(QuickLevel.this);
-        textView2.setLayoutParams(params);
+        textView1.setText(R.string.text_number);
         textView1.setTextSize(25);
-        textView2.setTextSize(25);
-        number.setTextSize(34);
-        answer.setTextSize(34);
-        Button next = new Button(newContext);
         textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView1.setText("NUMBER");
-        textView2.setText("YOUR ANSWER");
+        layout.addView(textView1);
+
+        TextView number = new TextView(QuickLevel.this);
+        number.setTextSize(34);
         number.setText(builder.toString());
+        number.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        layout.addView(number);
+
+        TextView textView2 = new TextView(QuickLevel.this);
+        textView2.setText(R.string.text_answer);
+        textView2.setTextSize(25);
+        textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        layout.addView(textView2);
+
+
+        TextView answer = new TextView(QuickLevel.this);
+        answer.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        answer.setTextSize(34);
+        textView2.setLayoutParams(params);
+        layout.addView(answer);
+
+        Button next = new Button(newContext);
         next.setLayoutParams(params);
+        next.setTextSize(20);
+        layout.addView(next);
+
         int passed = 0;
         try {
             for (int i = 0; i < editText.getText().length(); i++) {
                 if (numberText.charAt(i) != ' ') {
                     char c = numberText.charAt(i);
-                    if (c == builder.charAt(i) && i< builder.length()) {
+                    if (c == builder.charAt(i) && i < builder.length()) {
                         String a = "<font color='#8bc34a'>" + c + "</font>";
                         answer.append(Html.fromHtml(a));
                         passed++;
@@ -230,45 +242,37 @@ public class QuickLevel extends AppCompatActivity {
                     }
                 }
             }
-        }catch (ArrayIndexOutOfBoundsException exception){
+        } catch (ArrayIndexOutOfBoundsException exception) {
             exception.printStackTrace();
         }
-        next.setTextSize(20);
-        if(passed == builder.length()){
-            next.setText("NEXT");
+
+        if (passed == builder.length()) {
+            next.setText(R.string.button_next);
             next.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
                     layout.removeAllViews();
                     level++;
                     timerBetweenLevels();
-                    setTitle("Quick - Level "+level);
+                    setTitle("Quick - Level " + level);
                 }
             });
-        }else{
+        } else {
             next.setText("RETRY");
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
-                    level=1;
+                public void onClick(View v) {
+                    level = 1;
                     layout.removeAllViews();
                     timerBetweenLevels();
-                    setTitle("Quick - Level "+level);
+                    setTitle("Quick - Level " + level);
                 }
             });
         }
 
-        textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        number.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        answer.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        layout.addView(textView1);
-        layout.addView(number);
-        layout.addView(textView2);
-        layout.addView(answer);
-        layout.addView(next);
         editText.setText("");
+
     }
 
     @Override

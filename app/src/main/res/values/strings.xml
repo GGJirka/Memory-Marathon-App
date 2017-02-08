@@ -107,4 +107,20 @@
     <string name="numbers_fast_mode">QUICK</string>
 
     <string name="quick_button_done">DONE</string>
+
+    <string name="numbers_remembered_title">Numbers Remembered</string>
+    <string name="easy">easy</string>
+    <string name="medium">medium</string>
+    <string name="hard">hard</string>
+    <string name="numbers_remembered_passed"> passed</string>
+    <string name="dialog_passed_message1">You have successfuly remembered</string>
+    <string name="dialog_passed_message2">numbers in time: </string>
+    <string name="dialog_passed_title"> passed</string>
+    <string name="text_number">NUMBER</string>
+    <string name="button_next">NEXT</string>
+    <string name="text_answer">YOUR ANSWER</string>
+    <string name="button_menu">MENU</string>
+    <string name="button_retry">RETRY</string>
+    <string name="numbers_remembered_highest_score">New high score!</string>
+
 </resources>
