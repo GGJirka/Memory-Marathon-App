@@ -1,4 +1,4 @@
-package jimmy.gg.flashingnumbers.menu;
+package jimmy.gg.flashingnumbers.highscore;
 
 
 public class Score  {

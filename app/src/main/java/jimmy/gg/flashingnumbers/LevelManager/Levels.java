@@ -16,8 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
-import jimmy.gg.flashingnumbers.menu.HighScore;
+import jimmy.gg.flashingnumbers.highscore.HighScore;
+import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 
 public class Levels extends AppCompatActivity {
     public final static String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
@@ -108,7 +108,7 @@ public class Levels extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.high_score:
-                startActivity(new Intent(this, HighScore.class));
+                startActivity(new Intent(this, TabbedHighScore.class));
                 break;
             default:
                 this.finish();

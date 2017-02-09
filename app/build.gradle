@@ -29,9 +29,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
     compile files('/home/ggjimmy/Downloads/AndroidStudioProjects/MemoryApp-master/libs/material-code-input-master.jar')
+    compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.github.glomadrian:CodeInput:1.1@aar'
+    compile 'com.android.support:design:25.1.0'
+    testCompile 'junit:junit:4.12'
 }
 

@@ -122,5 +122,10 @@
     <string name="button_menu">MENU</string>
     <string name="button_retry">RETRY</string>
     <string name="numbers_remembered_highest_score">New high score!</string>
+    <string name="quick_button_ok">OK</string>
 
+    <string name="quick_level_hs_title">High Score</string>
+    <string name="title_activity_tabbed_high_score">TabbedHighScore</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

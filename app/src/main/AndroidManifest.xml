@@ -10,8 +10,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,29 +21,36 @@
         <activity
             android:name=".menu.FlashingNumbers"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LevelManager.Levels"
-            android:launchMode="singleTop"
             android:allowBackup="true"
-            android:theme="@style/NumbersStyle"
-            android:screenOrientation="portrait"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/NumbersStyle" />
         <activity
             android:name=".settings.NumbersSettings"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LevelManager.Numbers"
             android:noHistory="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LevelManager.NumbersRemember"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
-        <activity android:name=".quicklevel.QuickLevel"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".menu.HighScore"
-            android:screenOrientation="portrait"/>
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".quicklevel.QuickLevel"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".highscore.HighScore"
+            android:screenOrientation="portrait" />
+        <activity android:name=".highscore.QuickLevelHighScore" />
+        <activity
+            android:name=".highscore.TabbedHighScore"
+            android:label="@string/title_activity_tabbed_high_score"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

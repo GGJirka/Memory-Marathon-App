@@ -1,11 +1,14 @@
-package jimmy.gg.flashingnumbers.menu;
+package jimmy.gg.flashingnumbers.highscore;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -13,22 +16,19 @@ import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
 
-public class HighScore extends AppCompatActivity {
+public class HighScore extends Fragment{
     public final static String KEY_HIGH_SCORE ="KEY_HIGH_SCORE";
     public ArrayList<Score> scores;
     public ArrayList<Level> levelList;
     public ListView highScores;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-        setTheme(R.style.NumbersStyle);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_high_score);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("High Score");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_high_score, container, false);
         scores = new ArrayList<>();
         levelList = new ArrayList<>();
-        highScores = (ListView) findViewById(R.id.high_scores);
+        highScores = (ListView) rootView.findViewById(R.id.high_scores);
 
         for(int i=0;i<Levels.levelList.size();i++){
             Level lv = Levels.levelList.get(i);
@@ -37,17 +37,7 @@ public class HighScore extends AppCompatActivity {
                         Levels.highScore.getString(KEY_HIGH_SCORE + String.valueOf(i), "0")));
             }
         }
-        highScores.setAdapter(new HighScoreAdapter(getApplicationContext(),scores));
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        this.finish();
-        return super.onOptionsItemSelected(item);
+        highScores.setAdapter(new HighScoreAdapter(rootView.getContext(),scores));
+        return rootView;
     }
 }

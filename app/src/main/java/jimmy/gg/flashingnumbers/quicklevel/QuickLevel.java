@@ -2,6 +2,8 @@ package jimmy.gg.flashingnumbers.quicklevel;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +13,7 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +25,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.Random;
+
+import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.highscore.QuickLevelHighScore;
+import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
+import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class QuickLevel extends AppCompatActivity {
     public ProgressBar progress;
@@ -52,7 +60,7 @@ public class QuickLevel extends AppCompatActivity {
                     .setTitle("Rules")
                     .setMessage("There will be levels in each level the numbers amount increases by one. Starting on" +
                             "one digit. After timer is done you will have to write down this number.")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             timerBetweenLevels();
@@ -64,7 +72,6 @@ public class QuickLevel extends AppCompatActivity {
                             timerBetweenLevels();
                         }
                     })
-
                     .show();
         }
     }
@@ -76,8 +83,7 @@ public class QuickLevel extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                if (Math.round((float)millisUntilFinished/ 1000.0f) != sec)
-                {
+                if (Math.round((float)millisUntilFinished/ 1000.0f) != sec) {
                     sec = Math.round((float)millisUntilFinished / 1000.0f);
                     countDown.setText("" + (sec+1 ));
                 }
@@ -113,9 +119,15 @@ public class QuickLevel extends AppCompatActivity {
     public void onPause(){
         super.onPause();
     }
+
     public void onResume(){
         super.onResume();
+        EditText editText = (EditText) findViewById(R.id.quick_edit_text);
+        if(editText.getVisibility() == View.INVISIBLE) {
+            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        }
     }
+
     public void onStop(){
         super.onStop();
     }
@@ -203,7 +215,7 @@ public class QuickLevel extends AppCompatActivity {
         textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         layout.addView(textView1);
 
-        TextView number = new TextView(QuickLevel.this);
+        final TextView number = new TextView(QuickLevel.this);
         number.setTextSize(34);
         number.setText(builder.toString());
         number.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -260,27 +272,44 @@ public class QuickLevel extends AppCompatActivity {
             });
         } else {
             next.setText("RETRY");
-            next.setOnClickListener(new View.OnClickListener() {
+            next.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sharedPreferences = FlashingNumbers.quickHighScore;
                     level = 1;
                     layout.removeAllViews();
                     timerBetweenLevels();
                     setTitle("Quick - Level " + level);
+                    int numberCount = number.getText().length()-1;
+                    String count = String.valueOf(FlashingNumbers.quickHighScoreCount.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
+                    SharedPreferences.Editor editor = FlashingNumbers.quickHighScoreCount.edit();
+                    SharedPreferences.Editor edit = sharedPreferences.edit();
+                    editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
+                    editor.commit();
+                    edit.putString(QuickLevelHighScore.KEY, String.valueOf(numberCount));
+                    edit.commit();
                 }
             });
         }
-
         editText.setText("");
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menu){
-        this.finish();
-        return  super.onOptionsItemSelected(menu);
+        switch(menu.getItemId()) {
+            case R.id.high_score:
+                startActivity(new Intent(this, TabbedHighScore.class));
+                break;
+            default:
+                this.finish();
+        }
+        return super.onOptionsItemSelected(menu);
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.popup_menu,menu);
+        return true;
+    }
     public void numbersRemembered(View view){
         firstTimer.cancel();
         secondTimer.cancel();

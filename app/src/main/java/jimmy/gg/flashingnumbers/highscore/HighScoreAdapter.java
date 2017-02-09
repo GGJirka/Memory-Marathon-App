@@ -1,4 +1,4 @@
-package jimmy.gg.flashingnumbers.menu;
+package jimmy.gg.flashingnumbers.highscore;
 
 import android.content.Context;
 import android.view.View;
@@ -8,11 +8,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.R;
 
 /**
- * Created by root on 1/18/17.
+ * Created by ggjimmy on 1/18/17.
  */
 
 public class HighScoreAdapter extends BaseAdapter{

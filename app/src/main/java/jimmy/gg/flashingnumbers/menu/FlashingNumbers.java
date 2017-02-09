@@ -1,6 +1,8 @@
 package jimmy.gg.flashingnumbers.menu;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import jimmy.gg.flashingnumbers.quicklevel.QuickLevel;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class FlashingNumbers extends AppCompatActivity {
+    public static SharedPreferences quickHighScore,quickHighScoreCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class FlashingNumbers extends AppCompatActivity {
         s.setSpan(new ForegroundColorSpan(Color.BLACK), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(s);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        quickHighScore = this.getPreferences(Context.MODE_PRIVATE);
+        quickHighScoreCount = this.getPreferences(Context.MODE_PRIVATE);
     }
     public void levelsClicked(View view){
         Intent intent = new Intent(this,Levels.class);

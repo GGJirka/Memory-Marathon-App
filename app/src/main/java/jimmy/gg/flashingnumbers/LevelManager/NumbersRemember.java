@@ -8,10 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
-import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -20,13 +18,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.menu.HighScore;
+import jimmy.gg.flashingnumbers.highscore.HighScore;
 
 public class NumbersRemember extends AppCompatActivity {
     private EditText number;
@@ -117,7 +113,7 @@ public class NumbersRemember extends AppCompatActivity {
                 int k = 0;
                 for (char c : s.toCharArray()) {
                     if (c == numbers.charAt(k+count)) {
-                        String a = "<font color='#37FF8B'>"+c+"</font>";
+                        String a = "<font color='#8bc34a'>"+c+"</font>";
                         numEntered.append(Html.fromHtml(a));
                         passed++;
                     } else {
@@ -163,6 +159,11 @@ public class NumbersRemember extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    public void onDestroy(){
+        countDownTimer.cancel();
+        super.onDestroy();
+    }
     public void dialogPassed(){
         SharedPreferences sharedPreferences = Levels.sharedPreferences;
         SharedPreferences highScore = Levels.highScore;
