@@ -275,14 +275,14 @@ public class QuickLevel extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences sharedPreferences = FlashingNumbers.quickHighScore;
+                    SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
                     level = 1;
                     layout.removeAllViews();
                     timerBetweenLevels();
                     setTitle("Quick - Level " + level);
                     int numberCount = number.getText().length()-1;
-                    String count = String.valueOf(FlashingNumbers.quickHighScoreCount.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
-                    SharedPreferences.Editor editor = FlashingNumbers.quickHighScoreCount.edit();
+                    String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     SharedPreferences.Editor edit = sharedPreferences.edit();
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
                     editor.commit();
@@ -298,7 +298,9 @@ public class QuickLevel extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menu){
         switch(menu.getItemId()) {
             case R.id.high_score:
-                startActivity(new Intent(this, TabbedHighScore.class));
+                Intent intent = new Intent(this, TabbedHighScore.class);
+                intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)),"1");
+                startActivity(intent);
                 break;
             default:
                 this.finish();

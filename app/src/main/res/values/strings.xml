@@ -128,4 +128,16 @@
     <string name="title_activity_tabbed_high_score">TabbedHighScore</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="EXTRA_LEVEL">jimmy.gg.flashingnumbers.LEVEL</string>
+    <string name="EXTRA_NUMBERS">jimmy.gg.flashingnumbers.NUMBERS</string>
+    <string name="LEVEL_KEY">HIGHEST_LEVEL1</string>
+    <string name="EXTRA_TIME">jimmy.gg.flashingnumbers.TIME</string>
+    <string name="EXTRA_PAGE">jimmy.gg.flashingnumbers.PAGE</string>
+
+    <string name="settings_group">settings_group</string>
+    <string name="settings_row">settings_row</string>
+    <string name="settings_timer">settings_timer</string>
+    <string name="EXTRA_NUMBERS_COUNT">"jimmy.gg.flashingnumbers.NUMBERS_COUNT"</string>
+    <string name="EXTRA_TIME_REMAIN">jimmy.gg.flashingnumbers.TIME_REMAIN</string>
 </resources>

@@ -15,7 +15,7 @@ import jimmy.gg.flashingnumbers.R;
  */
 
 public class HighScoreAdapter extends BaseAdapter{
-    public final static String LEVEL_KEY = "HIGHEST_LEVEL1";
+    public final String LEVEL_KEY = "HIGHEST_LEVEL1";
     private Context context;
     private ArrayList<Score> scores;
     private View v;

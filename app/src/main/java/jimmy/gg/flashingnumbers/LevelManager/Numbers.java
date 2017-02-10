@@ -14,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class Numbers extends AppCompatActivity{
@@ -39,7 +41,7 @@ public class Numbers extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        sharedPreferences = FlashingNumbers.sharedPreferences;
         setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         timer = (ProgressBar) findViewById(R.id.progressBar);
         timeRemain = (TextView) findViewById(R.id.time_remain);
@@ -67,7 +69,7 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void gameStart(){
-        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_TIMER,""))*1000-500,100){
+        screenTimer = new CountDownTimer(Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_TIMER,"3"))*1000-500,100){
             TextView countDown = (TextView)findViewById(R.id.count_down);
             @Override
             public void onTick(long millisUntilFinished) {
@@ -104,10 +106,10 @@ public class Numbers extends AppCompatActivity{
                 return true;
             case R.id.retry_icon:
                 Intent retry = new Intent(this,Numbers.class)
-                    .putExtra(EXTRA_LEVEL,getIntent().getStringExtra(EXTRA_LEVEL))
-                    .putExtra(EXTRA_NUMBERS,getIntent().getStringExtra(EXTRA_NUMBERS))
+                        .putExtra(EXTRA_LEVEL,getIntent().getStringExtra(EXTRA_LEVEL))
+                        .putExtra(EXTRA_NUMBERS,getIntent().getStringExtra(EXTRA_NUMBERS))
                         .putExtra(EXTRA_TIME,getIntent().getStringExtra(EXTRA_TIME))
-                    .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 this.startActivity(retry);
                 return true;
             default:
@@ -118,8 +120,8 @@ public class Numbers extends AppCompatActivity{
 
     public void revealNumbers(){
         LinearLayout layout = (LinearLayout) findViewById(R.id.numbers_numbers_config);
-        int groupSize = Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_GROUP,""));
-        int row = Integer.parseInt(sharedPreferences.getString(Keys.KEY_SETTINGS_ROW,""));
+        int groupSize = Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_GROUP,"2"));
+        int row = Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_ROW,"2"));
         String extraNumbers = getIntent().getStringExtra(EXTRA_NUMBERS);
         LinearLayout dots = (LinearLayout) findViewById(R.id.dots);
         numbers = (TextView)findViewById(R.id.revealed_numbers);
@@ -223,7 +225,7 @@ public class Numbers extends AppCompatActivity{
     @Override
     public void onDestroy(){
         if(screenTimer != null) {
-         screenTimer.cancel();
+            screenTimer.cancel();
         }
         if(countDownTimer != null) {
             countDownTimer.cancel();
@@ -246,14 +248,12 @@ public class Numbers extends AppCompatActivity{
         countDownTimer.cancel();
     }
 
-    static class Keys{
-        private static final String KEY_SETTINGS_GROUP = "settings_group";
-        private static final String KEY_SETTINGS_ROW = "settings_row";
-        private static final String KEY_SETTINGS_TIMER = "settings_timer";
-    }
-    public static final String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
-    public static final String EXTRA_NUMBERS_COUNT = "jimmy.gg.flashingnumbers.NUMBERS_COUNT";
-    public static final String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
-    public static final String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
-    public static final String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
+    public final String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
+    public final String EXTRA_NUMBERS_COUNT = "jimmy.gg.flashingnumbers.NUMBERS_COUNT";
+    public final String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
+    public final String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
+    public final String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
+    public final String KEY_SETTINGS_GROUP = "settings_group";
+    public final String KEY_SETTINGS_ROW = "settings_row";
+    public final String KEY_SETTINGS_TIMER = "settings_timer";
 }

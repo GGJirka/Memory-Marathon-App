@@ -1,5 +1,6 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,10 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.highscore.HighScore;
+import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class NumbersRemember extends AppCompatActivity {
     private EditText number;
@@ -42,9 +46,9 @@ public class NumbersRemember extends AppCompatActivity {
         setContentView(R.layout.activity_numbers_remember);
         layout = (LinearLayout) findViewById(R.id.linear_layout);
         Intent intent = getIntent();
-        numberCount = intent.getIntExtra(Numbers.EXTRA_NUMBERS_COUNT,0);
-        numbers = intent.getStringExtra(Numbers.EXTRA_NUMBERS);
-        timerRemain = intent.getIntExtra(Numbers.EXTRA_TIME_REMAIN,0);
+        numberCount = intent.getIntExtra(EXTRA_NUMBERS_COUNT,0);
+        numbers = intent.getStringExtra(EXTRA_NUMBERS);
+        timerRemain = intent.getIntExtra(EXTRA_TIME_REMAIN,0);
         createRow();
         startTimer();
     }
@@ -165,15 +169,16 @@ public class NumbersRemember extends AppCompatActivity {
         super.onDestroy();
     }
     public void dialogPassed(){
-        SharedPreferences sharedPreferences = Levels.sharedPreferences;
-        SharedPreferences highScore = Levels.highScore;
+        SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
+        SharedPreferences highScore = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor highScoreEditor = highScore.edit();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String level= getIntent().getStringExtra(Numbers.EXTRA_LEVEL);
+        String level= getIntent().getStringExtra(EXTRA_LEVEL);
         String[] data = level.split(" ");
         int acLevel = Integer.parseInt(data[1]);
         String tm = String.valueOf(timerRemain);
         StringBuilder builder = new StringBuilder();
+        final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
 
         for(int i=0;i<tm.length();i++){
             char c = tm.charAt(i);
@@ -189,38 +194,38 @@ public class NumbersRemember extends AppCompatActivity {
         highestScore.append(getString(R.string.dialog_passed_message1)+" "+numberCount
                 +" "+getString(R.string.dialog_passed_message2)+" "+builder.toString()+"s\n");
 
-        if(highScore.getString(HighScore.KEY_HIGH_SCORE+String.valueOf(acLevel-1),"0")!="0") {
-            double time = Double.parseDouble(highScore.getString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), "0"));
+        if(highScore.getString(KEY_HIGH_SCORE+String.valueOf(acLevel-1),"0")!="0") {
+            double time = Double.parseDouble(highScore.getString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), "0"));
             if (time > Double.parseDouble(builder.toString())) {
                 highestScore.append(getString(R.string.numbers_remembered_highest_score));
-                highScoreEditor.putString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel - 1), builder.toString());
-                highScoreEditor.commit();
+                editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), builder.toString());
+                editor.commit();
             }
         }else {
-            highScoreEditor.putString(HighScore.KEY_HIGH_SCORE + String.valueOf(acLevel-1), builder.toString());
-            highScoreEditor.commit();
+            editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel-1), builder.toString());
+            editor.commit();
         }
-        if(sharedPreferences.getInt(Levels.LEVEL_KEY,1)==acLevel){
+        if(sharedPreferences.getInt(String.valueOf(getResources().getText(R.string.LEVEL_KEY)),1)==acLevel){
             acLevel++;
             if(acLevel>=6 && acLevel<=10){
-                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.medium));
+                levelList.get(acLevel).setDifficult(String.valueOf(R.string.medium));
             }else if(acLevel>=11 && acLevel<=14){
-                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.hard));
+                levelList.get(acLevel).setDifficult(String.valueOf(R.string.hard));
             }else{
-                Levels.levelList.get(acLevel).setDifficult(String.valueOf(R.string.easy));
+                levelList.get(acLevel).setDifficult(String.valueOf(R.string.easy));
             }
-            editor.putInt(Levels.LEVEL_KEY, acLevel);
+            editor.putInt(String.valueOf(getResources().getText(R.string.LEVEL_KEY)), acLevel);
             editor.commit();
         }
 
         new AlertDialog.Builder(NumbersRemember.this)
-                .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" "+getApplicationContext().getResources().getString(R.string.numbers_remembered_passed))
+                .setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" "+getApplicationContext().getResources().getString(R.string.numbers_remembered_passed))
                 .setMessage(highestScore.toString())
                 .setPositiveButton(R.string.button_next, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which){
-                        List<Level> levels = Levels.levelList;
-                        String level = getIntent().getStringExtra(Numbers.EXTRA_LEVEL);
+                        List<Level> levels = levelList;
+                        String level = getIntent().getStringExtra(EXTRA_LEVEL);
                         String[] data = level.split(" ");
                         int levell = Integer.parseInt(data[1]);
                         Intent intent = new Intent(NumbersRemember.this,Numbers.class);
@@ -240,8 +245,9 @@ public class NumbersRemember extends AppCompatActivity {
         }
 
         public void dialogFailed(int numbersRight){
+            final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
             new AlertDialog.Builder(NumbersRemember.this)
-                    .setTitle(getIntent().getStringExtra(Numbers.EXTRA_LEVEL)+" failed")
+                    .setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" failed")
                     .setMessage("Remembered "+numbersRight+"/"+numberCount)
                     .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
                         @Override
@@ -252,8 +258,8 @@ public class NumbersRemember extends AppCompatActivity {
                     .setNegativeButton(R.string.button_retry, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            List<Level> levels = Levels.levelList;
-                            String level = getIntent().getStringExtra(Numbers.EXTRA_LEVEL);
+                            List<Level> levels = levelList;
+                            String level = getIntent().getStringExtra(EXTRA_LEVEL);
                             String[] data = level.split(" ");
                             int levell = Integer.parseInt(data[1]);
                             Intent intent = new Intent(NumbersRemember.this,Numbers.class);
@@ -266,8 +272,11 @@ public class NumbersRemember extends AppCompatActivity {
                     .show();
         }
 
-    public final static String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
-    public final static String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
-    public final static String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
+    public String KEY_HIGH_SCORE ="KEY_HIGH_SCORE";
+    public String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
+    public String EXTRA_NUMBERS_COUNT = "jimmy.gg.flashingnumbers.NUMBERS_COUNT";
+    public String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
+    public String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
+    public String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
 }
 

@@ -12,5 +12,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:choiceMode="singleChoice"
-        android:id="@+id/high_scores"/>
+        android:id="@+id/high_scores_tab1"/>
 </RelativeLayout>

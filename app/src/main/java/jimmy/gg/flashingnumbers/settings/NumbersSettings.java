@@ -76,9 +76,9 @@ public class NumbersSettings extends AppCompatActivity {
     public class SettingsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-        private static final String KEY_SETTINGS_GROUP = "settings_group";
-        private static final String KEY_SETTINGS_ROW = "settings_row";
-        private static final String KEY_SETTINGS_TIMER = "settings_timer";
+        private final String KEY_SETTINGS_GROUP = "settings_group";
+        private final String KEY_SETTINGS_ROW = "settings_row";
+        private final String KEY_SETTINGS_TIMER = "settings_timer";
         private SharedPreferences prefs;
         private Preference pref1, pref2, pref3;
 
@@ -106,10 +106,6 @@ public class NumbersSettings extends AppCompatActivity {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             Preference pref = findPreference(key);
-            /*SharedPreferences sharedPreferences1 = getSharedPreferences(key,Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences1.edit();
-            editor.putString(key, sharedPreferences.getString(key,""));
-            editor.commit();*/
 
             switch (key) {
                 case KEY_SETTINGS_GROUP:

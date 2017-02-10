@@ -11,28 +11,35 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.main.MainActivity;
 import jimmy.gg.flashingnumbers.quicklevel.QuickLevel;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class FlashingNumbers extends AppCompatActivity {
-    public static SharedPreferences quickHighScore,quickHighScoreCount;
+    public static SharedPreferences sharedPreferences;
+    public static ArrayList<Level> levelList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.NumbersStyle);
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashing_numbers);
-        String title = "Menu";
-        SpannableString s = new SpannableString(title);
-        s.setSpan(new ForegroundColorSpan(Color.BLACK), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        getSupportActionBar().setTitle(s);
+        setTitle("Menu");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        quickHighScore = this.getPreferences(Context.MODE_PRIVATE);
-        quickHighScoreCount = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        IternalMemory memory = new IternalMemory();
+        levelList = memory.getLevelList();
+        initSettings();
+    }
+    public void initSettings(){
+
     }
     public void levelsClicked(View view){
         Intent intent = new Intent(this,Levels.class);

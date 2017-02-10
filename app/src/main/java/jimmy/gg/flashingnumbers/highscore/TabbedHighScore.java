@@ -35,7 +35,13 @@ public class TabbedHighScore extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        String actualPage = getIntent().getStringExtra(String.valueOf(getText(R.string.EXTRA_PAGE)));
 
+        if(actualPage.equals("0")){
+            mViewPager.setCurrentItem(0);
+        }else{
+            mViewPager.setCurrentItem(1);
+        }
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -86,6 +92,7 @@ public class TabbedHighScore extends AppCompatActivity {
                 case 0:
                     HighScore highScore = new HighScore();
                     return highScore;
+
                 case 1:
                     QuickLevelHighScore quickHighScore = new QuickLevelHighScore();
                     return quickHighScore;
