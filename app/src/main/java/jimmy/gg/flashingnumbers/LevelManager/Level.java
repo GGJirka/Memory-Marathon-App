@@ -8,6 +8,7 @@ public class Level {
     private String numbers;
     private String time;
     private String difficult;
+    private boolean isLocked;
 
     public Level(String level, String numbers, String time,String difficult){
         this.level = level;
@@ -45,5 +46,13 @@ public class Level {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.isLocked = locked;
     }
 }

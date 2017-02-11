@@ -3,15 +3,10 @@ package jimmy.gg.flashingnumbers.menu;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,7 +14,6 @@ import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.helpers.IternalMemory;
-import jimmy.gg.flashingnumbers.main.MainActivity;
 import jimmy.gg.flashingnumbers.quicklevel.QuickLevel;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
@@ -36,10 +30,6 @@ public class FlashingNumbers extends AppCompatActivity {
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         IternalMemory memory = new IternalMemory();
         levelList = memory.getLevelList();
-        initSettings();
-    }
-    public void initSettings(){
-
     }
     public void levelsClicked(View view){
         Intent intent = new Intent(this,Levels.class);

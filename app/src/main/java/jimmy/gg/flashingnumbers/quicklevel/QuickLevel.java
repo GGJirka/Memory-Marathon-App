@@ -5,10 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
@@ -24,9 +24,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import java.util.Random;
 
-import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.QuickLevelHighScore;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
@@ -171,6 +171,7 @@ public class QuickLevel extends AppCompatActivity {
     }
 
     public void timerOnEnd(){
+
         thirdTimer = new CountDownTimer(level*2000+2000,1){
             @Override
             public void onTick(long millisUntilFinished) {
@@ -277,17 +278,16 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
                     level = 1;
-                    layout.removeAllViews();
                     timerBetweenLevels();
                     setTitle("Quick - Level " + level);
-                    int numberCount = number.getText().length()-1;
+                    int numberCount = number.getText().toString().length() - 1;
                     String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
                     editor.commit();
-                    edit.putString(QuickLevelHighScore.KEY, String.valueOf(numberCount));
-                    edit.commit();
+                    editor.putString(QuickLevelHighScore.KEY + count, String.valueOf(numberCount));
+                    editor.commit();
+                    layout.removeAllViews();
                 }
             });
         }

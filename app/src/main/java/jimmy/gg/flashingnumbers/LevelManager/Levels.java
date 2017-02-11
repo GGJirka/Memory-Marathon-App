@@ -1,27 +1,27 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class Levels extends AppCompatActivity {
-    public  ListView levels;
+    public ListView levels;
     public ArrayList<Level> levelList;
 
     @Override
@@ -34,7 +34,12 @@ public class Levels extends AppCompatActivity {
         levels = (ListView) findViewById(R.id.levels);
         levels.setItemsCanFocus(false);
         levelList = ((IternalMemory)this.getApplication()).getLevelList();
-        levels.setAdapter(new LevelAdapter(getApplicationContext(), levelList));
+        manageList();
+    }
+
+    public void manageList() {
+        final BaseAdapter adapter = new LevelAdapter(getApplicationContext(), levelList);
+        levels.setAdapter(adapter);
         levels.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -49,20 +54,36 @@ public class Levels extends AppCompatActivity {
                 }
             }
         });
+        Runnable run = new Runnable() {
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        };
+        runOnUiThread(run);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.popup_menu,menu);
         return true;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        levelList = ((IternalMemory) this.getApplication()).getLevelList();
+        int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)), 1);
+        for (int i = 0; i < levelList.size(); i++) {
+            if (i >= index) {
+                levelList.get(i).setLocked(true);
+            } else {
+                levelList.get(i).setLocked(false);
+            }
+        }
+    }
     @Override
     public void onResume(){
         super.onResume();
-        int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)),1);
-        for(int i=index;i<levelList.size();i++){
-            levelList.get(i).setDifficult("locked");
-        }
-        levels.setAdapter(new LevelAdapter(getApplicationContext(), levelList));
+
     }
     public void gameStarted(String level, String numbers, String time){
         Intent intent = new Intent(this, Numbers.class);

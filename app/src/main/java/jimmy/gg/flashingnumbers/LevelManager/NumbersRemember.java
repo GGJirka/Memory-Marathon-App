@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
@@ -25,7 +25,6 @@ import java.util.List;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.helpers.IternalMemory;
-import jimmy.gg.flashingnumbers.highscore.HighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class NumbersRemember extends AppCompatActivity {
@@ -207,13 +206,7 @@ public class NumbersRemember extends AppCompatActivity {
         }
         if(sharedPreferences.getInt(String.valueOf(getResources().getText(R.string.LEVEL_KEY)),1)==acLevel){
             acLevel++;
-            if(acLevel>=6 && acLevel<=10){
-                levelList.get(acLevel).setDifficult(String.valueOf(R.string.medium));
-            }else if(acLevel>=11 && acLevel<=14){
-                levelList.get(acLevel).setDifficult(String.valueOf(R.string.hard));
-            }else{
-                levelList.get(acLevel).setDifficult(String.valueOf(R.string.easy));
-            }
+            levelList.get(acLevel).setLocked(false);
             editor.putInt(String.valueOf(getResources().getText(R.string.LEVEL_KEY)), acLevel);
             editor.commit();
         }

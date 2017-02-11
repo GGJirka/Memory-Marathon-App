@@ -1,27 +1,23 @@
 package jimmy.gg.flashingnumbers.highscore;
 
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class QuickLevelHighScore extends Fragment {
     /*
-    * TODO: BUGFIX ON START - SETTINGS,SHARED PREFERENCE IN FLASHINGNUMBERS,DATA STORAGE,LEVELS .
+    * TODO: BUGFIX ON START - SCORE FOR QUICK LEVEL,LEVELS .
     * */
     private ArrayList<Score> scores;
     public SharedPreferences sharedPreferences;

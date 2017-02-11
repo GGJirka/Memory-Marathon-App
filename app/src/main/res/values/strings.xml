@@ -140,4 +140,7 @@
     <string name="settings_timer">settings_timer</string>
     <string name="EXTRA_NUMBERS_COUNT">"jimmy.gg.flashingnumbers.NUMBERS_COUNT"</string>
     <string name="EXTRA_TIME_REMAIN">jimmy.gg.flashingnumbers.TIME_REMAIN</string>
+
+    <string name="default_value_timer">3</string>
+    <string name="default_value_numbers">2</string>
 </resources>

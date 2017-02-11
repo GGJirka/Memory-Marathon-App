@@ -1,11 +1,11 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,13 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class Numbers extends AppCompatActivity{
@@ -41,7 +39,8 @@ public class Numbers extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        sharedPreferences = FlashingNumbers.sharedPreferences;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         timer = (ProgressBar) findViewById(R.id.progressBar);
         timeRemain = (TextView) findViewById(R.id.time_remain);
@@ -191,20 +190,28 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void startTimer(){
-        final int time = Integer.parseInt(timer())*1000;
-        countDownTimer = new CountDownTimer(Integer.parseInt(timer()) * 1000, 1){
+        Runnable run = new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished){
-                timer.setProgress((int) (millisUntilFinished/(Integer.parseInt(timer()) * 1000/100)));
-                timeRemain1 = (int) ((time-millisUntilFinished)/10);
-            }
-            @Override
-            public void onFinish() {
-                numbersDone();
+            public void run() {
+                final int time = Integer.parseInt(timer()) * 1000;
+                countDownTimer = new CountDownTimer(Integer.parseInt(timer()) * 1000, 1) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        timer.setProgress((int) (millisUntilFinished / (Integer.parseInt(timer()) * 1000 / 100)));
+                        timeRemain1 = (int) ((time - millisUntilFinished) / 10);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        numbersDone();
+                    }
+                };
+                countDownTimer.start();
             }
         };
-        countDownTimer.start();
+        runOnUiThread(run);
     }
+
 
     @Override
     public void onPause(){

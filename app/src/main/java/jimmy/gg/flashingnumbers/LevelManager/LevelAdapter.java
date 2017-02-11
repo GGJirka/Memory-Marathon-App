@@ -42,6 +42,7 @@ public class LevelAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         v = View.inflate(context, R.layout.activity_level,null);
         TextView level = (TextView) v.findViewById(R.id.level);
         TextView numbers = (TextView) v.findViewById(R.id.numbers);
@@ -49,22 +50,22 @@ public class LevelAdapter extends BaseAdapter{
         level.setText(levels.get(position).getLevel());
         numbers.setText(levels.get(position).getNumbers());
         time.setText(levels.get(position).getTime());
-
-        switch(levels.get(position).getDifficult()){
-            case "easy":
-                v.setBackgroundResource(R.drawable.lw_easy);
-                break;
-            case "medium":
-                v.setBackgroundResource(R.drawable.lw_medium);
-                break;
-            case "hard":
-                v.setBackgroundResource(R.drawable.lw_hard);
-                break;
-            case "extreme":
-                break;
-            case "locked":
-                v.setBackgroundResource(R.drawable.lw_locked);
-                break;
+        if (!levels.get(position).isLocked()) {
+            switch (levels.get(position).getDifficult()) {
+                case "easy":
+                    v.setBackgroundResource(R.drawable.lw_easy);
+                    break;
+                case "medium":
+                    v.setBackgroundResource(R.drawable.lw_medium);
+                    break;
+                case "hard":
+                    v.setBackgroundResource(R.drawable.lw_hard);
+                    break;
+                case "extreme":
+                    break;
+            }
+        } else {
+            v.setBackgroundResource(R.drawable.lw_locked);
         }
         v.setTag(position);
         return v;
