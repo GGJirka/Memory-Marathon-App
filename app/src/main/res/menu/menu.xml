@@ -5,7 +5,7 @@
         android:id="@+id/retry_icon"
         android:title="retry"
         android:icon="@drawable/retry"
-        app:showAsAction="always"></item>
+        app:showAsAction="always" />
 <item
     android:id="@+id/action_settings"
     app:showAsAction="always"

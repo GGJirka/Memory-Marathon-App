@@ -34,8 +34,8 @@ public class QuickLevelHighScore extends Fragment {
 
     public void init(View rootView){
         ListView list = (ListView) rootView.findViewById(R.id.quick_hs_list);
-        for(int i=0;i<sharedPreferences.getInt(KEY_COUNT,0);i++){
-            scores.add(new Score("datum",sharedPreferences.getString(KEY+String.valueOf(i),"0")));
+        for (int i = 1; i <= sharedPreferences.getInt(KEY_COUNT, 0); i++) {
+            scores.add(new Score(sharedPreferences.getString(KEY + String.valueOf(i), "0")));
         }
         if(scores.size()>0) {
             list.setAdapter(new HighScoreAdapter(rootView.getContext(), scores));

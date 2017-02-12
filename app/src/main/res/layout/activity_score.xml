@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:id="@+id/high_score_score"
-        android:text="test"
+        android:text=""
         android:textColor="@color/black"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/high_score_level"

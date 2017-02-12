@@ -9,35 +9,41 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jimmy.gg.flashingnumbers.main.MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="@string/start_button"
-            android:layout_marginLeft="90sp"
-            android:layout_marginTop="50sp"
-            android:textSize="27sp"
-            android:height="70sp"
-            android:onClick="startGame"/>
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="@string/option_button"
-            android:layout_marginLeft="90sp"
-            android:layout_marginTop="50sp"
-            android:textSize="27sp"
-            android:height="70sp" />
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="@string/quit_button"
-            android:layout_marginLeft="90sp"
-            android:layout_marginTop="50sp"
-            android:textSize="27sp"
-            android:height="70sp" />
-    </LinearLayout>
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_words"
+        android:layout_marginTop="55dp"
+        android:textSize="24sp"
+        android:height="70sp"
+        android:layout_below="@+id/button3"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:onClick="wordsGameStart"
+        android:id="@+id/button4" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_images"
+        android:textSize="24sp"
+        android:height="70sp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_numbers"
+        android:layout_marginTop="35dp"
+        android:textSize="24sp"
+        android:height="70sp"
+        android:onClick="numbersGameStart"
+        android:id="@+id/button3"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4" />
 </RelativeLayout>

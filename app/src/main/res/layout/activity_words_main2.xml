@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_words_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="jimmy.gg.flashingnumbers.words.words.WordsMain">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lives: 3"
+        android:textSize="24dp"
+        android:id="@+id/words_lives" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="score: 0"
+        android:textSize="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:id="@+id/words_score" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="random"
+        android:layout_marginTop="100dp"
+        android:textSize="30dp"
+        android:id="@+id/words_word"
+        android:layout_below="@+id/words_lives"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="new"
+        android:layout_below="@+id/words_word"
+        android:layout_toRightOf="@+id/words_lives"
+        android:layout_toEndOf="@+id/words_lives"
+        android:layout_marginTop="44dp"
+        android:textSize="20sp"
+        android:id="@+id/words_new"
+        android:onClick="newWord" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="seen"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/words_seen"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/words_new"
+        android:layout_alignBottom="@+id/words_new"
+        android:layout_toRightOf="@+id/words_new"
+        android:layout_toEndOf="@+id/words_new"
+        android:onClick="seenWord" />
+
+    <Button
+        android:text="Retry"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/words_new"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:id="@+id/words_retry"
+        android:visibility="invisible" />
+
+    <Button
+        android:text="Save"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/words_retry"
+        android:textSize="20sp"
+        android:id="@+id/words_save"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
+</RelativeLayout>

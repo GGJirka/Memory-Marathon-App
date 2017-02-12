@@ -9,33 +9,44 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jimmy.gg.flashingnumbers.LevelManager.NumbersRemember">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/linear_layout"
-        android:layout_alignParentBottom="true">
     <TextView
         android:layout_marginLeft="4sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/numbers_time_remaining"
         android:id="@+id/time_remain"/>
+
     <ProgressBar
-        android:layout_marginLeft="4sp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="100"
-        android:id="@+id/remember_timer"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="20"
-            android:inputType="textMultiLine|numberDecimal"
-            android:textSize="27dp"
-            android:digits="0123456789"
-            android:textAlignment="center"
-            android:id="@+id/numbers_remember"/>
-    </LinearLayout>
+        android:id="@+id/remember_timer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/time_remain" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="20"
+        android:inputType="textMultiLine|numberDecimal"
+        android:textSize="27dp"
+        android:digits="0123456789"
+        android:textAlignment="center"
+        android:id="@+id/numbers_remember"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/time_remain"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quick_button_done"
+        android:theme="@style/MaterialButton"
+        android:id="@+id/numbers_remember_done"
+        android:layout_below="@+id/numbers_remember"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

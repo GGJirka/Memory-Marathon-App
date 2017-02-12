@@ -23,6 +23,7 @@ import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 public class Levels extends AppCompatActivity {
     public ListView levels;
     public ArrayList<Level> levelList;
+    public Toast display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,15 @@ public class Levels extends AppCompatActivity {
         levels.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(levelList.get(position).getDifficult()!="locked") {
+                if (!levelList.get(position).isLocked()) {
                     String level = levelList.get(position).getLevel();
                     String numbers = levelList.get(position).getNumbers();
                     String time = levelList.get(position).getTime();
                     gameStarted(level, numbers, time);
                 }else{
-                    Toast.makeText(getApplicationContext(),"Level locked, complete "+levelList.get(position-1).getLevel()
-                            +" to unlock.",Toast.LENGTH_SHORT).show();
+                    display = Toast.makeText(getApplicationContext(), "Level locked, complete " + levelList.get(position - 1).getLevel()
+                            + " to unlock.", Toast.LENGTH_SHORT);
+                    display.show();
                 }
             }
         });
@@ -66,10 +68,27 @@ public class Levels extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.popup_menu,menu);
         return true;
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (display != null) {
+            display.cancel();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (display != null) {
+            display.cancel();
+        }
+        super.onDestroy();
+    }
 
     @Override
     public void onStart() {
         super.onStart();
+        manageList();
+        levels = (ListView) findViewById(R.id.levels);
         levelList = ((IternalMemory) this.getApplication()).getLevelList();
         int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)), 1);
         for (int i = 0; i < levelList.size(); i++) {
@@ -83,7 +102,18 @@ public class Levels extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        /*manageList();
+        levels = (ListView) findViewById(R.id.levels);
 
+        levelList = ((IternalMemory) this.getApplication()).getLevelList();
+        int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)), 1);
+        for (int i = 0; i < levelList.size(); i++) {
+            if (i >= index) {
+                levelList.get(i).setLocked(true);
+            } else {
+                levelList.get(i).setLocked(false);
+            }
+        }*/
     }
     public void gameStarted(String level, String numbers, String time){
         Intent intent = new Intent(this, Numbers.class);

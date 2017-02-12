@@ -13,8 +13,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/level_1"
-        android:textSize="20sp"
+        android:text="Level 13"
+        android:textSize="19sp"
         android:id="@+id/level"
         android:textColor="@color/black"
         android:layout_alignParentLeft="true"/>
@@ -23,16 +23,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:textSize="19sp"
-        android:text="time: 1s"
+        android:textSize="18sp"
+        android:text="time: 130s"
         android:id="@+id/time"
         android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="numbers: 1"
-        android:textSize="19sp"
+        android:text="numbers: 100"
+        android:textSize="18sp"
         android:id="@+id/numbers"
         android:textColor="@color/black"
         android:layout_alignBaseline="@+id/level"

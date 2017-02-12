@@ -8,16 +8,14 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,11 +27,11 @@ import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class NumbersRemember extends AppCompatActivity {
     private EditText number;
-    private LinearLayout layout;
     private int numberCount;
     private CountDownTimer countDownTimer = null;
     private String numbers;
     private int timerRemain;
+    private RelativeLayout layout;
     private int c=20;
 
     @Override
@@ -43,11 +41,11 @@ public class NumbersRemember extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         setTitle(R.string.numbers_remembered_title);
         setContentView(R.layout.activity_numbers_remember);
-        layout = (LinearLayout) findViewById(R.id.linear_layout);
         Intent intent = getIntent();
         numberCount = intent.getIntExtra(EXTRA_NUMBERS_COUNT,0);
         numbers = intent.getStringExtra(EXTRA_NUMBERS);
         timerRemain = intent.getIntExtra(EXTRA_TIME_REMAIN,0);
+        layout = (RelativeLayout) findViewById(R.id.activity_numbers_remember);
         createRow();
         startTimer();
     }
@@ -55,18 +53,7 @@ public class NumbersRemember extends AppCompatActivity {
     protected void createRow(){
         number = (EditText) findViewById(R.id.numbers_remember);
         number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(numberCount)});
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(600,40,0,0);
-        ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
-        Button button = new Button(newContext);
-        button.setText(R.string.numbers_remember_done);
-        button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        button.setLayoutParams(params);
-        layout.addView(button);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.numbers_remember_done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 done();
@@ -133,8 +120,11 @@ public class NumbersRemember extends AppCompatActivity {
                 } else {
                     numRight.setText(numbers.substring(count, count+(numberCount-count)));
                 }
-                layout.addView(numEntered);
-                layout.addView(numRight);
+                LinearLayout linear = new LinearLayout(NumbersRemember.this);
+                linear.setOrientation(LinearLayout.VERTICAL);
+                linear.addView(numEntered);
+                linear.addView(numRight);
+                layout.addView(linear);
                 i++;
             }catch (Exception e){
             }

@@ -1,15 +1,19 @@
 package jimmy.gg.flashingnumbers.LevelManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class Numbers extends AppCompatActivity{
@@ -52,10 +57,49 @@ public class Numbers extends AppCompatActivity{
                 numbersDone();
             }
         });
-
-        gameStart();
+        if (FlashingNumbers.sharedPreferences.getString(String.valueOf(getText(R.string.INFO)), "uncheck").equals("uncheck")) {
+            showInfo();
+        } else {
+            gameStart();
+        }
     }
 
+    public void showInfo() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.checkbox, null);
+        final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
+        new AlertDialog.Builder(Numbers.this)
+                .setView(view)
+                .setTitle("Info")
+                .setMessage("Use arrows to move to another part of number.\n" +
+                        "Select number arrangement in settings like below.\n" +
+                        "from this: 555555 -> 55 55 55")
+                .setPositiveButton(getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (checkbox.isChecked()) {
+                            SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                            editor.putString(String.valueOf(getText(R.string.INFO)), "check");
+                            editor.commit();
+                        }
+                        gameStart();
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        if (checkbox.isChecked()) {
+                            SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                            editor.putString(String.valueOf(getText(R.string.INFO)), "check");
+                            editor.commit();
+                        }
+                        gameStart();
+                    }
+                })
+                .show();
+
+
+    }
     public String timer(){
         String[] seconds = getIntent().getStringExtra(EXTRA_TIME).split(" ");
         StringBuilder builder = new StringBuilder();

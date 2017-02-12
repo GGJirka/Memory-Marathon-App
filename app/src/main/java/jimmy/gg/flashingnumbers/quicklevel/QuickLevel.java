@@ -13,6 +13,7 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.InputFilter;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
@@ -51,29 +55,46 @@ public class QuickLevel extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progress = (ProgressBar) findViewById(R.id.quick_progressBar);
         onEndView = (TextView) findViewById(R.id.quick_on_end_view);
-        rulesExplain(false);
+        if (FlashingNumbers.sharedPreferences.getString(String.valueOf(getText(R.string.CHECKBOX)), "uncheck").equals("uncheck")) {
+            rulesExplain();
+        } else {
+            timerBetweenLevels();
+        }
     }
 
-    public void rulesExplain(boolean userDenied){
-        if(!userDenied){
+    public void rulesExplain() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.checkbox, null);
+        final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
             new AlertDialog.Builder(QuickLevel.this)
+                    .setView(view)
                     .setTitle("Rules")
                     .setMessage("There will be levels in each level the numbers amount increases by one. Starting on" +
                             "one digit. After timer is done you will have to write down this number.")
                     .setPositiveButton(getResources().getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            if (checkbox.isChecked()) {
+                                SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                                editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
+                                editor.commit();
+                            }
                             timerBetweenLevels();
                         }
                     })
                     .setOnCancelListener(new DialogInterface.OnCancelListener() {
                         @Override
                         public void onCancel(DialogInterface dialog) {
+                            if (checkbox.isChecked()) {
+                                SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                                editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
+                                editor.commit();
+                            }
                             timerBetweenLevels();
                         }
                     })
                     .show();
-        }
+
     }
 
     public void timerBetweenLevels(){
@@ -238,7 +259,6 @@ public class QuickLevel extends AppCompatActivity {
         Button next = new Button(newContext);
         next.setLayoutParams(params);
         next.setTextSize(20);
-        layout.addView(next);
 
         int passed = 0;
         try {
@@ -262,6 +282,7 @@ public class QuickLevel extends AppCompatActivity {
         if (passed == builder.length()) {
             next.setText(R.string.button_next);
             next.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            layout.addView(next);
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -272,8 +293,12 @@ public class QuickLevel extends AppCompatActivity {
                 }
             });
         } else {
-            next.setText("RETRY");
-            next.setOnClickListener(new View.OnClickListener(){
+            View v = getLayoutInflater().inflate(R.layout.buttons, null);
+            LinearLayout linear = (LinearLayout) v.findViewById(R.id.quick_linear_layout);
+            linear.setPadding(0, 30, 0, 0);
+            layout.addView(linear);
+
+            v.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
@@ -285,11 +310,22 @@ public class QuickLevel extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
                     editor.commit();
-                    editor.putString(QuickLevelHighScore.KEY + count, String.valueOf(numberCount));
+                    String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    editor.putString(QuickLevelHighScore.KEY + count, date + "   " + "numbers:  " + String.valueOf(numberCount));
                     editor.commit();
                     layout.removeAllViews();
                 }
             });
+            v.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    level = 1;
+                    timerBetweenLevels();
+                    setTitle("Quick - Level " + level);
+                    layout.removeAllViews();
+                }
+            });
+
         }
         editText.setText("");
     }

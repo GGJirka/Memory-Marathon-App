@@ -143,4 +143,20 @@
 
     <string name="default_value_timer">3</string>
     <string name="default_value_numbers">2</string>
+    <string name="CHECKBOX">CHECKBOX</string>
+    <string name="INFO">INFO</string>
+
+    <string name="button_quick_retry">RETRY</string>
+    <string name="button_quick_save">SAVE</string>
+    <string name="button_seen">SEEN</string>
+    <string name="button_new">NEW</string>
+    <string name="high_score">High score</string>
+
+    <string name="main_numbers">Numbers</string>
+    <string name="main_words">Words</string>
+    <string name="main_images">Images</string>
+
+
+    <string name="words_activity_title">Words</string>
+    <string name="words_activity_dialog">WORDSINFO</string>
 </resources>
