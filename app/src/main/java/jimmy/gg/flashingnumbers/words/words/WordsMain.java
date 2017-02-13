@@ -22,6 +22,7 @@ import jimmy.gg.flashingnumbers.R;
 public class WordsMain extends AppCompatActivity {
     /**
      * TODO:   BETTER ALGORITHM IN WORDS, BETTER DESIGN, ADD HIGH SCORE, WHEN 0 LIVES MENU.
+     * !!!!!!!WORKINGGGGG!!!!!!!! BETTER
      */
     private SharedPreferences sharedPreferences;
     private WordsStats words;
@@ -92,6 +93,7 @@ public class WordsMain extends AppCompatActivity {
                     TextView word = (TextView) findViewById(R.id.words_word);
                     int r = new Random().nextInt(words.getWordList().size());
                     word.setText(words.getWords(r));
+                    words.setRandom(5);
                 }
             };
             runOnUiThread(run);
@@ -112,16 +114,7 @@ public class WordsMain extends AppCompatActivity {
             words.setScore(words.getScore() + 1);
             score.setText("score: " + words.getScore());
         }
-        if (words.count != words.getRandom()) {
-            words.addNewWord(word.getText().toString());
-            word.setText(words.getWords(r));
-        } else {
-            word.setText(words.getUsedWords().get(new Random().nextInt(words.getUsedWords().size())));
-            words.count = 0;
-            words.setRandom(5);
-        }
-        words.count++;
-
+        usedAndUnusedCycle(word, r, view);
     }
 
     public void seenWord(View v) {
@@ -136,17 +129,53 @@ public class WordsMain extends AppCompatActivity {
             words.setScore(words.getScore() + 1);
             score.setText("score: " + words.getScore());
         }
-        if (words.count != words.getRandom()) {
-            words.addNewWord(word.getText().toString());
-            word.setText(words.getWords(r));
-        } else {
-            word.setText(words.getUsedWords().get(new Random().nextInt(words.getUsedWords().size())));
-            words.count = 0;
-            words.setRandom(5);
-        }
-        words.count++;
+        usedAndUnusedCycle(word, r, v);
     }
 
+    public void usedAndUnusedCycle(TextView word, int r, View v) {
+        if (words.isUsed()) {
+            if (words.count != words.getRandom() + 1) {
+                if (!words.isInUsed(word.getText().toString())) {
+                    words.addNewWord(word.getText().toString());
+                }
+                word.setText(words.getWords(r));
+                words.count++;
+            } else {
+                if (!words.isInUsed(word.getText().toString())) {
+                    words.addNewWord(word.getText().toString());
+                }
+                word.setText(words.getUsedWords().get(new Random().nextInt(words.getUsedWords().size())));
+                words.count = 0;
+                words.random = new Random().nextInt(3) + 1;
+                words.count++;
+                words.setUsed(false);
+            }
+        } else {
+            if (words.count != words.getRandom() + 1) {
+                Random random = new Random();
+                int rand = random.nextInt(words.getUsedWords().size());
+                if (!words.isInUsed(word.getText().toString())) {
+                    words.addNewWord(word.getText().toString());
+                }
+
+                word.setText(words.getUsedWords().get(rand));
+                words.count++;
+            } else {
+                if (!words.isInUsed(word.getText().toString())) {
+                    words.addNewWord(word.getText().toString());
+                }
+                word.setText(words.getWords(r));
+                words.count = 0;
+                if (words.getUsedWords().size() <= 3) {
+                    words.random = new Random().nextInt(3);
+                } else {
+                    words.random = new Random().nextInt(4);
+                }
+                words.count++;
+                words.setUsed(true);
+            }
+        }
+    }
     public String readText(int string) {
         return String.valueOf(getText(string));
     }

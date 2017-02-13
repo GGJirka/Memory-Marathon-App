@@ -11,7 +11,7 @@ public class WordsStats {
     private int lives, score;
     private ArrayList<String> usedWords;
     private ArrayList<String> wordList;
-    private int random;
+    public int random;
     public int count = 0;
     private boolean isUsed = true;
 
