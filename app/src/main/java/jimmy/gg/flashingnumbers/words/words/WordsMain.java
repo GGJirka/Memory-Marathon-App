@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -21,8 +22,7 @@ import jimmy.gg.flashingnumbers.R;
 
 public class WordsMain extends AppCompatActivity {
     /**
-     * TODO:   BETTER ALGORITHM IN WORDS, BETTER DESIGN, ADD HIGH SCORE, WHEN 0 LIVES MENU.
-     * !!!!!!!WORKINGGGGG!!!!!!!! BETTER
+     * TODO: BETTER DESIGN, ADD HIGH SCORE, WHEN 0 LIVES MENU.
      */
     private SharedPreferences sharedPreferences;
     private WordsStats words;
@@ -109,6 +109,11 @@ public class WordsMain extends AppCompatActivity {
             TextView lives = (TextView) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
             lives.setText("lives: " + words.getLives());
+            if (words.getLives() == 0) {
+                gameEnds();
+                word.setText("Score: " + words.getScore());
+                return;
+            }
         } else {
             TextView score = (TextView) findViewById(R.id.words_score);
             words.setScore(words.getScore() + 1);
@@ -124,6 +129,11 @@ public class WordsMain extends AppCompatActivity {
             TextView lives = (TextView) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
             lives.setText("lives: " + words.getLives());
+            if (words.getLives() == 0) {
+                gameEnds();
+                word.setText("Score: " + words.getScore());
+                return;
+            }
         } else {
             TextView score = (TextView) findViewById(R.id.words_score);
             words.setScore(words.getScore() + 1);
@@ -136,15 +146,22 @@ public class WordsMain extends AppCompatActivity {
         if (words.isUsed()) {
             if (words.count != words.getRandom() + 1) {
                 if (!words.isInUsed(word.getText().toString())) {
-                    words.addNewWord(word.getText().toString());
+                    for (int i = 0; i < 5; i++) {
+                        words.addNewWord(word.getText().toString());
+                    }
                 }
                 word.setText(words.getWords(r));
+                words.getWordList().remove(r);
                 words.count++;
             } else {
                 if (!words.isInUsed(word.getText().toString())) {
-                    words.addNewWord(word.getText().toString());
+                    for (int i = 0; i < 5; i++) {
+                        words.addNewWord(word.getText().toString());
+                    }
                 }
-                word.setText(words.getUsedWords().get(new Random().nextInt(words.getUsedWords().size())));
+                int rand = new Random().nextInt(words.getUsedWords().size());
+                word.setText(words.getUsedWords().get(rand));
+                words.getUsedWords().remove(rand);
                 words.count = 0;
                 words.random = new Random().nextInt(3) + 1;
                 words.count++;
@@ -155,18 +172,23 @@ public class WordsMain extends AppCompatActivity {
                 Random random = new Random();
                 int rand = random.nextInt(words.getUsedWords().size());
                 if (!words.isInUsed(word.getText().toString())) {
-                    words.addNewWord(word.getText().toString());
+                    for (int i = 0; i < 5; i++) {
+                        words.addNewWord(word.getText().toString());
+                    }
                 }
-
                 word.setText(words.getUsedWords().get(rand));
+                words.getUsedWords().remove(rand);
                 words.count++;
             } else {
                 if (!words.isInUsed(word.getText().toString())) {
-                    words.addNewWord(word.getText().toString());
+                    for (int i = 0; i < 5; i++) {
+                        words.addNewWord(word.getText().toString());
+                    }
                 }
                 word.setText(words.getWords(r));
+                words.getWordList().remove(r);
                 words.count = 0;
-                if (words.getUsedWords().size() <= 3) {
+                if (words.getUsedWords().size() <= 15) {
                     words.random = new Random().nextInt(3);
                 } else {
                     words.random = new Random().nextInt(4);
@@ -176,13 +198,45 @@ public class WordsMain extends AppCompatActivity {
             }
         }
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.popup_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void gameEnds() {
+        findViewById(R.id.words_new).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_seen).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_save).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_lives).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_score).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_end_high_score).setVisibility(View.VISIBLE);
+    }
+
     public String readText(int string) {
         return String.valueOf(getText(string));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        this.finish();
+        switch (item.getItemId()) {
+            case R.id.retry_icon:
+                words.count = 1;
+                words.setLives(3);
+                words.setScore(0);
+                words.getUsedWords().removeAll(words.getUsedWords());
+                findViewById(R.id.words_new).setVisibility(View.VISIBLE);
+                findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
+                findViewById(R.id.words_save).setVisibility(View.INVISIBLE);
+                findViewById(R.id.words_lives).setVisibility(View.VISIBLE);
+                findViewById(R.id.words_score).setVisibility(View.VISIBLE);
+                findViewById(R.id.words_end_high_score).setVisibility(View.INVISIBLE);
+                break;
+            case R.id.high_score:
+                break;
+            default:
+                this.finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 }

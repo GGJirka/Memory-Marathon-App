@@ -39,6 +39,16 @@
         android:layout_below="@+id/words_lives"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Highest score: 30"
+        android:layout_below="@+id/words_word"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/words_end_high_score"
+        android:visibility="invisible" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,24 +75,16 @@
         android:layout_toEndOf="@+id/words_new"
         android:onClick="seenWord" />
 
-    <Button
-        android:text="Retry"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/words_new"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:id="@+id/words_retry"
-        android:visibility="invisible" />
+
 
     <Button
         android:text="Save"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/words_retry"
+        android:layout_below="@id/words_end_high_score"
         android:textSize="20sp"
         android:id="@+id/words_save"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:visibility="invisible" />
 </RelativeLayout>
