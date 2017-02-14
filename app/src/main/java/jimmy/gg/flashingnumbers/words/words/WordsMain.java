@@ -2,6 +2,7 @@ package jimmy.gg.flashingnumbers.words.words;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
@@ -24,7 +27,7 @@ public class WordsMain extends AppCompatActivity {
     /**
      * TODO: BETTER DESIGN, ADD HIGH SCORE, WHEN 0 LIVES MENU.
      */
-    private SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences;
     private WordsStats words;
     private BufferedReader bf;
 
@@ -163,7 +166,11 @@ public class WordsMain extends AppCompatActivity {
                 word.setText(words.getUsedWords().get(rand));
                 words.getUsedWords().remove(rand);
                 words.count = 0;
-                words.random = new Random().nextInt(3) + 1;
+                if (words.getUsedWords().size() <= 15) {
+                    words.random = new Random().nextInt(3);
+                } else {
+                    words.random = new Random().nextInt(4);
+                }
                 words.count++;
                 words.setUsed(false);
             }
@@ -188,11 +195,12 @@ public class WordsMain extends AppCompatActivity {
                 word.setText(words.getWords(r));
                 words.getWordList().remove(r);
                 words.count = 0;
-                if (words.getUsedWords().size() <= 15) {
+                /*if (words.getUsedWords().size() <= 15) {
                     words.random = new Random().nextInt(3);
                 } else {
                     words.random = new Random().nextInt(4);
-                }
+                }*/
+                words.random = new Random().nextInt(5) + 1;
                 words.count++;
                 words.setUsed(true);
             }
@@ -200,7 +208,7 @@ public class WordsMain extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.popup_menu, menu);
+        getMenuInflater().inflate(R.menu.words_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -224,6 +232,15 @@ public class WordsMain extends AppCompatActivity {
                 words.count = 1;
                 words.setLives(3);
                 words.setScore(0);
+                TextView score = (TextView) findViewById(R.id.words_score);
+                TextView lives = (TextView) findViewById(R.id.words_lives);
+                TextView word = (TextView) findViewById(R.id.words_word);
+                score.setText("score: " + words.getScore());
+                lives.setText("lives: " + words.getLives());
+                int r = new Random().nextInt(words.getWordList().size());
+                word.setText(words.getWords(r));
+                words.setUsed(true);
+                words.setRandom(5);
                 words.getUsedWords().removeAll(words.getUsedWords());
                 findViewById(R.id.words_new).setVisibility(View.VISIBLE);
                 findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
@@ -232,7 +249,17 @@ public class WordsMain extends AppCompatActivity {
                 findViewById(R.id.words_score).setVisibility(View.VISIBLE);
                 findViewById(R.id.words_end_high_score).setVisibility(View.INVISIBLE);
                 break;
+
             case R.id.high_score:
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("WORDS_COUNT_SCORE", String.valueOf
+                        (Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")) + 1));
+
+                editor.putString("WORDS_SCORE" + sharedPreferences.getString("WORDS_COUNT_SCORE", "0")
+                        , date + " score: " + words.getScore());
+                editor.commit();
+                startActivity(new Intent(this, WordsScore.class));
                 break;
             default:
                 this.finish();

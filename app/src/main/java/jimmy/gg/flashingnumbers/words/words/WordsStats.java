@@ -20,7 +20,7 @@ public class WordsStats {
         this.score = score;
         usedWords = new ArrayList<>();
         wordList = new ArrayList<>();
-        random = new Random().nextInt(5);
+        random = new Random().nextInt(5) + 1;
     }
 
     public boolean isInUsed(String word) {

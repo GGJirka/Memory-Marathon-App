@@ -10,7 +10,6 @@ public class Score  {
         this.level = level;
         this.highScore = highScore;
     }
-
     public Score(String text) {
         this.text = text;
     }
