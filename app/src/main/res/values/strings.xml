@@ -159,4 +159,5 @@
 
     <string name="words_activity_title">Words</string>
     <string name="words_activity_dialog">WORDSINFO</string>
+    <string name="words_delete_score">Delete score</string>
 </resources>

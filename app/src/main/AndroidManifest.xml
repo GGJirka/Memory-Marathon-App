@@ -59,7 +59,10 @@
             android:name=".words.words.WordsMain"
             android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
-        <activity android:name=".words.words.WordsScore"></activity>
+        <activity
+            android:name=".words.words.WordsScore"
+            android:screenOrientation="portrait"
+            android:theme="@style/WordsStyle"></activity>
     </application>
 
 </manifest>

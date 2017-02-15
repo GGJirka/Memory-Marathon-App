@@ -25,7 +25,7 @@ import jimmy.gg.flashingnumbers.R;
 
 public class WordsMain extends AppCompatActivity {
     /**
-     * TODO: BETTER DESIGN, ADD HIGH SCORE, WHEN 0 LIVES MENU.
+     * TODO: BETTER DESIGN.
      */
     public static SharedPreferences sharedPreferences;
     private WordsStats words;
@@ -43,6 +43,12 @@ public class WordsMain extends AppCompatActivity {
         if (sharedPreferences.getString(readText(R.string.words_activity_dialog), "0").equals("0")) {
             init();
         }
+        findViewById(R.id.words_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
     }
 
     public void init() {
@@ -123,6 +129,25 @@ public class WordsMain extends AppCompatActivity {
             score.setText("score: " + words.getScore());
         }
         usedAndUnusedCycle(word, r, view);
+    }
+
+    public void saveData() {
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("WORDS_COUNT_SCORE", String.valueOf
+                (Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")) + 1));
+
+        editor.putString("WORDS_SCORE" + sharedPreferences.getString("WORDS_COUNT_SCORE", "0")
+                , date + " score: " + words.getScore());
+        editor.commit();
+        startActivity(new Intent(this, WordsScore.class));
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                clearView();
+            }
+        };
+        runOnUiThread(runnable);
     }
 
     public void seenWord(View v) {
@@ -212,6 +237,11 @@ public class WordsMain extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        clearView();
+    }
     public void gameEnds() {
         findViewById(R.id.words_new).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_seen).setVisibility(View.INVISIBLE);
@@ -225,40 +255,34 @@ public class WordsMain extends AppCompatActivity {
         return String.valueOf(getText(string));
     }
 
+    public void clearView() {
+        words.count = 1;
+        words.setLives(3);
+        words.setScore(0);
+        TextView score = (TextView) findViewById(R.id.words_score);
+        TextView lives = (TextView) findViewById(R.id.words_lives);
+        TextView word = (TextView) findViewById(R.id.words_word);
+        score.setText("score: " + words.getScore());
+        lives.setText("lives: " + words.getLives());
+        int r = new Random().nextInt(words.getWordList().size());
+        word.setText(words.getWords(r));
+        words.setUsed(true);
+        words.setRandom(5);
+        words.getUsedWords().removeAll(words.getUsedWords());
+        findViewById(R.id.words_new).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_save).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_lives).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_score).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_end_high_score).setVisibility(View.INVISIBLE);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.retry_icon:
-                words.count = 1;
-                words.setLives(3);
-                words.setScore(0);
-                TextView score = (TextView) findViewById(R.id.words_score);
-                TextView lives = (TextView) findViewById(R.id.words_lives);
-                TextView word = (TextView) findViewById(R.id.words_word);
-                score.setText("score: " + words.getScore());
-                lives.setText("lives: " + words.getLives());
-                int r = new Random().nextInt(words.getWordList().size());
-                word.setText(words.getWords(r));
-                words.setUsed(true);
-                words.setRandom(5);
-                words.getUsedWords().removeAll(words.getUsedWords());
-                findViewById(R.id.words_new).setVisibility(View.VISIBLE);
-                findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
-                findViewById(R.id.words_save).setVisibility(View.INVISIBLE);
-                findViewById(R.id.words_lives).setVisibility(View.VISIBLE);
-                findViewById(R.id.words_score).setVisibility(View.VISIBLE);
-                findViewById(R.id.words_end_high_score).setVisibility(View.INVISIBLE);
+                clearView();
                 break;
-
             case R.id.high_score:
-                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("WORDS_COUNT_SCORE", String.valueOf
-                        (Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")) + 1));
-
-                editor.putString("WORDS_SCORE" + sharedPreferences.getString("WORDS_COUNT_SCORE", "0")
-                        , date + " score: " + words.getScore());
-                editor.commit();
                 startActivity(new Intent(this, WordsScore.class));
                 break;
             default:

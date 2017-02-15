@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/sort_date"
+            android:title="sort by date"
+            android:showAsAction="never"></item>
+        <item
+            android:id="@+id/sort_score"
+            android:title="sort by score"
+            android:showAsAction="never"></item>
+    </group>
+    <item
+        android:title="Delete score"
+        android:icon="@drawable/words_delete_score"
+        android:id="@+id/words_delete"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>
