@@ -1,7 +1,9 @@
 package jimmy.gg.flashingnumbers.words.words;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,27 +20,23 @@ import jimmy.gg.flashingnumbers.highscore.Score;
 
 public class WordsScore extends AppCompatActivity {
     /**
-     * TODO: BETTER DESIGN, ON DELETE SCORE POPUP MENU, RADIO BUTTONS..
+     * TODO: BETTER DESIGN, ON DELETE SCORE POPUP MENU
      */
     public ArrayList<Score> score;
     public SharedPreferences sharedPreferences;
     public BaseAdapter baseAdapter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_score);
         ListView list = (ListView) findViewById(R.id.words_high_score);
         sharedPreferences = WordsMain.sharedPreferences;
-        // MenuItem dateButton = (MenuItem) findViewById(R.id.sort_date);
-        // MenuItem scoreButton = (MenuItem) findViewById(R.id.sort_score);
         score = new ArrayList<>();
         if (sharedPreferences.getString("WORDS_SORT", "0").equals("0")) {
-            //  dateButton.setChecked(true);
-            //  scoreButton.setChecked(false);
+
             sortByDate();
         } else {
-            //  scoreButton.setChecked(true);
-            //  dateButton.setChecked(false);
             sortByScore();
         }
         baseAdapter = new HighScoreAdapter(getApplicationContext(), score);
@@ -67,7 +65,7 @@ public class WordsScore extends AppCompatActivity {
                 ArrayList<Integer> addScore = new ArrayList<>();
                 for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
                     Score score0 = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), ""));
-                    addScore.add(Integer.parseInt(score0.getText().split(" ")[2]));
+                    addScore.add(Integer.parseInt(score0.getText().split(" ")[3]));
                 }
                 Collections.sort(addScore, new Comparator<Integer>() {
                     @Override
@@ -79,7 +77,7 @@ public class WordsScore extends AppCompatActivity {
                     String score0 = String.valueOf(addScore.get(i));
                     for (int j = 0; j < addScore.size(); j++) {
                         Score row = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(j), ""));
-                        if (row.getText().split(" ")[2].equals(score0)) {
+                        if (row.getText().split(" ")[3].equals(score0)) {
                             score.add(row);
                             break;
                         }
@@ -92,18 +90,42 @@ public class WordsScore extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
+        if (sharedPreferences.getString("WORDS_SCORE_CHECK", "0").equals("0")) {
+            menu.findItem(R.id.sort_date).setChecked(true);
+        } else {
+            menu.findItem(R.id.sort_score).setChecked(true);
+        }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void deleteScoreDialog() {
+        new AlertDialog.Builder(WordsScore.this)
+                .setTitle("Delete score")
+                .setMessage("Do you really want to delete all score?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
+                            sharedPreferences.edit().remove("WORDS_SCORE" + String.valueOf(i)).commit();
+                            sharedPreferences.edit().remove("WORDS_COUNT_SCORE").commit();
+                        }
+                        score.removeAll(score);
+                        baseAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.words_delete:
-                for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
-                    sharedPreferences.edit().remove("WORDS_SCORE" + String.valueOf(i)).commit();
-                    sharedPreferences.edit().remove("WORDS_COUNT_SCORE").commit();
-                }
-                score.removeAll(score);
-                baseAdapter.notifyDataSetChanged();
+                deleteScoreDialog();
                 break;
             case R.id.sort_date:
                 score.removeAll(score);
@@ -114,8 +136,10 @@ public class WordsScore extends AppCompatActivity {
                     item.setChecked(true);
 
                 sortByDate();
+                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "0").commit();
                 baseAdapter.notifyDataSetChanged();
                 break;
+
             case R.id.sort_score:
                 sharedPreferences.edit().putString("WORDS_SORT", "1").commit();
                 if (item.isChecked())
@@ -125,11 +149,19 @@ public class WordsScore extends AppCompatActivity {
 
                 score.removeAll(score);
                 sortByScore();
+                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "1").commit();
                 baseAdapter.notifyDataSetChanged();
                 break;
             default:
+                sharedPreferences.edit().putString("WORDS_STATE", "0").commit();
                 this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        sharedPreferences.edit().putString("WORDS_STATE", "0").commit();
+        this.finish();
     }
 }

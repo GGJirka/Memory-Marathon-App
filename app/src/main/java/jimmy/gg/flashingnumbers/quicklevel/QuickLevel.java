@@ -45,7 +45,6 @@ public class QuickLevel extends AppCompatActivity {
     private CountDownTimer secondTimer = null;
     private CountDownTimer thirdTimer = null;
     private int sec = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -147,6 +146,20 @@ public class QuickLevel extends AppCompatActivity {
         if(editText.getVisibility() == View.INVISIBLE) {
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
+        if (FlashingNumbers.sharedPreferences.getString("QUICK_LEVEL_STATE", "2").equals("0")) {
+            LinearLayout lay = (LinearLayout) findViewById(R.id.quick_linear_result);
+            lay.removeAllViews();
+            if (FlashingNumbers.sharedPreferences.getString(String.valueOf(getText(R.string.CHECKBOX)), "uncheck").equals("uncheck")) {
+                rulesExplain();
+            } else {
+                timerBetweenLevels();
+            }
+            FlashingNumbers.sharedPreferences
+                    .edit()
+                    .putString("QUICK_LEVEL_STATE", "1")
+                    .commit();
+        }
+
     }
 
     public void onStop(){
@@ -249,7 +262,6 @@ public class QuickLevel extends AppCompatActivity {
         textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         layout.addView(textView2);
 
-
         TextView answer = new TextView(QuickLevel.this);
         answer.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         answer.setTextSize(34);
@@ -303,7 +315,6 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
                     level = 1;
-                    timerBetweenLevels();
                     setTitle("Quick - Level " + level);
                     int numberCount = number.getText().toString().length() - 1;
                     String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
@@ -311,9 +322,15 @@ public class QuickLevel extends AppCompatActivity {
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
                     editor.commit();
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                    editor.putString(QuickLevelHighScore.KEY + count, date + "   " + "numbers:  " + String.valueOf(numberCount));
+                    editor.putString(QuickLevelHighScore.KEY + count, date + " " + "numbers:" + " " + String.valueOf(numberCount));
                     editor.commit();
-                    layout.removeAllViews();
+                    sharedPreferences.edit()
+                            .putString("TAB_STATE", "0")
+                            .apply();
+                    Intent intent = new Intent(QuickLevel.this, TabbedHighScore.class);
+                    intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)), "1");
+                    QuickLevel.this.startActivity(intent);
+
                 }
             });
             v.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,7 @@
 package jimmy.gg.flashingnumbers.highscore;
 
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import jimmy.gg.flashingnumbers.LevelManager.Level;
-import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 
 public class HighScore extends Fragment{
@@ -51,5 +48,12 @@ public class HighScore extends Fragment{
         }
         highScores.setAdapter(new HighScoreAdapter(rootView.getContext(),scores));
         return rootView;
+    }
+
+    public void removeList() {
+        for (int i = 0; i < FlashingNumbers.levelList.size(); i++) {
+            FlashingNumbers.sharedPreferences.edit().remove(KEY_HIGH_SCORE + String.valueOf(i));
+        }
+        this.scores.removeAll(scores);
     }
 }

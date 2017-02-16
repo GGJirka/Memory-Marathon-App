@@ -67,7 +67,7 @@ public class WordsMain extends AppCompatActivity {
                         if (checkbox.isChecked()) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(readText(R.string.words_activity_dialog), "check");
-                            editor.commit();
+                            editor.apply();
                         }
                     }
                 })
@@ -77,7 +77,7 @@ public class WordsMain extends AppCompatActivity {
                         if (checkbox.isChecked()) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(readText(R.string.words_activity_dialog), "check");
-                            editor.commit();
+                            editor.apply();
                         }
                     }
                 })
@@ -138,13 +138,13 @@ public class WordsMain extends AppCompatActivity {
                 (Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")) + 1));
 
         editor.putString("WORDS_SCORE" + sharedPreferences.getString("WORDS_COUNT_SCORE", "0")
-                , date + " score: " + words.getScore());
+                , date + " | score: " + words.getScore());
         editor.commit();
         startActivity(new Intent(this, WordsScore.class));
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                clearView();
+
             }
         };
         runOnUiThread(runnable);
@@ -202,7 +202,7 @@ public class WordsMain extends AppCompatActivity {
         } else {
             if (words.count != words.getRandom() + 1) {
                 Random random = new Random();
-                int rand = random.nextInt(words.getUsedWords().size());
+                int rand = random.nextInt(words.getUsedWords().size() - 1);
                 if (!words.isInUsed(word.getText().toString())) {
                     for (int i = 0; i < 5; i++) {
                         words.addNewWord(word.getText().toString());
@@ -253,6 +253,20 @@ public class WordsMain extends AppCompatActivity {
 
     public String readText(int string) {
         return String.valueOf(getText(string));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sharedPreferences.getString("WORDS_STATE", "2").equals("0")) {
+            clearView();
+            sharedPreferences.edit().putString("WORDS_STATE", "2").apply();
+        }
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
     }
 
     public void clearView() {
