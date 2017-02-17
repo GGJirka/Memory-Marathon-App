@@ -92,17 +92,19 @@ public class NumbersRemember extends AppCompatActivity {
                 lines[i] = numbToStr.substring(i*21,numbToStr.length());
             }
         }
+
         int i = 0;
         int count = 0;
         int passed = 0;
-
+        LinearLayout linear = new LinearLayout(NumbersRemember.this);
+        linear.setOrientation(LinearLayout.VERTICAL);
         for(String s:lines){
             try {
                 TextView numEntered = new TextView(NumbersRemember.this);
                 numEntered.setTextSize(27);
                 int k = 0;
                 for (char c : s.toCharArray()) {
-                    if (c == numbers.charAt(k+count)) {
+                    if (c == numbers.charAt(k + count)) {
                         String a = "<font color='#8bc34a'>"+c+"</font>";
                         numEntered.append(Html.fromHtml(a));
                         passed++;
@@ -120,16 +122,15 @@ public class NumbersRemember extends AppCompatActivity {
                 } else {
                     numRight.setText(numbers.substring(count, count+(numberCount-count)));
                 }
-                LinearLayout linear = new LinearLayout(NumbersRemember.this);
-                linear.setOrientation(LinearLayout.VERTICAL);
+
                 linear.addView(numEntered);
                 linear.addView(numRight);
-                layout.addView(linear);
                 i++;
             }catch (Exception e){
             }
         }
-
+        layout.addView(linear);
+        //Toast.makeText(getApplicationContext(),"i: "+i,Toast.LENGTH_SHORT).show();
         if(passed == numberCount) {
             dialogPassed();
         }else{

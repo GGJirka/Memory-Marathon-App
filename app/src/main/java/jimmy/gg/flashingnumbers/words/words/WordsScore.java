@@ -87,7 +87,6 @@ public class WordsScore extends AppCompatActivity {
         };
         runOnUiThread(run);
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
         if (sharedPreferences.getString("WORDS_SCORE_CHECK", "0").equals("0")) {

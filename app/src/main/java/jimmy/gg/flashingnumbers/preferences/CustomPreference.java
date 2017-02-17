@@ -23,6 +23,7 @@ public class CustomPreference extends PreferenceCategory {
     public CustomPreference(Context context, AttributeSet attrs, int defStyle){
         super(context, attrs, defStyle);
     }
+
     @Override
     protected View onCreateView(ViewGroup group){
         TextView pref = (TextView) super.onCreateView(group);

@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_high_score"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="jimmy.gg.flashingnumbers.highscore.HighScore">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:choiceMode="singleChoice"
-        android:id="@+id/high_scores_tab1"/>
+        android:id="@+id/high_scores_tab1"
+        android:layout_marginBottom="?attr/actionBarSize" />
 </RelativeLayout>

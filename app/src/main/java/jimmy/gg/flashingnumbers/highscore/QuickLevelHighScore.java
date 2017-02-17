@@ -41,7 +41,9 @@ public class QuickLevelHighScore extends Fragment {
         ListView list = (ListView) rootView.findViewById(R.id.quick_hs_list);
         for (int i = 1; i <= sharedPreferences.getInt(KEY_COUNT, 0); i++) {
             scores.add(new Score(sharedPreferences.getString(KEY + String.valueOf(i), "0")));
+
         }
+
         adapter = new HighScoreAdapter(rootView.getContext(), scores);
         if(scores.size()>0) {
             list.setAdapter(adapter);
@@ -53,7 +55,6 @@ public class QuickLevelHighScore extends Fragment {
         } else {
             sortByScore();
         }
-        // setListener(list);
     }
 
     public void setListener(ListView list) {

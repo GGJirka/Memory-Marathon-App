@@ -57,11 +57,11 @@ public class TabbedHighScore extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
-        if (FlashingNumbers.sharedPreferences.getString(HIGH_SCORE_SORT, "0").equals("0")) {
+       /* if (FlashingNumbers.sharedPreferences.getString(HIGH_SCORE_SORT, "0").equals("0")) {
             menu.findItem(R.id.sort_date).setChecked(true);
         } else {
             menu.findItem(R.id.sort_score).setChecked(true);
-        }
+        }*/
         return super.onCreateOptionsMenu(menu);
     }
 

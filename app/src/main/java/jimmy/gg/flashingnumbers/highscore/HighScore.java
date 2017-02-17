@@ -32,6 +32,7 @@ public class HighScore extends Fragment{
                 scores.add(new Score(lv.getLevel() + " (" + lv.getNumbers()+"): ",
                         FlashingNumbers.sharedPreferences.getString(KEY_HIGH_SCORE + String.valueOf(i), "0")));
             }
+
         }
         if(scores.size()==0){
             TextView view = new TextView(rootView.getContext());

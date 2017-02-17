@@ -65,7 +65,7 @@ public class Levels extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.popup_menu,menu);
+        getMenuInflater().inflate(R.menu.levels_menu, menu);
         return true;
     }
     @Override

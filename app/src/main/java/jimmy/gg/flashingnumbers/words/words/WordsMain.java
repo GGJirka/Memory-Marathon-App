@@ -22,10 +22,12 @@ import java.util.Date;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.highscore.Score;
 
 public class WordsMain extends AppCompatActivity {
     /**
-     * TODO: BETTER DESIGN.
+     * TODO: BETTER DESIGN, FIX WORD LIST (words with less than 3 length, vulcaric words)
+     * TODO: FIX WORDS THAT ARE MORE THAN ONCE SHOWED.
      */
     public static SharedPreferences sharedPreferences;
     private WordsStats words;
@@ -248,7 +250,10 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_save).setVisibility(View.VISIBLE);
         findViewById(R.id.words_lives).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_score).setVisibility(View.INVISIBLE);
-        findViewById(R.id.words_end_high_score).setVisibility(View.VISIBLE);
+
+        TextView text = (TextView) findViewById(R.id.words_end_high_score);
+        text.setText("Highest score: " + getHighestScore());
+        text.setVisibility(View.VISIBLE);
     }
 
     public String readText(int string) {
@@ -303,5 +308,23 @@ public class WordsMain extends AppCompatActivity {
                 this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getHighestScore() {
+        for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
+            Score row = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), ""));
+            String[] data = row.getText().split(" ");
+            int score = Integer.parseInt(data[3]);
+            for (int j = 0; j < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); j++) {
+                Score row2 = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(j), ""));
+                String[] data2 = row2.getText().split(" ");
+                int score2 = Integer.parseInt(data2[3]);
+                if (score < score2) {
+                    score = score2;
+                }
+            }
+            return score;
+        }
+        return 0;
     }
 }

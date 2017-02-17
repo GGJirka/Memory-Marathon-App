@@ -1,11 +1,12 @@
 package jimmy.gg.flashingnumbers.settings;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
 import jimmy.gg.flashingnumbers.R;
 
 
@@ -121,6 +122,13 @@ public class NumbersSettings extends AppCompatActivity {
                         pref.setSummary("Actual inspection time: " + sharedPreferences.getString(key, "") + "s");
                     }
                     break;
+               /* case "settings_timer_quick":
+                    CheckBoxPreference checkBoxPreference = (CheckBoxPreference) findPreference("settings_timer_quick");
+                    if(checkBoxPreference.isChecked())
+                        FlashingNumbers.sharedPreferences.edit().putBoolean("settings_timer_quick",true);
+                    else
+                        FlashingNumbers.sharedPreferences.edit().putBoolean("settings_timer_quick",false);
+                    break;*/
             }
         }
 

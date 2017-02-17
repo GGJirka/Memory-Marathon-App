@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
@@ -35,6 +36,7 @@ import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.QuickLevelHighScore;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
+import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
 public class QuickLevel extends AppCompatActivity {
     public ProgressBar progress;
@@ -97,25 +99,29 @@ public class QuickLevel extends AppCompatActivity {
     }
 
     public void timerBetweenLevels(){
-        final TextView countDown = (TextView) findViewById(R.id.quick_count_down);
-        countDown.setVisibility(View.VISIBLE);
-        firstTimer =  new CountDownTimer(2500,100) {
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("settings_timer_quick", true)) {
+            final TextView countDown = (TextView) findViewById(R.id.quick_count_down);
+            countDown.setVisibility(View.VISIBLE);
+            firstTimer = new CountDownTimer(2500, 100) {
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                if (Math.round((float)millisUntilFinished/ 1000.0f) != sec) {
-                    sec = Math.round((float)millisUntilFinished / 1000.0f);
-                    countDown.setText("" + (sec+1 ));
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if (Math.round((float) millisUntilFinished / 1000.0f) != sec) {
+                        sec = Math.round((float) millisUntilFinished / 1000.0f);
+                        countDown.setText("" + (sec + 1));
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                countDown.setVisibility(View.INVISIBLE);
-                displayNumbers();
-            }
-        };
-        firstTimer.start();
+                @Override
+                public void onFinish() {
+                    countDown.setVisibility(View.INVISIBLE);
+                    displayNumbers();
+                }
+            };
+            firstTimer.start();
+        } else {
+            displayNumbers();
+        }
     }
 
 
@@ -324,13 +330,13 @@ public class QuickLevel extends AppCompatActivity {
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                     editor.putString(QuickLevelHighScore.KEY + count, date + " " + "numbers:" + " " + String.valueOf(numberCount));
                     editor.commit();
+
                     sharedPreferences.edit()
                             .putString("TAB_STATE", "0")
                             .apply();
                     Intent intent = new Intent(QuickLevel.this, TabbedHighScore.class);
                     intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)), "1");
                     QuickLevel.this.startActivity(intent);
-
                 }
             });
             v.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
@@ -342,7 +348,6 @@ public class QuickLevel extends AppCompatActivity {
                     layout.removeAllViews();
                 }
             });
-
         }
         editText.setText("");
     }
@@ -355,6 +360,10 @@ public class QuickLevel extends AppCompatActivity {
                 intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)),"1");
                 startActivity(intent);
                 break;
+            case R.id.quick_action_settings:
+                Intent settings = new Intent(this, NumbersSettings.class);
+                startActivity(settings);
+                return true;
             default:
                 this.finish();
         }
@@ -366,9 +375,15 @@ public class QuickLevel extends AppCompatActivity {
         return true;
     }
     public void numbersRemembered(View view){
-        firstTimer.cancel();
-        secondTimer.cancel();
-        thirdTimer.cancel();
+        if (firstTimer != null) {
+            firstTimer.cancel();
+        }
+        if (secondTimer != null) {
+            secondTimer.cancel();
+        }
+        if (thirdTimer != null) {
+            thirdTimer.cancel();
+        }
         numberFinish();
     }
     @Override

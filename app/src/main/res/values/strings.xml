@@ -160,4 +160,6 @@
     <string name="words_activity_title">Words</string>
     <string name="words_activity_dialog">WORDSINFO</string>
     <string name="words_delete_score">Delete score</string>
+    <string name="quick_level_settings_title">QUICK LEVEL</string>
+    <string name="settings">Settings</string>
 </resources>
