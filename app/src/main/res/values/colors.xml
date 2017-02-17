@@ -36,4 +36,7 @@
     <color name="numbers_button_color">#26a69a</color>
     <color name="numbers_button_clicked_color">#004d40</color>
     <color name="numbers_background">#ffab91</color>
+
+    <color name="words_button_click">#1b5e20</color>
+    <color name="words_button">#81c784</color>
 </resources>

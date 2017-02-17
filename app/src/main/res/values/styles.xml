@@ -41,6 +41,12 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="MaterialButtonWords" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/words_button_click</item>
+        <item name="colorButtonNormal">@color/words_button</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="MaterialButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/numbers_button_clicked_color</item>
         <item name="colorButtonNormal">@color/numbers_button_color</item>

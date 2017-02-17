@@ -5,14 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,18 +46,32 @@ public class WordsMain extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         words = new WordsStats(3, 0);
-        initWordList();
-        if (sharedPreferences.getString(readText(R.string.words_activity_dialog), "0").equals("0")) {
-            init();
-        }
         findViewById(R.id.words_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveData();
             }
         });
-    }
+        TextSwitcher switcher = (TextSwitcher) findViewById(R.id.words_word);
+        switcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView wordText = new TextView(WordsMain.this);
+                wordText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                wordText.setTextSize(30);
+                return wordText;
+            }
+        });
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("words_settings_anim", true)) {
+            Animation in = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+            switcher.setInAnimation(in);
+        }
 
+        if (sharedPreferences.getString(readText(R.string.words_activity_dialog), "0").equals("0")) {
+            init();
+        }
+        initWordList();
+    }
     public void init() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.checkbox, null);
@@ -101,8 +120,9 @@ public class WordsMain extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    TextView word = (TextView) findViewById(R.id.words_word);
+                    TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
                     int r = new Random().nextInt(words.getWordList().size());
+
                     word.setText(words.getWords(r));
                     words.setRandom(5);
                 }
@@ -114,15 +134,17 @@ public class WordsMain extends AppCompatActivity {
     }
 
     public void newWord(View view) {
-        TextView word = (TextView) findViewById(R.id.words_word);
+        TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
+        TextView wordText = (TextView) word.getCurrentView();
         int r = new Random().nextInt(words.getWordList().size());
-        if (words.isInUsed(word.getText().toString())) {
+        if (words.isInUsed(wordText.getText().toString())) {
             TextView lives = (TextView) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
             lives.setText("lives: " + words.getLives());
             if (words.getLives() == 0) {
                 gameEnds();
-                word.setText("Score: " + words.getScore());
+                TextView scored = (TextView) findViewById(R.id.words_end_scored);
+                scored.setText("Score: " + words.getScore());
                 return;
             }
         } else {
@@ -153,15 +175,17 @@ public class WordsMain extends AppCompatActivity {
     }
 
     public void seenWord(View v) {
-        TextView word = (TextView) findViewById(R.id.words_word);
+        TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
+        TextView wordText = (TextView) word.getCurrentView();
         int r = new Random().nextInt(words.getWordList().size());
-        if (!words.isInUsed(word.getText().toString())) {
+        if (!words.isInUsed(wordText.getText().toString())) {
             TextView lives = (TextView) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
             lives.setText("lives: " + words.getLives());
             if (words.getLives() == 0) {
                 gameEnds();
-                word.setText("Score: " + words.getScore());
+                TextView scored = (TextView) findViewById(R.id.words_end_scored);
+                scored.setText("Score: " + words.getScore());
                 return;
             }
         } else {
@@ -172,21 +196,22 @@ public class WordsMain extends AppCompatActivity {
         usedAndUnusedCycle(word, r, v);
     }
 
-    public void usedAndUnusedCycle(TextView word, int r, View v) {
+    public void usedAndUnusedCycle(TextSwitcher word, int r, View v) {
+        TextView wordText = (TextView) word.getCurrentView();
         if (words.isUsed()) {
             if (words.count != words.getRandom() + 1) {
-                if (!words.isInUsed(word.getText().toString())) {
+                if (!words.isInUsed(wordText.getText().toString())) {
                     for (int i = 0; i < 5; i++) {
-                        words.addNewWord(word.getText().toString());
+                        words.addNewWord(wordText.getText().toString());
                     }
                 }
                 word.setText(words.getWords(r));
                 words.getWordList().remove(r);
                 words.count++;
             } else {
-                if (!words.isInUsed(word.getText().toString())) {
+                if (!words.isInUsed(wordText.getText().toString())) {
                     for (int i = 0; i < 5; i++) {
-                        words.addNewWord(word.getText().toString());
+                        words.addNewWord(wordText.getText().toString());
                     }
                 }
                 int rand = new Random().nextInt(words.getUsedWords().size());
@@ -205,18 +230,18 @@ public class WordsMain extends AppCompatActivity {
             if (words.count != words.getRandom() + 1) {
                 Random random = new Random();
                 int rand = random.nextInt(words.getUsedWords().size() - 1);
-                if (!words.isInUsed(word.getText().toString())) {
+                if (!words.isInUsed(wordText.getText().toString())) {
                     for (int i = 0; i < 5; i++) {
-                        words.addNewWord(word.getText().toString());
+                        words.addNewWord(wordText.getText().toString());
                     }
                 }
                 word.setText(words.getUsedWords().get(rand));
                 words.getUsedWords().remove(rand);
                 words.count++;
             } else {
-                if (!words.isInUsed(word.getText().toString())) {
+                if (!words.isInUsed(wordText.getText().toString())) {
                     for (int i = 0; i < 5; i++) {
-                        words.addNewWord(word.getText().toString());
+                        words.addNewWord(wordText.getText().toString());
                     }
                 }
                 word.setText(words.getWords(r));
@@ -250,7 +275,7 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_save).setVisibility(View.VISIBLE);
         findViewById(R.id.words_lives).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_score).setVisibility(View.INVISIBLE);
-
+        findViewById(R.id.words_word).setVisibility(View.INVISIBLE);
         TextView text = (TextView) findViewById(R.id.words_end_high_score);
         text.setText("Highest score: " + getHighestScore());
         text.setVisibility(View.VISIBLE);
@@ -267,6 +292,15 @@ public class WordsMain extends AppCompatActivity {
             clearView();
             sharedPreferences.edit().putString("WORDS_STATE", "2").apply();
         }
+        TextSwitcher switcher = (TextSwitcher) findViewById(R.id.words_word);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (pref.getBoolean("words_settings_anim", true)) {
+            Animation in = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+            switcher.setInAnimation(in);
+        } else {
+            Animation in = AnimationUtils.loadAnimation(this, R.anim.no_anim);
+            switcher.setInAnimation(in);
+        }
     }
 
     @Override
@@ -280,7 +314,8 @@ public class WordsMain extends AppCompatActivity {
         words.setScore(0);
         TextView score = (TextView) findViewById(R.id.words_score);
         TextView lives = (TextView) findViewById(R.id.words_lives);
-        TextView word = (TextView) findViewById(R.id.words_word);
+        TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
+        word.setVisibility(View.VISIBLE);
         score.setText("score: " + words.getScore());
         lives.setText("lives: " + words.getLives());
         int r = new Random().nextInt(words.getWordList().size());
@@ -288,6 +323,8 @@ public class WordsMain extends AppCompatActivity {
         words.setUsed(true);
         words.setRandom(5);
         words.getUsedWords().removeAll(words.getUsedWords());
+        TextView scored = (TextView) findViewById(R.id.words_end_scored);
+        scored.setText("");
         findViewById(R.id.words_new).setVisibility(View.VISIBLE);
         findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
         findViewById(R.id.words_save).setVisibility(View.INVISIBLE);
@@ -303,6 +340,9 @@ public class WordsMain extends AppCompatActivity {
                 break;
             case R.id.high_score:
                 startActivity(new Intent(this, WordsScore.class));
+                break;
+            case R.id.words_settings:
+                startActivity(new Intent(this, WordsSettings.class));
                 break;
             default:
                 this.finish();

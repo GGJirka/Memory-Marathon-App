@@ -7,6 +7,11 @@
         android:icon="@drawable/retry"
         app:showAsAction="always" />
     <item
+        android:id="@+id/words_settings"
+        app:showAsAction="always"
+        android:icon="@drawable/settings"
+        android:title="Settings" />
+    <item
         android:title="@string/high_score"
         android:showAsAction="never"
         android:id="@+id/high_score"

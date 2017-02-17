@@ -32,6 +32,7 @@ public class WordsScore extends AppCompatActivity {
         setContentView(R.layout.activity_words_score);
         ListView list = (ListView) findViewById(R.id.words_high_score);
         sharedPreferences = WordsMain.sharedPreferences;
+        setTitle("High Score");
         score = new ArrayList<>();
         if (sharedPreferences.getString("WORDS_SORT", "0").equals("0")) {
 
