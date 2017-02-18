@@ -293,8 +293,10 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_word).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_live).setVisibility(View.INVISIBLE);
         TextView text = (TextView) findViewById(R.id.words_end_high_score);
-        text.setText("Highest score: " + getHighestScore());
-        text.setVisibility(View.VISIBLE);
+        if (getHighestScore() != 0) {
+            text.setText("Highest score: " + getHighestScore());
+            text.setVisibility(View.VISIBLE);
+        }
     }
 
     public String readText(int string) {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -76,6 +77,14 @@ public class Numbers extends AppCompatActivity{
         } else {
             gameStart();
         }
+        if (actualIndex == 0) {
+            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+            leftButton.setImageResource(R.drawable.no_icon);
+        }
+        if (actualIndex == numbersInRow.size() - 1) {
+            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+            rightButton.setImageResource(R.drawable.no_icon);
+        }
     }
 
     public void showInfo() {
@@ -111,8 +120,6 @@ public class Numbers extends AppCompatActivity{
                     }
                 })
                 .show();
-
-
     }
     public String timer(){
         String[] seconds = getIntent().getStringExtra(EXTRA_TIME).split(" ");
@@ -234,6 +241,14 @@ public class Numbers extends AppCompatActivity{
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_left));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_right));
         }
+        if (actualIndex == 1) {
+            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+            leftButton.setImageResource(R.drawable.no_icon);
+        }
+        if (actualIndex == numbersInRow.size() - 1) {
+            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+            rightButton.setImageResource(R.drawable.button_right);
+        }
         if (actualIndex != 0) {
             actualIndex--;
             numbers.setText(numbersInRow.get(actualIndex));
@@ -246,6 +261,14 @@ public class Numbers extends AppCompatActivity{
         if (sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_right));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_left));
+        }
+        if (actualIndex == numbersInRow.size() - 2) {
+            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+            rightButton.setImageResource(R.drawable.no_icon);
+        }
+        if (actualIndex == 0) {
+            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+            leftButton.setImageResource(R.drawable.button_left);
         }
         if(actualIndex!=numbersInRow.size()-1) {
             actualIndex++;

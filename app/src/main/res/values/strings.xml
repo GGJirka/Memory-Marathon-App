@@ -165,4 +165,8 @@
     <string name="header_number_settings">Numbers settings</string>
     <string name="header_quick_mode_settings">Quick numbers settings</string>
     <string name="animation">Animation</string>
+    <string name="title_activity_main_test">MainActivityTest</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

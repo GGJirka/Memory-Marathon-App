@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#ff8a65</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
@@ -32,11 +32,16 @@
 
     <color name="words_title_top">#388e3c</color>
     <color name="words_title_bot">#4caf50</color>
-
+    <color name="main_button_words">#81c784</color>
     <color name="numbers_button_color">#26a69a</color>
     <color name="numbers_button_clicked_color">#004d40</color>
     <color name="numbers_background">#ffab91</color>
 
+    <color name="main_button_normal">#90caf9</color>
+    <color name="main_button_clicked">#0d47a1</color>
     <color name="words_button_click">#1b5e20</color>
     <color name="words_button">#81c784</color>
+
+    <color name="main_title_bot">#2196f3</color>
+    <color name="main_title_top">#1565c0</color>
 </resources>

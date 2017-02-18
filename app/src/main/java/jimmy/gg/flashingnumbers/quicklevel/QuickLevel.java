@@ -139,7 +139,7 @@ public class QuickLevel extends AppCompatActivity {
             builder.append(random.nextInt(10));
         }
         numbers.setText(builder.toString());
-        numbers.setTextSize(50);
+        numbers.setTextSize(45);
         startTimer();
     }
 
@@ -275,8 +275,8 @@ public class QuickLevel extends AppCompatActivity {
         textView2.setLayoutParams(params);
         layout.addView(answer);
 
-        Button next = new Button(newContext);
-        next.setLayoutParams(params);
+        Button next = (Button) findViewById(R.id.next_button);
+        next.setVisibility(View.VISIBLE);
         next.setTextSize(20);
 
         int passed = 0;

@@ -30,6 +30,12 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
+    <style name="MainStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/main_title_bot</item>
+        <item name="colorPrimaryDark">@color/main_title_top</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
     <style name="WordsStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/words_title_bot</item>
         <item name="colorPrimaryDark">@color/words_title_top</item>
@@ -39,6 +45,18 @@
 
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="MaterialButtonMainNumbers" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/numbers_title_top</item>
+        <item name="colorButtonNormal">@color/numbers_title_bot</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MaterialButtonMainWords" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/main_button_clicked</item>
+        <item name="colorButtonNormal">@color/main_button_normal</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="MaterialButtonWords" parent="Theme.AppCompat.Light">

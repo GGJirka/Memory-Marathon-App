@@ -9,16 +9,16 @@
             android:title="@string/settings_number_group_title"
             android:summary="@string/settings_number_group_summary"
             android:dialogTitle="@string/settings_number_group_dialogtitle"
-            android:entries="@array/array_entries"
-            android:entryValues="@array/array_entries"
+            android:entries="@array/array_group"
+            android:entryValues="@array/array_group"
             android:defaultValue="@string/default_value_numbers" />
         <ListPreference
             android:key="settings_row"
             android:title="@string/settings_number_row_title"
             android:summary="@string/settings_number_row_summary"
             android:dialogTitle="@string/settings_number_row_dialogtitle"
-            android:entries="@array/array_entries"
-            android:entryValues="@array/array_entries"
+            android:entries="@array/array_row"
+            android:entryValues="@array/array_row"
             android:defaultValue="@string/default_value_numbers" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
     <jimmy.gg.flashingnumbers.preferences.CustomPreference

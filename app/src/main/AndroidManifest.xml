@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".main.MainActivity"
-            android:launchMode="singleTop"
+            android:name=".main.MemoryMarathon"
+            android:label="@string/title_activity_main_test"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -69,12 +70,13 @@
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".settings.NumbersSettings"
-            android:theme="@style/NumbersStyle"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/NumbersStyle" />
         <activity
             android:name=".settings.QuickLevelSettings"
-            android:theme="@style/NumbersStyle"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/NumbersStyle" />
+
     </application>
 
 </manifest>

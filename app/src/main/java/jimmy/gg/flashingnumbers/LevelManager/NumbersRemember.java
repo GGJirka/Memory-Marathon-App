@@ -161,38 +161,25 @@ public class NumbersRemember extends AppCompatActivity {
     public void dialogPassed(){
         SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
         SharedPreferences highScore = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor highScoreEditor = highScore.edit();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String level= getIntent().getStringExtra(EXTRA_LEVEL);
         String[] data = level.split(" ");
         int acLevel = Integer.parseInt(data[1]);
-        String tm = String.valueOf(timerRemain);
-        StringBuilder builder = new StringBuilder();
         final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
 
-        for(int i=0;i<tm.length();i++){
-            char c = tm.charAt(i);
-            if(tm.length()==2){
-                builder.append("0");
-            }
-            if (i == tm.length() - 2) {
-                builder.append(".");
-            }
-            builder.append(c);
-        }
         StringBuilder highestScore = new StringBuilder();
         highestScore.append(getString(R.string.dialog_passed_message1)+" "+numberCount
-                +" "+getString(R.string.dialog_passed_message2)+" "+builder.toString()+"s\n");
+                + " " + getString(R.string.dialog_passed_message2) + " " + getTimeRemain().toString() + "s\n");
 
         if(highScore.getString(KEY_HIGH_SCORE+String.valueOf(acLevel-1),"0")!="0") {
             double time = Double.parseDouble(highScore.getString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), "0"));
-            if (time > Double.parseDouble(builder.toString())) {
+            if (time > Double.parseDouble(getTimeRemain().toString())) {
                 highestScore.append(getString(R.string.numbers_remembered_highest_score));
-                editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), builder.toString());
+                editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), getTimeRemain().toString());
                 editor.commit();
             }
         }else {
-            editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel-1), builder.toString());
+            editor.putString(KEY_HIGH_SCORE + String.valueOf(acLevel - 1), getTimeRemain().toString());
             editor.commit();
         }
         if(sharedPreferences.getInt(String.valueOf(getResources().getText(R.string.LEVEL_KEY)),1)==acLevel){
@@ -228,11 +215,27 @@ public class NumbersRemember extends AppCompatActivity {
                 .show();
         }
 
+    public StringBuilder getTimeRemain() {
+        String tm = String.valueOf(timerRemain);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tm.length(); i++) {
+            char c = tm.charAt(i);
+            if (tm.length() == 2) {
+                builder.append("0");
+            }
+            if (i == tm.length() - 2) {
+                builder.append(".");
+            }
+            builder.append(c);
+        }
+        return builder;
+    }
+
         public void dialogFailed(int numbersRight){
             final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
             new AlertDialog.Builder(NumbersRemember.this)
                     .setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" failed")
-                    .setMessage("Remembered "+numbersRight+"/"+numberCount)
+                    .setMessage("Remembered " + numbersRight + "/" + numberCount + "\n" + "time:" + " " + getTimeRemain().toString() + "s")
                     .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
