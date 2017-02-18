@@ -36,7 +36,7 @@ import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.QuickLevelHighScore;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
-import jimmy.gg.flashingnumbers.settings.NumbersSettings;
+import jimmy.gg.flashingnumbers.settings.QuickLevelSettings;
 
 public class QuickLevel extends AppCompatActivity {
     public ProgressBar progress;
@@ -47,6 +47,7 @@ public class QuickLevel extends AppCompatActivity {
     private CountDownTimer secondTimer = null;
     private CountDownTimer thirdTimer = null;
     private int sec = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.NumbersStyle);
@@ -361,7 +362,7 @@ public class QuickLevel extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.quick_action_settings:
-                Intent settings = new Intent(this, NumbersSettings.class);
+                Intent settings = new Intent(this, QuickLevelSettings.class);
                 startActivity(settings);
                 return true;
             default:
@@ -369,11 +370,13 @@ public class QuickLevel extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menu);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.popup_menu,menu);
         return true;
     }
+
     public void numbersRemembered(View view){
         if (firstTimer != null) {
             firstTimer.cancel();

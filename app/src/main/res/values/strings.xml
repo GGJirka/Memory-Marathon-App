@@ -162,4 +162,7 @@
     <string name="words_delete_score">Delete score</string>
     <string name="quick_level_settings_title">QUICK LEVEL</string>
     <string name="settings">Settings</string>
+    <string name="header_number_settings">Numbers settings</string>
+    <string name="header_quick_mode_settings">Quick numbers settings</string>
+    <string name="animation">Animation</string>
 </resources>

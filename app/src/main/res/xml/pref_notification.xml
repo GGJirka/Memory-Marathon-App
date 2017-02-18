@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- A 'parent' preference, which enables/disables child preferences (below)
+    <!-- A 'parent' preference, which enables/disables child levels_preferences (below)
          when checked/unchecked. -->
     <SwitchPreference
         android:defaultValue="true"

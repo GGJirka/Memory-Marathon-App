@@ -13,9 +13,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lives: 3"
+        android:text="lives: "
         android:textSize="24dp"
-        android:id="@+id/words_lives" />
+        android:id="@+id/words_live" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="70dp"
         android:id="@+id/words_word"
-        android:layout_below="@+id/words_lives"
+        android:layout_below="@+id/words_live"
         android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_marginTop="100dp"
         android:textSize="30dp"
         android:id="@+id/words_end_scored"
-        android:layout_below="@+id/words_lives"
+        android:layout_below="@+id/words_live"
         android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
@@ -59,9 +59,10 @@
         android:layout_height="wrap_content"
         android:text="new"
         android:layout_below="@+id/words_word"
-        android:layout_toRightOf="@+id/words_lives"
-        android:layout_toEndOf="@+id/words_lives"
+        android:layout_toRightOf="@+id/words_live"
+        android:layout_toEndOf="@+id/words_live"
         android:layout_marginTop="44dp"
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         android:id="@+id/words_new"
         android:onClick="newWord"
@@ -93,5 +94,13 @@
         android:textSize="20sp"
         android:id="@+id/words_save"
         android:layout_marginTop="20dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:theme="@style/MaterialButtonWords" />
+
+    <TextSwitcher
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/words_lives"
+        android:layout_toRightOf="@+id/words_live"
+        android:layout_above="@+id/words_word" />
 </RelativeLayout>

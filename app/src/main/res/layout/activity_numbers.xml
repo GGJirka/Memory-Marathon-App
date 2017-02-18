@@ -12,8 +12,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jimmy.gg.flashingnumbers.LevelManager.Numbers"
     android:background="@color/white">
-    android:layout_centerInParent="true"
-    tools:context="jimmy.gg.flashingnumbers.LevelManager.Numbers">
 
     <TextView
             android:layout_width="wrap_content"
@@ -82,17 +80,13 @@
                 android:background="@color/white"
                 app:srcCompat="@drawable/button_left" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextSwitcher
+                android:layout_width="260dp"
+                android:layout_height="50dp"
                 android:id="@+id/revealed_numbers"
-                android:text="77555 55555"
-                android:textAlignment="center"
-                android:textColor="@color/black"
+                android:layout_toRightOf="@+id/numbers_right_button"
                 android:textSize="40sp"
-                android:width="260sp"
-                android:maxWidth="260sp"
-                android:layout_centerInParent="true" />
+                android:textAlignment="center" />
 
             <ImageButton
                 android:layout_width="35dp"

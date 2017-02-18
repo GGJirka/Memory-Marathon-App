@@ -2,8 +2,8 @@ package jimmy.gg.flashingnumbers.preferences;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.preference.PreferenceCategory;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +27,7 @@ public class CustomPreference extends PreferenceCategory {
     @Override
     protected View onCreateView(ViewGroup group){
         TextView pref = (TextView) super.onCreateView(group);
-        pref.setTextColor(Color.BLACK);
-        pref.setBackgroundResource(R.color.gray);
+        pref.setTextColor(ContextCompat.getColor(group.getContext(), R.color.numbers_button_color));
         pref.setTextSize(15);
         return pref;
     }

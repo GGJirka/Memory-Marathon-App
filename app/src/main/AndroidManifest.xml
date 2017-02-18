@@ -32,7 +32,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
-            android:name=".settings.NumbersSettings"
+            android:name=".settings.NumbersLevelsSettings"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
@@ -65,7 +65,15 @@
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".words.words.WordsSettings"
-            android:theme="@style/WordsStyle"
+            android:screenOrientation="portrait"
+            android:theme="@style/WordsStyle" />
+        <activity
+            android:name=".settings.NumbersSettings"
+            android:theme="@style/NumbersStyle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.QuickLevelSettings"
+            android:theme="@style/NumbersStyle"
             android:screenOrientation="portrait"></activity>
     </application>
 

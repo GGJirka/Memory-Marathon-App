@@ -32,11 +32,12 @@
             android:entryValues="@array/array_time_id"
             android:defaultValue="@string/default_value_timer" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
-    <jimmy.gg.flashingnumbers.preferences.CustomPreference android:title="@string/quick_level_settings_title">
+    <jimmy.gg.flashingnumbers.preferences.CustomPreference android:title="@string/animation">
         <CheckBoxPreference
-            android:key="settings_timer_quick"
-            android:title="Inspection time"
-            android:summary="Wait 3 seconds on start"
+            android:key="numbers_levels_setting_animation"
+            android:title="Animation"
+            android:summaryOn="display animation: on"
+            android:summaryOff="display animation: off"
             android:defaultValue="true" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
 </PreferenceScreen>

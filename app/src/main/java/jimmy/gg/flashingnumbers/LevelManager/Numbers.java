@@ -12,22 +12,26 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
-import jimmy.gg.flashingnumbers.settings.NumbersSettings;
+import jimmy.gg.flashingnumbers.settings.NumbersLevelsSettings;
 
 public class Numbers extends AppCompatActivity{
-    private TextView timeRemain, numbers;
+    private TextView timeRemain;
+    private TextSwitcher numbers;
     private Button remember;
     private SharedPreferences sharedPreferences;
     private ProgressBar timer;
@@ -37,7 +41,6 @@ public class Numbers extends AppCompatActivity{
     private int actualIndex=0, countRow=0,timeRemain1,sec = 0;
     private StringBuilder numbersToSend = new StringBuilder();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         setTheme(R.style.NumbersStyle);
@@ -45,12 +48,23 @@ public class Numbers extends AppCompatActivity{
         setContentView(R.layout.activity_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(this, R.xml.levels_preferences, false);
         setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         timer = (ProgressBar) findViewById(R.id.progressBar);
+        numbers = (TextSwitcher) findViewById(R.id.revealed_numbers);
         timeRemain = (TextView) findViewById(R.id.time_remain);
         remember = (Button)findViewById(R.id.remember);
+        TextSwitcher switcher = (TextSwitcher) findViewById(R.id.revealed_numbers);
 
+        switcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView view = new TextView(Numbers.this);
+                view.setTextSize(40);
+                view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                return view;
+            }
+        });
         remember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +135,7 @@ public class Numbers extends AppCompatActivity{
                     countDown.setText("" + (sec+1));
                 }
             }
+
             @Override
             public void onFinish(){
                 countDown.setVisibility(View.INVISIBLE);
@@ -144,7 +159,7 @@ public class Numbers extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch(menuItem.getItemId()){
             case R.id.action_settings:
-                Intent intent = new Intent(this,NumbersSettings.class);
+                Intent intent = new Intent(this, NumbersLevelsSettings.class);
                 startActivity(intent);
                 return true;
             case R.id.retry_icon:
@@ -167,7 +182,6 @@ public class Numbers extends AppCompatActivity{
         int row = Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_ROW,"2"));
         String extraNumbers = getIntent().getStringExtra(EXTRA_NUMBERS);
         LinearLayout dots = (LinearLayout) findViewById(R.id.dots);
-        numbers = (TextView)findViewById(R.id.revealed_numbers);
         StringBuilder build_number = new StringBuilder();
         layout.setVisibility(View.VISIBLE);
         String[] data = extraNumbers.split(" ");
@@ -216,7 +230,11 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void leftButton(View view){
-        if(actualIndex!=0) {
+        if (sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+            numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_left));
+            numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_right));
+        }
+        if (actualIndex != 0) {
             actualIndex--;
             numbers.setText(numbersInRow.get(actualIndex));
             images.get(actualIndex).setImageResource(R.drawable.dot_fill);
@@ -225,6 +243,10 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void rightButton(View view){
+        if (sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+            numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_right));
+            numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_left));
+        }
         if(actualIndex!=numbersInRow.size()-1) {
             actualIndex++;
             numbers.setText(numbersInRow.get(actualIndex));
@@ -286,6 +308,10 @@ public class Numbers extends AppCompatActivity{
     @Override
     public void onResume(){
         super.onResume();
+        if (!sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+            numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.no_anim));
+            numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.no_anim));
+        }
     }
 
     public void numbersDone(){

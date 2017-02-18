@@ -53,6 +53,8 @@ public class WordsMain extends AppCompatActivity {
             }
         });
         TextSwitcher switcher = (TextSwitcher) findViewById(R.id.words_word);
+        TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
+
         switcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -62,11 +64,23 @@ public class WordsMain extends AppCompatActivity {
                 return wordText;
             }
         });
+        liveSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView liveText = new TextView(WordsMain.this);
+                liveText.setTextSize(24);
+                return liveText;
+            }
+        });
+
         if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("words_settings_anim", true)) {
             Animation in = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+            Animation live_in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+            Animation live_out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+            liveSwitcher.setInAnimation(live_in);
+            liveSwitcher.setOutAnimation(live_out);
             switcher.setInAnimation(in);
         }
-
         if (sharedPreferences.getString(readText(R.string.words_activity_dialog), "0").equals("0")) {
             init();
         }
@@ -121,8 +135,9 @@ public class WordsMain extends AppCompatActivity {
                         }
                     }
                     TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
+                    TextSwitcher lives = (TextSwitcher) findViewById(R.id.words_lives);
                     int r = new Random().nextInt(words.getWordList().size());
-
+                    lives.setText("3");
                     word.setText(words.getWords(r));
                     words.setRandom(5);
                 }
@@ -138,9 +153,9 @@ public class WordsMain extends AppCompatActivity {
         TextView wordText = (TextView) word.getCurrentView();
         int r = new Random().nextInt(words.getWordList().size());
         if (words.isInUsed(wordText.getText().toString())) {
-            TextView lives = (TextView) findViewById(R.id.words_lives);
+            TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
-            lives.setText("lives: " + words.getLives());
+            liveSwitcher.setText("" + words.getLives());
             if (words.getLives() == 0) {
                 gameEnds();
                 TextView scored = (TextView) findViewById(R.id.words_end_scored);
@@ -179,9 +194,9 @@ public class WordsMain extends AppCompatActivity {
         TextView wordText = (TextView) word.getCurrentView();
         int r = new Random().nextInt(words.getWordList().size());
         if (!words.isInUsed(wordText.getText().toString())) {
-            TextView lives = (TextView) findViewById(R.id.words_lives);
+            TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
-            lives.setText("lives: " + words.getLives());
+            liveSwitcher.setText("" + words.getLives());
             if (words.getLives() == 0) {
                 gameEnds();
                 TextView scored = (TextView) findViewById(R.id.words_end_scored);
@@ -276,6 +291,7 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_lives).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_score).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_word).setVisibility(View.INVISIBLE);
+        findViewById(R.id.words_live).setVisibility(View.INVISIBLE);
         TextView text = (TextView) findViewById(R.id.words_end_high_score);
         text.setText("Highest score: " + getHighestScore());
         text.setVisibility(View.VISIBLE);
@@ -293,12 +309,21 @@ public class WordsMain extends AppCompatActivity {
             sharedPreferences.edit().putString("WORDS_STATE", "2").apply();
         }
         TextSwitcher switcher = (TextSwitcher) findViewById(R.id.words_word);
+        TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (pref.getBoolean("words_settings_anim", true)) {
             Animation in = AnimationUtils.loadAnimation(this, R.anim.anim_top);
             switcher.setInAnimation(in);
+            Animation live_in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+            Animation live_out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+            liveSwitcher.setInAnimation(live_in);
+            liveSwitcher.setOutAnimation(live_out);
         } else {
             Animation in = AnimationUtils.loadAnimation(this, R.anim.no_anim);
+            Animation live_in = AnimationUtils.loadAnimation(this, R.anim.no_anim);
+            Animation live_out = AnimationUtils.loadAnimation(this, R.anim.no_anim);
+            liveSwitcher.setInAnimation(live_in);
+            liveSwitcher.setOutAnimation(live_out);
             switcher.setInAnimation(in);
         }
     }
@@ -313,11 +338,11 @@ public class WordsMain extends AppCompatActivity {
         words.setLives(3);
         words.setScore(0);
         TextView score = (TextView) findViewById(R.id.words_score);
-        TextView lives = (TextView) findViewById(R.id.words_lives);
+        TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
         TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
         word.setVisibility(View.VISIBLE);
         score.setText("score: " + words.getScore());
-        lives.setText("lives: " + words.getLives());
+        liveSwitcher.setText("" + words.getLives());
         int r = new Random().nextInt(words.getWordList().size());
         word.setText(words.getWords(r));
         words.setUsed(true);
@@ -329,6 +354,7 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_seen).setVisibility(View.VISIBLE);
         findViewById(R.id.words_save).setVisibility(View.INVISIBLE);
         findViewById(R.id.words_lives).setVisibility(View.VISIBLE);
+        findViewById(R.id.words_live).setVisibility(View.VISIBLE);
         findViewById(R.id.words_score).setVisibility(View.VISIBLE);
         findViewById(R.id.words_end_high_score).setVisibility(View.INVISIBLE);
     }

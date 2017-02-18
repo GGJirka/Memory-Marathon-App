@@ -4,7 +4,13 @@
     android:id="@+id/activity_numbers_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="jimmy.gg.flashingnumbers.settings.NumbersSettings">
+    tools:context="jimmy.gg.flashingnumbers.settings.NumbersLevelsSettings">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:choiceMode="singleChoice"
+        android:id="@+id/settings_navigate" />
 </RelativeLayout>
