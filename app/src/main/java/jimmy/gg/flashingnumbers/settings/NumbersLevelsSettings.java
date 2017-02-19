@@ -77,20 +77,20 @@ public class NumbersLevelsSettings extends AppCompatActivity {
     public class SettingsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-        private final String KEY_SETTINGS_GROUP = "settings_group";
-        private final String KEY_SETTINGS_ROW = "settings_row";
-        private final String KEY_SETTINGS_TIMER = "settings_timer";
+        private final String KEY_SETTINGS_GROUP = "levels_test_g";
+        private final String KEY_SETTINGS_ROW = "levels_test_r";
+        private final String KEY_SETTINGS_TIMER = "levels_test_t";
         private SharedPreferences prefs;
         private Preference pref1, pref2, pref3;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.levels_preferences);
+            addPreferencesFromResource(R.xml.levels_test);
+            prefs = getPreferenceScreen().getSharedPreferences();
             pref1 = findPreference(KEY_SETTINGS_GROUP);
             pref2 = findPreference(KEY_SETTINGS_ROW);
             pref3 = findPreference(KEY_SETTINGS_TIMER);
-            prefs = getPreferenceScreen().getSharedPreferences();
         }
 
         @Override

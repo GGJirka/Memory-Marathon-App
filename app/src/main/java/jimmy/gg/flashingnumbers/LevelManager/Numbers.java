@@ -44,20 +44,17 @@ public class Numbers extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        setTheme(R.style.NumbersStyle);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        PreferenceManager.setDefaultValues(this, R.xml.levels_preferences, false);
         setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         timer = (ProgressBar) findViewById(R.id.progressBar);
         numbers = (TextSwitcher) findViewById(R.id.revealed_numbers);
         timeRemain = (TextView) findViewById(R.id.time_remain);
         remember = (Button)findViewById(R.id.remember);
-        TextSwitcher switcher = (TextSwitcher) findViewById(R.id.revealed_numbers);
 
-        switcher.setFactory(new ViewSwitcher.ViewFactory() {
+        numbers.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
                 TextView view = new TextView(Numbers.this);
@@ -77,18 +74,10 @@ public class Numbers extends AppCompatActivity{
         } else {
             gameStart();
         }
-        if (actualIndex == 0) {
-            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
-            leftButton.setImageResource(R.drawable.no_icon);
-        }
-        if (actualIndex == numbersInRow.size() - 1) {
-            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
-            rightButton.setImageResource(R.drawable.no_icon);
-        }
     }
 
     public void showInfo() {
-        LayoutInflater inflater = LayoutInflater.from(this);
+        LayoutInflater inflater = LayoutInflater.from(Numbers.this);
         View view = inflater.inflate(R.layout.checkbox, null);
         final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
         new AlertDialog.Builder(Numbers.this)
@@ -149,7 +138,8 @@ public class Numbers extends AppCompatActivity{
                 timeRemain.setVisibility(View.VISIBLE);
                 timer.setVisibility(View.VISIBLE);
                 remember.setVisibility(View.VISIBLE);
-                revealNumbers();startTimer();
+                revealNumbers();
+                startTimer();
             }
         };
         screenTimer.start();
@@ -234,10 +224,22 @@ public class Numbers extends AppCompatActivity{
         }
         numbers.setText(numbersInRow.get(actualIndex));
         images.get(0).setImageResource(R.drawable.dot_fill);
+        try {
+            if (actualIndex == 0) {
+                ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+                leftButton.setImageResource(R.drawable.no_icon);
+            }
+            if (actualIndex == numbersInRow.size() - 1) {
+                ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+                rightButton.setImageResource(R.drawable.no_icon);
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     public void leftButton(View view){
-        if (sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+        if (sharedPreferences.getBoolean("levels_test_a", true)) {
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_left));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_right));
         }
@@ -258,7 +260,7 @@ public class Numbers extends AppCompatActivity{
     }
 
     public void rightButton(View view){
-        if (sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+        if (sharedPreferences.getBoolean("levels_test_a", true)) {
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_right));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_left));
         }
@@ -331,19 +333,19 @@ public class Numbers extends AppCompatActivity{
     @Override
     public void onResume(){
         super.onResume();
-        if (!sharedPreferences.getBoolean("numbers_levels_setting_animation", true)) {
+        if (!sharedPreferences.getBoolean("levels_test_a", true)) {
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.no_anim));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.no_anim));
         }
     }
 
-    public void numbersDone(){
-        Intent intent = new Intent(this,NumbersRemember.class);
+    public void numbersDone() {
+        Intent intent = new Intent(this, NumbersRemember.class);
         intent.putExtra(EXTRA_NUMBERS, numbersToSend.toString());
         intent.putExtra(EXTRA_NUMBERS_COUNT, countRow);
         intent.putExtra(EXTRA_LEVEL, getIntent().getStringExtra(EXTRA_LEVEL));
         intent.putExtra(EXTRA_TIME, getIntent().getStringExtra(EXTRA_TIME));
-        intent.putExtra(EXTRA_TIME_REMAIN,timeRemain1);
+        intent.putExtra(EXTRA_TIME_REMAIN, timeRemain1);
         startActivity(intent);
         countDownTimer.cancel();
     }
@@ -353,7 +355,7 @@ public class Numbers extends AppCompatActivity{
     public final String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
     public final String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
     public final String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
-    public final String KEY_SETTINGS_GROUP = "settings_group";
-    public final String KEY_SETTINGS_ROW = "settings_row";
-    public final String KEY_SETTINGS_TIMER = "settings_timer";
+    public final String KEY_SETTINGS_GROUP = "levels_test_g";
+    public final String KEY_SETTINGS_ROW = "levels_test_r";
+    public final String KEY_SETTINGS_TIMER = "levels_test_t";
 }

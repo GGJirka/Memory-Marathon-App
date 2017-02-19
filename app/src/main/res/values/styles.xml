@@ -48,20 +48,20 @@
     </style>
 
     <style name="MaterialButtonMainNumbers" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/numbers_title_top</item>
-        <item name="colorButtonNormal">@color/numbers_title_bot</item>
+        <item name="colorControlHighlight">@color/main_button_numbers_clicked</item>
+        <item name="colorButtonNormal">@color/main_button_numbers_normal</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MaterialButtonWords" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/main_button_clicked</item>
+        <item name="colorButtonNormal">@color/main_button_normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="MaterialButtonMainWords" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/main_button_clicked</item>
         <item name="colorButtonNormal">@color/main_button_normal</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="MaterialButtonWords" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/words_button_click</item>
-        <item name="colorButtonNormal">@color/words_button</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

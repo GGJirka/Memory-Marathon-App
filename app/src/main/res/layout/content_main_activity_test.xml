@@ -18,18 +18,19 @@
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:text="@string/main_numbers"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="40dp"
         android:textSize="24sp"
         android:height="70sp"
         android:onClick="numbersGameStart"
         android:id="@+id/button3"
-        android:theme="@style/MaterialButtonMainWords"
+        android:theme="@style/MaterialButtonMainNumbers"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/main_numbers_icon" />
 
     <Button
         android:layout_width="200dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:layout_height="80dp"
         android:text="@string/main_words"
         android:textSize="24sp"

@@ -78,7 +78,7 @@
                 android:onClick="leftButton"
                 android:id="@+id/numbers_left_button"
                 android:background="@color/white"
-                app:srcCompat="@drawable/button_left" />
+                app:srcCompat="@drawable/no_icon" />
 
             <TextSwitcher
                 android:layout_width="260dp"

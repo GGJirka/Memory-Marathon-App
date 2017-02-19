@@ -275,9 +275,11 @@ public class QuickLevel extends AppCompatActivity {
         textView2.setLayoutParams(params);
         layout.addView(answer);
 
-        Button next = (Button) findViewById(R.id.next_button);
-        next.setVisibility(View.VISIBLE);
+        Button next = new Button(newContext);
+        next.setLayoutParams(params);
         next.setTextSize(20);
+        next.setText(R.string.button_next);
+        next.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         int passed = 0;
         try {
@@ -299,8 +301,6 @@ public class QuickLevel extends AppCompatActivity {
         }
 
         if (passed == builder.length()) {
-            next.setText(R.string.button_next);
-            next.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             layout.addView(next);
             next.setOnClickListener(new View.OnClickListener() {
                 @Override

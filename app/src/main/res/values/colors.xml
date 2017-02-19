@@ -37,10 +37,16 @@
     <color name="numbers_button_clicked_color">#004d40</color>
     <color name="numbers_background">#ffab91</color>
 
-    <color name="main_button_normal">#90caf9</color>
-    <color name="main_button_clicked">#0d47a1</color>
+    <color name="main_button_normal">#a5d6a7</color>
+    <color name="main_button_clicked">#81c784</color>
+    <color name="main_numbers_textcolor">#1b5e20</color>
+
+    <color name="main_button_numbers_normal">#ffab91</color>
+    <color name="main_button_numbers_clicked">#ff8a65</color>
+    <color name="main_button_text">#bf360c</color>
+
     <color name="words_button_click">#1b5e20</color>
-    <color name="words_button">#81c784</color>
+    <color name="words_button">#66bb6a</color>
 
     <color name="main_title_bot">#2196f3</color>
     <color name="main_title_top">#1565c0</color>

@@ -13,8 +13,8 @@
         <activity
             android:name=".main.MemoryMarathon"
             android:label="@string/title_activity_main_test"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,7 +76,18 @@
             android:name=".settings.QuickLevelSettings"
             android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
-
+        <activity
+            android:name=".main.MainSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainStyle" />
+        <activity
+            android:name=".main.GeneralSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainStyle" />
+        <activity
+            android:name=".main.MainHighScore"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainStyle" />
     </application>
 
 </manifest>

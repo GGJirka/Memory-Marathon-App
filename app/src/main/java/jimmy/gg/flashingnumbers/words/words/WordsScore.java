@@ -7,8 +7,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,10 +39,12 @@ public class WordsScore extends AppCompatActivity {
         setTitle("High Score");
         score = new ArrayList<>();
         if (sharedPreferences.getString("WORDS_SORT", "0").equals("0")) {
-
             sortByDate();
         } else {
             sortByScore();
+        }
+        if (score.size() == 0) {
+            addView();
         }
         baseAdapter = new HighScoreAdapter(getApplicationContext(), score);
         Runnable run = new Runnable() {
@@ -52,6 +58,19 @@ public class WordsScore extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void addView() {
+        TextView view = new TextView(WordsScore.this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 450, 0, 0);
+        view.setLayoutParams(params);
+        view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view.setText("Nothing to display");
+        view.setTextSize(20);
+        view.setTextColor(getResources().getColor(R.color.black));
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_words_score);
+        layout.addView(view);
+    }
     public void sortByDate() {
         for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
             score.add(new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), "none lul")));
@@ -74,12 +93,17 @@ public class WordsScore extends AppCompatActivity {
                         return o2 - o1;
                     }
                 });
+                ArrayList<Score> addScores = new ArrayList<>();
+                for (int j = 0; j < addScore.size(); j++) {
+                    Score row = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(j), ""));
+                    addScores.add(row);
+                }
                 for (int i = 0; i < addScore.size(); i++) {
                     String score0 = String.valueOf(addScore.get(i));
-                    for (int j = 0; j < addScore.size(); j++) {
-                        Score row = new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(j), ""));
-                        if (row.getText().split(" ")[3].equals(score0)) {
-                            score.add(row);
+                    for (Score score1 : addScores) {
+                        if (score1.getText().split(" ")[3].equals(score0)) {
+                            score.add(score1);
+                            addScores.remove(score1);
                             break;
                         }
                     }
@@ -88,6 +112,7 @@ public class WordsScore extends AppCompatActivity {
         };
         runOnUiThread(run);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
         if (sharedPreferences.getString("WORDS_SCORE_CHECK", "0").equals("0")) {
@@ -111,6 +136,7 @@ public class WordsScore extends AppCompatActivity {
                         }
                         score.removeAll(score);
                         baseAdapter.notifyDataSetChanged();
+                        addView();
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
