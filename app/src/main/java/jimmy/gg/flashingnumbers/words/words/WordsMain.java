@@ -1,6 +1,5 @@
 package jimmy.gg.flashingnumbers.words.words;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,15 +27,16 @@ import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.Score;
+import jimmy.gg.flashingnumbers.main.MemoryMarathon;
 
 public class WordsMain extends AppCompatActivity {
     /**
      * TODO: BETTER DESIGN, FIX WORD LIST (words with less than 3 length, vulcaric words)
      * TODO: FIX WORDS THAT ARE MORE THAN ONCE SHOWED.
      */
-    public static SharedPreferences sharedPreferences;
     private WordsStats words;
     private BufferedReader bf;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,8 @@ public class WordsMain extends AppCompatActivity {
         setContentView(R.layout.activity_words_main2);
         setTitle(getText(R.string.words_activity_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         words = new WordsStats(3, 0);
+        sharedPreferences = MemoryMarathon.sharedPreferences;
         findViewById(R.id.words_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

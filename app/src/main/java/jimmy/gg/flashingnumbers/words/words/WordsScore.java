@@ -21,6 +21,7 @@ import java.util.Comparator;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.HighScoreAdapter;
 import jimmy.gg.flashingnumbers.highscore.Score;
+import jimmy.gg.flashingnumbers.main.MemoryMarathon;
 
 public class WordsScore extends AppCompatActivity {
     /**
@@ -35,7 +36,7 @@ public class WordsScore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_score);
         ListView list = (ListView) findViewById(R.id.words_high_score);
-        sharedPreferences = WordsMain.sharedPreferences;
+        sharedPreferences = MemoryMarathon.sharedPreferences;
         setTitle("High Score");
         score = new ArrayList<>();
         if (sharedPreferences.getString("WORDS_SORT", "0").equals("0")) {

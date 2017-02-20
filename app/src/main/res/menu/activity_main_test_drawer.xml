@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_high_score"
-            android:title="High score" />
-        <item
             android:id="@+id/drawer_settings"
-            android:title="Settings" />
+            android:title="Settings"
+            android:icon="@drawable/settings" />
         <item
             android:id="@+id/drawer_rate"
-            android:title="Rate us" />
+            android:title="Rate us"
+            android:icon="@drawable/drawer_rate_us" />
         <item
             android:id="@+id/drawer_about"
-            android:title="About author" />
+            android:title="About author"
+            android:icon="@drawable/drawer_about" />
     </group>
 
     <item android:title="">

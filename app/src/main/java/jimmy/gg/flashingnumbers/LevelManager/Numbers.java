@@ -222,6 +222,7 @@ public class Numbers extends AppCompatActivity{
                 }
             }
         }
+
         numbers.setText(numbersInRow.get(actualIndex));
         images.get(0).setImageResource(R.drawable.dot_fill);
         try {
@@ -229,7 +230,7 @@ public class Numbers extends AppCompatActivity{
                 ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
                 leftButton.setImageResource(R.drawable.no_icon);
             }
-            if (actualIndex == numbersInRow.size() - 1) {
+            if (numbersInRow.size() <= 0) {
                 ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
                 rightButton.setImageResource(R.drawable.no_icon);
             }
@@ -243,13 +244,17 @@ public class Numbers extends AppCompatActivity{
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_left));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_right));
         }
-        if (actualIndex == 1) {
-            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
-            leftButton.setImageResource(R.drawable.no_icon);
-        }
-        if (actualIndex == numbersInRow.size() - 1) {
-            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
-            rightButton.setImageResource(R.drawable.button_right);
+        if (numbersInRow.size() > 0) {
+            if (actualIndex == 1) {
+                ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+                leftButton.setImageResource(R.drawable.no_icon);
+
+            }
+
+            if (actualIndex == numbersInRow.size() - 1) {
+                ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+                rightButton.setImageResource(R.drawable.button_right);
+            }
         }
         if (actualIndex != 0) {
             actualIndex--;
@@ -264,19 +269,21 @@ public class Numbers extends AppCompatActivity{
             numbers.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_in_right));
             numbers.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_out_left));
         }
-        if (actualIndex == numbersInRow.size() - 2) {
-            ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
-            rightButton.setImageResource(R.drawable.no_icon);
-        }
-        if (actualIndex == 0) {
-            ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
-            leftButton.setImageResource(R.drawable.button_left);
-        }
-        if(actualIndex!=numbersInRow.size()-1) {
-            actualIndex++;
-            numbers.setText(numbersInRow.get(actualIndex));
-            images.get(actualIndex).setImageResource(R.drawable.dot_fill);
-            images.get(actualIndex-1).setImageResource(R.drawable.dot_unfill);
+        if (numbersInRow.size() > 0) {
+            if (actualIndex == numbersInRow.size() - 2) {
+                ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
+                rightButton.setImageResource(R.drawable.no_icon);
+            }
+            if (actualIndex == 0) {
+                ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+                leftButton.setImageResource(R.drawable.button_left);
+            }
+            if (actualIndex != numbersInRow.size() - 1) {
+                actualIndex++;
+                numbers.setText(numbersInRow.get(actualIndex));
+                images.get(actualIndex).setImageResource(R.drawable.dot_fill);
+                images.get(actualIndex - 1).setImageResource(R.drawable.dot_unfill);
+            }
         }
     }
 

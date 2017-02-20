@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -48,6 +50,27 @@ public class NumbersRemember extends AppCompatActivity {
         layout = (RelativeLayout) findViewById(R.id.activity_numbers_remember);
         createRow();
         startTimer();
+
+        final TextView textChar = (TextView) findViewById(R.id.numbers_remembered_txtchanged);
+        textChar.setText("numbers length: (0" + "/" + numberCount + ")");
+        final EditText txt = (EditText) findViewById(R.id.numbers_remember);
+        txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textChar.setText("numbers length: (" + txt.getText().toString().length() + "/" + numberCount + ")");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     protected void createRow(){

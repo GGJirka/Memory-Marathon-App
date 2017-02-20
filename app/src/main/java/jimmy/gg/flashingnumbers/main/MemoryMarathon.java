@@ -1,6 +1,8 @@
 package jimmy.gg.flashingnumbers.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +21,11 @@ import jimmy.gg.flashingnumbers.words.words.WordsMain;
 public class MemoryMarathon extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static SharedPreferences sharedPreferences;
 
+    /*
+    * 20.2 - TODO: numbers add listener on text to see amount of numbers, FIX BUG WITH ARROWS,
+    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,7 @@ public class MemoryMarathon extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -87,10 +94,6 @@ public class MemoryMarathon extends AppCompatActivity
             case R.id.drawer_settings:
                 Intent intent = new Intent(this, MainSettings.class);
                 startActivity(intent);
-                break;
-            case R.id.drawer_high_score:
-                Intent mainHighScore = new Intent(this, MainHighScore.class);
-                startActivity(mainHighScore);
                 break;
         }
 
