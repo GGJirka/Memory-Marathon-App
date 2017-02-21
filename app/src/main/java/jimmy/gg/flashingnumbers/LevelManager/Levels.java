@@ -19,6 +19,7 @@ import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
+import jimmy.gg.flashingnumbers.techniques.NumberMajorSystem;
 
 public class Levels extends AppCompatActivity {
     public ListView levels;
@@ -102,18 +103,6 @@ public class Levels extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        /*manageList();
-        levels = (ListView) findViewById(R.id.levels);
-
-        levelList = ((IternalMemory) this.getApplication()).getLevelList();
-        int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)), 1);
-        for (int i = 0; i < levelList.size(); i++) {
-            if (i >= index) {
-                levelList.get(i).setLocked(true);
-            } else {
-                levelList.get(i).setLocked(false);
-            }
-        }*/
     }
     public void gameStarted(String level, String numbers, String time){
         Intent intent = new Intent(this, Numbers.class);
@@ -134,6 +123,10 @@ public class Levels extends AppCompatActivity {
                 Intent intent = new Intent(this, TabbedHighScore.class);
                 intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)),"0");
                 startActivity(intent);
+                break;
+            case R.id.memory_system:
+                Intent system = new Intent(this, NumberMajorSystem.class);
+                startActivity(system);
                 break;
             default:
                 this.finish();

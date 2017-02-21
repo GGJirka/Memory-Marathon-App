@@ -5,4 +5,9 @@
         android:showAsAction="never"
         android:id="@+id/high_score"
         android:orderInCategory="100" />
+    <item
+        android:title="Memory technique"
+        android:showAsAction="never"
+        android:id="@+id/memory_system"
+        android:orderInCategory="100" />
 </menu>

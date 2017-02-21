@@ -28,6 +28,7 @@ import java.util.Random;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.Score;
 import jimmy.gg.flashingnumbers.main.MemoryMarathon;
+import jimmy.gg.flashingnumbers.techniques.WordsMemorySystem;
 
 public class WordsMain extends AppCompatActivity {
     /**
@@ -371,6 +372,9 @@ public class WordsMain extends AppCompatActivity {
                 break;
             case R.id.words_settings:
                 startActivity(new Intent(this, WordsSettings.class));
+                break;
+            case R.id.memory_technique_words:
+                startActivity(new Intent(this, WordsMemorySystem.class));
                 break;
             default:
                 this.finish();

@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/drawe_techniques"
+            android:title="Memory techniques"
+            android:icon="@drawable/drawer_techniques" />
+        <item
             android:id="@+id/drawer_settings"
             android:title="Settings"
             android:icon="@drawable/settings" />

@@ -88,6 +88,17 @@
             android:name=".main.MainHighScore"
             android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
+        <activity
+            android:name=".techniques.MemoryTechniques"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainStyle" />
+        <activity
+            android:name=".techniques.NumberMajorSystem"
+            android:screenOrientation="portrait"
+            android:theme="@style/NumbersStyle" />
+        <activity
+            android:name=".techniques.WordsMemorySystem"
+            android:screenOrientation="portrait"
+            android:theme="@style/WordsStyle" />
     </application>
-
 </manifest>

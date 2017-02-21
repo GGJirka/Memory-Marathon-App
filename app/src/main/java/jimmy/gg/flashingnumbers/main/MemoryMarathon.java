@@ -16,6 +16,7 @@ import android.view.View;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
+import jimmy.gg.flashingnumbers.techniques.MemoryTechniques;
 import jimmy.gg.flashingnumbers.words.words.WordsMain;
 
 public class MemoryMarathon extends AppCompatActivity
@@ -94,6 +95,10 @@ public class MemoryMarathon extends AppCompatActivity
             case R.id.drawer_settings:
                 Intent intent = new Intent(this, MainSettings.class);
                 startActivity(intent);
+                break;
+            case R.id.drawe_techniques:
+                Intent techniques = new Intent(this, MemoryTechniques.class);
+                startActivity(techniques);
                 break;
         }
 

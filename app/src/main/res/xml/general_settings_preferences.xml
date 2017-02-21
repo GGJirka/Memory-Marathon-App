@@ -3,6 +3,7 @@
     <CheckBoxPreference
         android:title="Check for updates"
         android:key="general_settings_updates"
+        android:summary="Automatically gets the latest version."
         android:defaultValue="true" />
 
     <ListPreference
