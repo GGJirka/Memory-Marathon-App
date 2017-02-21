@@ -169,4 +169,12 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="the_major_memory_system_title">The Major Memory System</string>
+    <string name="major_system_howtouse">The system works by converting number sequences into noun, nouns into images, and linking images into sequences. These sequences can be very complex and detailed.
+
+        \n\nThe building blocks of the system are the association of the numbers below with the following consonant sounds:</string>
+    <string name="major_system_number"><b>0</b> - s, z, soft-c \n<b>1</b> - d, t ,th \n<b>2</b> - n \n<b>3</b> - m \n<b>4</b> - r \n<b>5</b> - l \n<b>6</b> - j, sh, soft-ch \n<b>7</b> - k \n<b>8</b> - f,v \n<b>9</b> - p,b</string>
+    <string name="major_system_how_to_use"><b>How to use</b></string>
+    <string name="major_system_example">For example: 23 - n,m = Nemo, 64 - ch, r = chair\nNow you make image of this number - Nemo sitting on chair.</string>
+    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>monkey</b>, <b>mobile phone</b>, <b>banana</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>monkey</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>banana</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words. You can start go to walk in your head! Now you should see all words if you have done it right.</string>
 </resources>

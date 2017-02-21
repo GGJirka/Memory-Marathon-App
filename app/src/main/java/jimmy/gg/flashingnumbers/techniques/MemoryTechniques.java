@@ -11,10 +11,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.settings.SettingsAdapter;
+import jimmy.gg.flashingnumbers.mainAdapter.OptionAdapter;
+import jimmy.gg.flashingnumbers.mainAdapter.OptionUnit;
 
 public class MemoryTechniques extends AppCompatActivity {
-    public ArrayList<String> activities;
+    public ArrayList<OptionUnit> activities;
     public ListView list;
 
     @Override
@@ -25,9 +26,9 @@ public class MemoryTechniques extends AppCompatActivity {
         setTitle("Memory techniques");
         activities = new ArrayList<>();
         list = (ListView) findViewById(R.id.main_techniques);
-        activities.add(new String("Numbers Major System"));
-        activities.add(new String("Words System"));
-        list.setAdapter(new SettingsAdapter(getApplicationContext(), activities));
+        activities.add(new OptionUnit("numbers", "Numbers Major System"));
+        activities.add(new OptionUnit("words", "Words System"));
+        list.setAdapter(new OptionAdapter(getApplicationContext(), activities));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

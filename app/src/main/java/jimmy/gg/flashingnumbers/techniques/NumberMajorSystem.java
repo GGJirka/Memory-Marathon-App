@@ -13,7 +13,7 @@ public class NumberMajorSystem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number_major_system);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Number memory system");
+        setTitle("The Major Memory System");
 
     }
 

@@ -11,12 +11,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.mainAdapter.OptionAdapter;
+import jimmy.gg.flashingnumbers.mainAdapter.OptionUnit;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
-import jimmy.gg.flashingnumbers.settings.SettingsAdapter;
 import jimmy.gg.flashingnumbers.words.words.WordsSettings;
 
 public class MainSettings extends AppCompatActivity {
-    public ArrayList<String> settings;
+    public ArrayList<OptionUnit> settings;
     public ListView list;
 
     @Override
@@ -26,11 +27,11 @@ public class MainSettings extends AppCompatActivity {
         setTitle("Settings");
         settings = new ArrayList<>();
         list = (ListView) findViewById(R.id.main_settings);
-        settings.add(new String("General settings"));
-        settings.add(new String("Numbers settings"));
-        settings.add(new String("Words settings"));
+        settings.add(new OptionUnit("settings", "General settings"));
+        settings.add(new OptionUnit("numbers", "Numbers settings"));
+        settings.add(new OptionUnit("words", "Words settings"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        list.setAdapter(new SettingsAdapter(getApplicationContext(), settings));
+        list.setAdapter(new OptionAdapter(getApplicationContext(), settings));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

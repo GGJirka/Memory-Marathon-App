@@ -23,7 +23,7 @@
     <color name="material_blue_title_top">#1976d2</color>
     <color name="material_blue_title_bot">#2196f3</color>
     <color name="material_blue_buttons">#2196f3</color>
-
+    <color name="title_blue">#317eac</color>
     <color name="numbers_title_top">#ff7043</color>
     <color name="numbers_title_bot">#ff8a65</color>
     <color name="number_bottom_navigation">#8c371d</color>
