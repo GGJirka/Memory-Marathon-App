@@ -88,7 +88,6 @@ public class MemoryMarathon extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         switch (id) {
@@ -99,6 +98,10 @@ public class MemoryMarathon extends AppCompatActivity
             case R.id.drawe_techniques:
                 Intent techniques = new Intent(this, MemoryTechniques.class);
                 startActivity(techniques);
+                break;
+            case R.id.drawer_about:
+                Intent about = new Intent(this, MainAboutApp.class);
+                startActivity(about);
                 break;
         }
 

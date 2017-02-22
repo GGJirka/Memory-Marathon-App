@@ -50,7 +50,6 @@ public class QuickLevel extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.NumbersStyle);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_level);
         setTitle("Quick - Level 1");
@@ -228,7 +227,6 @@ public class QuickLevel extends AppCompatActivity {
     public void numberFinish() {
         EditText editText = (EditText) findViewById(R.id.quick_edit_text);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         thirdTimer.cancel();
 

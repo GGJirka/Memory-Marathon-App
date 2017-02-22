@@ -12,6 +12,12 @@
             android:showAsAction="never"></item>
     </group>
     <item
+        android:title="in graph"
+        app:showAsAction="always"
+        android:id="@+id/graph"
+        android:orderInCategory="100"
+        android:icon="@drawable/graph" />
+    <item
         android:title="Delete score"
         android:icon="@drawable/words_delete_score"
         android:id="@+id/words_delete"

@@ -1,6 +1,7 @@
 package jimmy.gg.flashingnumbers.words.words;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -114,6 +115,7 @@ public class WordsScore extends AppCompatActivity {
         runOnUiThread(run);
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
         if (sharedPreferences.getString("WORDS_SCORE_CHECK", "0").equals("0")) {
@@ -179,6 +181,12 @@ public class WordsScore extends AppCompatActivity {
                 sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "1").commit();
                 baseAdapter.notifyDataSetChanged();
                 break;
+
+            case R.id.graph:
+                Intent graphIntent = new Intent(this, WordsGraph.class);
+                startActivity(graphIntent);
+                break;
+
             default:
                 sharedPreferences.edit().putString("WORDS_STATE", "0").commit();
                 this.finish();

@@ -100,5 +100,14 @@
             android:name=".techniques.WordsMemorySystem"
             android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
+        <activity
+            android:name=".main.MainAboutApp"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainStyle" />
+        <activity
+            android:name=".words.words.WordsGraph"
+            android:screenOrientation="portrait"
+            android:theme="@style/WordsStyle"></activity>
     </application>
+
 </manifest>

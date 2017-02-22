@@ -16,6 +16,7 @@ import jimmy.gg.flashingnumbers.R;
  */
 
 public class OptionAdapter extends BaseAdapter {
+
     public ArrayList<OptionUnit> options;
     public Context context;
 
@@ -55,6 +56,11 @@ public class OptionAdapter extends BaseAdapter {
             case "settings":
                 image.setImageResource(R.drawable.settings);
                 break;
+            case "levels":
+                image.setImageResource(R.drawable.levels);
+                break;
+            case "quick":
+                image.setImageResource(R.drawable.fast_mode);
         }
         v.setTag(position);
         return v;

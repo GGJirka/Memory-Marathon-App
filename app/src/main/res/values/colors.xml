@@ -24,8 +24,10 @@
     <color name="material_blue_title_bot">#2196f3</color>
     <color name="material_blue_buttons">#2196f3</color>
     <color name="title_blue">#317eac</color>
-    <color name="numbers_title_top">#ff7043</color>
-    <color name="numbers_title_bot">#ff8a65</color>
+
+    <color name="numbers_title_top">#d32f2f</color>
+    <color name="numbers_title_bot">#ef5350</color>
+
     <color name="number_bottom_navigation">#8c371d</color>
     <color name="alert_dialog">#ff7043</color>
     <color name="high_score_bg">#80cbc4</color>
@@ -41,8 +43,9 @@
     <color name="main_button_clicked">#81c784</color>
     <color name="main_numbers_textcolor">#1b5e20</color>
 
-    <color name="main_button_numbers_normal">#ffab91</color>
-    <color name="main_button_numbers_clicked">#ff8a65</color>
+    <color name="main_button_numbers_normal">#ef9a9a</color>
+    <color name="main_button_numbers_clicked">#e57373</color>
+
     <color name="main_button_text">#bf360c</color>
 
     <color name="words_button_click">#1b5e20</color>

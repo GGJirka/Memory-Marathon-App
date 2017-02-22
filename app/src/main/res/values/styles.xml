@@ -30,6 +30,19 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
+    <style name="check_box_words">
+        <item name="android:colorControlActivated">@color/words_title_bot</item>
+    </style>
+
+    <style name="NumbersEditText" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/numbers_button_color</item>
+        <item name="colorControlHighlight">@color/numbers_button_color</item>
+    </style>
+
+    <style name="PrefsMain" parent="Theme.AppCompat">
+        <item name="colorAccent">#2196f3</item>
+    </style>
     <style name="MainStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/main_title_bot</item>
         <item name="colorPrimaryDark">@color/main_title_top</item>

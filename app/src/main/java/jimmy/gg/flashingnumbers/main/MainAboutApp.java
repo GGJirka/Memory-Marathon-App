@@ -1,4 +1,4 @@
-package jimmy.gg.flashingnumbers.techniques;
+package jimmy.gg.flashingnumbers.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,14 +6,14 @@ import android.view.MenuItem;
 
 import jimmy.gg.flashingnumbers.R;
 
-public class NumberMajorSystem extends AppCompatActivity {
+public class MainAboutApp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_number_major_system);
+        setContentView(R.layout.activity_main_about_app);
+        setTitle("About app");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Major Memory System");
     }
 
     @Override

@@ -4,7 +4,8 @@
         android:title="Check for updates"
         android:key="general_settings_updates"
         android:summary="Automatically gets the latest version."
-        android:defaultValue="true" />
+        android:defaultValue="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <ListPreference
         android:key="general_settings_language"
