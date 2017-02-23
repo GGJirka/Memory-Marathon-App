@@ -62,7 +62,7 @@ public class QuickLevelHighScore extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 new AlertDialog.Builder(parent.getContext())
-                        .setItems(new CharSequence[]{"delete score"}, new DialogInterface.OnClickListener() {
+                        .setItems(new CharSequence[]{getString(R.string.delete_score)}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 scores.remove(position);
@@ -84,7 +84,7 @@ public class QuickLevelHighScore extends Fragment {
         params.setMargins(0, 450, 0, 0);
         view.setLayoutParams(params);
         view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        view.setText("Nothing to display");
+        view.setText(R.string.nothing_to_display);
         view.setTextSize(20);
         view.setTextColor(getResources().getColor(R.color.black));
         RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.activity_quick_level_high_score);

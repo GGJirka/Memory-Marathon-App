@@ -41,7 +41,7 @@ public class HighScore extends Fragment{
             params.setMargins(0, 450, 0, 0);
             view.setLayoutParams(params);
             view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            view.setText("Nothing to display");
+            view.setText(R.string.nothing_to_display);
             view.setTextSize(20);
             view.setTextColor(getResources().getColor(R.color.black));
             RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.activity_high_score);

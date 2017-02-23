@@ -96,11 +96,11 @@ public class NumbersLevelsSettings extends AppCompatActivity {
         @Override
         public void onStart() {
             super.onStart();
-            pref1.setSummary("Actual number size in group: "
+            pref1.setSummary(getString(R.string.numbers_size_group)
                     + prefs.getString(KEY_SETTINGS_GROUP, "Actual number size in group: 2"));
-            pref2.setSummary("Actual number of numbers in row: "
+            pref2.setSummary(getString(R.string.numbers_size_row)
                     + prefs.getString(KEY_SETTINGS_ROW, "Actual number of numbers in row: 20"));
-            pref3.setSummary("Actual inspection time: "
+            pref3.setSummary(getString(R.string.actual_inspection_time)
                     + prefs.getString(KEY_SETTINGS_TIMER, "Actual inspection time: 3s") + "s");
         }
 
@@ -110,16 +110,16 @@ public class NumbersLevelsSettings extends AppCompatActivity {
 
             switch (key) {
                 case KEY_SETTINGS_GROUP:
-                    pref.setSummary("Actual number size in group: " + sharedPreferences.getString(key, ""));
+                    pref.setSummary(getString(R.string.numbers_size_group) + sharedPreferences.getString(key, ""));
                     break;
                 case KEY_SETTINGS_ROW:
-                    pref.setSummary("Actual number of numbers in row: " + sharedPreferences.getString(key, ""));
+                    pref.setSummary(getString(R.string.numbers_size_row) + sharedPreferences.getString(key, ""));
                     break;
                 case KEY_SETTINGS_TIMER:
                     if (sharedPreferences.getString(key, "").equals("none")) {
-                        pref.setSummary("Actual inspection time: none");
+                        pref.setSummary(R.string.inspection_time_none);
                     } else {
-                        pref.setSummary("Actual inspection time: " + sharedPreferences.getString(key, "") + "s");
+                        pref.setSummary(getString(R.string.actual_inspection_time) + sharedPreferences.getString(key, "") + "s");
                     }
                     break;
                /* case "settings_timer_quick":

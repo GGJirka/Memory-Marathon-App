@@ -48,12 +48,12 @@ public class WordsGraph extends AppCompatActivity {
         graph.getViewport().setScrollable(true);
         graph.getViewport().setScalableY(true);
         graph.getViewport().setScrollableY(true);
+
         DataPoint[] dataPoints = new DataPoint[points.size()];
         String[] date = new String[points.size()];
 
         for (int i = 0; i < points.size(); i++) {
             dataPoints[i] = new DataPoint(((double) i / points.size()), points.get(i));
-
         }
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
         series.setColor(getResources().getColor(R.color.words_title_bot));

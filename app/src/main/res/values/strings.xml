@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FlashingNumbers</string>
+    <string name="app_name">Memory Marathon</string>
     <string name="start_button">Start</string>
     <string name="option_button">Options</string>
     <string name="quit_button">Quit</string>
@@ -177,4 +177,33 @@
     <string name="major_system_how_to_use"><b>How to use</b></string>
     <string name="major_system_example">For example: 23 - n,m = Nemo, 64 - ch, r = chair\nNow you make image of this number - Nemo sitting on chair.</string>
     <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>monkey</b>, <b>mobile phone</b>, <b>banana</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>monkey</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>banana</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words. You can start go to walk in your head! Now you should see all words if you have done it right.</string>
+    <string name="quick_level_graph_title">Quick Level Graph</string>
+    <string name="nothing_to_display">Nothing to display</string>
+    <string name="delete_score">delete score</string>
+    <string name="high_score_title">High Score</string>
+    <string name="delete_all_score">Delete all score</string>
+    <string name="delete_all_score_summary">Do you really want to delete all score from quick level?</string>
+    <string name="yes">YES</string>
+    <string name="cancel">CANCEL</string>
+    <string name="dialog_cancel">CANCEL</string>
+    <string name="levels_title">Levels</string>
+    <string name="quick_level_title">Quick Level</string>
+    <string name="level_locked">"Level locked, complete "</string>
+    <string name="to_unlock">" to unlock."</string>
+    <string name="numbers_info_summ">Use arrows to move to another part of number.\n</string>
+    <string name="numbers_info_summ1">Change number arrangement in settings like below.\n</string>
+    <string name="numbers_info_summ3"><![CDATA[například: 555555 -> 55 55 55]]></string>
+    <string name="number_remember_numlength">numbers length: (</string>
+    <string name="number_remember_remembered">"Remembered "</string>
+    <string name="failed">" failed"</string>
+    <string name="animation_on">display animation: on</string>
+    <string name="animation_off">display animation: off</string>
+    <string name="animation_title">Animation</string>
+    <string name="numbers_size_group">"Actual number size in group: "</string>
+    <string name="numbers_size_row">"Actual number of numbers in row: "</string>
+    <string name="actual_inspection_time">"Actual inspection time: "</string>
+    <string name="inspection_time_none">Actual inspection time: none</string>
+    <string name="animation_offf">display animation: off</string>
+    <string name="display_animation_onn">display animation: on</string>
+    <string name="animation_tit">Animation</string>
 </resources>

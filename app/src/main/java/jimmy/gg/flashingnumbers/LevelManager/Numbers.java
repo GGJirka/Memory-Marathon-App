@@ -83,9 +83,9 @@ public class Numbers extends AppCompatActivity{
         new AlertDialog.Builder(Numbers.this)
                 .setView(view)
                 .setTitle("Info")
-                .setMessage("Use arrows to move to another part of number.\n" +
-                        "Select number arrangement in settings like below.\n" +
-                        "from this: 555555 -> 55 55 55")
+                .setMessage(getString(R.string.numbers_info_summ) +
+                        getString(R.string.numbers_info_summ1) +
+                        getString(R.string.numbers_info_summ3))
                 .setPositiveButton(getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

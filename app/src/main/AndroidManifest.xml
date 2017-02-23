@@ -107,7 +107,11 @@
         <activity
             android:name=".words.words.WordsGraph"
             android:screenOrientation="portrait"
-            android:theme="@style/WordsStyle"></activity>
+            android:theme="@style/WordsStyle" />
+        <activity
+            android:name=".highscore.NumbersGraph"
+            android:screenOrientation="portrait"
+            android:theme="@style/NumbersStyle"></activity>
     </application>
 
 </manifest>

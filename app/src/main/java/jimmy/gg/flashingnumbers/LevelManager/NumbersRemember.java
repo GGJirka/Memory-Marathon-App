@@ -51,7 +51,7 @@ public class NumbersRemember extends AppCompatActivity {
         startTimer();
 
         final TextView textChar = (TextView) findViewById(R.id.numbers_remembered_txtchanged);
-        textChar.setText("numbers length: (0" + "/" + numberCount + ")");
+        textChar.setText(getString(R.string.number_remember_numlength) + "/" + numberCount + ")");
         final EditText txt = (EditText) findViewById(R.id.numbers_remember);
         txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -61,7 +61,7 @@ public class NumbersRemember extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textChar.setText("numbers length: (" + txt.getText().toString().length() + "/" + numberCount + ")");
+                textChar.setText(getString(R.string.number_remember_numlength) + txt.getText().toString().length() + "/" + numberCount + ")");
             }
 
             @Override
@@ -256,8 +256,8 @@ public class NumbersRemember extends AppCompatActivity {
         public void dialogFailed(int numbersRight){
             final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
             new AlertDialog.Builder(NumbersRemember.this)
-                    .setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" failed")
-                    .setMessage("Remembered " + numbersRight + "/" + numberCount + "\n" + "time:" + " " + getTimeRemain().toString() + "s")
+                    .setTitle(getIntent().getStringExtra(EXTRA_LEVEL) + getString(R.string.failed))
+                    .setMessage(getString(R.string.number_remember_remembered) + numbersRight + "/" + numberCount + "\n" + "time:" + " " + getTimeRemain().toString() + "s")
                     .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

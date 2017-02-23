@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ public class MemoryMarathon extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static SharedPreferences sharedPreferences;
+    public ActionProvider shareActionProvider;
 
     /*
     * 20.2 - TODO: numbers add listener on text to see amount of numbers, FIX BUG WITH ARROWS,
@@ -67,9 +69,14 @@ public class MemoryMarathon extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_activity_test, menu);
+
         return true;
     }
 
+    public void setShareIntent(Intent shareIntent) {
+        if (shareActionProvider != null) {
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

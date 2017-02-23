@@ -1,6 +1,7 @@
 package jimmy.gg.flashingnumbers.highscore;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -51,7 +52,7 @@ public class TabbedHighScore extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("High Score");
+        setTitle(getString(R.string.high_score_title));
     }
 
     @Override
@@ -105,6 +106,14 @@ public class TabbedHighScore extends AppCompatActivity {
                     showDialog();
                 }
                 break;
+            case R.id.graph:
+                if (mViewPager.getCurrentItem() == 0) {
+                    mViewPager.setCurrentItem(1);
+                } else {
+                    Intent graphIntent = new Intent(this, NumbersGraph.class);
+                    startActivity(graphIntent);
+                }
+                break;
             default:
                 if (FlashingNumbers.sharedPreferences.getString("TAB_STATE", "2").equals("0")) {
                     FlashingNumbers.sharedPreferences.edit().putString("QUICK_LEVEL_STATE", "0").apply();
@@ -117,15 +126,15 @@ public class TabbedHighScore extends AppCompatActivity {
 
     public void showDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Delete all score")
-                .setMessage("Do you really want to delete all score from quick level?")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.delete_all_score)
+                .setMessage(R.string.delete_all_score_summary)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         quickHighScore.removeList();
                     }
                 })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -195,9 +204,9 @@ public class TabbedHighScore extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Levels";
+                    return getString(R.string.levels_title);
                 case 1:
-                    return "Quick Level";
+                    return getString(R.string.quick_level_title);
             }
             return null;
         }

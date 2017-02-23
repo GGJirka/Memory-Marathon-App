@@ -30,7 +30,7 @@ public class Levels extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
-        setTitle("Levels");
+        setTitle(getText(R.string.levels_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         levelList = new ArrayList<>();
         levels = (ListView) findViewById(R.id.levels);
@@ -51,8 +51,8 @@ public class Levels extends AppCompatActivity {
                     String time = levelList.get(position).getTime();
                     gameStarted(level, numbers, time);
                 }else{
-                    display = Toast.makeText(getApplicationContext(), "Level locked, complete " + levelList.get(position - 1).getLevel()
-                            + " to unlock.", Toast.LENGTH_SHORT);
+                    display = Toast.makeText(getApplicationContext(), getString(R.string.level_locked) + levelList.get(position - 1).getLevel()
+                            + getString(R.string.to_unlock), Toast.LENGTH_SHORT);
                     display.show();
                 }
             }
