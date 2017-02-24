@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/retry_icon"
-        android:title="retry"
+        android:title="@string/button_retry"
         android:icon="@drawable/retry"
         app:showAsAction="always" />
 <item
     android:id="@+id/action_settings"
     app:showAsAction="always"
     android:icon="@drawable/settings"
-    android:title="Settings"/>
+    android:title="@string/settings"/>
 </menu>

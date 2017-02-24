@@ -61,6 +61,7 @@ public class OptionAdapter extends BaseAdapter {
                 break;
             case "quick":
                 image.setImageResource(R.drawable.fast_mode);
+                break;
         }
         v.setTag(position);
         return v;

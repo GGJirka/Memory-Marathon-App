@@ -176,7 +176,7 @@
     <string name="major_system_number"><b>0</b> - s, z, soft-c \n<b>1</b> - d, t ,th \n<b>2</b> - n \n<b>3</b> - m \n<b>4</b> - r \n<b>5</b> - l \n<b>6</b> - j, sh, soft-ch \n<b>7</b> - k \n<b>8</b> - f,v \n<b>9</b> - p,b</string>
     <string name="major_system_how_to_use"><b>How to use</b></string>
     <string name="major_system_example">For example: 23 - n,m = Nemo, 64 - ch, r = chair\nNow you make image of this number - Nemo sitting on chair.</string>
-    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>monkey</b>, <b>mobile phone</b>, <b>banana</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>monkey</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>banana</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words. You can start go to walk in your head! Now you should see all words if you have done it right.</string>
+    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>monkey</b>, <b>mobile phone</b>, <b>banana</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>monkey</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>banana</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words, you can start go to walk in your head! Now you should see all words if you have done it right.</string>
     <string name="quick_level_graph_title">Quick Level Graph</string>
     <string name="nothing_to_display">Nothing to display</string>
     <string name="delete_score">delete score</string>
@@ -223,4 +223,26 @@
     <string name="numbers_settings">Numbers settings</string>
     <string name="memory_technique">Memory technique</string>
     <string name="do_not_show_again">Do not show again.</string>
+    <string name="retry_menu">retry</string>
+    <string name="graph_menu">Graph</string>
+    <string name="delete_score_menu">Delete score</string>
+    <string name="sort_by_date">sort by date</string>
+    <string name="sort_by_score">sort by score</string>
+    <string name="number_guess">What was the number?</string>
+    <string name="score">Score:</string>
+    <string name="words_lives">lives:</string>
+    <string name="words_score">score: 0</string>
+    <string name="words_seen">seen</string>
+    <string name="words_new">new</string>
+    <string name="words_delete_all">Do you really want to delete all scores?</string>
+    <string name="rate_us">Rate us</string>
+    <string name="about_app">About app</string>
+    <string name="share">Share</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="general_settings_title">General Settings</string>
+    <string name="words_settings">Words Settings</string>
+    <string name="main_settings_numbers">Numbers Settings</string>
+    <string name="major_system">Numbers Major System</string>
+    <string name="words_system">Words System</string>
+    <string name="major_system_title">Major Memory System</string>
 </resources>

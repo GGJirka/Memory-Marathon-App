@@ -44,7 +44,6 @@ public class QuickLevelHighScore extends Fragment {
             int length = s.split(" ").length;
             scores.add(new Score(s.split(" ")[0]+" "+"cs "+s.split(" ")[length-1]));
         }
-
         adapter = new HighScoreAdapter(rootView.getContext(), scores);
         if(scores.size()>0) {
             list.setAdapter(adapter);
@@ -68,8 +67,8 @@ public class QuickLevelHighScore extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 scores.remove(position);
                                 adapter.notifyDataSetChanged();
-                                sharedPreferences.edit().remove(KEY + String.valueOf(position)).commit();
-                                sharedPreferences.edit().putInt(KEY_COUNT, sharedPreferences.getInt(KEY_COUNT, 0) - 1).commit();
+                                sharedPreferences.edit().remove(KEY + String.valueOf(position)).apply();
+                                sharedPreferences.edit().putInt(KEY_COUNT, sharedPreferences.getInt(KEY_COUNT, 0) - 1).apply();
                             }
                         })
                         .show();
@@ -94,9 +93,9 @@ public class QuickLevelHighScore extends Fragment {
 
     public void removeList(){
         for (int i = 0; i < this.scores.size(); i++) {
-            this.sharedPreferences.edit().remove(KEY + String.valueOf(i)).commit();
+            this.sharedPreferences.edit().remove(KEY + String.valueOf(i)).apply();
         }
-        this.sharedPreferences.edit().remove(KEY_COUNT).commit();
+        this.sharedPreferences.edit().remove(KEY_COUNT).apply();
         addView();
         this.scores.removeAll(scores);
         adapter.notifyDataSetChanged();
@@ -123,7 +122,7 @@ public class QuickLevelHighScore extends Fragment {
                 int number = Integer.parseInt(score.getText().split(" ")[length-1]);
                 if (number == addScore.get(i)) {
                     String s = sharedPreferences.getString(KEY + String.valueOf(j), "0");
-                    scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.numbers)+" "+s.split(" ")[length-1]));
+                    scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.score)+" "+s.split(" ")[length-1]));
                    // scores.add(score);
                     break;
                 }
@@ -138,7 +137,7 @@ public class QuickLevelHighScore extends Fragment {
             //scores.add(new Score(sharedPreferences.getString(KEY + String.valueOf(i), "0")));
             String s = sharedPreferences.getString(KEY + String.valueOf(i), "0");
             int length = s.split(" ").length;
-            scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.numbers)+" "+s.split(" ")[length-1]));
+            scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.score)+" "+s.split(" ")[length-1]));
         }
         Collections.reverse(scores);
         adapter.notifyDataSetChanged();

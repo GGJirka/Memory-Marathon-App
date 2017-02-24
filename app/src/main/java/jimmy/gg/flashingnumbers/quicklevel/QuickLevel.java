@@ -224,11 +224,16 @@ public class QuickLevel extends AppCompatActivity {
         thirdTimer.start();
     }
     public void numberFinish() {
-        EditText editText = (EditText) findViewById(R.id.quick_edit_text);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-        thirdTimer.cancel();
-
+        final EditText editText = (EditText) findViewById(R.id.quick_edit_text);
+        Runnable key = new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                thirdTimer.cancel();
+            }
+        };
+        runOnUiThread(key);
         TextView timeRemain = (TextView) findViewById(R.id.quick_time_remain);
 
         timeRemain.setVisibility(View.INVISIBLE);

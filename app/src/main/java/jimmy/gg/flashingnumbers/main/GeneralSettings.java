@@ -13,7 +13,7 @@ public class GeneralSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_settings);
-        setTitle("General Settings");
+        setTitle(getString(R.string.general_settings_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new GeneralPreference()).commit();
     }

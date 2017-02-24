@@ -93,7 +93,7 @@
         android:onClick="numbersRemembered"/>
 
     <TextView
-        android:text="What was the number?"
+        android:text="@string/number_guess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quick_on_end_view"

@@ -23,11 +23,11 @@ public class MemoryTechniques extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_tech);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Memory techniques");
+        setTitle(getString(R.string.memory_technique));
         activities = new ArrayList<>();
         list = (ListView) findViewById(R.id.main_techniques);
-        activities.add(new OptionUnit("numbers", "Numbers Major System"));
-        activities.add(new OptionUnit("words", "Words System"));
+        activities.add(new OptionUnit("numbers", getString(R.string.major_system)));
+        activities.add(new OptionUnit("words", getString(R.string.words_system)));
         list.setAdapter(new OptionAdapter(getApplicationContext(), activities));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

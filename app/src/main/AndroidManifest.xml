@@ -58,7 +58,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".words.words.WordsMain"
-            android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".words.words.WordsScore"

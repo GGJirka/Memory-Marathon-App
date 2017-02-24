@@ -24,12 +24,12 @@ public class MainSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_settings);
-        setTitle("Settings");
+        setTitle(getString(R.string.settings));
         settings = new ArrayList<>();
         list = (ListView) findViewById(R.id.main_settings);
-        settings.add(new OptionUnit("settings", "General settings"));
-        settings.add(new OptionUnit("numbers", "Numbers settings"));
-        settings.add(new OptionUnit("words", "Words settings"));
+        settings.add(new OptionUnit("settings", getString(R.string.general_settings_title)));
+        settings.add(new OptionUnit("numbers", getString(R.string.main_settings_numbers)));
+        settings.add(new OptionUnit("words", getString(R.string.words_settings)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         list.setAdapter(new OptionAdapter(getApplicationContext(), settings));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

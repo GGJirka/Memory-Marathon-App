@@ -19,7 +19,7 @@ public class NumbersLevelsSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_settings);
         fragment = new SettingsFragment();
-        setTitle("Settings");
+        setTitle(getString(R.string.settings));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment()).commit();

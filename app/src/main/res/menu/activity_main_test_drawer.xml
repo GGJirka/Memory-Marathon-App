@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawe_techniques"
-            android:title="Memory techniques"
+            android:title="@string/memory_technique"
             android:icon="@drawable/drawer_techniques" />
         <item
             android:id="@+id/drawer_settings"
-            android:title="Settings"
+            android:title="@string/settings"
             android:icon="@drawable/settings" />
         <item
             android:id="@+id/drawer_rate"
-            android:title="Rate us"
+            android:title="@string/rate_us"
             android:icon="@drawable/drawer_rate_us" />
         <item
             android:id="@+id/drawer_about"
-            android:title="About author"
+            android:title="@string/about_app"
             android:icon="@drawable/drawer_about" />
     </group>
 
@@ -26,11 +26,11 @@
                 android:id="@+id/drawer_share"
                 android:icon="@drawable/ic_menu_share"
                 android:actionProviderClass="android.widget.ShareActionProvider"
-                android:title="Share" />
+                android:title="@string/share" />
             <item
                 android:id="@+id/drawer_send_feedback"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/send_feedback" />
         </menu>
     </item>
 

@@ -13,7 +13,7 @@ public class WordsSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_settings);
-        setTitle("Settings");
+        setTitle(getString(R.string.settings));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new WordsPreference()).commit();

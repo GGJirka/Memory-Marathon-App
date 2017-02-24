@@ -36,8 +36,10 @@ public class NumbersGraph extends AppCompatActivity {
         ArrayList<String> dates = new ArrayList<>();
 
         for (int i = 1; i <= FlashingNumbers.sharedPreferences.getInt(KEY_COUNT, 0); i++) {
+            int length = FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
+                    .split(" ").length;
             scores.add(Integer.valueOf(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
-                    .split(" ")[2]));
+                    .split(" ")[length-1]));
             dates.add(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
                     .split(" ")[0]);
         }

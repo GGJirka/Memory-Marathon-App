@@ -12,7 +12,7 @@ public class WordsMemorySystem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_memory_system);
-        setTitle("Words Memory System");
+        setTitle(getText(R.string.words_system));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

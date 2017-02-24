@@ -13,15 +13,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lives: "
-        android:textSize="24dp"
+        android:text="@string/words_lives"
+        android:textSize="24sp"
         android:id="@+id/words_live" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score: 0"
-        android:textSize="24dp"
+        android:text="@string/words_score"
+        android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -32,7 +32,7 @@
     <TextSwitcher
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30pt"
         android:id="@+id/words_word"
         android:layout_below="@+id/words_live"
         android:layout_centerHorizontal="true" />
@@ -40,53 +40,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:id="@+id/words_end_scored"
         android:layout_below="@+id/words_live"
         android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="Highest score: 30"
         android:layout_below="@+id/words_word"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:id="@+id/words_end_high_score"
         android:visibility="invisible" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="new"
-        android:layout_below="@+id/words_word"
-        android:layout_toRightOf="@+id/words_live"
-        android:layout_toEndOf="@+id/words_live"
-        android:layout_marginTop="44dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp"
-        android:id="@+id/words_new"
-        android:onClick="newWord"
-        android:theme="@style/MaterialButtonWords" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="seen"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp"
-        android:id="@+id/words_seen"
-        android:textSize="20sp"
-        android:layout_alignBaseline="@+id/words_new"
-        android:layout_alignBottom="@+id/words_new"
-        android:layout_toRightOf="@+id/words_new"
-        android:layout_toEndOf="@+id/words_new"
-        android:onClick="seenWord"
-        android:theme="@style/MaterialButtonWords" />
-
 
 
     <Button
-        android:text="Save"
+        android:text="@string/button_quick_save"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -103,4 +74,36 @@
         android:id="@+id/words_lives"
         android:layout_toRightOf="@+id/words_live"
         android:layout_above="@+id/words_word" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/words_word"
+        android:layout_centerHorizontal="true">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/words_new"
+        android:layout_marginTop="44dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:id="@+id/words_new"
+        android:onClick="newWord"
+        android:theme="@style/MaterialButtonWords" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/words_seen"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/words_seen"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/words_new"
+        android:layout_alignBottom="@+id/words_new"
+        android:layout_toRightOf="@+id/words_new"
+        android:layout_toEndOf="@+id/words_new"
+        android:onClick="seenWord"
+        android:theme="@style/MaterialButtonWords" />
+    </RelativeLayout>
 </RelativeLayout>

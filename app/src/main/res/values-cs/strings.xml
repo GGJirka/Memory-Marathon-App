@@ -25,8 +25,8 @@
     <string name="failed">" nedokončena"</string>
     <string name="hard"></string>
     <string name="header_quick_mode_settings">Nastavení rychlé úrovně</string>
-    <string name="high_score">Nejvyšší škóre</string>
-    <string name="high_score_title">Nejvyšší škóre</string>
+    <string name="high_score">Nejvyšší skóre</string>
+    <string name="high_score_title">Nejvyšší skóre</string>
     <string name="level_1"></string>
     <string name="level_locked">"Úrověn zamčena, splňte "</string>
     <string name="levels_button">Úrovně</string>
@@ -84,7 +84,7 @@
     <string name="the_major_memory_system_title">Major Systém</string>
     <string name="title_activity_settings">Nastavení</string>
     <string name="to_unlock">" k odemčení"</string>
-    <string name="wods_memory_system_howtouse"></string>
+    <string name="wods_memory_system_howtouse">Tato metoda je velice podobná pamětovímu paláci.\nMáme zadaný seznam slov - <b>opice</b>, <b>mobil</b>, <b>banán</b>.\n\nTedka jsi představte cestu, například do práce, do školy nebo kam často chodíte.\nPrvní slovo <b>opice</b> - představíme si někde nazačátku cestu. <b>Mobil</b> - představíme na nějákým detailním bodě nebo někde uprostřed.\nPoslední slovo <b>banán</b> umístíme někam na konec naší cesty, pro lepší zapomatování jsi zkuste zapomatovat předmět jako součást nějáké vymyšlené události.\n\nPoté co jste si zapomatovaly všechny slova můžeme se vydat na imaginární cestu. Měly byste se tu procházet a vidět ty předměty kolem. Pokud jste si to zapomatovaly správně.</string>
     <string name="pref_title_display_name"></string>
     <string name="animation_off">zobrazení animace: vypnuto</string>
     <string name="animation_on">zobrazení animace: zapnuto</string>
@@ -117,4 +117,25 @@
     <string name="default_group">Aktuální velikost skupiny čísel: 2</string>
     <string name="default_row">Aktuální počet čísel na obrazovce: 2</string>
     <string name="do_not_show_again">Neukazovat znovu.</string>
+    <string name="sort_by_date">seřadit podle data</string>
+    <string name="sort_by_score">seřadit podle skóre</string>
+    <string name="graph_menu">Graf</string>
+    <string name="delete_score_menu">Vymazat skóre</string>
+    <string name="retry_menu">znovu</string>
+    <string name="number_guess">Jaké to bylo číslo?</string>
+    <string name="score">Skóre:</string>
+    <string name="words_lives">"životy: "</string>
+    <string name="words_new">nový</string>
+    <string name="words_score">skóre: 0</string>
+    <string name="words_seen">bylo</string>
+    <string name="words_delete_all">Opravdu chcete vymazat všechny skóre?</string>
+    <string name="rate_us">Ohodnotit</string>
+    <string name="about_app">O aplikaci</string>
+    <string name="send_feedback">Odeslat zpětnou vazbu</string>
+    <string name="share">Sdílet</string>
+    <string name="words_settings">Nastavení Slov</string>
+    <string name="general_settings_title">Obecné Nastavení</string>
+    <string name="main_settings_numbers">Nastavení Čísel</string>
+    <string name="major_system">Major Systém pro Čísla</string>
+    <string name="words_system">Systém pro Slova</string>
 </resources>

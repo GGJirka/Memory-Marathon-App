@@ -4,21 +4,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/sort_date"
-            android:title="sort by date"
+            android:title="@string/sort_by_date"
             android:showAsAction="never"></item>
         <item
             android:id="@+id/sort_score"
-            android:title="sort by score"
+            android:title="@string/sort_by_score"
             android:showAsAction="never"></item>
     </group>
     <item
-        android:title="in graph"
+        android:title="@string/graph_menu"
         app:showAsAction="always"
         android:id="@+id/graph"
         android:orderInCategory="100"
         android:icon="@drawable/graph" />
     <item
-        android:title="Delete score"
+        android:title="@string/delete_score_menu"
         android:icon="@drawable/words_delete_score"
         android:id="@+id/words_delete"
         android:orderInCategory="100"

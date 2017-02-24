@@ -16,7 +16,7 @@ import jimmy.gg.flashingnumbers.mainAdapter.OptionAdapter;
 import jimmy.gg.flashingnumbers.mainAdapter.OptionUnit;
 
 public class NumbersSettings extends AppCompatActivity {
-    public ArrayList<OptionUnit> settings;
+    public ArrayList<String> settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +26,9 @@ public class NumbersSettings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         settings = new ArrayList<>();
         ListView listView = (ListView) findViewById(R.id.settings_navigate);
-        settings.add(new OptionUnit("levels", getString(R.string.numbers_settings)));
-        settings.add(new OptionUnit("quick", getString(R.string.quick_level_sett_title)));
-        listView.setAdapter(new OptionAdapter(getApplicationContext(), settings));
+        settings.add(new String( getString(R.string.numbers_settings)));
+        settings.add(new String(getString(R.string.quick_level_sett_title)));
+        listView.setAdapter(new SettingsAdapter(getApplicationContext(), settings));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

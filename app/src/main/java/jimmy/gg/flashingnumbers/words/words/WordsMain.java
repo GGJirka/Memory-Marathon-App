@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 import jimmy.gg.flashingnumbers.R;
@@ -122,7 +123,13 @@ public class WordsMain extends AppCompatActivity {
 
     public void initWordList() {
         try {
-            bf = new BufferedReader(new InputStreamReader(getResources().getAssets().open("wordlist.txt")));
+            String wordlist;
+            if(Locale.getDefault().getLanguage().equals("en")) {
+                wordlist = "wordlist.txt";
+            }else{
+                wordlist = "wordlist-cz.txt";
+            }
+            bf = new BufferedReader(new InputStreamReader(getResources().getAssets().open(wordlist)));
             Runnable run = new Runnable() {
                 @Override
                 public void run() {

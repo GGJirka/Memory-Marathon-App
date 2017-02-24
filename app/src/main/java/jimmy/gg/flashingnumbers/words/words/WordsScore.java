@@ -38,7 +38,7 @@ public class WordsScore extends AppCompatActivity {
         setContentView(R.layout.activity_words_score);
         ListView list = (ListView) findViewById(R.id.words_high_score);
         sharedPreferences = MemoryMarathon.sharedPreferences;
-        setTitle("High Score");
+        setTitle(getString(R.string.high_score_title));
         score = new ArrayList<>();
         if (sharedPreferences.getString("WORDS_SORT", "0").equals("0")) {
             sortByDate();
@@ -67,7 +67,7 @@ public class WordsScore extends AppCompatActivity {
         params.setMargins(0, 450, 0, 0);
         view.setLayoutParams(params);
         view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        view.setText("Nothing to display");
+        view.setText(getString(R.string.nothing_to_display));
         view.setTextSize(20);
         view.setTextColor(getResources().getColor(R.color.black));
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_words_score);
@@ -75,7 +75,8 @@ public class WordsScore extends AppCompatActivity {
     }
     public void sortByDate() {
         for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
-            score.add(new Score(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), "none lul")));
+            String s = sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), "none lul");
+            score.add(new Score(s.split(" ")[0]+" "+s.split(" ")[1]+" "+getString(R.string.score)+" "+s.split(" ")[s.split(" ").length-1]));
         }
         Collections.reverse(score);
     }
@@ -104,7 +105,8 @@ public class WordsScore extends AppCompatActivity {
                     String score0 = String.valueOf(addScore.get(i));
                     for (Score score1 : addScores) {
                         if (score1.getText().split(" ")[3].equals(score0)) {
-                            score.add(score1);
+                            String s = score1.getText();
+                            score.add(new Score(s.split(" ")[0]+" "+s.split(" ")[1]+" "+getString(R.string.score)+" "+s.split(" ")[s.split(" ").length-1]));
                             addScores.remove(score1);
                             break;
                         }
@@ -128,21 +130,21 @@ public class WordsScore extends AppCompatActivity {
 
     public void deleteScoreDialog() {
         new AlertDialog.Builder(WordsScore.this)
-                .setTitle("Delete score")
-                .setMessage("Do you really want to delete all score?")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.delete_all_score))
+                .setMessage(R.string.words_delete_all)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
-                            sharedPreferences.edit().remove("WORDS_SCORE" + String.valueOf(i)).commit();
-                            sharedPreferences.edit().remove("WORDS_COUNT_SCORE").commit();
+                            sharedPreferences.edit().remove("WORDS_SCORE" + String.valueOf(i)).apply();
+                            sharedPreferences.edit().remove("WORDS_COUNT_SCORE").apply();
                         }
                         score.removeAll(score);
                         baseAdapter.notifyDataSetChanged();
                         addView();
                     }
                 })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -158,19 +160,19 @@ public class WordsScore extends AppCompatActivity {
                 break;
             case R.id.sort_date:
                 score.removeAll(score);
-                sharedPreferences.edit().putString("WORDS_SORT", "0").commit();
+                sharedPreferences.edit().putString("WORDS_SORT", "0").apply();
                 if (item.isChecked())
                     item.setChecked(false);
                 else
                     item.setChecked(true);
 
                 sortByDate();
-                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "0").commit();
+                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "0").apply();
                 baseAdapter.notifyDataSetChanged();
                 break;
 
             case R.id.sort_score:
-                sharedPreferences.edit().putString("WORDS_SORT", "1").commit();
+                sharedPreferences.edit().putString("WORDS_SORT", "1").apply();
                 if (item.isChecked())
                     item.setChecked(false);
                 else
@@ -178,7 +180,7 @@ public class WordsScore extends AppCompatActivity {
 
                 score.removeAll(score);
                 sortByScore();
-                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "1").commit();
+                sharedPreferences.edit().putString("WORDS_SCORE_CHECK", "1").apply();
                 baseAdapter.notifyDataSetChanged();
                 break;
 
@@ -188,7 +190,7 @@ public class WordsScore extends AppCompatActivity {
                 break;
 
             default:
-                sharedPreferences.edit().putString("WORDS_STATE", "0").commit();
+                sharedPreferences.edit().putString("WORDS_STATE", "0").apply();
                 this.finish();
         }
         return super.onOptionsItemSelected(item);
@@ -196,7 +198,7 @@ public class WordsScore extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        sharedPreferences.edit().putString("WORDS_STATE", "0").commit();
+        sharedPreferences.edit().putString("WORDS_STATE", "0").apply();
         this.finish();
     }
 }
