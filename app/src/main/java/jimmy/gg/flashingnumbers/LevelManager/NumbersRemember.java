@@ -40,7 +40,7 @@ public class NumbersRemember extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        setTitle(R.string.numbers_remembered_title);
+        setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
         setContentView(R.layout.activity_numbers_remember);
         Intent intent = getIntent();
         numberCount = intent.getIntExtra(EXTRA_NUMBERS_COUNT,0);
@@ -51,7 +51,8 @@ public class NumbersRemember extends AppCompatActivity {
         startTimer();
 
         final TextView textChar = (TextView) findViewById(R.id.numbers_remembered_txtchanged);
-        textChar.setText(getString(R.string.number_remember_numlength) + "/" + numberCount + ")");
+
+        textChar.setText(getString(R.string.number_remember_numlength) + "0/" + numberCount + ")");
         final EditText txt = (EditText) findViewById(R.id.numbers_remember);
         txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -187,7 +188,7 @@ public class NumbersRemember extends AppCompatActivity {
         String level= getIntent().getStringExtra(EXTRA_LEVEL);
         String[] data = level.split(" ");
         int acLevel = Integer.parseInt(data[1]);
-        final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
+        final ArrayList<Level> levelList = FlashingNumbers.levelList;
 
         StringBuilder highestScore = new StringBuilder();
         highestScore.append(getString(R.string.dialog_passed_message1)+" "+numberCount
@@ -254,10 +255,10 @@ public class NumbersRemember extends AppCompatActivity {
     }
 
         public void dialogFailed(int numbersRight){
-            final ArrayList<Level> levelList = ((IternalMemory)this.getApplication()).getLevelList();
+            final ArrayList<Level> levelList = FlashingNumbers.levelList;
             new AlertDialog.Builder(NumbersRemember.this)
                     .setTitle(getIntent().getStringExtra(EXTRA_LEVEL) + getString(R.string.failed))
-                    .setMessage(getString(R.string.number_remember_remembered) + numbersRight + "/" + numberCount + "\n" + "time:" + " " + getTimeRemain().toString() + "s")
+                    .setMessage(getString(R.string.number_remember_remembered) +" "+numbersRight + "/" + numberCount + "\n" + getString(R.string.timer) + " " + getTimeRemain().toString() + "s")
                     .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -284,8 +285,8 @@ public class NumbersRemember extends AppCompatActivity {
     public String KEY_HIGH_SCORE ="KEY_HIGH_SCORE";
     public String EXTRA_NUMBERS = "jimmy.gg.flashingnumbers.NUMBERS";
     public String EXTRA_NUMBERS_COUNT = "jimmy.gg.flashingnumbers.NUMBERS_COUNT";
-    public String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
     public String EXTRA_TIME = "jimmy.gg.flashingnumbers.TIME";
     public String EXTRA_TIME_REMAIN = "jimmy.gg.flashingnumbers.TIME_REMAIN";
+    public final String EXTRA_LEVEL = "jimmy.gg.flashingnumbers.LEVEL";
 }
 

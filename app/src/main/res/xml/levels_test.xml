@@ -31,9 +31,9 @@
     <jimmy.gg.flashingnumbers.preferences.CustomPreference android:title="@string/animation">
         <CheckBoxPreference
             android:key="levels_test_a"
-            android:title="Animation"
-            android:summaryOn="display animation: on"
-            android:summaryOff="display animation: off"
+            android:title="@string/animation"
+            android:summaryOn="@string/animation_on"
+            android:summaryOff="@string/animation_off"
             android:defaultValue="true" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
 </PreferenceScreen>

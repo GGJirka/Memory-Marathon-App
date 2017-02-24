@@ -22,12 +22,12 @@ public class NumbersSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_settings);
-        setTitle("Settings");
+        setTitle(getText(R.string.settings));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         settings = new ArrayList<>();
         ListView listView = (ListView) findViewById(R.id.settings_navigate);
-        settings.add(new OptionUnit("levels", "Numbers settings"));
-        settings.add(new OptionUnit("quick", "Quick level settings"));
+        settings.add(new OptionUnit("levels", getString(R.string.numbers_settings)));
+        settings.add(new OptionUnit("quick", getString(R.string.quick_level_sett_title)));
         listView.setAdapter(new OptionAdapter(getApplicationContext(), settings));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

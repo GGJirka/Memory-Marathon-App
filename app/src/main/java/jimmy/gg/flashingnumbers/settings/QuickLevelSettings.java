@@ -13,7 +13,7 @@ public class QuickLevelSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_level_settings);
-        setTitle("Quick level settings");
+        setTitle(getString(R.string.quick_settings_title));
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new LevelsSettings()).commit();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -35,7 +35,7 @@ public class Levels extends AppCompatActivity {
         levelList = new ArrayList<>();
         levels = (ListView) findViewById(R.id.levels);
         levels.setItemsCanFocus(false);
-        levelList = ((IternalMemory)this.getApplication()).getLevelList();
+        levelList = FlashingNumbers.levelList;
         manageList();
     }
 
@@ -90,7 +90,7 @@ public class Levels extends AppCompatActivity {
         super.onStart();
         manageList();
         levels = (ListView) findViewById(R.id.levels);
-        levelList = ((IternalMemory) this.getApplication()).getLevelList();
+        levelList = FlashingNumbers.levelList;
         int index = FlashingNumbers.sharedPreferences.getInt(String.valueOf(getText(R.string.LEVEL_KEY)), 1);
         for (int i = 0; i < levelList.size(); i++) {
             if (i >= index) {

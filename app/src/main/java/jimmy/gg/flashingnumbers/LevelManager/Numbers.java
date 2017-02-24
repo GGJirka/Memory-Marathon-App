@@ -182,7 +182,7 @@ public class Numbers extends AppCompatActivity{
         StringBuilder build_number = new StringBuilder();
         layout.setVisibility(View.VISIBLE);
         String[] data = extraNumbers.split(" ");
-        int number = Integer.parseInt(data[1]);
+        int number = Integer.parseInt(data[data.length-1]);
         numbersInRow = new ArrayList<>();
         countRow = number;
         int num = 0;

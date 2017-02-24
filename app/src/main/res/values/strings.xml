@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Memory Marathon</string>
-    <string name="start_button">Start</string>
+    <string name="start_button" translatable="false">Start</string>
     <string name="option_button">Options</string>
-    <string name="quit_button">Quit</string>
+    <string name="quit_button" translatable="false">Quit</string>
     <string name="levels_button">Levels</string>
     <string name="settings_button">Settings</string>
     <string name="custom_button">Custom</string>
@@ -12,17 +12,17 @@
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
+    <string name="pref_header_general" translatable="false">General</string>
 
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_title_social_recommendations" translatable="false">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history
     </string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_title_display_name" translatable="false">Display name</string>
+    <string name="pref_default_display_name" translatable="false">John Smith</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_add_friends_to_messages" translatable="false">Add friends to messages</string>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
         <item>When possible</item>
@@ -35,9 +35,9 @@
     </string-array>
 
     <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_header_data_sync" translatable="false">Data &amp; sync</string>
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string name="pref_title_sync_frequency" translatable="false">Sync frequency</string>
     <string-array name="pref_sync_frequency_titles">
         <item>15 minutes</item>
         <item>30 minutes</item>
@@ -72,12 +72,12 @@
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_header_notifications" translatable="false">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications" translatable="false">New message notifications</string>
 
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_ringtone" translatable="false">Ringtone</string>
+    <string name="pref_ringtone_silent" translatable="false">Silent</string>
     <string name="numbers_numbers">NUMBERS</string>
     <string name="pref_title_vibrate">Vibrate</string>
     =======
@@ -108,10 +108,10 @@
 
     <string name="quick_button_done">DONE</string>
 
-    <string name="numbers_remembered_title">Numbers Remembered</string>
-    <string name="easy">easy</string>
-    <string name="medium">medium</string>
-    <string name="hard">hard</string>
+    <string name="numbers_remembered_title" translatable="false">Numbers Remembered</string>
+    <string name="easy" translatable="false">easy</string>
+    <string name="medium" translatable="false">medium</string>
+    <string name="hard" translatable="false">hard</string>
     <string name="numbers_remembered_passed"> passed</string>
     <string name="dialog_passed_message1">You have successfuly remembered</string>
     <string name="dialog_passed_message2">numbers in time: </string>
@@ -127,7 +127,7 @@
     <string name="quick_level_hs_title">High Score</string>
     <string name="title_activity_tabbed_high_score">TabbedHighScore</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="section_format" translatable="false">Hello World from section: %1$d</string>
 
     <string name="EXTRA_LEVEL">jimmy.gg.flashingnumbers.LEVEL</string>
     <string name="EXTRA_NUMBERS">jimmy.gg.flashingnumbers.NUMBERS</string>
@@ -135,14 +135,14 @@
     <string name="EXTRA_TIME">jimmy.gg.flashingnumbers.TIME</string>
     <string name="EXTRA_PAGE">jimmy.gg.flashingnumbers.PAGE</string>
 
-    <string name="settings_group">settings_group</string>
-    <string name="settings_row">settings_row</string>
-    <string name="settings_timer">settings_timer</string>
+    <string name="settings_group" translatable="false">settings_group</string>
+    <string name="settings_row" translatable="false">settings_row</string>
+    <string name="settings_timer" translatable="false">settings_timer</string>
     <string name="EXTRA_NUMBERS_COUNT">"jimmy.gg.flashingnumbers.NUMBERS_COUNT"</string>
     <string name="EXTRA_TIME_REMAIN">jimmy.gg.flashingnumbers.TIME_REMAIN</string>
 
-    <string name="default_value_timer">3</string>
-    <string name="default_value_numbers">2</string>
+    <string name="default_value_timer" translatable="false">3</string>
+    <string name="default_value_numbers" translatable="false">2</string>
     <string name="CHECKBOX">CHECKBOX</string>
     <string name="INFO">INFO</string>
 
@@ -154,7 +154,7 @@
 
     <string name="main_numbers">Numbers</string>
     <string name="main_words">Words</string>
-    <string name="main_images">Images</string>
+    <string name="main_images" translatable="false">Images</string>
 
 
     <string name="words_activity_title">Words</string>
@@ -167,8 +167,8 @@
     <string name="animation">Animation</string>
     <string name="title_activity_main_test">Memory Marathon</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="the_major_memory_system_title">The Major Memory System</string>
     <string name="major_system_howtouse">The system works by converting number sequences into noun, nouns into images, and linking images into sequences. These sequences can be very complex and detailed.
 
@@ -193,7 +193,7 @@
     <string name="numbers_info_summ">Use arrows to move to another part of number.\n</string>
     <string name="numbers_info_summ1">Change number arrangement in settings like below.\n</string>
     <string name="numbers_info_summ3"><![CDATA[například: 555555 -> 55 55 55]]></string>
-    <string name="number_remember_numlength">numbers length: (</string>
+    <string name="number_remember_numlength" translatable="false">numbers length: (</string>
     <string name="number_remember_remembered">"Remembered "</string>
     <string name="failed">" failed"</string>
     <string name="animation_on">display animation: on</string>
@@ -202,8 +202,25 @@
     <string name="numbers_size_group">"Actual number size in group: "</string>
     <string name="numbers_size_row">"Actual number of numbers in row: "</string>
     <string name="actual_inspection_time">"Actual inspection time: "</string>
-    <string name="inspection_time_none">Actual inspection time: none</string>
+    <string name="inspection_time_none" translatable="false">Actual inspection time: none</string>
     <string name="animation_offf">display animation: off</string>
     <string name="display_animation_onn">display animation: on</string>
     <string name="animation_tit">Animation</string>
+    <string name="test" translatable="false">aaa</string>
+    <string name="menu_title" translatable="false">Menu</string>
+    <string name="timer">time:</string>
+    <string name="numbers">numbers:</string>
+    <string name="level">Level</string>
+    <string name="inspection_time">Inspection time</string>
+    <string name="inspection_wait">Wait 3 seconds on start</string>
+    <string name="quick_level_title1">Quick - Level 1</string>
+    <string name="quick_level_rules">How to play</string>
+    <string name="quick_level_explain">You will be shown number, which after the timer is gone you have to type. If number is correct you will pass to next level, where the length of number increases by one.</string>
+    <string name="quick_level_explain1" translatable="false">one digit. After timer is done you will have to write down this number.</string>
+    <string name="quick_level_tit">"Quick - Level "</string>
+    <string name="quick_level_sett_title">Quick level settings</string>
+    <string name="quick_settings_title">Quick level settings</string>
+    <string name="numbers_settings">Numbers settings</string>
+    <string name="memory_technique">Memory technique</string>
+    <string name="do_not_show_again">Do not show again.</string>
 </resources>

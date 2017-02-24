@@ -41,7 +41,6 @@ public class NumbersLevelsSettings extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     public static void trimCache(Context context) {
         try {
             File dir = context.getCacheDir();
@@ -52,7 +51,6 @@ public class NumbersLevelsSettings extends AppCompatActivity {
             // TODO: handle exception
         }
     }
-
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
@@ -63,7 +61,6 @@ public class NumbersLevelsSettings extends AppCompatActivity {
                 }
             }
         }
-
         // The directory is now empty so delete it
         return dir.delete();
     }*/
@@ -145,4 +142,3 @@ public class NumbersLevelsSettings extends AppCompatActivity {
         }
     }
 }
-

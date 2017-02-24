@@ -52,7 +52,7 @@ public class QuickLevel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_level);
-        setTitle("Quick - Level 1");
+        setTitle(getString(R.string.quick_level_title1));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progress = (ProgressBar) findViewById(R.id.quick_progressBar);
         onEndView = (TextView) findViewById(R.id.quick_on_end_view);
@@ -69,9 +69,8 @@ public class QuickLevel extends AppCompatActivity {
         final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
             new AlertDialog.Builder(QuickLevel.this)
                     .setView(view)
-                    .setTitle("Rules")
-                    .setMessage("There will be levels in each level the numbers amount increases by one. Starting on" +
-                            "one digit. After timer is done you will have to write down this number.")
+                    .setTitle(R.string.quick_level_rules)
+                    .setMessage(getString(R.string.quick_level_explain))
                     .setPositiveButton(getResources().getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -306,7 +305,7 @@ public class QuickLevel extends AppCompatActivity {
                     layout.removeAllViews();
                     level++;
                     timerBetweenLevels();
-                    setTitle("Quick - Level " + level);
+                    setTitle(getString(R.string.quick_level_tit) +" "+ level);
                 }
             });
         } else {
@@ -320,14 +319,15 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
                     level = 1;
-                    setTitle("Quick - Level " + level);
+                    setTitle(getString(R.string.quick_level_tit) +" "+ level);
                     int numberCount = number.getText().toString().length() - 1;
                     String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
                     editor.commit();
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                    editor.putString(QuickLevelHighScore.KEY + count, date + " " + "numbers:" + " " + String.valueOf(numberCount));
+                    editor.putString(QuickLevelHighScore.KEY + count, date + " " + getString(R.string.numbers)
+                            + " " + String.valueOf(numberCount));
                     editor.commit();
 
                     sharedPreferences.edit()
@@ -343,7 +343,7 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     level = 1;
                     timerBetweenLevels();
-                    setTitle("Quick - Level " + level);
+                    setTitle(getString(R.string.quick_level_tit)+" "+ level);
                     layout.removeAllViews();
                 }
             });

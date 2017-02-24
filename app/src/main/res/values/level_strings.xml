@@ -1,16 +1,16 @@
 <resources>
-    <string name="level_1">Level 1</string>
-    <string name="level_2">Level 2</string>
-    <string name="level_3">Level 3</string>
-    <string name="level_4">Level 4</string>
-    <string name="level_5">Level 5</string>
-    <string name="level_6">Level 6</string>
-    <string name="level_7">Level 7</string>
-    <string name="level_8">Level 8</string>
-    <string name="level_9">Level 9</string>
-    <string name="level_10">Level 10</string>
-    <string name="level_11">Level 11</string>
-    <string name="level_12">Level 12</string>
+    <string name="level_1" translatable="false">Level 1</string>
+    <string name="level_2" translatable="false">Level 2</string>
+    <string name="level_3" translatable="false">Level 3</string>
+    <string name="level_4" translatable="false">Level 4</string>
+    <string name="level_5" translatable="false">Level 5</string>
+    <string name="level_6" translatable="false">Level 6</string>
+    <string name="level_7" translatable="false">Level 7</string>
+    <string name="level_8" translatable="false">Level 8</string>
+    <string name="level_9" translatable="false">Level 9</string>
+    <string name="level_10" translatable="false">Level 10</string>
+    <string name="level_11" translatable="false">Level 11</string>
+    <string name="level_12" translatable="false">Level 12</string>
     <string name="revel_numbers">Reveal numbers</string>
 
 </resources>

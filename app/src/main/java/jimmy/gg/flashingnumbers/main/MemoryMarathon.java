@@ -27,7 +27,8 @@ public class MemoryMarathon extends AppCompatActivity
     public ActionProvider shareActionProvider;
 
     /*
-    * 20.2 - TODO: numbers add listener on text to see amount of numbers, FIX BUG WITH ARROWS,
+    * 20.2 - TODO: numbers add listener on text to see amount of numbers.
+    * TODO: BUGFIXES = FIX BUG WITH ARROWS,SETTINGS DEFAULT VALUE, COLOR EDITTEXT.
     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
