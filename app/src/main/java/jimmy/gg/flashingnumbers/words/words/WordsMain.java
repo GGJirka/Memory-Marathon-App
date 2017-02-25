@@ -124,11 +124,11 @@ public class WordsMain extends AppCompatActivity {
     public void initWordList() {
         try {
             String wordlist;
-            if(Locale.getDefault().getLanguage().equals("en")) {
-                wordlist = "wordlist.txt";
-            }else{
-                wordlist = "wordlist-cz.txt";
-            }
+            //if(Locale.getDefault().getLanguage().equals("en")) {
+                wordlist = "wordlist-en.txt";
+           // }/*else{
+                //wordlist = "wordlist-cz.txt";
+           // }*/
             bf = new BufferedReader(new InputStreamReader(getResources().getAssets().open(wordlist)));
             Runnable run = new Runnable() {
                 @Override
@@ -167,13 +167,13 @@ public class WordsMain extends AppCompatActivity {
             if (words.getLives() == 0) {
                 gameEnds();
                 TextView scored = (TextView) findViewById(R.id.words_end_scored);
-                scored.setText("Score: " + words.getScore());
+                scored.setText(getString(R.string.score_capital) + words.getScore());
                 return;
             }
         } else {
             TextView score = (TextView) findViewById(R.id.words_score);
             words.setScore(words.getScore() + 1);
-            score.setText("score: " + words.getScore());
+            score.setText(getString(R.string.score) +" "+ words.getScore());
         }
         usedAndUnusedCycle(word, r, view);
     }
@@ -208,13 +208,13 @@ public class WordsMain extends AppCompatActivity {
             if (words.getLives() == 0) {
                 gameEnds();
                 TextView scored = (TextView) findViewById(R.id.words_end_scored);
-                scored.setText("Score: " + words.getScore());
+                scored.setText(getString(R.string.score_capital)+ words.getScore());
                 return;
             }
         } else {
             TextView score = (TextView) findViewById(R.id.words_score);
             words.setScore(words.getScore() + 1);
-            score.setText("score: " + words.getScore());
+            score.setText(getString(R.string.score)+" " + words.getScore());
         }
         usedAndUnusedCycle(word, r, v);
     }
@@ -302,7 +302,7 @@ public class WordsMain extends AppCompatActivity {
         findViewById(R.id.words_live).setVisibility(View.INVISIBLE);
         TextView text = (TextView) findViewById(R.id.words_end_high_score);
         if (getHighestScore() != 0) {
-            text.setText("Highest score: " + getHighestScore());
+            text.setText(getString(R.string.highest_score) + getHighestScore());
             text.setVisibility(View.VISIBLE);
         }
     }

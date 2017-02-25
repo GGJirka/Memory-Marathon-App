@@ -13,7 +13,6 @@
         <activity
             android:name=".main.MemoryMarathon"
             android:label="@string/title_activity_main_test"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,93 +23,73 @@
         <activity
             android:name=".menu.FlashingNumbers"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".LevelManager.Levels"
             android:allowBackup="true"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".settings.NumbersLevelsSettings"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".LevelManager.Numbers"
             android:noHistory="true"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".LevelManager.NumbersRemember"
             android:noHistory="true"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".quicklevel.QuickLevel"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".highscore.TabbedHighScore"
             android:label="@string/title_activity_tabbed_high_score"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".words.words.WordsMain"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".words.words.WordsScore"
-            android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".words.words.WordsSettings"
-            android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".settings.NumbersSettings"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".settings.QuickLevelSettings"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".main.MainSettings"
-            android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
         <activity
             android:name=".main.GeneralSettings"
-            android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
         <activity
             android:name=".main.MainHighScore"
-            android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
         <activity
             android:name=".techniques.MemoryTechniques"
-            android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
         <activity
             android:name=".techniques.NumberMajorSystem"
-            android:screenOrientation="portrait"
             android:theme="@style/NumbersStyle" />
         <activity
             android:name=".techniques.WordsMemorySystem"
-            android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".main.MainAboutApp"
-            android:screenOrientation="portrait"
             android:theme="@style/MainStyle" />
         <activity
             android:name=".words.words.WordsGraph"
-            android:screenOrientation="portrait"
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".highscore.NumbersGraph"
-            android:screenOrientation="portrait"
-            android:theme="@style/NumbersStyle"></activity>
+            android:theme="@style/NumbersStyle"/>
     </application>
 
 </manifest>

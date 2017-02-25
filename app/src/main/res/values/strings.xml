@@ -229,7 +229,7 @@
     <string name="sort_by_date">sort by date</string>
     <string name="sort_by_score">sort by score</string>
     <string name="number_guess">What was the number?</string>
-    <string name="score">Score:</string>
+    <string name="score">score:</string>
     <string name="words_lives">lives:</string>
     <string name="words_score">score: 0</string>
     <string name="words_seen">seen</string>
@@ -245,4 +245,6 @@
     <string name="major_system">Numbers Major System</string>
     <string name="words_system">Words System</string>
     <string name="major_system_title">Major Memory System</string>
+    <string name="highest_score">"Highest score: "</string>
+    <string name="score_capital">Score:</string>
 </resources>

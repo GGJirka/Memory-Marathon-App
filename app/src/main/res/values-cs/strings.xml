@@ -8,7 +8,7 @@
     <string name="button_new">NOVÝ</string>
     <string name="button_next">DALŠÍ</string>
     <string name="button_retry">ZNOVA</string>
-    <string name="button_seen">BYLO</string>
+    <string name="button_seen">VIDĚNO</string>
     <string name="cancel">ZRUŠIT</string>
     <string name="animation">Animace</string>
     <string name="action_settings">Nastavení</string>
@@ -123,7 +123,7 @@
     <string name="delete_score_menu">Vymazat skóre</string>
     <string name="retry_menu">znovu</string>
     <string name="number_guess">Jaké to bylo číslo?</string>
-    <string name="score">Skóre:</string>
+    <string name="score">skóre:</string>
     <string name="words_lives">"životy: "</string>
     <string name="words_new">nový</string>
     <string name="words_score">skóre: 0</string>
@@ -138,4 +138,6 @@
     <string name="main_settings_numbers">Nastavení Čísel</string>
     <string name="major_system">Major Systém pro Čísla</string>
     <string name="words_system">Systém pro Slova</string>
+    <string name="highest_score">"Nejvyšší skóre: "</string>
+    <string name="score_capital">"Skóre: "</string>
 </resources>

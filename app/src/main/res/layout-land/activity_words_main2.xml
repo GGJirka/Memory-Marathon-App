@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_words_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="jimmy.gg.flashingnumbers.words.words.WordsMain">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/words_lives"
+        android:textSize="24sp"
+        android:id="@+id/words_live" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/words_score"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:id="@+id/words_score" />
+
+    <TextSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10pt"
+        android:id="@+id/words_word"
+        android:layout_below="@+id/words_live"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/words_end_high_score"
+        android:textSize="30sp"
+        android:id="@+id/words_end_scored"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Highest score: 30"
+        android:layout_below="@+id/words_word"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/words_end_high_score"
+        android:visibility="invisible" />
+
+
+    <Button
+        android:text="@string/button_quick_save"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/words_end_high_score"
+        android:textSize="20sp"
+        android:id="@+id/words_save"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        android:theme="@style/MaterialButtonWords" />
+
+    <TextSwitcher
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/words_lives"
+        android:layout_toRightOf="@+id/words_live"
+        android:layout_above="@+id/words_word" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/words_word"
+        android:layout_centerHorizontal="true">
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/words_new"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:id="@+id/words_new"
+        android:onClick="newWord"
+        android:theme="@style/MaterialButtonWords" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/words_seen"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/words_seen"
+        android:textSize="22sp"
+        android:layout_alignBaseline="@+id/words_new"
+        android:layout_alignBottom="@+id/words_new"
+        android:layout_toRightOf="@+id/words_new"
+        android:layout_toEndOf="@+id/words_new"
+        android:onClick="seenWord"
+        android:theme="@style/MaterialButtonWords" />
+    </RelativeLayout>
+</RelativeLayout>

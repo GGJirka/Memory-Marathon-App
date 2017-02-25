@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_quick_level"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="jimmy.gg.flashingnumbers.quicklevel.QuickLevel">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/quick_timer">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/numbers_time_remaining"
+        android:id="@+id/quick_time_remain"
+        android:visibility="invisible"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quick_progressBar"
+        android:progress="100"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"/>
+</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="130sp"
+        android:id="@+id/quick_count_down"
+        android:layout_below="@+id/quick_timer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="78dp"
+        android:layout_below="@+id/quick_timer"
+        android:textSize="40sp"
+        android:layout_marginTop="50sp"
+        android:id="@+id/quick_numbers"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:layout_below="@id/quick_on_end_view"
+        android:id="@+id/quick_edit_text"
+        android:textAlignment="center"
+        android:digits="0123456789"
+        android:visibility="invisible"
+        android:inputType="numberDecimal"
+        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10sp"
+        android:gravity="center"
+        android:id="@+id/quick_linear_result"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/number_guess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quick_on_end_view"
+        android:visibility="invisible"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/quick_timer"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quick_button_done"
+        android:theme="@style/MaterialButton"
+        android:id="@+id/quick_button_done"
+        android:visibility="invisible"
+        android:onClick="numbersRemembered"
+        android:layout_centerHorizontal="true"
+       android:layout_below="@id/quick_edit_text" />
+
+</RelativeLayout>

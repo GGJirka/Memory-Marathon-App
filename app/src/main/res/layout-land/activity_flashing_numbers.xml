@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_flashing_numbers"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="jimmy.gg.flashingnumbers.menu.FlashingNumbers">
+
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:textSize="11pt"
+        android:height="70sp"
+        android:text="@string/numbers_fast_mode"
+        android:theme="@style/MaterialButton"
+        android:drawableLeft="@drawable/fast_mode"
+        android:onClick="quickClicked"
+        android:id="@+id/button5"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/levels_button"
+        android:textSize="22sp"
+        android:height="70sp"
+        android:onClick="levelsClicked"
+        android:theme="@style/MaterialButton"
+        android:drawableLeft="@drawable/levels"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:height="70sp"
+        android:text="@string/settings_button"
+        android:onClick="settingsClicked"
+        android:theme="@style/MaterialButton"
+        android:drawableLeft="@drawable/settings"
+        android:id="@+id/button6"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5" />
+</RelativeLayout>
