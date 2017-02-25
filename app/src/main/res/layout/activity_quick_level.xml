@@ -102,4 +102,87 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="@string/text_number"
+        android:layout_above="@+id/quick_on_end_view"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/quick_level_number"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="@string/text_answer"
+        android:layout_alignBaseline="@+id/quick_edit_text"
+        android:layout_alignBottom="@+id/quick_edit_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/quick_level_your_answer" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_next"
+        android:theme="@style/MaterialButton"
+        android:id="@+id/quick_level_button_next"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:layout_below="@+id/quick_level_answer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34sp"
+        android:text=""
+        android:visibility="invisible"
+        android:id="@+id/quick_level_answer"
+        android:layout_below="@+id/quick_level_your_answer"
+        android:layout_alignRight="@+id/quick_level_number_shown"
+        android:layout_alignEnd="@+id/quick_level_number_shown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quick_level_number_shown"
+        android:textSize="34sp"
+        android:visibility="invisible"
+        android:text="69"
+        android:layout_below="@+id/quick_level_number"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quick_linear_layout"
+        android:layout_below="@+id/quick_level_answer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible">
+
+        <Button
+            android:theme="@style/MaterialButton"
+            android:id="@+id/save"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:text="@string/button_quick_save"
+            android:layout_weight="1.0"
+            android:textSize="17dp" />
+
+        <Button
+            android:theme="@style/MaterialButton"
+            android:id="@+id/retry"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:text="@string/button_quick_retry"
+            android:layout_weight="1.0"
+            android:textSize="17dp" />
+
+    </LinearLayout>
 </RelativeLayout>

@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/revealed_numbers"
                 android:layout_toRightOf="@+id/numbers_right_button"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:textAlignment="center" />
 
             <ImageButton

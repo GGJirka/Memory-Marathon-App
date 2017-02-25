@@ -247,4 +247,6 @@
     <string name="major_system_title">Major Memory System</string>
     <string name="highest_score">"Highest score: "</string>
     <string name="score_capital">Score:</string>
+    <string name="how_to_play">How to play</string>
+    <string name="words_explain">There will be always one word displayed.\nPress new if you haven\'t seen this word.\nPress seen if you already seen this word.\nCheck memory techniques in menu.</string>
 </resources>

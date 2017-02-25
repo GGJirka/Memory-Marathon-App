@@ -140,4 +140,5 @@
     <string name="words_system">Systém pro Slova</string>
     <string name="highest_score">"Nejvyšší skóre: "</string>
     <string name="score_capital">"Skóre: "</string>
+    <string name="words_explain">Pokaždé vám bude ukázáno jedno slovo.\nStisknete nový, pokud\' todle slovo ještě nebylo.\nNebo stisknete bylo, pokud\' již bylo.\nPodívejte se na metody zapomatovávání v menu.</string>
 </resources>

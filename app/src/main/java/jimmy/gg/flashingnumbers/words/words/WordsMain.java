@@ -94,10 +94,8 @@ public class WordsMain extends AppCompatActivity {
         final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
         new AlertDialog.Builder(WordsMain.this)
                 .setView(view)
-                .setTitle("How to play")
-                .setMessage("There will be always one word displayed.\n" +
-                        "press seen if you already seen that word " +
-                        "or press new if it is new.")
+                .setTitle(R.string.quick_level_rules)
+                .setMessage(getString(R.string.words_explain))
                 .setPositiveButton(getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -28,8 +28,14 @@ public class HighScore extends Fragment{
         highScores = (ListView) rootView.findViewById(R.id.high_scores_tab1);
         for(int i = 0; i<FlashingNumbers.levelList.size(); i++){
             Level lv = FlashingNumbers.levelList.get(i);
+            int length = lv.getNumbers().split(" ").length;
+            String isSpace = "";
+            if(Integer.parseInt(lv.getNumbers().split(" ")[length-1])<9){
+                isSpace = "  ";
+            }
             if(FlashingNumbers.sharedPreferences.getString(KEY_HIGH_SCORE+String.valueOf(i),"0")!="0") {
-                scores.add(new Score(lv.getLevel() + " (" + lv.getNumbers()+"): ",
+                scores.add(new Score(lv.getLevel() + " (" + lv.getNumbers().split(" ")[length-2]+" "
+                        +lv.getNumbers().split(" ")[length-1]+isSpace+"): ",
                         FlashingNumbers.sharedPreferences.getString(KEY_HIGH_SCORE + String.valueOf(i), "0")));
             }
 

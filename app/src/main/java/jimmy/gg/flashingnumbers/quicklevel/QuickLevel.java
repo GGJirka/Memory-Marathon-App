@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -223,7 +224,8 @@ public class QuickLevel extends AppCompatActivity {
         };
         thirdTimer.start();
     }
-    public void numberFinish() {
+
+    public void numberFinish(){
         final EditText editText = (EditText) findViewById(R.id.quick_edit_text);
         Runnable key = new Runnable() {
             @Override
@@ -244,44 +246,32 @@ public class QuickLevel extends AppCompatActivity {
         findViewById(R.id.quick_button_done).setVisibility(View.INVISIBLE);
 
         String numberText = editText.getText().toString();
-        ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
+        /*ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
         final LinearLayout layout = (LinearLayout) findViewById(R.id.quick_linear_result);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 30, 0, 0);
 
-        layout.setGravity(Gravity.CENTER);
+        layout.setGravity(Gravity.CENTER);*/
 
-        TextView textView1 = new TextView(QuickLevel.this);
-        textView1.setText(R.string.text_number);
-        textView1.setTextSize(25);
-        textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        layout.addView(textView1);
 
-        final TextView number = new TextView(QuickLevel.this);
-        number.setTextSize(34);
+        final TextView number = (TextView) findViewById(R.id.quick_level_number_shown);
+        number.setVisibility(View.VISIBLE);
         number.setText(builder.toString());
-        number.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        layout.addView(number);
 
-        TextView textView2 = new TextView(QuickLevel.this);
+        findViewById(R.id.quick_level_number).setVisibility(View.VISIBLE);
+        findViewById(R.id.quick_level_your_answer).setVisibility(View.VISIBLE);
+        /*TextView textView2 = new TextView(QuickLevel.this);
         textView2.setText(R.string.text_answer);
         textView2.setTextSize(25);
         textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        layout.addView(textView2);
+        layout.addView(textView2);*/
 
-        TextView answer = new TextView(QuickLevel.this);
-        answer.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        answer.setTextSize(34);
-        textView2.setLayoutParams(params);
-        layout.addView(answer);
-
-        Button next = new Button(newContext);
-        next.setLayoutParams(params);
-        next.setTextSize(20);
-        next.setText(R.string.button_next);
-        next.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        final TextView answer = (TextView) findViewById(R.id.quick_level_answer);
+        answer.setVisibility(View.VISIBLE);
+        answer.setText("");
+        final Button next = (Button) findViewById(R.id.quick_level_button_next);
 
         int passed = 0;
         try {
@@ -303,23 +293,22 @@ public class QuickLevel extends AppCompatActivity {
         }
 
         if (passed == builder.length()) {
-            layout.addView(next);
+            //passed
+            next.setVisibility(View.VISIBLE);
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    layout.removeAllViews();
                     level++;
                     timerBetweenLevels();
                     setTitle(getString(R.string.quick_level_tit) +" "+ level);
+                    removeView();
                 }
             });
         } else {
-            View v = getLayoutInflater().inflate(R.layout.buttons, null);
-            LinearLayout linear = (LinearLayout) v.findViewById(R.id.quick_linear_layout);
-            linear.setPadding(0, 30, 0, 0);
-            layout.addView(linear);
-
-            v.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
+            //failed
+            final LinearLayout linear = (LinearLayout) findViewById(R.id.quick_linear_layout);
+            linear.setVisibility(View.VISIBLE);
+            findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
@@ -341,21 +330,30 @@ public class QuickLevel extends AppCompatActivity {
                     Intent intent = new Intent(QuickLevel.this, TabbedHighScore.class);
                     intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)), "1");
                     QuickLevel.this.startActivity(intent);
+                    removeView();
+                    linear.setVisibility(View.INVISIBLE);
                 }
             });
-            v.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     level = 1;
                     timerBetweenLevels();
                     setTitle(getString(R.string.quick_level_tit)+" "+ level);
-                    layout.removeAllViews();
+                    removeView();
+                    linear.setVisibility(View.INVISIBLE);
                 }
             });
         }
         editText.setText("");
     }
-
+    public void removeView(){
+        findViewById(R.id.quick_level_number).setVisibility(View.INVISIBLE);
+        findViewById(R.id.quick_level_your_answer).setVisibility(View.INVISIBLE);
+        findViewById(R.id.quick_level_button_next).setVisibility(View.INVISIBLE);
+        findViewById(R.id.quick_level_answer).setVisibility(View.INVISIBLE);
+        findViewById(R.id.quick_level_number_shown).setVisibility(View.INVISIBLE);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem menu){
         switch(menu.getItemId()) {
