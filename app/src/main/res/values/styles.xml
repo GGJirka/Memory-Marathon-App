@@ -43,12 +43,14 @@
     <style name="PrefsMain" parent="Theme.AppCompat">
         <item name="colorAccent">#2196f3</item>
     </style>
+
     <style name="MainStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/main_title_bot</item>
         <item name="colorPrimaryDark">@color/main_title_top</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
+
     <style name="WordsStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/words_title_bot</item>
         <item name="colorPrimaryDark">@color/words_title_top</item>

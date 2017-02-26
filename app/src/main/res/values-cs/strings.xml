@@ -43,7 +43,7 @@
     <string name="number_remember_numlength">počet čísel: (</string>
     <string name="number_remember_remembered">Zapomatováno</string>
     <string name="numbers_button_remember">ZAPOMATOVÁNO</string>
-    <string name="numbers_fast_mode">RYCHLÁ HRA</string>
+    <string name="numbers_fast_mode">RYCHLÁ</string>
     <string name="numbers_info_summ">Používejte šipky k posunutí zobrazení čísel.</string>
     <string name="numbers_info_summ1">Změnte si uspořádání čísel v nastavení jako je zobrazeno dole.</string>
     <string name="numbers_info_summ3">například: 555555 -> 55 55 55</string>
@@ -149,4 +149,11 @@
     <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com\nCelý projekt najdete na: https://github.com/GGJirka/MemoryApp</string>
     <string name="about_app_def">Tato aplikace byla vytvořena, abyste si zlepšily pamět v oblasti čísel a slov.</string>
     <string name="action_share_message">Zkus tudle aplikaci - Memory Marathon, zlepší to tvojí pamět\' a je to zábava.</string>
+    <string name="send">Odeslat</string>
+    <string name="send_feedback_title">Odeslat zpětnou vazbu</string>
+    <string name="sf_definition">Odešlete jakoukoliv zprávu chcete, pokud to bude nějáký problém budem se snažit ho opravit. Nebo bychom měli přidat něco?</string>
+    <string name="sf_message">Zpráva</string>
+    <string name="sf_title">"Název: "</string>
+    <string name="sf_sending_title">"Odeslat zpětnou vazbu použitím: "</string>
+    <string name="retry_icon">Znovu</string>
 </resources>

@@ -18,6 +18,7 @@ import android.widget.ShareActionProvider;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.techniques.MemoryTechniques;
+import jimmy.gg.flashingnumbers.techniques.NumberMajorSystem;
 import jimmy.gg.flashingnumbers.words.words.WordsMain;
 
 public class MemoryMarathon extends AppCompatActivity
@@ -96,20 +97,27 @@ public class MemoryMarathon extends AppCompatActivity
                 Intent intent = new Intent(this, MainSettings.class);
                 startActivity(intent);
                 break;
+
             case R.id.drawe_techniques:
                 Intent techniques = new Intent(this, MemoryTechniques.class);
                 startActivity(techniques);
                 break;
+
             case R.id.drawer_about:
                 Intent about = new Intent(this, MainAboutApp.class);
                 startActivity(about);
                 break;
+
             case R.id.drawer_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.action_share_message));
                 shareIntent.setType("text/plain");
                 startActivity(shareIntent);
+                break;
+
+            case R.id.drawer_send_feedback:
+                startActivity(new Intent(this, MainSendFeedback.class));
                 break;
         }
 

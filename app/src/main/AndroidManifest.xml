@@ -89,7 +89,9 @@
             android:theme="@style/WordsStyle" />
         <activity
             android:name=".highscore.NumbersGraph"
-            android:theme="@style/NumbersStyle"/>
+            android:theme="@style/NumbersStyle" />
+        <activity android:name=".main.MainSendFeedback"
+            android:theme="@style/MainStyle"/>
     </application>
 
 </manifest>

@@ -256,4 +256,12 @@
     <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com\nYou can find the project on: https://github.com/GGJirka/MemoryApp</string>
     <string name="about_app_def">This application was created to improve your memory skills in numbers and words.</string>
     <string name="action_share_message">Try this app - Memory marathon, it will improve your memory and it\'s fun.</string>
+    <string name="title_activity_main_send_feedback">MainSendFeedback</string>
+    <string name="send_feedback_title">Send Feedback</string>
+    <string name="send">Send</string>
+    <string name="sf_definition">Leave any message you want, if its an issue I will try to fix it. Or should I add some feature?</string>
+    <string name="sf_title">"Title: "</string>
+    <string name="sf_message">Message</string>
+    <string name="sf_sending_title">Send feedback using:</string>
+    <string name="retry_icon">Retry</string>
 </resources>

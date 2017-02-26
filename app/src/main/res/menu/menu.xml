@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/retry_icon"
-        android:title="@string/button_retry"
+        android:title="@string/retry_icon"
         android:icon="@drawable/retry"
         app:showAsAction="always" />
 <item
