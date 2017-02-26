@@ -92,9 +92,9 @@
     <string name="settings_number_group_summary">Actual number size in group: 2</string>
     <string name="settings_number_group_dialogtitle">Set group size</string>
 
-    <string name="settings_number_row_title">Number of numbers in row</string>
-    <string name="settings_number_row_summary">Actual number of numbers in row: 20</string>
-    <string name="settings_number_row_dialogtitle">Set number of numbers in row</string>
+    <string name="settings_number_row_title">Number of groups in row</string>
+    <string name="settings_number_row_summary">Actual number of groups in row: 20</string>
+    <string name="settings_number_row_dialogtitle">Set number of groups in row</string>
 
     <string name="settings_number_title">NUMBERS</string>
     <string name="settings_timer_title">TIMER</string>
@@ -200,7 +200,7 @@
     <string name="animation_off">display animation: off</string>
     <string name="animation_title">Animation</string>
     <string name="numbers_size_group">"Actual number size in group: "</string>
-    <string name="numbers_size_row">"Actual number of numbers in row: "</string>
+    <string name="numbers_size_row">\"Actual number of groups in row: \"</string>
     <string name="actual_inspection_time">"Actual inspection time: "</string>
     <string name="inspection_time_none" translatable="false">Actual inspection time: none</string>
     <string name="animation_offf">display animation: off</string>
@@ -249,4 +249,11 @@
     <string name="score_capital">Score:</string>
     <string name="how_to_play">How to play</string>
     <string name="words_explain">There will be always one word displayed.\nPress new if you haven\'t seen this word.\nPress seen if you already seen this word.\nCheck memory techniques in menu.</string>
+    <string name="about_app_title">About app</string>
+    <string name="actual_version">actual version: 1.0</string>
+    <string name="latest_version">latest version: 1.0</string>
+    <string name="about_author_title">About author</string>
+    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com\nYou can find the project on: https://github.com/GGJirka/MemoryApp</string>
+    <string name="about_app_def">This application was created to improve your memory skills in numbers and words.</string>
+    <string name="action_share_message">Try this app - Memory marathon, it will improve your memory and it\'s fun.</string>
 </resources>

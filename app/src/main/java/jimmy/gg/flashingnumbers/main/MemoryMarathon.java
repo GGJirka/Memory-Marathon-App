@@ -10,10 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.ActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ShareActionProvider;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
@@ -24,10 +24,9 @@ public class MemoryMarathon extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static SharedPreferences sharedPreferences;
-    public ActionProvider shareActionProvider;
+    //private ShareActionProvider shareActionProvider;
 
     /*
-    * 20.2 - TODO: numbers add listener on text to see amount of numbers.
     * TODO: BUGFIXES = FIX BUG WITH ARROWS,SETTINGS DEFAULT VALUE, COLOR EDITTEXT.
     * */
     @Override
@@ -68,24 +67,18 @@ public class MemoryMarathon extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_activity_test, menu);
-
         return true;
     }
 
-    public void setShareIntent(Intent shareIntent) {
+    /*public void setShareIntent(Intent shareIntent) {
         if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(shareIntent);
         }
-    }
+    }*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -110,6 +103,13 @@ public class MemoryMarathon extends AppCompatActivity
             case R.id.drawer_about:
                 Intent about = new Intent(this, MainAboutApp.class);
                 startActivity(about);
+                break;
+            case R.id.drawer_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.action_share_message));
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
                 break;
         }
 

@@ -12,7 +12,7 @@ public class MainAboutApp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_about_app);
-        setTitle("About app");
+        setTitle(getString(R.string.about_app_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

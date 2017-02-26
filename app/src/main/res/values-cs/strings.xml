@@ -70,8 +70,8 @@
     <string name="settings_number_group_summary">Aktuální počet ve skupině: 2</string>
     <string name="settings_number_group_title">"Velikost skupiny čísel "</string>
     <string name="settings_number_row_dialogtitle">Počet skupin na obrazovace</string>
-    <string name="settings_number_row_summary">Aktuální počet čísel na obrazovace: 20</string>
-    <string name="settings_number_row_title">Počet čísel na obrazovce</string>
+    <string name="settings_number_row_summary">Aktuální počet skupin na obrazovace: 20</string>
+    <string name="settings_number_row_title">Počet skupin na obrazovce</string>
     <string name="settings_number_title">ČÍSLA</string>
     <string name="settings_row"></string>
     <string name="settings_timer_dialogtitle">Zvolte čas odpočtu</string>
@@ -91,7 +91,7 @@
     <string name="animation_title">Animace</string>
     <string name="actual_inspection_time">"Aktuální čas odpočtu: "</string>
     <string name="numbers_size_group">"Aktuální velikost skupiny čísel: "</string>
-    <string name="numbers_size_row">"Aktuální počet čísel na obrazovce: "</string>
+    <string name="numbers_size_row">\"Aktuální počet skupin na obrazovce: \"</string>
     <string name="animation_offf">zobrazení animace: vypnuto</string>
     <string name="animation_tit">Animace</string>
     <string name="display_animation_onn">zobrazení animace: zapnuto</string>
@@ -141,4 +141,12 @@
     <string name="highest_score">"Nejvyšší skóre: "</string>
     <string name="score_capital">"Skóre: "</string>
     <string name="words_explain">Pokaždé vám bude ukázáno jedno slovo.\nStisknete nový, pokud\' todle slovo ještě nebylo.\nNebo stisknete bylo, pokud\' již bylo.\nPodívejte se na metody zapomatovávání v menu.</string>
+    <string name="actual_version">Aktuální verze: 1.0</string>
+    <string name="how_to_play">Jak hrát</string>
+    <string name="latest_version">Nejnovější verze: 1.0</string>
+    <string name="about_author_title">O autorovi</string>
+    <string name="about_app_title">O aplikaci</string>
+    <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com\nCelý projekt najdete na: https://github.com/GGJirka/MemoryApp</string>
+    <string name="about_app_def">Tato aplikace byla vytvořena, abyste si zlepšily pamět v oblasti čísel a slov.</string>
+    <string name="action_share_message">Zkus tudle aplikaci - Memory Marathon, zlepší to tvojí pamět\' a je to zábava.</string>
 </resources>
