@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
@@ -222,20 +223,18 @@ public class Numbers extends AppCompatActivity{
                 }
             }
         }
-
         numbers.setText(numbersInRow.get(actualIndex));
         images.get(0).setImageResource(R.drawable.dot_fill);
-        try {
-            if (actualIndex == 0) {
-                ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
-                leftButton.setImageResource(R.drawable.no_icon);
-            }
-            if (numbersInRow.size() <= 0) {
-                ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
-                rightButton.setImageResource(R.drawable.no_icon);
-            }
-        } catch (Exception e) {
+        ImageButton leftButton = (ImageButton) findViewById(R.id.numbers_left_button);
+        ImageButton rightButton = (ImageButton) findViewById(R.id.numbers_right_button);
 
+        if (actualIndex == 0){
+            leftButton.setImageResource(R.drawable.no_icon);
+        }if (numbersInRow.size() == 1){
+            rightButton.setImageResource(R.drawable.no_icon);
+            leftButton.setClickable(false);
+            rightButton.setClickable(false);
+            findViewById(R.id.dots).setVisibility(View.INVISIBLE);
         }
     }
 

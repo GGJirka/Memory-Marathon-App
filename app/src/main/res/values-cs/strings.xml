@@ -156,4 +156,6 @@
     <string name="sf_title">"Název: "</string>
     <string name="sf_sending_title">"Odeslat zpětnou vazbu použitím: "</string>
     <string name="retry_icon">Znovu</string>
+    <string name="high_score_graph">Graf Skóre</string>
+    <string name="graph_no_score">Žádné skóre k zobrazení</string>
 </resources>

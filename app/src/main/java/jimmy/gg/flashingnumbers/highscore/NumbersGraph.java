@@ -21,7 +21,7 @@ public class NumbersGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_graph);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(getString(R.string.quick_level_graph_title));
+        setTitle(getString(R.string.high_score_graph));
         initScore();
     }
 
@@ -38,25 +38,31 @@ public class NumbersGraph extends AppCompatActivity {
         for (int i = 1; i <= FlashingNumbers.sharedPreferences.getInt(KEY_COUNT, 0); i++) {
             int length = FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
                     .split(" ").length;
-            scores.add(Integer.valueOf(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
-                    .split(" ")[length-1]));
-            dates.add(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
-                    .split(" ")[0]);
+            if(length!=0) {
+                scores.add(Integer.valueOf(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
+                        .split(" ")[length - 1]));
+                dates.add(FlashingNumbers.sharedPreferences.getString(KEY + String.valueOf(i), "")
+                        .split(" ")[0]);
+            }
         }
-
-        DataPoint[] points = new DataPoint[scores.size()];
-        for (int i = 0; i < scores.size(); i++) {
-            points[i] = new DataPoint(((double) i / scores.size()), scores.get(i));
+        if(scores.size()!=0) {
+            DataPoint[] points = new DataPoint[scores.size()];
+            for (int i = 0; i < scores.size(); i++) {
+                points[i] = new DataPoint(((double) i / scores.size()), scores.get(i));
+            }
+            LineGraphSeries<DataPoint> graphSeries = new LineGraphSeries<>(points);
+            graphSeries.setColor(getResources().getColor(R.color.numbers_title_bot));
+            graphSeries.setDrawDataPoints(true);
+            graphSeries.setDataPointsRadius(8);
+            graphSeries.setThickness(7);
+            graph.setClickable(false);
+            graph.addSeries(graphSeries);
+            labelsFormatter.setHorizontalLabels(new String[]{dates.get(0), dates.get(dates.size() - 1)});
+            graph.getGridLabelRenderer().setLabelFormatter(labelsFormatter);
+        }else{
+            labelsFormatter.setHorizontalLabels(new String[]{""});
+            graph.getGridLabelRenderer().setLabelFormatter(labelsFormatter);
         }
-        LineGraphSeries<DataPoint> graphSeries = new LineGraphSeries<>(points);
-        graphSeries.setColor(getResources().getColor(R.color.numbers_title_bot));
-        graphSeries.setDrawDataPoints(true);
-        graphSeries.setDataPointsRadius(8);
-        graphSeries.setThickness(7);
-        graph.setClickable(false);
-        graph.addSeries(graphSeries);
-        labelsFormatter.setHorizontalLabels(new String[]{dates.get(0), dates.get(dates.size() - 1)});
-        graph.getGridLabelRenderer().setLabelFormatter(labelsFormatter);
     }
 
     @Override

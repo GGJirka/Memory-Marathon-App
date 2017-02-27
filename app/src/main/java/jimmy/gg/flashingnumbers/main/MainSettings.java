@@ -27,7 +27,6 @@ public class MainSettings extends AppCompatActivity {
         setTitle(getString(R.string.settings));
         settings = new ArrayList<>();
         list = (ListView) findViewById(R.id.main_settings);
-        settings.add(new OptionUnit("settings", getString(R.string.general_settings_title)));
         settings.add(new OptionUnit("numbers", getString(R.string.main_settings_numbers)));
         settings.add(new OptionUnit("words", getString(R.string.words_settings)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -37,14 +36,10 @@ public class MainSettings extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(MainSettings.this, GeneralSettings.class);
-                        startActivity(intent);
-                        break;
-                    case 1:
                         Intent numbersSettings = new Intent(MainSettings.this, NumbersSettings.class);
                         startActivity(numbersSettings);
                         break;
-                    case 2:
+                    case 1:
                         Intent wordsSettings = new Intent(MainSettings.this, WordsSettings.class);
                         startActivity(wordsSettings);
                         break;

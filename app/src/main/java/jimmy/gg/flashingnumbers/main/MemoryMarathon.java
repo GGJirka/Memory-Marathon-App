@@ -25,11 +25,7 @@ public class MemoryMarathon extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static SharedPreferences sharedPreferences;
-    //private ShareActionProvider shareActionProvider;
 
-    /*
-    * TODO: BUGFIXES = FIX BUG WITH ARROWS,SETTINGS DEFAULT VALUE, COLOR EDITTEXT.
-    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

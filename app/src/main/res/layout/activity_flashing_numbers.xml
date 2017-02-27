@@ -32,7 +32,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50sp"
-        android:textSize="11pt"
+        android:textSize="22sp"
         android:height="70sp"
         android:text="@string/numbers_fast_mode"
         android:theme="@style/MaterialButton"

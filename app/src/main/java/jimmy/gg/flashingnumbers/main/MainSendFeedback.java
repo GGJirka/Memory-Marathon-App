@@ -35,25 +35,33 @@ public class MainSendFeedback extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.send:
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run(){
-                            try{
-                                Intent email = new Intent(Intent.ACTION_SEND);
-                                email.setData(Uri.parse("mailto:"));
-                                email.setType("message/rfc822");
-                                email.putExtra(Intent.EXTRA_EMAIL,new String[]{"jirkazboril4@seznam.cz"});
-                                email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
-                                email.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
+                    if(subject.getText().length()==0){
+                        subject.setFocusable(true);
+                        subject.requestFocus();
+                    }else if(message.getText().length()==0){
+                        message.setFocusable(true);
+                        message.requestFocus();
+                    }else {
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Intent email = new Intent(Intent.ACTION_SEND);
+                                    email.setData(Uri.parse("mailto:"));
+                                    email.setType("message/rfc822");
+                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jirkazboril4@seznam.cz"});
+                                    email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
+                                    email.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
 
-                                startActivity(Intent.createChooser(email,getString(R.string.sf_sending_title)));
-                            }catch(Exception e){
-                                Toast.makeText(getApplicationContext(),"Something went wrong, check your internet connection.",
-                                        Toast.LENGTH_SHORT).show();
+                                    startActivity(Intent.createChooser(email, getString(R.string.sf_sending_title)));
+                                } catch (Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Something went wrong, check your internet connection.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    };
-                   runOnUiThread(runnable);
+                        };
+                        runOnUiThread(runnable);
+                    }
                 break;
             default:
                 this.finish();

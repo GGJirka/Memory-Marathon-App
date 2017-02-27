@@ -37,7 +37,7 @@
             android:layout_alignBaseline="@+id/textView7"
             android:layout_alignBottom="@+id/textView7"
             android:layout_toRightOf="@+id/textView7"
-            android:textSize="9pt"
+            android:textSize="10pt"
             android:layout_toEndOf="@+id/textView7" />
 
         <TextView

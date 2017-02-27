@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
@@ -110,8 +111,12 @@ public class TabbedHighScore extends AppCompatActivity {
                 if (mViewPager.getCurrentItem() == 0) {
                     mViewPager.setCurrentItem(1);
                 } else {
-                    Intent graphIntent = new Intent(this, NumbersGraph.class);
-                    startActivity(graphIntent);
+                    if(FlashingNumbers.sharedPreferences.getInt("HIGHEST_SCORE_QUICK_COUNT", 0)!=0) {
+                        Intent graphIntent = new Intent(this, NumbersGraph.class);
+                        startActivity(graphIntent);
+                    }else{
+                        Toast.makeText(getApplicationContext(), R.string.graph_no_score, Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             default:

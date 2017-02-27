@@ -192,15 +192,15 @@
     <string name="to_unlock">" to unlock."</string>
     <string name="numbers_info_summ">Use arrows to move to another part of number.\n</string>
     <string name="numbers_info_summ1">Change number arrangement in settings like below.\n</string>
-    <string name="numbers_info_summ3"><![CDATA[například: 555555 -> 55 55 55]]></string>
+    <string name="numbers_info_summ3">for example: 555555 -> 55 55 55</string>
     <string name="number_remember_numlength" translatable="false">numbers length: (</string>
     <string name="number_remember_remembered">"Remembered "</string>
     <string name="failed">" failed"</string>
     <string name="animation_on">display animation: on</string>
     <string name="animation_off">display animation: off</string>
     <string name="animation_title">Animation</string>
-    <string name="numbers_size_group">"Actual number size in group: "</string>
-    <string name="numbers_size_row">\"Actual number of groups in row: \"</string>
+    <string name="numbers_size_group">Actual number size in group:</string>
+    <string name="numbers_size_row">Actual number of groups in row:</string>
     <string name="actual_inspection_time">"Actual inspection time: "</string>
     <string name="inspection_time_none" translatable="false">Actual inspection time: none</string>
     <string name="animation_offf">display animation: off</string>
@@ -221,7 +221,7 @@
     <string name="quick_level_sett_title">Quick level settings</string>
     <string name="quick_settings_title">Quick level settings</string>
     <string name="numbers_settings">Numbers settings</string>
-    <string name="memory_technique">Memory technique</string>
+    <string name="memory_technique">Memory techniques</string>
     <string name="do_not_show_again">Do not show again.</string>
     <string name="retry_menu">retry</string>
     <string name="graph_menu">Graph</string>
@@ -230,7 +230,7 @@
     <string name="sort_by_score">sort by score</string>
     <string name="number_guess">What was the number?</string>
     <string name="score">score:</string>
-    <string name="words_lives">lives:</string>
+    <string name="words_lives">"lives: "</string>
     <string name="words_score">score: 0</string>
     <string name="words_seen">seen</string>
     <string name="words_new">new</string>
@@ -264,4 +264,6 @@
     <string name="sf_message">Message</string>
     <string name="sf_sending_title">Send feedback using:</string>
     <string name="retry_icon">Retry</string>
+    <string name="high_score_graph">High Score Graph</string>
+    <string name="graph_no_score">No score to display.</string>
 </resources>

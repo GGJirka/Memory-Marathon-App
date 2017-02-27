@@ -26,14 +26,13 @@ public class WordsGraph extends AppCompatActivity {
         setContentView(R.layout.activity_words_graph);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = MemoryMarathon.sharedPreferences;
-        setTitle("High Score Graph");
+        setTitle(getString(R.string.high_score_graph));
         initScore();
     }
 
     public void initScore() {
         ArrayList<Integer> points = new ArrayList<>();
         ArrayList<String> dates = new ArrayList<>();
-
         for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
             points.add(Integer.valueOf(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), "none").split(" ")[3]));
             dates.add(sharedPreferences.getString("WORDS_SCORE" + String.valueOf(i), "none").split(" ")[0]);
@@ -50,20 +49,23 @@ public class WordsGraph extends AppCompatActivity {
         graph.getViewport().setScrollableY(true);
 
         DataPoint[] dataPoints = new DataPoint[points.size()];
-        String[] date = new String[points.size()];
-
-        for (int i = 0; i < points.size(); i++) {
-            dataPoints[i] = new DataPoint(((double) i / points.size()), points.get(i));
+        if(points.size()!=0) {
+            for (int i = 0; i < points.size(); i++) {
+                dataPoints[i] = new DataPoint(((double) i / points.size()), points.get(i));
+            }
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+            series.setColor(getResources().getColor(R.color.words_title_bot));
+            series.setDrawDataPoints(true);
+            series.setDataPointsRadius(5);
+            series.setThickness(8);
+            graph.addSeries(series);
+            staticLabelsFormatter.setHorizontalLabels(new String[]{dates.get(0), dates.get(dates.size() / 2)
+                    , dates.get(dates.size() - 1)});
+            graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        }else{
+            staticLabelsFormatter.setHorizontalLabels(new String[]{""});
+            graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         }
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-        series.setColor(getResources().getColor(R.color.words_title_bot));
-        series.setDrawDataPoints(true);
-        series.setDataPointsRadius(5);
-        series.setThickness(8);
-        graph.addSeries(series);
-        staticLabelsFormatter.setHorizontalLabels(new String[]{dates.get(0), dates.get(dates.size() / 2)
-                , dates.get(dates.size() - 1)});
-        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
     }
 
     @Override

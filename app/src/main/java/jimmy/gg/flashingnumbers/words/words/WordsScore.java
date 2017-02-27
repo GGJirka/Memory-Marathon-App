@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -185,8 +186,12 @@ public class WordsScore extends AppCompatActivity {
                 break;
 
             case R.id.graph:
-                Intent graphIntent = new Intent(this, WordsGraph.class);
-                startActivity(graphIntent);
+                if(Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0"))!=0) {
+                    Intent graphIntent = new Intent(this, WordsGraph.class);
+                    startActivity(graphIntent);
+                }else{
+                    Toast.makeText(getApplicationContext(), R.string.graph_no_score, Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             default:
