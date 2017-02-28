@@ -1,5 +1,2 @@
-# MemoryApp
-Android app to improve your memory.
-Numbers - levels and quick level
-Words - memorizing words
-Images - memorizing images
+# Memory Marathon
+This is Android app which help you with memorizing numbers and words.
