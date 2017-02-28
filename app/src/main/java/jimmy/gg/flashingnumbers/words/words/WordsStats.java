@@ -1,5 +1,6 @@
 package jimmy.gg.flashingnumbers.words.words;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,9 +19,12 @@ public class WordsStats {
     public WordsStats(int lives, int score) {
         this.lives = lives;
         this.score = score;
-        usedWords = new ArrayList<>();
         wordList = new ArrayList<>();
         random = new Random().nextInt(5) + 1;
+    }
+
+    public void initUsedWords(){
+        usedWords = new ArrayList<>();
     }
 
     public boolean isInUsed(String word) {
@@ -90,5 +94,9 @@ public class WordsStats {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setUsedWords(ArrayList<String> usedWords){
+        this.usedWords = usedWords;
     }
 }

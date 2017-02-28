@@ -26,6 +26,10 @@ public class MemoryMarathon extends AppCompatActivity
 
     public static SharedPreferences sharedPreferences;
 
+    /*
+     * TODO: GRAPH ICON X, SORT BY DATE AND SORT BY SCORE SAVE RADIO BUTTON,SAVE INSTANCE STATE WORDS.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -163,7 +163,7 @@ public class QuickLevel extends AppCompatActivity {
             FlashingNumbers.sharedPreferences
                     .edit()
                     .putString("QUICK_LEVEL_STATE", "1")
-                    .commit();
+                    .apply();
         }
 
     }
