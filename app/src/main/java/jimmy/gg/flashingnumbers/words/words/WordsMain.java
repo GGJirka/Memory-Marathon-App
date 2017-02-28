@@ -198,8 +198,8 @@ public class WordsMain extends AppCompatActivity {
         TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
         TextView wordText = (TextView) word.getCurrentView();
         int r = new Random().nextInt(words.getWordList().size());
-        if (!words.isInUsed(wordText.getText().toString())) {
-            TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
+        if (!words.isInUsed(wordText.getText().toString())){
+            TextSwitcher liveSwitcher = (TextSwitcher)findViewById(R.id.words_lives);
             words.setLives(words.getLives() - 1);
             liveSwitcher.setText("" + words.getLives());
             if (words.getLives() == 0) {
@@ -406,26 +406,41 @@ public class WordsMain extends AppCompatActivity {
 
     //This saves instance on changing screen orientation
     @Override
-    protected void onRestoreInstanceState(Bundle bundle){
-        words.setLives(bundle.getInt("LIVES",3));
-        TextSwitcher lives = (TextSwitcher) findViewById(R.id.words_lives);
-        lives.setText(""+words.getLives());
-
-        words.setScore(bundle.getInt("SCORE",0));
-        TextView score = (TextView) findViewById(R.id.words_score);
-        score.setText(getString(R.string.score)+" " + words.getScore());
-        TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
-        word.setText(bundle.getString("WORD"));
+    protected void onRestoreInstanceState(final Bundle bundle){
 
        /* words.setUsedWords(bundle.getStringArrayList("WORDS"));
         Toast.makeText(getApplicationContext(),bundle.getStringArrayList("WORDS").size()+"",Toast.LENGTH_SHORT).show();
         */
-        ArrayList<String> arrayList = new ArrayList<>();
-        for(int i=0;i<bundle.getInt("COUNT",0);i++){
-            arrayList.add(bundle.getString("WORDS"+String.valueOf(i)));
-        }
-        words.setUsedWords(arrayList);
-        Toast.makeText(getApplicationContext(),words.getUsedWords().size()+"",Toast.LENGTH_SHORT).show();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                words.setLives(bundle.getInt("LIVES",3));
+                words.setScore(bundle.getInt("SCORE", 0));
+                if(words.getLives()!=0) {
+                    TextSwitcher lives = (TextSwitcher) findViewById(R.id.words_lives);
+                    lives.setText("" + words.getLives());
+                    TextView score = (TextView) findViewById(R.id.words_score);
+                    score.setText(getString(R.string.score) + " " + words.getScore());
+                    TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
+                    word.setText(bundle.getString("WORD"));
+
+                    ArrayList<String> arrayList = new ArrayList<>();
+
+                    for (int i = 0; i < bundle.getInt("COUNT", 0); i++) {
+                        for (int j = 0; j < 5; j++) {
+                            arrayList.add(bundle.getString("WORDS" + String.valueOf(i)));
+                        }
+                    }
+                    words.setUsedWords(arrayList);
+                    //Toast.makeText(getApplicationContext(),words.getUsedWords().size()+"",Toast.LENGTH_SHORT).show();
+                }else{
+                    gameEnds();
+                    TextView scored = (TextView) findViewById(R.id.words_end_scored);
+                    scored.setText(getString(R.string.score_capital)+words.getScore());
+                }
+            }
+        };
+        runnable.run();
     }
 
     @Override
@@ -433,7 +448,9 @@ public class WordsMain extends AppCompatActivity {
         super.onSaveInstanceState(saveState);
         saveState.putInt("LIVES",words.getLives());
         saveState.putInt("SCORE",words.getScore());
-
+        /*if(words.getLives()==0) {
+            saveState.putInt("FINALSCORE", );
+        }*/
         TextSwitcher word = (TextSwitcher) findViewById(R.id.words_word);
         TextView wordText = (TextView) word.getCurrentView();
 

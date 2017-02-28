@@ -318,7 +318,7 @@ public class QuickLevel extends AppCompatActivity {
                     String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
-                    editor.commit();
+                    editor.apply();
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                     editor.putString(QuickLevelHighScore.KEY + count, date + " " + getString(R.string.numbers)
                             + " " + String.valueOf(numberCount));

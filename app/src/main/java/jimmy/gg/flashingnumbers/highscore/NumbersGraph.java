@@ -21,6 +21,7 @@ public class NumbersGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_graph);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.words_delete_score);
         setTitle(getString(R.string.high_score_graph));
         initScore();
     }

@@ -121,6 +121,7 @@ public class WordsScore extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
+
         if (sharedPreferences.getString("WORDS_SCORE_CHECK", "0").equals("0")) {
             menu.findItem(R.id.sort_date).setChecked(true);
         } else {

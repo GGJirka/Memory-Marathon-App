@@ -59,11 +59,11 @@ public class TabbedHighScore extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.words_score_menu, menu);
-       /* if (FlashingNumbers.sharedPreferences.getString(HIGH_SCORE_SORT, "0").equals("0")) {
+        if (FlashingNumbers.sharedPreferences.getString(HIGH_SCORE_SORT, "0").equals("0")) {
             menu.findItem(R.id.sort_date).setChecked(true);
         } else {
             menu.findItem(R.id.sort_score).setChecked(true);
-        }*/
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,7 +82,7 @@ public class TabbedHighScore extends AppCompatActivity {
                     quickHighScore.sortByDate();
                     SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
                     editor.putString(HIGH_SCORE_SORT, "0");
-                    editor.commit();
+                    editor.apply();
                 }
                 break;
             case R.id.sort_score:
@@ -97,7 +97,7 @@ public class TabbedHighScore extends AppCompatActivity {
                     quickHighScore.sortByScore();
                     SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
                     editor.putString(HIGH_SCORE_SORT, "1");
-                    editor.commit();
+                    editor.apply();
                 }
                 break;
             case R.id.words_delete:
@@ -142,7 +142,6 @@ public class TabbedHighScore extends AppCompatActivity {
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 })
                 .show();

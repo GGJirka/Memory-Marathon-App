@@ -122,7 +122,7 @@ public class QuickLevelHighScore extends Fragment {
                 int number = Integer.parseInt(score.getText().split(" ")[length-1]);
                 if (number == addScore.get(i)) {
                     String s = sharedPreferences.getString(KEY + String.valueOf(j), "0");
-                    scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.score)+" "+s.split(" ")[length-1]));
+                    scores.add(new Score(s.split(" ")[0]+" | "+getString(R.string.score)+" "+s.split(" ")[length-1]));
                    // scores.add(score);
                     break;
                 }
@@ -131,13 +131,13 @@ public class QuickLevelHighScore extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    public void sortByDate() {
+    public void sortByDate(){
         scores.removeAll(scores);
         for (int i = 1; i <= FlashingNumbers.sharedPreferences.getInt(KEY_COUNT, 0); i++) {
             //scores.add(new Score(sharedPreferences.getString(KEY + String.valueOf(i), "0")));
             String s = sharedPreferences.getString(KEY + String.valueOf(i), "0");
             int length = s.split(" ").length;
-            scores.add(new Score(s.split(" ")[0]+" "+getString(R.string.score)+" "+s.split(" ")[length-1]));
+            scores.add(new Score(s.split(" ")[0]+" | "+getString(R.string.score)+" "+s.split(" ")[length-1]));
         }
         Collections.reverse(scores);
         adapter.notifyDataSetChanged();

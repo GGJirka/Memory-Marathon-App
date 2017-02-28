@@ -25,6 +25,7 @@ public class WordsGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_graph);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.words_delete_score);
         sharedPreferences = MemoryMarathon.sharedPreferences;
         setTitle(getString(R.string.high_score_graph));
         initScore();
