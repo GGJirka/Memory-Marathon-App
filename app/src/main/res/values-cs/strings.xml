@@ -13,7 +13,7 @@
     <string name="animation">Animace</string>
     <string name="action_settings">Nastavení</string>
     <string name="custom_button"></string>
-    <string name="default_value_numbers"></string>
+    <string name="default_value_numbers">2</string>
     <string name="delete_all_score">Vymazat všechny skóre</string>
     <string name="delete_all_score_summary">Opravdu chcete vymazat všechny skóre z rychlé úrovně?</string>
     <string name="delete_score">vymazat skóre</string>
@@ -34,9 +34,9 @@
     <string name="main_images"></string>
     <string name="main_numbers">Čísla</string>
     <string name="main_words">Slova</string>
-    <string name="major_system_example">Na příklad: 23 - n,m = Nemo, 47 - r,k = ruka\\nTeďka si představíme obrázek v hlavě - Nemova ruka.</string>
+    <string name="major_system_example">Na příklad: 23 - n,m = Nemo, 47 - r,k = ruka\nTeďka si představíme obrázek v hlavě - Nemova ruka.\nSlova si vytvořte podle sebe, nebo se podívejte na seznam slov na internetu.</string>
     <string name="major_system_how_to_use">Jak jí použít</string>
-    <string name="major_system_howtouse">Tento systém funguje na principu přeměnování čísel na jednotlivá písma ,z písem slova a slova si uložíme do paměti jako obrázek. Je dobré si zapomatovat obrázek velice detailně.</string>
+    <string name="major_system_howtouse">Tento systém funguje na principu přeměnování čísel na jednotlivá písmena, z písmen slova a slova si uložíme do paměti jako obrázek. Je dobré si zapomatovat obrázek velice detailně.</string>
     <string name="major_system_number"><b>0</b> - s, z, \n<b>1</b> - d, t \n<b>2</b> - n \n<b>3</b> - m \n<b>4</b> - r \n<b>5</b> - l \n<b>6</b> - j, ch\n<b>7</b> - k \n<b>8</b> - f,v \n<b>9</b> - p,b</string>
     <string name="navigation_drawer_close"></string>
     <string name="nothing_to_display">Nic k zobrazení</string>
@@ -84,20 +84,20 @@
     <string name="the_major_memory_system_title">Major Systém</string>
     <string name="title_activity_settings">Nastavení</string>
     <string name="to_unlock">" k odemčení"</string>
-    <string name="wods_memory_system_howtouse">Tato metoda je velice podobná pamětovímu paláci.\nMáme zadaný seznam slov - <b>baterka</b>, <b>mobil</b>, <b>kniha</b>.\n\nTedka jsi představte cestu, například do práce, do školy nebo kam často chodíte.\nPrvní slovo <b>baterka</b> - představíme si někde nazačátku cestu. <b>Mobil</b> - představíme na nějákým detailním bodě nebo někde uprostřed.\nPoslední slovo <b>kniha</b> umístíme někam na konec naší cesty, pro lepší zapomatování jsi zkuste zapomatovat předmět jako součást nějáké vymyšlené události.\n\nPoté co jste si zapomatovaly všechny slova můžeme se vydat na imaginární cestu. Měly byste se tu procházet a vidět ty předměty kolem. Pokud jste si to zapomatovaly správně.</string>
+    <string name="wods_memory_system_howtouse">Tato metoda je velice podobná pamětovému paláci.\nMáme zadaný seznam slov - <b>baterka</b>, <b>mobil</b>, <b>kniha</b>.\n\nTedka jsi představte cestu, například do práce, do školy nebo někam kam často chodíte.\nPrvní slovo <b>baterka</b> - představíme si někde na začátku cestu. <b>Mobil</b> - představíme na nějákým detailním bodě nebo někde uprostřed.\nPoslední slovo <b>kniha</b> umístíme někam na konec naší cesty, pro lepší zapomatování jsi zkuste zapomatovat předmět jako součást nějáké vymyšlené události.\n\nPoté co jste si zapomatovaly všechny slova můžeme se vydat na imaginární cestu. Měly byste se tu procházet a vidět ty předměty kolem sebe. Pokud jste si to zapomatovaly správně.</string>
     <string name="pref_title_display_name"></string>
     <string name="animation_off">zobrazení animace: vypnuto</string>
     <string name="animation_on">zobrazení animace: zapnuto</string>
     <string name="animation_title">Animace</string>
     <string name="actual_inspection_time">"Aktuální čas odpočtu: "</string>
-    <string name="numbers_size_group">"Aktuální velikost skupiny čísel: "</string>
-    <string name="numbers_size_row">\"Aktuální počet skupin na obrazovce: \"</string>
+    <string name="numbers_size_group">Aktuální velikost skupiny čísel:</string>
+    <string name="numbers_size_row">Aktuální počet skupin na obrazovce:</string>
     <string name="animation_offf">zobrazení animace: vypnuto</string>
     <string name="animation_tit">Animace</string>
     <string name="display_animation_onn">zobrazení animace: zapnuto</string>
     <string name="level">Úroveň</string>
     <string name="timer">"čas:"</string>
-    <string name="numbers">počet čísel:</string>
+    <string name="numbers">čísel:</string>
     <string name="inspection_time">Čas odpočtu</string>
     <string name="inspection_time_none"></string>
     <string name="inspection_wait">Počkat 3 sekundy před začátkem</string>
@@ -146,7 +146,7 @@
     <string name="latest_version">Nejnovější verze: 1.0</string>
     <string name="about_author_title">O autorovi</string>
     <string name="about_app_title">O aplikaci</string>
-    <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com\nCelý projekt najdete na:\n</string>
+    <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com</string>
     <string name="about_app_def">Tato aplikace byla vytvořena, abyste si zlepšily pamět v oblasti čísel a slov.</string>
     <string name="action_share_message">Zkus tudle aplikaci - Memory Marathon, zlepší to tvojí pamět\' a je to zábava.</string>
     <string name="send">Odeslat</string>
@@ -161,4 +161,5 @@
     <string name="enter_message">Vložte zprávu</string>
     <string name="github_link"><a href="https://github.com/GGJirka/Memory-Marathon">         <u>Github.com/GGJirka/Memory-Marathon</u></a></string>
     <string name="enter_title">Vložte název</string>
+    <string name="default_value_timer" translatable="false">3</string>
 </resources>

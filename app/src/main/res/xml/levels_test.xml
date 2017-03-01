@@ -8,7 +8,7 @@
             android:dialogTitle="@string/settings_number_group_dialogtitle"
             android:entries="@array/array_group"
             android:entryValues="@array/array_group"
-            android:defaultValue="@string/default_value_numbers" />
+            android:defaultValue="2" />
         <ListPreference
             android:key="levels_test_r"
             android:title="@string/settings_number_row_title"
@@ -16,7 +16,7 @@
             android:dialogTitle="@string/settings_number_row_dialogtitle"
             android:entries="@array/array_row"
             android:entryValues="@array/array_row"
-            android:defaultValue="@string/default_value_numbers" />
+            android:defaultValue="4" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
     <jimmy.gg.flashingnumbers.preferences.CustomPreference android:title="@string/settings_timer_title">
         <ListPreference
@@ -26,7 +26,7 @@
             android:dialogTitle="@string/settings_timer_dialogtitle"
             android:entries="@array/array_time"
             android:entryValues="@array/array_time_id"
-            android:defaultValue="@string/default_value_timer" />
+            android:defaultValue="3" />
     </jimmy.gg.flashingnumbers.preferences.CustomPreference>
     <jimmy.gg.flashingnumbers.preferences.CustomPreference android:title="@string/animation">
         <CheckBoxPreference

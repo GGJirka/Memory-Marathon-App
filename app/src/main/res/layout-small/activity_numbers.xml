@@ -26,7 +26,8 @@
             android:id="@+id/progressBar"
             android:progress="100"
             android:layout_marginTop="20dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:progressDrawable="@drawable/custom_progressbar"/>
 
     <TextView
         android:layout_width="wrap_content"

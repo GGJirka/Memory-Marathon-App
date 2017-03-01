@@ -141,8 +141,8 @@
     <string name="EXTRA_NUMBERS_COUNT">"jimmy.gg.flashingnumbers.NUMBERS_COUNT"</string>
     <string name="EXTRA_TIME_REMAIN">jimmy.gg.flashingnumbers.TIME_REMAIN</string>
 
-    <string name="default_value_timer" translatable="false">3</string>
-    <string name="default_value_numbers" translatable="false">2</string>
+    <string name="default_value_timer">3</string>
+    <string name="default_value_numbers">2</string>
     <string name="CHECKBOX">CHECKBOX</string>
     <string name="INFO">INFO</string>
 
@@ -176,7 +176,7 @@
     <string name="major_system_number"><b>0</b> - s, z, soft-c \n<b>1</b> - d, t ,th \n<b>2</b> - n \n<b>3</b> - m \n<b>4</b> - r \n<b>5</b> - l \n<b>6</b> - j, sh, soft-ch \n<b>7</b> - k \n<b>8</b> - f,v \n<b>9</b> - p,b</string>
     <string name="major_system_how_to_use"><b>How to use</b></string>
     <string name="major_system_example">For example: 23 - n,m = Nemo, 64 - ch, r = chair\nNow you make image of this number - Nemo sitting on chair.</string>
-    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>ball</b>, <b>mobile phone</b>, <b>book</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>ball</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>book</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words, you can start go to walk in your head! Now you should see all words if you have done it right.</string>
+    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nWe have a list of words - <b>ball</b>, <b>mobile phone</b>, <b>book</b>.\n\nNow imagine a journey to the school, or somewhere else where you like to going. \nYou have to imagine that word as object with as many details as possible (colors).\nFirst word <b>ball</b> - imagine at start of walk. <b>Mobile phone</b> - imagine at some point in the middle, since this word is in middle of our list <b>book</b> - imagine somewhere in the end of the walk.\nYou can choose your own spots, some interesting places.\n\nOnce you\'ve imagined all the words, you can start go to walk in your head! Now you should see all words if you have done it right.</string>
     <string name="quick_level_graph_title">Quick Level Graph</string>
     <string name="nothing_to_display">Nothing to display</string>
     <string name="delete_score">delete score</string>
@@ -215,7 +215,7 @@
     <string name="inspection_wait">Wait 3 seconds on start</string>
     <string name="quick_level_title1">Quick - Level 1</string>
     <string name="quick_level_rules">How to play</string>
-    <string name="quick_level_explain">You will be shown number, which after the timer is gone you have to type. If number is correct you will pass to next level, where the length of number increases by one.</string>
+    <string name="quick_level_explain">You will be shown number, which you have to memorize. If memorized number is correct you will pass to next level, where the length of number increases by one.</string>
     <string name="quick_level_explain1" translatable="false">one digit. After timer is done you will have to write down this number.</string>
     <string name="quick_level_tit">"Quick - Level "</string>
     <string name="quick_level_sett_title">Quick level settings</string>
@@ -253,7 +253,7 @@
     <string name="actual_version">Actual version: 1.0</string>
     <string name="latest_version">latest version: 1.0</string>
     <string name="about_author_title">About author</string>
-    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com\nYou can find the project on:\n</string>
+    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com</string>
     <string name="about_app_def">This application was created to improve your memory skills in numbers and words.</string>
     <string name="action_share_message">Try this app - Memory marathon, it will improve your memory and it\'s fun.</string>
     <string name="title_activity_main_send_feedback">MainSendFeedback</string>

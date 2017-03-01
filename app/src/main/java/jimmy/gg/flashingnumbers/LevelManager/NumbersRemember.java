@@ -37,7 +37,7 @@ public class NumbersRemember extends AppCompatActivity {
     private int c=20;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         setTitle(getIntent().getStringExtra(EXTRA_LEVEL));
@@ -212,30 +212,35 @@ public class NumbersRemember extends AppCompatActivity {
             editor.commit();
         }
 
-        new AlertDialog.Builder(NumbersRemember.this)
-                .setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" "+getApplicationContext().getResources().getString(R.string.numbers_remembered_passed))
-                .setMessage(highestScore.toString())
-                .setPositiveButton(R.string.button_next, new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        List<Level> levels = levelList;
-                        String level = getIntent().getStringExtra(EXTRA_LEVEL);
-                        String[] data = level.split(" ");
-                        int levell = Integer.parseInt(data[1]);
-                        Intent intent = new Intent(NumbersRemember.this,Numbers.class);
-                        intent.putExtra(EXTRA_NUMBERS,levels.get((levell)).getNumbers());
-                        intent.putExtra(EXTRA_LEVEL,levels.get((levell)).getLevel()) ;
-                        intent.putExtra(EXTRA_TIME, levels.get((levell)).getTime());
-                        NumbersRemember.this.startActivity(intent);
-                    }
-                })
-                .setNegativeButton(R.string.button_menu, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(NumbersRemember.this);
+            builder.setTitle(getIntent().getStringExtra(EXTRA_LEVEL)+" "+getApplicationContext().getResources().getString(R.string.numbers_remembered_passed));
+            builder.setMessage(highestScore.toString());
+
+            builder.setPositiveButton(R.string.button_next, new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int which){
+                            List<Level> levels = levelList;
+                            String level = getIntent().getStringExtra(EXTRA_LEVEL);
+                            String[] data = level.split(" ");
+                            int levell = Integer.parseInt(data[1]);
+                            Intent intent = new Intent(NumbersRemember.this,Numbers.class);
+                            intent.putExtra(EXTRA_NUMBERS,levels.get((levell)).getNumbers());
+                            intent.putExtra(EXTRA_LEVEL,levels.get((levell)).getLevel()) ;
+                            intent.putExtra(EXTRA_TIME, levels.get((levell)).getTime());
+                            NumbersRemember.this.startActivity(intent);
+                        }
+                    });
+                builder.setNegativeButton(R.string.button_menu, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.numbers_title_bot));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.numbers_title_bot));
         }
 
     public StringBuilder getTimeRemain() {
@@ -256,30 +261,33 @@ public class NumbersRemember extends AppCompatActivity {
 
         public void dialogFailed(int numbersRight){
             final ArrayList<Level> levelList = FlashingNumbers.levelList;
-            new AlertDialog.Builder(NumbersRemember.this)
-                    .setTitle(getIntent().getStringExtra(EXTRA_LEVEL) + getString(R.string.failed))
-                    .setMessage(getString(R.string.number_remember_remembered) +" "+numbersRight + "/" + numberCount + "\n" + getString(R.string.timer) + " " + getTimeRemain().toString() + "s")
-                    .setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton(R.string.button_retry, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            List<Level> levels = levelList;
-                            String level = getIntent().getStringExtra(EXTRA_LEVEL);
-                            String[] data = level.split(" ");
-                            int levell = Integer.parseInt(data[1]);
-                            Intent intent = new Intent(NumbersRemember.this,Numbers.class);
-                            intent.putExtra(EXTRA_NUMBERS,levels.get((levell-1)).getNumbers());
-                            intent.putExtra(EXTRA_LEVEL,levels.get((levell-1)).getLevel());
-                            intent.putExtra(EXTRA_TIME, levels.get((levell-1)).getTime());
-                            NumbersRemember.this.startActivity(intent);
-                        }
-                    })
-                    .show();
+               AlertDialog.Builder builder = new AlertDialog.Builder(NumbersRemember.this);
+                    builder.setTitle(getIntent().getStringExtra(EXTRA_LEVEL) + getString(R.string.failed));
+                    builder.setMessage(getString(R.string.number_remember_remembered) +" "+numbersRight + "/" + numberCount + "\n" + getString(R.string.timer) + " " + getTimeRemain().toString() + "s");
+                    builder.setPositiveButton(R.string.button_menu, new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+                    builder.setNegativeButton(R.string.button_retry, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    List<Level> levels = levelList;
+                                    String level = getIntent().getStringExtra(EXTRA_LEVEL);
+                                    String[] data = level.split(" ");
+                                    int levell = Integer.parseInt(data[1]);
+                                    Intent intent = new Intent(NumbersRemember.this,Numbers.class);
+                                    intent.putExtra(EXTRA_NUMBERS,levels.get((levell-1)).getNumbers());
+                                    intent.putExtra(EXTRA_LEVEL,levels.get((levell-1)).getLevel());
+                                    intent.putExtra(EXTRA_TIME, levels.get((levell-1)).getTime());
+                                    NumbersRemember.this.startActivity(intent);
+                                }
+                            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.numbers_title_bot));
+            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.numbers_title_bot));
         }
 
     public String KEY_HIGH_SCORE ="KEY_HIGH_SCORE";

@@ -109,7 +109,8 @@ public class Numbers extends AppCompatActivity{
                         gameStart();
                     }
                 })
-                .show();
+                .show()
+        .getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.numbers_title_bot));
     }
     public String timer(){
         String[] seconds = getIntent().getStringExtra(EXTRA_TIME).split(" ");

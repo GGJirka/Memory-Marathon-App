@@ -24,10 +24,11 @@
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="4dp"
         android:id="@+id/quick_progressBar"
         android:progress="100"
         android:layout_marginTop="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         android:visibility="invisible"/>
 </LinearLayout>
 
@@ -102,7 +103,6 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:text="@string/text_number"
-        android:layout_above="@+id/quick_on_end_view"
         android:layout_centerHorizontal="true"
         android:id="@+id/quick_level_number"
         android:visibility="invisible"/>

@@ -138,10 +138,10 @@ public class WordsScore extends AppCompatActivity {
     }
 
     public void deleteScoreDialog() {
-        new AlertDialog.Builder(WordsScore.this)
-                .setTitle(getString(R.string.delete_all_score))
-                .setMessage(R.string.words_delete_all)
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+       AlertDialog.Builder build = new AlertDialog.Builder(WordsScore.this);
+                build.setTitle(getString(R.string.delete_all_score));
+                build.setMessage(R.string.words_delete_all);
+                build.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         for (int i = 0; i < Integer.parseInt(sharedPreferences.getString("WORDS_COUNT_SCORE", "0")); i++) {
@@ -152,14 +152,17 @@ public class WordsScore extends AppCompatActivity {
                         baseAdapter.notifyDataSetChanged();
                         addView();
                     }
-                })
-                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                });
+                build.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                })
-                .show();
+                });
+        AlertDialog dialog = build.create();
+        dialog.show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.numbers_button_color));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.numbers_button_color));
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

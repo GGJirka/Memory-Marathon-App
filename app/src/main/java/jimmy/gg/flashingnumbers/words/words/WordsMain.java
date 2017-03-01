@@ -122,7 +122,8 @@ public class WordsMain extends AppCompatActivity {
                         }
                     }
                 })
-                .show();
+                .show()
+        .getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.words_title_bot));
     }
 
     public void initWordList() {
