@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,10 +82,15 @@ public class QuickLevelHighScore extends Fragment {
     public void addView() {
         TextView view = new TextView(rootView.getContext());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 450, 0, 0);
+                (ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+        TypedValue typedValue = new TypedValue();
+        int actionBarHeight=0;
+        if(rootView.getContext().getTheme().resolveAttribute(android.R.attr.actionBarSize,typedValue,true)){
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data,getResources().getDisplayMetrics());
+        }
+        params.setMargins(0,0,0, actionBarHeight*2);
         view.setLayoutParams(params);
-        view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
         view.setText(R.string.nothing_to_display);
         view.setTextSize(20);
         view.setTextColor(getResources().getColor(R.color.black));

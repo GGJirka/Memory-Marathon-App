@@ -38,9 +38,11 @@ public class MainSendFeedback extends AppCompatActivity {
                     if(subject.getText().length()==0){
                         subject.setFocusable(true);
                         subject.requestFocus();
+                        Toast.makeText(getApplicationContext(), R.string.enter_title,Toast.LENGTH_SHORT).show();
                     }else if(message.getText().length()==0){
                         message.setFocusable(true);
                         message.requestFocus();
+                        Toast.makeText(getApplicationContext(), R.string.enter_message,Toast.LENGTH_SHORT).show();
                     }else {
                         Runnable runnable = new Runnable() {
                             @Override
@@ -49,7 +51,7 @@ public class MainSendFeedback extends AppCompatActivity {
                                     Intent email = new Intent(Intent.ACTION_SEND);
                                     email.setData(Uri.parse("mailto:"));
                                     email.setType("message/rfc822");
-                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jirkazboril4@seznam.cz"});
+                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"GGJimmy@gmail.com"});
                                     email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
                                     email.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
 

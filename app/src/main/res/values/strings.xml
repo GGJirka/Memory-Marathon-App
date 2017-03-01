@@ -176,7 +176,7 @@
     <string name="major_system_number"><b>0</b> - s, z, soft-c \n<b>1</b> - d, t ,th \n<b>2</b> - n \n<b>3</b> - m \n<b>4</b> - r \n<b>5</b> - l \n<b>6</b> - j, sh, soft-ch \n<b>7</b> - k \n<b>8</b> - f,v \n<b>9</b> - p,b</string>
     <string name="major_system_how_to_use"><b>How to use</b></string>
     <string name="major_system_example">For example: 23 - n,m = Nemo, 64 - ch, r = chair\nNow you make image of this number - Nemo sitting on chair.</string>
-    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>monkey</b>, <b>mobile phone</b>, <b>banana</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>monkey</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>banana</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words, you can start go to walk in your head! Now you should see all words if you have done it right.</string>
+    <string name="wods_memory_system_howtouse">This method is very similar to memory palace.\nLets say you have a list of words - <b>ball</b>, <b>mobile phone</b>, <b>book</b>.\n\nNow imagine a journey to the school, or somewhere else and imagine that word as picture on the walk. \nFirst word <b>ball</b> - put on start of walk. <b>Mobile phone</b> - you put it in some good point for easy to memorize, <b>book</b> - put is somewhere in the end of the walk.\n\nOnce youved imagined all the words, you can start go to walk in your head! Now you should see all words if you have done it right.</string>
     <string name="quick_level_graph_title">Quick Level Graph</string>
     <string name="nothing_to_display">Nothing to display</string>
     <string name="delete_score">delete score</string>
@@ -250,20 +250,25 @@
     <string name="how_to_play">How to play</string>
     <string name="words_explain">There will be always one word displayed.\nPress new if you haven\'t seen this word.\nPress seen if you already seen this word.\nCheck memory techniques in menu.</string>
     <string name="about_app_title">About app</string>
-    <string name="actual_version">actual version: 1.0</string>
+    <string name="actual_version">Actual version: 1.0</string>
     <string name="latest_version">latest version: 1.0</string>
     <string name="about_author_title">About author</string>
-    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com\nYou can find the project on: https://github.com/GGJirka/MemoryApp</string>
+    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com\nYou can find the project on:\n</string>
     <string name="about_app_def">This application was created to improve your memory skills in numbers and words.</string>
     <string name="action_share_message">Try this app - Memory marathon, it will improve your memory and it\'s fun.</string>
     <string name="title_activity_main_send_feedback">MainSendFeedback</string>
     <string name="send_feedback_title">Send Feedback</string>
     <string name="send">Send</string>
-    <string name="sf_definition">Leave any message you want, if its an issue I will try to fix it. Or should I add some feature?</string>
+    <string name="sf_definition">Leave any message you want, if it\'s an issue I will try to fix it. Or should I add something?</string>
     <string name="sf_title">"Title: "</string>
     <string name="sf_message">Message</string>
     <string name="sf_sending_title">Send feedback using:</string>
     <string name="retry_icon">Retry</string>
     <string name="high_score_graph">High Score Graph</string>
     <string name="graph_no_score">No score to display.</string>
+
+    <string name="github_link"><a href="https://github.com/GGJirka/Memory-Marathon">
+        <u>Github.com/GGJirka/Memory-Marathon</u></a></string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_message">Enter message</string>
 </resources>

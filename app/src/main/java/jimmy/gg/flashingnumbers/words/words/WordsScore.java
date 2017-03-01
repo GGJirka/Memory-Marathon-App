@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,10 +66,15 @@ public class WordsScore extends AppCompatActivity {
     public void addView() {
         TextView view = new TextView(WordsScore.this);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 450, 0, 0);
+                (ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+        TypedValue typedValue = new TypedValue();
+        int actionBarHeight=0;
+        if(getTheme().resolveAttribute(android.R.attr.actionBarSize,typedValue,true)){
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data,getResources().getDisplayMetrics());
+        }
+        params.setMargins(0,0,0, actionBarHeight*2);
         view.setLayoutParams(params);
-        view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
         view.setText(getString(R.string.nothing_to_display));
         view.setTextSize(20);
         view.setTextColor(getResources().getColor(R.color.black));

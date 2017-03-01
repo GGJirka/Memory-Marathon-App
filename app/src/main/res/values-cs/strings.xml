@@ -84,7 +84,7 @@
     <string name="the_major_memory_system_title">Major Systém</string>
     <string name="title_activity_settings">Nastavení</string>
     <string name="to_unlock">" k odemčení"</string>
-    <string name="wods_memory_system_howtouse">Tato metoda je velice podobná pamětovímu paláci.\nMáme zadaný seznam slov - <b>opice</b>, <b>mobil</b>, <b>banán</b>.\n\nTedka jsi představte cestu, například do práce, do školy nebo kam často chodíte.\nPrvní slovo <b>opice</b> - představíme si někde nazačátku cestu. <b>Mobil</b> - představíme na nějákým detailním bodě nebo někde uprostřed.\nPoslední slovo <b>banán</b> umístíme někam na konec naší cesty, pro lepší zapomatování jsi zkuste zapomatovat předmět jako součást nějáké vymyšlené události.\n\nPoté co jste si zapomatovaly všechny slova můžeme se vydat na imaginární cestu. Měly byste se tu procházet a vidět ty předměty kolem. Pokud jste si to zapomatovaly správně.</string>
+    <string name="wods_memory_system_howtouse">Tato metoda je velice podobná pamětovímu paláci.\nMáme zadaný seznam slov - <b>baterka</b>, <b>mobil</b>, <b>kniha</b>.\n\nTedka jsi představte cestu, například do práce, do školy nebo kam často chodíte.\nPrvní slovo <b>baterka</b> - představíme si někde nazačátku cestu. <b>Mobil</b> - představíme na nějákým detailním bodě nebo někde uprostřed.\nPoslední slovo <b>kniha</b> umístíme někam na konec naší cesty, pro lepší zapomatování jsi zkuste zapomatovat předmět jako součást nějáké vymyšlené události.\n\nPoté co jste si zapomatovaly všechny slova můžeme se vydat na imaginární cestu. Měly byste se tu procházet a vidět ty předměty kolem. Pokud jste si to zapomatovaly správně.</string>
     <string name="pref_title_display_name"></string>
     <string name="animation_off">zobrazení animace: vypnuto</string>
     <string name="animation_on">zobrazení animace: zapnuto</string>
@@ -146,7 +146,7 @@
     <string name="latest_version">Nejnovější verze: 1.0</string>
     <string name="about_author_title">O autorovi</string>
     <string name="about_app_title">O aplikaci</string>
-    <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com\nCelý projekt najdete na: https://github.com/GGJirka/MemoryApp</string>
+    <string name="about_app_about_author">Aplikaci vytvořil GGJimmy\nKontaktujte mě - ggjimmy@gmail.com\nCelý projekt najdete na:\n</string>
     <string name="about_app_def">Tato aplikace byla vytvořena, abyste si zlepšily pamět v oblasti čísel a slov.</string>
     <string name="action_share_message">Zkus tudle aplikaci - Memory Marathon, zlepší to tvojí pamět\' a je to zábava.</string>
     <string name="send">Odeslat</string>
@@ -158,4 +158,7 @@
     <string name="retry_icon">Znovu</string>
     <string name="high_score_graph">Graf Skóre</string>
     <string name="graph_no_score">Žádné skóre k zobrazení</string>
+    <string name="enter_message">Vložte zprávu</string>
+    <string name="github_link"><a href="https://github.com/GGJirka/Memory-Marathon">         <u>Github.com/GGJirka/Memory-Marathon</u></a></string>
+    <string name="enter_title">Vložte název</string>
 </resources>

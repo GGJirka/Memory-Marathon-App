@@ -3,6 +3,7 @@ package jimmy.gg.flashingnumbers.main;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,10 +26,6 @@ public class MemoryMarathon extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static SharedPreferences sharedPreferences;
-
-    /*
-     * TODO: GRAPH ICON X, SORT BY DATE AND SORT BY SCORE SAVE RADIO BUTTON,SAVE INSTANCE STATE WORDS.
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +52,13 @@ public class MemoryMarathon extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+    //User clicks on Numbers button
     public void numbersGameStart(View v) {
         Intent intent = new Intent(this, FlashingNumbers.class);
         startActivity(intent);
     }
 
+    //User clicks on Words button
     public void wordsGameStart(View v) {
         Intent intent = new Intent(this, WordsMain.class);
         startActivity(intent);

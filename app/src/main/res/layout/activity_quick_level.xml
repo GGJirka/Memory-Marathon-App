@@ -183,6 +183,5 @@
             android:text="@string/button_quick_retry"
             android:layout_weight="1.0"
             android:textSize="17dp" />
-
     </LinearLayout>
 </RelativeLayout>

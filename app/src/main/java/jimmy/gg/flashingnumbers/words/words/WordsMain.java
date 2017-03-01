@@ -128,11 +128,11 @@ public class WordsMain extends AppCompatActivity {
     public void initWordList() {
         try {
             String wordlist;
-            //if(Locale.getDefault().getLanguage().equals("en")) {
+            if(Locale.getDefault().getLanguage().equals("en")) {
                 wordlist = "wordlist-en.txt";
-           // }/*else{
-                //wordlist = "wordlist-cz.txt";
-           // }*/
+            }else{
+                wordlist = "wordlist-cz.txt";
+            }
             bf = new BufferedReader(new InputStreamReader(getResources().getAssets().open(wordlist)));
             Runnable run = new Runnable() {
                 @Override

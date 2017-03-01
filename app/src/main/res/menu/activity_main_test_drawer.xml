@@ -11,10 +11,6 @@
             android:title="@string/settings"
             android:icon="@drawable/settings" />
         <item
-            android:id="@+id/drawer_rate"
-            android:title="@string/rate_us"
-            android:icon="@drawable/drawer_rate_us" />
-        <item
             android:id="@+id/drawer_about"
             android:title="@string/about_app"
             android:icon="@drawable/drawer_about" />

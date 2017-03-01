@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -28,6 +29,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,37 +74,37 @@ public class QuickLevel extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.checkbox, null);
         final CheckBox checkbox = (CheckBox) view.findViewById(R.id.check);
-            new AlertDialog.Builder(QuickLevel.this)
-                    .setView(view)
-                    .setTitle(R.string.quick_level_rules)
-                    .setMessage(getString(R.string.quick_level_explain))
-                    .setPositiveButton(getResources().getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (checkbox.isChecked()) {
-                                SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
-                                editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
-                                editor.commit();
-                            }
-                            timerBetweenLevels();
+        new AlertDialog.Builder(QuickLevel.this)
+                .setView(view)
+                .setTitle(R.string.quick_level_rules)
+                .setMessage(getString(R.string.quick_level_explain))
+                .setPositiveButton(getResources().getText(R.string.quick_button_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (checkbox.isChecked()) {
+                            SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                            editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
+                            editor.apply();
                         }
-                    })
-                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            if (checkbox.isChecked()) {
-                                SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
-                                editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
-                                editor.commit();
-                            }
-                            timerBetweenLevels();
+                        timerBetweenLevels();
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        if (checkbox.isChecked()) {
+                            SharedPreferences.Editor editor = FlashingNumbers.sharedPreferences.edit();
+                            editor.putString(String.valueOf(getText(R.string.CHECKBOX)), "check");
+                            editor.apply();
                         }
-                    })
-                    .show();
+                        timerBetweenLevels();
+                    }
+                })
+                .show();
 
     }
 
-    public void timerBetweenLevels(){
+    public void timerBetweenLevels() {
         if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("settings_timer_quick", true)) {
             final TextView countDown = (TextView) findViewById(R.id.quick_count_down);
             countDown.setVisibility(View.VISIBLE);
@@ -125,7 +131,7 @@ public class QuickLevel extends AppCompatActivity {
     }
 
 
-    public void displayNumbers(){
+    public void displayNumbers() {
         TextView numbers = (TextView) findViewById(R.id.quick_numbers);
         TextView timeRemain = (TextView) findViewById(R.id.quick_time_remain);
         timeRemain.setVisibility(View.VISIBLE);
@@ -134,7 +140,7 @@ public class QuickLevel extends AppCompatActivity {
         Random random = new Random();
         numbers.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-        for(int i=0;i<level;i++){
+        for (int i = 0; i < level; i++) {
             builder.append(random.nextInt(10));
         }
         numbers.setText(builder.toString());
@@ -142,14 +148,14 @@ public class QuickLevel extends AppCompatActivity {
         startTimer();
     }
 
-    public void onPause(){
+    public void onPause() {
         super.onPause();
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         EditText editText = (EditText) findViewById(R.id.quick_edit_text);
-        if(editText.getVisibility() == View.INVISIBLE) {
+        if (editText.getVisibility() == View.INVISIBLE) {
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
         if (FlashingNumbers.sharedPreferences.getString("QUICK_LEVEL_STATE", "2").equals("0")) {
@@ -168,18 +174,18 @@ public class QuickLevel extends AppCompatActivity {
 
     }
 
-    public void onStop(){
+    public void onStop() {
         super.onStop();
     }
 
-    public void startTimer(){
+    public void startTimer() {
         progress.setVisibility(View.VISIBLE);
 
-        secondTimer = new CountDownTimer(level*1000+1000,1){
+        secondTimer = new CountDownTimer(level * 1000 + 1000, 1) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                progress.setProgress((int) millisUntilFinished/((level*1000+1000)/100));
+                progress.setProgress((int) millisUntilFinished / ((level * 1000 + 1000) / 100));
             }
 
             @Override
@@ -190,7 +196,7 @@ public class QuickLevel extends AppCompatActivity {
         secondTimer.start();
     }
 
-    public void levelRemember(){
+    public void levelRemember() {
 
         EditText editText = (EditText) findViewById(R.id.quick_edit_text);
         findViewById(R.id.quick_button_done).setVisibility(View.VISIBLE);
@@ -210,13 +216,14 @@ public class QuickLevel extends AppCompatActivity {
         timerOnEnd();
     }
 
-    public void timerOnEnd(){
+    public void timerOnEnd() {
 
-        thirdTimer = new CountDownTimer(level*2000+2000,1){
+        thirdTimer = new CountDownTimer(level * 2000 + 2000, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
-                progress.setProgress((int) millisUntilFinished/((level*2000+2000)/100));
+                progress.setProgress((int) millisUntilFinished / ((level * 2000 + 2000) / 100));
             }
+
             @Override
             public void onFinish() {
                 numberFinish();
@@ -225,7 +232,7 @@ public class QuickLevel extends AppCompatActivity {
         thirdTimer.start();
     }
 
-    public void numberFinish(){
+    public void numberFinish() {
         final EditText editText = (EditText) findViewById(R.id.quick_edit_text);
         Runnable key = new Runnable() {
             @Override
@@ -246,6 +253,7 @@ public class QuickLevel extends AppCompatActivity {
         findViewById(R.id.quick_button_done).setVisibility(View.INVISIBLE);
 
         String numberText = editText.getText().toString();
+
         /*ContextThemeWrapper newContext = new ContextThemeWrapper(getApplicationContext(), R.style.MaterialButton);
         final LinearLayout layout = (LinearLayout) findViewById(R.id.quick_linear_result);
 
@@ -300,7 +308,7 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     level++;
                     timerBetweenLevels();
-                    setTitle(getString(R.string.quick_level_tit) +" "+ level);
+                    setTitle(getString(R.string.quick_level_tit) + " " + level);
                     removeView();
                 }
             });
@@ -313,11 +321,11 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     SharedPreferences sharedPreferences = FlashingNumbers.sharedPreferences;
                     level = 1;
-                    setTitle(getString(R.string.quick_level_tit) +" "+ level);
+                    setTitle(getString(R.string.quick_level_tit) + " " + level);
                     int numberCount = number.getText().toString().length() - 1;
-                    String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT,0)+1);
+                    String count = String.valueOf(sharedPreferences.getInt(QuickLevelHighScore.KEY_COUNT, 0) + 1);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt(QuickLevelHighScore.KEY_COUNT,Integer.parseInt(count));
+                    editor.putInt(QuickLevelHighScore.KEY_COUNT, Integer.parseInt(count));
                     editor.apply();
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                     editor.putString(QuickLevelHighScore.KEY + count, date + " " + getString(R.string.numbers)
@@ -339,7 +347,7 @@ public class QuickLevel extends AppCompatActivity {
                 public void onClick(View v) {
                     level = 1;
                     timerBetweenLevels();
-                    setTitle(getString(R.string.quick_level_tit)+" "+ level);
+                    setTitle(getString(R.string.quick_level_tit) + " " + level);
                     removeView();
                     linear.setVisibility(View.INVISIBLE);
                 }
@@ -347,19 +355,21 @@ public class QuickLevel extends AppCompatActivity {
         }
         editText.setText("");
     }
-    public void removeView(){
+
+    public void removeView() {
         findViewById(R.id.quick_level_number).setVisibility(View.INVISIBLE);
         findViewById(R.id.quick_level_your_answer).setVisibility(View.INVISIBLE);
         findViewById(R.id.quick_level_button_next).setVisibility(View.INVISIBLE);
         findViewById(R.id.quick_level_answer).setVisibility(View.INVISIBLE);
         findViewById(R.id.quick_level_number_shown).setVisibility(View.INVISIBLE);
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem menu){
-        switch(menu.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        switch (menu.getItemId()) {
             case R.id.high_score:
                 Intent intent = new Intent(this, TabbedHighScore.class);
-                intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)),"1");
+                intent.putExtra(String.valueOf(getText(R.string.EXTRA_PAGE)), "1");
                 startActivity(intent);
                 break;
             case R.id.quick_action_settings:
@@ -373,12 +383,12 @@ public class QuickLevel extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.popup_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.popup_menu, menu);
         return true;
     }
 
-    public void numbersRemembered(View view){
+    public void numbersRemembered(View view) {
         if (firstTimer != null) {
             firstTimer.cancel();
         }
@@ -390,17 +400,32 @@ public class QuickLevel extends AppCompatActivity {
         }
         numberFinish();
     }
+
     @Override
-    public void onDestroy(){
-        if(firstTimer != null) {
+    public void onDestroy() {
+        if (firstTimer != null) {
             firstTimer.cancel();
         }
-        if(secondTimer !=null) {
+        if (secondTimer != null) {
             secondTimer.cancel();
         }
-        if(thirdTimer != null) {
+        if (thirdTimer != null) {
             thirdTimer.cancel();
         }
         super.onDestroy();
     }
+    /*@Override
+    public void onSaveInstanceState(Bundle saveInstanceState){
+        super.onSaveInstanceState(saveInstanceState);
+        EditText number = (EditText) findViewById(R.id.quick_edit_text);
+        saveInstanceState.putString("EDIT_NUMBER",number.getText().toString());
+        TextView numbers = (TextView) findViewById(R.id.quick_numbers);
+        saveInstanceState.putString("VIEW_NUMBER",numbers.getText().toString());
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle restoreInstanceState){
+        TextView numbers = (TextView) findViewById(R.id.quick_numbers);
+        numbers.setText(restoreInstanceState.getString("VIEW_NUMBER"));
+    }*/
 }

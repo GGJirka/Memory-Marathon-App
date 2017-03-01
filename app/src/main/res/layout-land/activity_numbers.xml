@@ -69,7 +69,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:weightSum="1"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:id="@+id/numbers_numbers_config">
 
             <ImageButton

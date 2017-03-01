@@ -25,7 +25,7 @@
         android:height="70sp"
         android:onClick="levelsClicked"
         android:theme="@style/MaterialButton"
-        android:drawableLeft="@drawable/levels"
+        android:drawableLeft="@drawable/levels_icon"
         android:id="@+id/button" />
 
     <Button
