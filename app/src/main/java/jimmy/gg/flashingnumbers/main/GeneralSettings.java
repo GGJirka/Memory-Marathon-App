@@ -14,11 +14,12 @@ public class GeneralSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_settings);
         setTitle(getString(R.string.general_settings_title));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new GeneralPreference()).commit();
+    */
     }
 
-    public class GeneralPreference extends PreferenceFragment {
+    /*public class GeneralPreference extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -30,5 +31,5 @@ public class GeneralSettings extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         this.finish();
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

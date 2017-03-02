@@ -30,19 +30,20 @@ public class FlashingNumbers extends AppCompatActivity {
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         //IternalMemory memory = new IternalMemory();
         levelList = new ArrayList<>();
-        levelList.add(new Level(getString(R.string.level)+" 1", getString(R.string.numbers)+" 5   ", getString(R.string.timer)+" 10s   ", "easy"));
-        levelList.add(new Level(getString(R.string.level)+" 2", getString(R.string.numbers)+" 8   ", getString(R.string.timer)+" 20s   ", "easy"));
-        levelList.add(new Level(getString(R.string.level)+" 3", getString(R.string.numbers)+" 13 ", getString(R.string.timer)+" 45s   ", "easy"));
-        levelList.add(new Level(getString(R.string.level)+" 4", getString(R.string.numbers)+" 15 ", getString(R.string.timer)+" 45s   ", "easy"));
-        levelList.add(new Level(getString(R.string.level)+" 5", getString(R.string.numbers)+" 19 ", getString(R.string.timer)+" 60s   ", "easy"));
-        levelList.add(new Level(getString(R.string.level)+" 6", getString(R.string.numbers)+" 25 ", getString(R.string.timer)+" 80s   ", "medium"));
-        levelList.add(new Level(getString(R.string.level)+" 7", getString(R.string.numbers)+" 30 ", getString(R.string.timer)+" 80s   ", "medium"));
+        levelList.add(new Level(getString(R.string.level)+" 1", getString(R.string.numbers)+" 5   ", getString(R.string.timer)+" 15s   ", "easy"));
+        levelList.add(new Level(getString(R.string.level)+" 2", getString(R.string.numbers)+" 7   ", getString(R.string.timer)+" 20s   ", "easy"));
+        levelList.add(new Level(getString(R.string.level)+" 3", getString(R.string.numbers)+" 10 ", getString(R.string.timer)+" 30s   ", "easy"));
+        levelList.add(new Level(getString(R.string.level)+" 4", getString(R.string.numbers)+" 13 ", getString(R.string.timer)+" 40s   ", "easy"));
+        levelList.add(new Level(getString(R.string.level)+" 5", getString(R.string.numbers)+" 17 ", getString(R.string.timer)+" 50s   ", "easy"));
+        levelList.add(new Level(getString(R.string.level)+" 6", getString(R.string.numbers)+" 20 ", getString(R.string.timer)+" 60s   ", "medium"));
+        levelList.add(new Level(getString(R.string.level)+" 7", getString(R.string.numbers)+" 25 ", getString(R.string.timer)+" 60s   ", "medium"));
         levelList.add(new Level(getString(R.string.level)+" 8", getString(R.string.numbers)+" 33 ", getString(R.string.timer)+" 80s   ", "medium"));
         levelList.add(new Level(getString(R.string.level)+" 9", getString(R.string.numbers)+" 40 ",getString(R.string.timer)+" 120s", "medium"));
         levelList.add(new Level(getString(R.string.level)+" 10", getString(R.string.numbers)+" 45 ", getString(R.string.timer)+" 120s", "medium"));
         levelList.add(new Level(getString(R.string.level)+" 11", getString(R.string.numbers)+" 55 ", getString(R.string.timer)+" 150s", "hard"));
         levelList.add(new Level(getString(R.string.level)+" 12", getString(R.string.numbers)+" 65 ", getString(R.string.timer)+" 180s", "hard"));
         levelList.add(new Level(getString(R.string.level)+" 13", getString(R.string.numbers)+" 80 ", getString(R.string.timer)+" 180s", "hard"));
+        levelList.add(new Level(getString(R.string.level)+" 14", getString(R.string.numbers)+" 95 ", getString(R.string.timer)+" 240s", "hard"));
     }
     public void levelsClicked(View view){
         Intent intent = new Intent(this,Levels.class);

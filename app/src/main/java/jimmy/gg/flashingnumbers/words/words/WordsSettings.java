@@ -25,7 +25,7 @@ public class WordsSettings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class WordsPreference extends PreferenceFragment {
+    public static class WordsPreference extends PreferenceFragment {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.words_pref);

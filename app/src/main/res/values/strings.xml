@@ -15,7 +15,7 @@
     <string name="pref_header_general" translatable="false">General</string>
 
     <string name="pref_title_social_recommendations" translatable="false">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
+    <string name="pref_description_social_recommendations" translatable="false">Recommendations for people to contact
         based on your message history
     </string>
 
@@ -69,7 +69,7 @@
 
     <string-array name="multi_select_list_preference_default_value" />
 
-    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="pref_title_system_sync_settings" translatable="false">System sync settings</string>
 
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications" translatable="false">Notifications</string>
@@ -79,7 +79,7 @@
     <string name="pref_title_ringtone" translatable="false">Ringtone</string>
     <string name="pref_ringtone_silent" translatable="false">Silent</string>
     <string name="numbers_numbers">NUMBERS</string>
-    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_title_vibrate" translatable="false">Vibrate</string>
     =======
 
     <!-- Example settings for Data & Sync -->
@@ -109,9 +109,9 @@
     <string name="quick_button_done">DONE</string>
 
     <string name="numbers_remembered_title" translatable="false">Numbers Remembered</string>
-    <string name="easy" translatable="false">easy</string>
+    <string name="easy">easy</string>
     <string name="medium" translatable="false">medium</string>
-    <string name="hard" translatable="false">hard</string>
+    <string name="hard">hard</string>
     <string name="numbers_remembered_passed"> passed</string>
     <string name="dialog_passed_message1">You have successfuly remembered</string>
     <string name="dialog_passed_message2">numbers in time: </string>
@@ -125,12 +125,12 @@
     <string name="quick_button_ok">OK</string>
 
     <string name="quick_level_hs_title">High Score</string>
-    <string name="title_activity_tabbed_high_score">TabbedHighScore</string>
+    <string name="title_activity_tabbed_high_score" translatable="false">TabbedHighScore</string>
     <string name="action_settings">Settings</string>
     <string name="section_format" translatable="false">Hello World from section: %1$d</string>
 
-    <string name="EXTRA_LEVEL">jimmy.gg.flashingnumbers.LEVEL</string>
-    <string name="EXTRA_NUMBERS">jimmy.gg.flashingnumbers.NUMBERS</string>
+    <string name="EXTRA_LEVEL" translatable="false">jimmy.gg.flashingnumbers.LEVEL</string>
+    <string name="EXTRA_NUMBERS" translatable="false">jimmy.gg.flashingnumbers.NUMBERS</string>
     <string name="LEVEL_KEY">HIGHEST_LEVEL1</string>
     <string name="EXTRA_TIME">jimmy.gg.flashingnumbers.TIME</string>
     <string name="EXTRA_PAGE">jimmy.gg.flashingnumbers.PAGE</string>
@@ -143,7 +143,7 @@
 
     <string name="default_value_timer">3</string>
     <string name="default_value_numbers">2</string>
-    <string name="CHECKBOX">CHECKBOX</string>
+    <string name="CHECKBOX" translatable="false">CHECKBOX</string>
     <string name="INFO">INFO</string>
 
     <string name="button_quick_retry">RETRY</string>
@@ -158,14 +158,14 @@
 
 
     <string name="words_activity_title">Words</string>
-    <string name="words_activity_dialog">WORDSINFO</string>
+    <string name="words_activity_dialog" translatable="false">WORDSINFO</string>
     <string name="words_delete_score">Delete score</string>
     <string name="quick_level_settings_title">QUICK LEVEL</string>
     <string name="settings">Settings</string>
     <string name="header_number_settings">Numbers settings</string>
     <string name="header_quick_mode_settings">Quick numbers settings</string>
     <string name="animation">Animation</string>
-    <string name="title_activity_main_test">Memory Marathon</string>
+    <string name="title_activity_main_test" translatable="false">Memory Marathon</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
@@ -202,7 +202,7 @@
     <string name="numbers_size_group">Actual number size in group:</string>
     <string name="numbers_size_row">Actual number of groups in row:</string>
     <string name="actual_inspection_time">"Actual inspection time: "</string>
-    <string name="inspection_time_none" translatable="false">Actual inspection time: none</string>
+    <string name="inspection_time_none">Actual inspection time: none</string>
     <string name="animation_offf">display animation: off</string>
     <string name="display_animation_onn">display animation: on</string>
     <string name="animation_tit">Animation</string>
@@ -253,10 +253,10 @@
     <string name="actual_version">Actual version: 1.0</string>
     <string name="latest_version">latest version: 1.0</string>
     <string name="about_author_title">About author</string>
-    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjimmmy@gmail.com</string>
+    <string name="about_app_about_author">Application is created by GGJimmy\nContact me - ggjirka4@gmail.com</string>
     <string name="about_app_def">This application was created to improve your memory skills in numbers and words.</string>
     <string name="action_share_message">Try this app - Memory marathon, it will improve your memory and it\'s fun.</string>
-    <string name="title_activity_main_send_feedback">MainSendFeedback</string>
+    <string name="title_activity_main_send_feedback" translatable="false">MainSendFeedback</string>
     <string name="send_feedback_title">Send Feedback</string>
     <string name="send">Send</string>
     <string name="sf_definition">Leave any message you want, if it\'s an issue I will try to fix it. Or should I add something?</string>

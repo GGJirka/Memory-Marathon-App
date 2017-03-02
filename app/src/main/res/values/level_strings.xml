@@ -1,5 +1,5 @@
 <resources>
-    <string name="level_1" translatable="false">Level 1</string>
+    <string name="level_1">Level 1</string>
     <string name="level_2" translatable="false">Level 2</string>
     <string name="level_3" translatable="false">Level 3</string>
     <string name="level_4" translatable="false">Level 4</string>
@@ -8,9 +8,9 @@
     <string name="level_7" translatable="false">Level 7</string>
     <string name="level_8" translatable="false">Level 8</string>
     <string name="level_9" translatable="false">Level 9</string>
-    <string name="level_10" translatable="false">Level 10</string>
-    <string name="level_11" translatable="false">Level 11</string>
+    <string name="level_10">Level 10</string>
+    <string name="level_11">Level 11</string>
     <string name="level_12" translatable="false">Level 12</string>
-    <string name="revel_numbers">Reveal numbers</string>
+    <string name="revel_numbers" translatable="false">Reveal numbers</string>
 
 </resources>

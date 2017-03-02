@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ShareActionProvider;
 
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.images.ImagesMain;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.techniques.MemoryTechniques;
 import jimmy.gg.flashingnumbers.techniques.NumberMajorSystem;
@@ -44,7 +45,7 @@ public class MemoryMarathon extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -63,7 +64,10 @@ public class MemoryMarathon extends AppCompatActivity
         Intent intent = new Intent(this, WordsMain.class);
         startActivity(intent);
     }
-
+    public void imagesStart(View v){
+        Intent intent = new Intent(this, ImagesMain.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_test, menu);

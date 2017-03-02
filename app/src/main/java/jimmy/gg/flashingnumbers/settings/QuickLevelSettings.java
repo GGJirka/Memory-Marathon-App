@@ -25,7 +25,7 @@ public class QuickLevelSettings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class LevelsSettings extends PreferenceFragment {
+    public static class LevelsSettings extends PreferenceFragment {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

@@ -71,7 +71,7 @@ public class NumbersLevelsSettings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class SettingsFragment extends PreferenceFragment
+    public static class SettingsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         private final String KEY_SETTINGS_GROUP = "levels_test_g";

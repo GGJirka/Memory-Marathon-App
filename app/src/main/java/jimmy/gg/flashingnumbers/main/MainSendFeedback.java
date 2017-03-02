@@ -51,7 +51,7 @@ public class MainSendFeedback extends AppCompatActivity {
                                     Intent email = new Intent(Intent.ACTION_SEND);
                                     email.setData(Uri.parse("mailto:"));
                                     email.setType("message/rfc822");
-                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"GGJimmy@gmail.com"});
+                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"ggjirka4@gmail.com"});
                                     email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
                                     email.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
 
