@@ -25,15 +25,27 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="101dp"
         android:id="@+id/next"
+        android:text="NEXT"
         android:onClick="nextImage"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/prev"
+        android:text="previous"
         android:layout_alignBaseline="@+id/next"
         android:layout_alignBottom="@+id/next"
         android:layout_alignLeft="@+id/image"
         android:layout_alignStart="@+id/image"
         android:onClick="previousImage"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="done"
+        android:onClick="done"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/button7" />
 </RelativeLayout>
