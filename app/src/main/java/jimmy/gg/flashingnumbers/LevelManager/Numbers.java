@@ -179,6 +179,9 @@ public class Numbers extends AppCompatActivity{
         LinearLayout layout = (LinearLayout) findViewById(R.id.numbers_numbers_config);
         int groupSize = Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_GROUP,"2"));
         int row = Integer.parseInt(sharedPreferences.getString(KEY_SETTINGS_ROW,"2"));
+        if(groupSize==3 && row>3){
+            row = 3;
+        }
         String extraNumbers = getIntent().getStringExtra(EXTRA_NUMBERS);
         LinearLayout dots = (LinearLayout) findViewById(R.id.dots);
         StringBuilder build_number = new StringBuilder();
@@ -194,7 +197,7 @@ public class Numbers extends AppCompatActivity{
             build_number.append(String.valueOf(rand));
             numbersToSend.append(String.valueOf(rand));
 
-            if(i%groupSize==0 ) {
+            if(i%groupSize==0 ){
                 build_number.append(" ");
             }
             if((row*groupSize)+groupSize-1>=12){

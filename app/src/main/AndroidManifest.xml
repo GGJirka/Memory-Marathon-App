@@ -68,9 +68,6 @@
             android:name=".main.MainSettings"
             android:theme="@style/MainStyle" />
         <activity
-            android:name=".main.GeneralSettings"
-            android:theme="@style/MainStyle" />
-        <activity
             android:name=".main.MainHighScore"
             android:theme="@style/MainStyle" />
         <activity
