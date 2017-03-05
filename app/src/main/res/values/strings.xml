@@ -271,4 +271,5 @@
         <u>Github.com/GGJirka/Memory-Marathon</u></a></string>
     <string name="enter_title">Enter title</string>
     <string name="enter_message">Enter message</string>
+    <string name="about_app_project">You can find the whole project on:</string>
 </resources>

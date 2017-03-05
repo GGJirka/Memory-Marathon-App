@@ -162,4 +162,5 @@
     <string name="github_link"><a href="https://github.com/GGJirka/Memory-Marathon">         <u>Github.com/GGJirka/Memory-Marathon</u></a></string>
     <string name="enter_title">Vložte název</string>
     <string name="default_value_timer" translatable="false">3</string>
+    <string name="about_app_project">"Celý projekt najdete na: "</string>
 </resources>

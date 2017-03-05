@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jimmy.gg.flashingnumbers.R;
-import jimmy.gg.flashingnumbers.helpers.IternalMemory;
 import jimmy.gg.flashingnumbers.highscore.TabbedHighScore;
 import jimmy.gg.flashingnumbers.menu.FlashingNumbers;
 import jimmy.gg.flashingnumbers.techniques.NumberMajorSystem;

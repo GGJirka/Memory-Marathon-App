@@ -16,8 +16,8 @@ public class MainAboutApp extends AppCompatActivity {
         setContentView(R.layout.activity_main_about_app);
         setTitle(getString(R.string.about_app_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*TextView githubLink = (TextView) findViewById(R.id.github_link);
-        githubLink.setMovementMethod(LinkMovementMethod.getInstance());*/
+        TextView githubLink = (TextView) findViewById(R.id.github_link);
+        githubLink.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
