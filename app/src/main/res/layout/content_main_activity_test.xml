@@ -44,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/words_icon" />
 
-    <Button
+    <!--<Button
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:textSize="24sp"
@@ -53,5 +53,5 @@
         android:layout_below="@id/button4"
         android:layout_centerHorizontal="true"
         android:id="@+id/main_images"
-        android:onClick="imagesStart"/>
+        android:onClick="imagesStart"/>-->
 </RelativeLayout>

@@ -56,6 +56,9 @@ public class FlashingNumbers extends AppCompatActivity {
         Intent intent = new Intent(this,QuickLevel.class);
         startActivity(intent);
     }
+    public void multiplayerStart(View view){
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();

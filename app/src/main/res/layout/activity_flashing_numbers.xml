@@ -18,11 +18,10 @@
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70sp"
         android:text="@string/levels_button"
         android:layout_marginBottom="0sp"
         android:textSize="22sp"
-        android:height="70sp"
         android:onClick="levelsClicked"
         android:theme="@style/MaterialButton"
         android:drawableLeft="@drawable/levels_icon"
@@ -30,26 +29,31 @@
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
+        android:layout_height="70sp"
+        android:layout_marginTop="40sp"
         android:textSize="22sp"
-        android:height="70sp"
         android:text="@string/numbers_fast_mode"
         android:theme="@style/MaterialButton"
         android:drawableLeft="@drawable/fast_mode"
         android:onClick="quickClicked"/>
-
     <Button
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
+        android:layout_height="70sp"
+        android:layout_marginTop="40sp"
         android:textSize="20sp"
-        android:height="70sp"
+        android:onClick="multiplayerStart"
+        android:text="multiplayer"
+        android:theme="@style/MaterialButton" />
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="70sp"
+        android:layout_marginTop="40sp"
+        android:textSize="20sp"
         android:text="@string/settings_button"
         android:onClick="settingsClicked"
-        android:layout_marginBottom="70sp"
         android:theme="@style/MaterialButton"
         android:drawableLeft="@drawable/settings"/>
+
 
 </LinearLayout>
 </RelativeLayout>

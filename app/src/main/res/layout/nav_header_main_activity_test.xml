@@ -9,7 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -18,4 +17,5 @@
         android:textSize="40dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:id="@+id/textView" />
+
 </RelativeLayout>
