@@ -40,7 +40,7 @@ public class MemoryMarathon extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);1
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -53,6 +53,7 @@ public class MemoryMarathon extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
     //User clicks on Numbers button
     public void numbersGameStart(View v) {
         Intent intent = new Intent(this, FlashingNumbers.class);

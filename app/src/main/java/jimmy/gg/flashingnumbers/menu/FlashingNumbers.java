@@ -3,16 +3,21 @@ package jimmy.gg.flashingnumbers.menu;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.net.ConnectivityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers;
 import jimmy.gg.flashingnumbers.quicklevel.QuickLevel;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
 
@@ -56,8 +61,16 @@ public class FlashingNumbers extends AppCompatActivity {
         Intent intent = new Intent(this,QuickLevel.class);
         startActivity(intent);
     }
-    public void multiplayerStart(View view){
 
+    public void multiplayerStart(View view){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState()== NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED){
+            Intent intent = new Intent(this, MultiplayerNumbers.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot connect to internet. Try again.", Toast.LENGTH_LONG).show();
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

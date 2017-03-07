@@ -20,6 +20,9 @@ public class Server extends AppCompatActivity{
     private Socket clientSocket;
     private ArrayList<ClientHandler> clients;
 
+    public static void main(String[] args){
+        new Server();
+    }
     public Server(){
         try {
             serverSocket = new ServerSocket(4758);
@@ -33,6 +36,8 @@ public class Server extends AppCompatActivity{
     public void initSocket(){
         try {
             clientSocket = serverSocket.accept();
+            new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())).write("TEST"+"\r\n");
+            new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())).flush();
             clients.add(new ClientHandler(this,"username",new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),
                     new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))));
         }catch(Exception e){
