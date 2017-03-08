@@ -20,12 +20,9 @@ public class Server extends AppCompatActivity{
     private Socket clientSocket;
     private ArrayList<ClientHandler> clients;
 
-    public static void main(String[] args){
-        new Server();
-    }
     public Server(){
         try {
-            serverSocket = new ServerSocket(4758);
+            serverSocket = new ServerSocket(80);
         } catch (IOException e) {
             e.printStackTrace();
         }

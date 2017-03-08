@@ -10,36 +10,66 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+
 /**
  * Created by ggjimmy on 3/7/17.
  */
 
-public class Client extends AsyncTask<Void, Void, Void>{
+public class Client extends AsyncTask<Object, Object, String> {
     private Socket clientSocket;
     private BufferedWriter bw;
     private BufferedReader br;
-    private String message;
+    private String message = "";
+    private TextView view;
 
-    public Client(){
-        try {
-            clientSocket = new Socket("192.168.1.100",4758);
-            bw = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            bw.write("TEST"+"\r\n");
-            bw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Client(TextView view){
+        this.view = view;
     }
 
     @Override
-    protected Void doInBackground(Void... params){
-        try {
-            message = br.readLine();
-        } catch (IOException e){
-            e.printStackTrace();
+    protected String doInBackground(Object... params){
+                clientSocket = null;
+                try {
+                    clientSocket = new Socket("192.168.1.101", 4758);
+                    message = "";
+                    bw = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+                    br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    bw.write("TEST"+"\r\n");
+                    bw.flush();
+                } catch (IOException e) {
+                    message = e.getMessage();
+                }
+
+
+        return message;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+       // readingThread();
+        super.onPostExecute(s);
+    }
+
+    public void readingThread(){
+        if(br != null) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            view.setText("waiting");
+                            String message = br.readLine();
+                            view.setText(message);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            thread.start();
+        }else{
+            readingThread();
         }
-        return null;
     }
 
     public String getMessage(){
