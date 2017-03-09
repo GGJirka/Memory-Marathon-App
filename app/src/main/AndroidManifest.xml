@@ -101,7 +101,8 @@
 
         <activity android:name=".images.ImagesMain" />
         <activity android:name=".images.ImagesRemember" />
-        <activity android:name=".multiplayer.MultiplayerNumbers"></activity>
+        <activity android:name=".multiplayer.MultiplayerNumbers"
+            android:theme="@style/NumbersStyle"/>
     </application>
 
 </manifest>

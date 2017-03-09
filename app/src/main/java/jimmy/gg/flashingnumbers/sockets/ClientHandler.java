@@ -3,48 +3,41 @@ package jimmy.gg.flashingnumbers.sockets;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- * Created by ggjimmy on 3/7/17.
- */
+public class ClientHandler extends Thread {
 
-public class ClientHandler{
-    private String username;
-    private Server server;
-    private BufferedWriter bw;
     private BufferedReader br;
+    private BufferedWriter bw;
+    private Server server;
+    private String receivedMessage = "";
 
-
-    public ClientHandler(Server server, String username, BufferedWriter bw, BufferedReader br){
+    public ClientHandler(Server server, BufferedReader br, BufferedWriter bw) {
         this.server = server;
-        this.username = username;
-        this.bw = bw;
         this.br = br;
+        this.bw = bw;
     }
 
-    public void run(){
-        server.sendToAllClients("ahoj");
-        Thread thread = new Thread(new Runnable(){
-            public void run() {
-                while (true) {
-                    try {
-                        String message = br.readLine();
-                        System.out.println("mesage " + message);
-                        server.sendToAllClients(message);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                receivedMessage = br.readLine();
+                System.out.println("received:  " + receivedMessage);
+                server.sendToAllClients(receivedMessage.trim());
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        });
-        thread.start();
+        }
     }
-    public BufferedReader getBufferedReader(){
-        return br;
+    public void send() throws IOException{
+        bw.write(receivedMessage);
+        bw.flush();
     }
-    public BufferedWriter getBufferedWriter(){
-        return bw;
+
+    public String getMessage() {
+        return receivedMessage;
+    }
+    public void disconnect(){
+        server.getClients().remove(this);
     }
 }

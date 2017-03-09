@@ -9,59 +9,74 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+
 /**
- * Created by ggjimmy on 3/7/17.
+ *
+ * @author root
  */
 public class Server {
-
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private ArrayList<ClientHandler> clients;
+    private ArrayList<BufferedWriter> writer;
+    private static Server server;
 
-    public static void main(String[] args) {
-        new Server();
+    public static void main(String[] args){
+        server = new Server();
     }
-
-    public Server() {
-        try {
-            System.out.println("connected client");
-            serverSocket = new ServerSocket(4758);
-            System.out.println("connected client");
-        } catch (IOException e) {
+    public Server(){
+        try{
+            this.serverSocket = new ServerSocket(4758);
+            this.clients = new ArrayList<>();
+            this.writer = new ArrayList<>();
+            this.listen();
+        }catch(IOException e){
             e.printStackTrace();
         }
-        clients = new ArrayList<>();
-        this.initSocket();
+    }
+    public void listen(){
+        Thread listenThread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                while(true){
+                    try {
+                        clientSocket = serverSocket.accept();
+                        ClientHandler client = new ClientHandler(server, new BufferedReader(
+                                new InputStreamReader(clientSocket.getInputStream())),
+                                new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())));
+                        clients.add(client);
+                        writer.add(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())));
+                        Thread clientThread = new Thread(client);
+                        clientThread.start();
+                        System.out.println("Client connected: "+clientSocket.getInetAddress());
+                    } catch (IOException ex) {
+
+                    }
+                }
+            }
+        });
+        listenThread.start();
     }
 
-    public void initSocket() {
-        System.out.println("connected client");
-        while (true) {
-            try {
-                clientSocket = serverSocket.accept();
-                System.out.println("connected client" + clientSocket.getInetAddress().getHostName());
-                ClientHandler client = new ClientHandler(this, "username", new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),
-                        new BufferedReader(new InputStreamReader(clientSocket.getInputStream())));
-
-                clients.add(client);
-                client.run();
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void sendToAllClients(String message){
+        if(message != ""){
+            for(BufferedWriter bw:writer){
+                try {
+                    bw.write(message+"\r\n");
+                    bw.flush();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
-
-    public void sendToAllClients(final String message) {
-        for (ClientHandler client : clients) {
-            try {
-                BufferedWriter bw = client.getBufferedWriter();
-                bw.write(message + "\r\n");
-                bw.flush();
-                System.out.println("send > " + message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public void tryToReconnect() throws IOException{
+        this.serverSocket.close();
+        clientSocket = null;
+        System.gc();
+        clientSocket = serverSocket.accept();
     }
-
+    public ArrayList<ClientHandler> getClients(){
+        return this.clients;
+    }
 }
