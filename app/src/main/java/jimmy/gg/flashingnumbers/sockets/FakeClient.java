@@ -1,10 +1,6 @@
 package jimmy.gg.flashingnumbers.sockets;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.RequiresPermission;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -29,6 +25,17 @@ public class FakeClient {
     * This creating creating a client socket to connect to local server
     * and proccess mssages
     */
+
+    public boolean socketClose(){
+        try{
+            clientSocket.close();
+            bw.close();
+            br.close();
+        }catch(Exception e){
+            return false;
+        }
+        return true;
+    }
 
     class SocketThread implements Runnable{
         @RequiresPermission(android.Manifest.permission.INTERNET)

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="room name"
+    android:id="@+id/edittext_alert2"
     android:textAlignment="center"
     android:layout_centerHorizontal="true"/>
 </RelativeLayout>

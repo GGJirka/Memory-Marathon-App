@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_room"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="jimmy.gg.flashingnumbers.multiplayer.RoomActivity">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:choiceMode="singleChoice"
+        android:id="@+id/connected_players"
+        android:layout_below="@+id/room_title_players" />
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Start"
+        android:layout_below="@id/connected_players"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_title_players"
+        android:textSize="15dp"
+        android:text="Connected players: "
+        android:textColor="@color/black"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/room_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:text="Room - jirka"
+        android:id="@+id/room_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/room_title_players"
+        android:layout_alignStart="@+id/room_title_players" />
+</RelativeLayout>
