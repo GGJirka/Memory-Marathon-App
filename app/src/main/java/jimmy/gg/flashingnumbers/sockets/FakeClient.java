@@ -20,11 +20,8 @@ public class FakeClient {
     private BufferedWriter bw;
     private BufferedReader br;
     private String message = "";
-    private TextView view;
 
-    public FakeClient(final TextView view){
-        this.view = view;
-        view.setText("test");
+    public FakeClient(){
         new Thread(new SocketThread()).start();
     }
 
@@ -46,7 +43,6 @@ public class FakeClient {
 
                 while(true){
                     String message = br.readLine();
-                    view.setText(message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
