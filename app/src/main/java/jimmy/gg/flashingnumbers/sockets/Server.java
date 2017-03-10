@@ -1,5 +1,7 @@
 package jimmy.gg.flashingnumbers.sockets;
 
+import android.support.annotation.RequiresPermission;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,11 +11,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-
-/**
- *
- * @author root
- */
 public class Server {
     private ServerSocket serverSocket;
     private Socket clientSocket;
@@ -24,16 +21,19 @@ public class Server {
     public static void main(String[] args){
         server = new Server();
     }
+
     public Server(){
         try{
             this.serverSocket = new ServerSocket(4758);
             this.clients = new ArrayList<>();
             this.writer = new ArrayList<>();
             this.listen();
-        }catch(IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
+
+    @RequiresPermission(android.Manifest.permission.INTERNET)
     public void listen(){
         Thread listenThread = new Thread(new Runnable(){
             @Override
@@ -50,7 +50,7 @@ public class Server {
                         clientThread.start();
                         System.out.println("Client connected: "+clientSocket.getInetAddress());
                     } catch (IOException ex) {
-
+                        ex.printStackTrace();
                     }
                 }
             }

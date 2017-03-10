@@ -1,12 +1,13 @@
 package jimmy.gg.flashingnumbers.menu;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.net.ConnectivityManagerCompat;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +63,7 @@ public class FlashingNumbers extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
     public void multiplayerStart(View view){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState()== NetworkInfo.State.CONNECTED ||

@@ -2,6 +2,7 @@ package jimmy.gg.flashingnumbers.sockets;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresPermission;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -30,10 +31,10 @@ public class FakeClient {
     /*
     * This creating creating a client socket to connect to local server
     * and proccess mssages
-    * */
+    */
 
     class SocketThread implements Runnable{
-
+        @RequiresPermission(android.Manifest.permission.INTERNET)
         @Override
         public void run() {
             try {
@@ -53,10 +54,4 @@ public class FakeClient {
         }
     }
 
-    /*private Handler handler = new Handler(){
-        public void handleMessage(Message message){
-            super.handleMessage(message);
-            view.setText(message.toString());
-        }
-    };*/
 }

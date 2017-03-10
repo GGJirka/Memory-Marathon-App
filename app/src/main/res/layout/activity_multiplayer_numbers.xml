@@ -11,8 +11,21 @@
     tools:context="jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers">
 
     <TextView
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="waiting for message... "
-        android:id="@+id/message"/>
+        android:layout_height="wrap_content"
+        android:text="Nick: "
+        android:textColor="@color/black"
+        android:id="@+id/nick"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="13dp" />
+
+    <EditText
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:maxLength="15"
+        android:layout_alignBaseline="@+id/nick"
+        android:layout_alignBottom="@+id/nick"
+        android:layout_toRightOf="@+id/nick"
+        android:layout_toEndOf="@+id/nick" />
 </RelativeLayout>

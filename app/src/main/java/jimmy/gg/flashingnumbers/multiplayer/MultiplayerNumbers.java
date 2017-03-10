@@ -1,6 +1,5 @@
 package jimmy.gg.flashingnumbers.multiplayer;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,17 +20,15 @@ public class MultiplayerNumbers extends AppCompatActivity {
         setContentView(R.layout.activity_multiplayer_numbers);
         TextView view = (TextView) findViewById(R.id.message);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*client = new Client(view);
-        client.execute();*/
+        setTitle("Multiplayer");
         fakeClient = new FakeClient(view);
-        //new Thread(new FakeClient(view).run());
     }
 
     public void setText(String message){
         TextView view = (TextView) findViewById(R.id.message);
         view.setText(message);
     }
-    @RequiresPermission(android.Manifest.permission.INTERNET)
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();
