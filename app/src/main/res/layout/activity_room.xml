@@ -12,7 +12,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:choiceMode="singleChoice"
@@ -30,19 +30,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/room_title_players"
         android:textSize="15dp"
-        android:text="Connected players: "
+        android:text="@string/connected_players"
         android:textColor="@color/black"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/room_title" />
-
+        android:layout_marginTop="40dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:textColor="@color/black"
-        android:text="Room - jirka"
+        android:text="Waiting for users ..."
         android:id="@+id/room_title"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/room_title_players"

@@ -41,7 +41,7 @@ public class HighScoreAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
         v = View.inflate(context, R.layout.activity_score,null);
         TextView time = (TextView) v.findViewById(R.id.high_score_score);
         TextView level = (TextView) v.findViewById(R.id.high_score_level);
@@ -50,6 +50,9 @@ public class HighScoreAdapter extends BaseAdapter{
             level.setText(scores.get(position).getLevel());
             time.setText(scores.get(position).getHighScore() + "s");
         } else {
+            if(scores.get(position).getUser()){
+                level.setTextSize(15);
+            }
             level.setText(scores.get(position).getText());
         }
         v.setTag(position);

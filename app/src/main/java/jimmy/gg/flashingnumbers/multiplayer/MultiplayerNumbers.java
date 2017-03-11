@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.sockets.Client;
@@ -16,6 +18,7 @@ import jimmy.gg.flashingnumbers.sockets.FakeClient;
 
 public class MultiplayerNumbers extends AppCompatActivity implements IMultiplayerNumbers{
     public final String ROOMNAME = "ROOMNAME";
+    public final String NICKNAME = "NICKNAME";
     public Client         client;
     public FakeClient fakeClient;
 
@@ -29,42 +32,67 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     }
     @Override
     public void connectToRoom(View v) {
-        final View view = LayoutInflater.from(this).inflate(R.layout.edittext_alert,null);
-        final EditText text = (EditText) view.findViewById(R.id.edittext_alert2);
+        final EditText nickname = (EditText) findViewById(R.id.nick);
+        if(!nickname.getText().toString().equals("")) {
+            final View view = LayoutInflater.from(this).inflate(R.layout.edittext_alert, null);
+            final EditText text = (EditText) view.findViewById(R.id.edittext_alert2);
 
-        AlertDialog.Builder connectDialog = new AlertDialog.Builder(MultiplayerNumbers.this)
-                .setTitle("Connect")
-                .setMessage("Enter name of room: ")
-                .setView(LayoutInflater.from(this).inflate(R.layout.edittext_alert,null))
-                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
+            AlertDialog.Builder connectDialog = new AlertDialog.Builder(MultiplayerNumbers.this)
+                    .setTitle("Connect")
+                    .setMessage("Enter name of room: ")
+                    .setView(LayoutInflater.from(this).inflate(R.layout.edittext_alert, null))
+                    .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-        connectDialog.show();
-        connectDialog.create();
+                        }
+                    });
+            connectDialog.show();
+            connectDialog.create();
+        }else{
+            Toast.makeText(getApplicationContext(),"Enter nickname",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
-    public void createRoom(View v) {
-        View view = LayoutInflater.from(MultiplayerNumbers.this).inflate(R.layout.edittext_alert,null);
-        final EditText text = (EditText) view.findViewById(R.id.edittext_alert2);
+    public void createRoom(View v){
+        final EditText nickname = (EditText) findViewById(R.id.nick);
+        if(!nickname.getText().toString().equals("")) {
+            View view = LayoutInflater.from(MultiplayerNumbers.this).inflate(R.layout.edittext_alert, null);
+            final EditText text = (EditText) view.findViewById(R.id.edittext_alert2);
+            final AlertDialog connectDialog = new AlertDialog.Builder(this)
+                    .setView(view)
+                    .setTitle("Create room")
+                    .setMessage("Enter room name: ")
+                    .setPositiveButton("create", null)
+                    .create();
 
-        AlertDialog.Builder connectDialog = new AlertDialog.Builder(MultiplayerNumbers.this)
-                .setView(view)
-                .setTitle("Create room")
-                .setMessage("Enter name of room: ")
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
-                        roomIntent.putExtra(ROOMNAME,text.getText()+"test");
-                        startActivity(roomIntent);
-                    }
-                });
-        connectDialog.show();
-        connectDialog.create();
+
+            connectDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    Button button = connectDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v){
+                            if(!text.getText().toString().equals("")) {
+                                Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
+                                roomIntent.putExtra(ROOMNAME, text.getText() + "");
+                                roomIntent.putExtra(NICKNAME, nickname.getText() + "");
+                                startActivity(roomIntent);
+                                connectDialog.dismiss();
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Enter room name",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+            connectDialog.show();
+        }else{
+            Toast.makeText(getApplicationContext(),"Enter nickname",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

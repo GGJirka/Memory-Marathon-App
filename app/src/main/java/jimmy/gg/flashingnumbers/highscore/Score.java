@@ -1,10 +1,11 @@
 package jimmy.gg.flashingnumbers.highscore;
 
 
-public class Score  {
+public class Score {
     private String level;
     private String highScore;
     private String text = "";
+    private boolean users;
 
     public Score(String level, String highScore){
         this.level = level;
@@ -14,6 +15,10 @@ public class Score  {
         this.text = text;
     }
 
+    public Score(String text,boolean users){
+        this.text = text;
+        this.users = users;
+    }
     public String getText() {
         return this.text;
     }
@@ -33,5 +38,8 @@ public class Score  {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+    public boolean getUser(){
+        return this.users;
     }
 }

@@ -272,4 +272,6 @@
     <string name="enter_title">Enter title</string>
     <string name="enter_message">Enter message</string>
     <string name="about_app_project">You can find the whole project on:</string>
+    <string name="connected_players"><b>Connected players:</b></string>
+    <string name="room_title"><b>"Room:    "</b></string>
 </resources>
