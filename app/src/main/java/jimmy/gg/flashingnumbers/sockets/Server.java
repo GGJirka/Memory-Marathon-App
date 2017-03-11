@@ -1,6 +1,8 @@
-package jimmy.gg.flashingnumbers.sockets;
-
-import android.support.annotation.RequiresPermission;
+package jimmy.gg.flashingnumbers.sockets;/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,34 +13,41 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+
+/**
+ *
+ * @author root
+ */
 public class Server {
+
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private ArrayList<ClientHandler> clients;
     private ArrayList<BufferedWriter> writer;
+    private ArrayList<Room> rooms;
     private static Server server;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         server = new Server();
     }
 
-    public Server(){
-        try{
+    public Server() {
+        try {
             this.serverSocket = new ServerSocket(4758);
             this.clients = new ArrayList<>();
             this.writer = new ArrayList<>();
+            this.rooms = new ArrayList<>();
             this.listen();
-        }catch(Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @RequiresPermission(android.Manifest.permission.INTERNET)
-    public void listen(){
-        Thread listenThread = new Thread(new Runnable(){
+    public void listen() {
+        Thread listenThread = new Thread(new Runnable() {
             @Override
-            public void run(){
-                while(true){
+            public void run() {
+                while (true) {
                     try {
                         clientSocket = serverSocket.accept();
                         ClientHandler client = new ClientHandler(server, new BufferedReader(
@@ -48,7 +57,7 @@ public class Server {
                         writer.add(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())));
                         Thread clientThread = new Thread(client);
                         clientThread.start();
-                        System.out.println("Client connected: "+clientSocket.getInetAddress());
+                        System.out.println("Client connected: " + clientSocket.getInetAddress());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -58,11 +67,11 @@ public class Server {
         listenThread.start();
     }
 
-    public void sendToAllClients(String message){
-        if(message != ""){
-            for(BufferedWriter bw:writer){
+    public void sendToAllClients(String message) {
+        if (message != "" || message != null) {
+            for (BufferedWriter bw : writer) {
                 try {
-                    bw.write(message+"\r\n");
+                    bw.write(message + "\r\n");
                     bw.flush();
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -70,13 +79,34 @@ public class Server {
             }
         }
     }
-    public void tryToReconnect() throws IOException{
+
+    public void tryToReconnect() throws IOException {
         this.serverSocket.close();
         clientSocket = null;
         System.gc();
         clientSocket = serverSocket.accept();
     }
-    public ArrayList<ClientHandler> getClients(){
+
+    public boolean roomExist(String roomName){
+        for(Room room : rooms){
+            if(room.getRoomName().equals(roomName))
+                return true;
+        }
+        return false;
+    }
+
+    public Room findRoomByName(String roomName){
+        for(Room room : rooms){
+            if(room.getRoomName().equals(roomName))
+                return room;
+        }
+        return null;
+    }
+    public ArrayList<ClientHandler> getClients() {
         return this.clients;
+    }
+
+    public ArrayList<Room> getRooms(){
+        return this.rooms;
     }
 }

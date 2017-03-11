@@ -1,11 +1,19 @@
-package jimmy.gg.flashingnumbers.sockets;
+package jimmy.gg.flashingnumbers.sockets;/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class ClientHandler extends Thread {
 
+/**
+ *
+ * @author root
+ */
+public class ClientHandler extends Thread {
     private BufferedReader br;
     private BufferedWriter bw;
     private Server server;
@@ -23,12 +31,30 @@ public class ClientHandler extends Thread {
             try {
                 receivedMessage = br.readLine();
                 System.out.println("received:  " + receivedMessage);
-                server.sendToAllClients(receivedMessage.trim());
+                String manageMessage = receivedMessage.split(" ")[0];
+                if(manageMessage.equals("ROOMNAME")){
+                    Room room = new Room(receivedMessage.split(" ")[2]);
+                    room.addUser(receivedMessage.split(" ")[2]);
+                    server.getRooms().add(room);
+                }else if(manageMessage.equals("ROOMCONNECT")){
+                    if(server.roomExist(receivedMessage.split(" ")[2])){
+                        System.out.println(receivedMessage.split(" ")[2]+" exists");
+                        server.findRoomByName(receivedMessage.split(" ")[2]).addUser(
+                                receivedMessage.split(" ")[1]);
+                        System.out.println(receivedMessage.split(" ")[1]+" added");
+                        server.sendToAllClients(receivedMessage.split(" ")[1]+" "+
+                                receivedMessage.split(" ")[2]);
+                        server.sendToAllClients(receivedMessage.trim());
+                    }
+                }else{
+                    server.sendToAllClients(receivedMessage.trim());
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }
+
     public void send() throws IOException{
         bw.write(receivedMessage);
         bw.flush();

@@ -3,8 +3,10 @@ package jimmy.gg.flashingnumbers.words.words;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.io.BufferedReader;
@@ -24,8 +25,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -36,10 +35,7 @@ import jimmy.gg.flashingnumbers.main.MemoryMarathon;
 import jimmy.gg.flashingnumbers.techniques.WordsMemorySystem;
 
 public class WordsMain extends AppCompatActivity {
-    /**
-     * TODO: BETTER DESIGN, FIX WORD LIST (words with less than 3 length, vulcaric words)
-     * TODO: FIX WORDS THAT ARE MORE THAN ONCE SHOWED.
-     */
+
     private WordsStats words;
     private BufferedReader bf;
     private SharedPreferences sharedPreferences;
@@ -64,6 +60,7 @@ public class WordsMain extends AppCompatActivity {
         TextSwitcher switcher = (TextSwitcher) findViewById(R.id.words_word);
         TextSwitcher liveSwitcher = (TextSwitcher) findViewById(R.id.words_lives);
         switcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public View makeView() {
                 TextView wordText = new TextView(WordsMain.this);
