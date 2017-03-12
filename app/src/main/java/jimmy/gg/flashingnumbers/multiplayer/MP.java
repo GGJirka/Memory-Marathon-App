@@ -15,7 +15,7 @@ public class MP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mp);
         final TextView view = (TextView) findViewById(R.id.mp);
-        fakeClient = new FakeClient(view);
+       // fakeClient = new FakeClient(view);
 
         Thread thread = new Thread(new Runnable(){
             @Override

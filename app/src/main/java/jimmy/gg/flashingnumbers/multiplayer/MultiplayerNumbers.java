@@ -23,7 +23,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     public final String ROOMNAME = "ROOMNAME";
     public final String NICKNAME = "NICKNAME";
     public Client         client;
-    public IFakeClient fakeClient;
+    public static FakeClient fakeClient;
     public static MultiplayerState  GAMESTATE = MultiplayerState.INMENU;
 
     @Override
@@ -34,6 +34,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setTitle("Multiplayer");
         TextView vi = (TextView) findViewById(R.id.nik);
         fakeClient = new FakeClient(vi);
+        fakeClient.startSocket();
     }
 
     @Override
@@ -93,7 +94,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                     .setPositiveButton("create", null)
                     .create();
 
-            connectDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            connectDialog.setOnShowListener(new DialogInterface.OnShowListener(){
                 @Override
                 public void onShow(DialogInterface dialog) {
                     Button button = connectDialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -107,11 +108,11 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                         try {
                                             if(fakeClient.isConnected()){
                                                fakeClient.sendMessage("ROOMNAME "+nickname.getText()+" "+text.getText());
-                                                /*Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
+                                                Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
                                                 roomIntent.putExtra(ROOMNAME, text.getText() + "");
                                                 roomIntent.putExtra(NICKNAME, nickname.getText() + "");
                                                 startActivity(roomIntent);
-                                                connectDialog.dismiss();*/
+                                                connectDialog.dismiss();
                                             }else{
                                                 Toast.makeText(getApplicationContext(),"Problem with internet.",Toast.LENGTH_SHORT).show();
                                             }
@@ -147,7 +148,8 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
 
     @Override
     public void onDestroy(){
-        //fakeClient.socketClose();
+        /*fakeClient.sendMessage("DISCONNECT");
+        fakeClient.socketClose();*/
         super.onDestroy();
     }
 

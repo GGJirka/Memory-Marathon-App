@@ -1,5 +1,9 @@
 package jimmy.gg.flashingnumbers.sockets;
 
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 /**
  * Created by ggjimmy on 3/11/17.
  */

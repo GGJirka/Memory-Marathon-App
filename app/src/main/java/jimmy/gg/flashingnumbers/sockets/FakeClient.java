@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers;
+import jimmy.gg.flashingnumbers.multiplayer.MultiplayerState;
 import jimmy.gg.flashingnumbers.multiplayer.RoomActivity;
 
 /*praise jimmy*/
@@ -25,7 +28,6 @@ public class FakeClient implements IFakeClient{
 
     public FakeClient(TextView view){
         this.view = view;
-        new Thread(new SocketThread()).start();
     }
 
     @Override
@@ -47,7 +49,9 @@ public class FakeClient implements IFakeClient{
         }
         return true;
     }
-
+    public void setText(TextView view){
+        this.view = view;
+    }
     @Override
     public void sendMessage(String message) {
         try {
@@ -80,8 +84,11 @@ public class FakeClient implements IFakeClient{
                 while(true){
                     message = br.readLine();
                     try {
-                        if (message != null) {
+                        if (message != null){
                             view.setText(message);
+                            if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INROOM)){
+
+                            }
                         }
                     }catch(Exception e){
 

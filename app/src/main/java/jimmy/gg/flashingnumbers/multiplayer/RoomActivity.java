@@ -33,10 +33,10 @@ public class RoomActivity extends AppCompatActivity {
         UserData.username = getIntent().getStringExtra(NICKNAME);
         UserData.roomName = getIntent().getStringExtra(ROOMNAME);
         MultiplayerNumbers.setState(MultiplayerState.INROOM);
-        /*client = new FakeClient();
-        client.view = title;*/
+        TextView room = (TextView) findViewById(R.id.room_title);
+        client = MultiplayerNumbers.fakeClient;
+        client.setText(room);
         initUsers();
-        //listener();
     }
 
     public void initUsers(){
