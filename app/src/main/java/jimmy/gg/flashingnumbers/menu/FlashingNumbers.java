@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import jimmy.gg.flashingnumbers.LevelManager.Level;
 import jimmy.gg.flashingnumbers.LevelManager.Levels;
 import jimmy.gg.flashingnumbers.R;
+import jimmy.gg.flashingnumbers.multiplayer.MP;
 import jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers;
 import jimmy.gg.flashingnumbers.quicklevel.QuickLevel;
 import jimmy.gg.flashingnumbers.settings.NumbersSettings;
@@ -74,6 +75,7 @@ public class FlashingNumbers extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Cannot connect to internet. Try again.", Toast.LENGTH_LONG).show();
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();

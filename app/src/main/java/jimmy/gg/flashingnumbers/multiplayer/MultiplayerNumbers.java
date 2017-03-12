@@ -34,7 +34,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setTitle("Multiplayer");
         TextView vi = (TextView) findViewById(R.id.nik);
         fakeClient = new FakeClient(vi);
-        fakeClient.startSocket();
     }
 
     @Override
@@ -61,8 +60,8 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                             if(!text.getText().toString().equals("")) {
                                 Thread thread = new Thread(new Runnable(){
                                     @Override
-                                    public void run() {
-                                        if(fakeClient.isConnected()) {
+                                    public void run(){
+                                        if(fakeClient.isConnected()){
                                             fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
                                         }
                                     }

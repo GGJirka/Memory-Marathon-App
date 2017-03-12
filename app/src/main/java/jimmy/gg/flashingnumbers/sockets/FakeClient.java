@@ -25,6 +25,7 @@ public class FakeClient implements IFakeClient{
 
     public FakeClient(TextView view){
         this.view = view;
+        new Thread(new SocketThread()).start();
     }
 
     @Override
@@ -75,21 +76,18 @@ public class FakeClient implements IFakeClient{
                 clientSocket = new Socket(InetAddress.getByName("192.168.1.101"), 4758);
                 bw = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
                 br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                sendMessage("ahojky");
 
                 while(true){
                     message = br.readLine();
-                    view.setText(message);
-                   // if(message.equals("ROOMCONNECT")){
-                        //if(view != null){
-                            //if(message.split(" ")[2].equals(RoomActivity.UserData.roomName)){
-                              //  view.setText(message.split(" ")[2]+"a");
-                              //  RoomActivity.UserData.users.add(new Score(message.split(" ")[1]+"jo",true));
-                              //  RoomActivity.UserData.connectedUsers.setAdapter(RoomActivity.UserData.userAdapter);
-                           // }
-                       // }
-                   // }
+                    try {
+                        if (message != null) {
+                            view.setText(message);
+                        }
+                    }catch(Exception e){
+
+                    }
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
