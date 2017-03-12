@@ -5,6 +5,7 @@ package jimmy.gg.flashingnumbers.sockets;
  */
 
 public interface IFakeClient{
+    void startSocket();
 
     boolean socketClose();
 
@@ -13,4 +14,5 @@ public interface IFakeClient{
     boolean attemptToConnectRoom(String roomName);
 
     boolean isConnected();
+
 }

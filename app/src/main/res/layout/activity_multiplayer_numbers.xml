@@ -10,14 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers">
 
-    <!--<TextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nick: "
         android:textColor="@color/black"
-        android:id="@+id/nick"
+        android:id="@+id/nik"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="13dp" />-->
+        android:layout_marginTop="13dp" />
 
     <EditText
         android:layout_marginTop="20dp"

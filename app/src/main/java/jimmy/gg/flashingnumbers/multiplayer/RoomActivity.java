@@ -6,18 +6,19 @@ import android.view.MenuItem;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.highscore.HighScoreAdapter;
 import jimmy.gg.flashingnumbers.highscore.Score;
+import jimmy.gg.flashingnumbers.sockets.FakeClient;
+import jimmy.gg.flashingnumbers.sockets.Room;
 
 public class RoomActivity extends AppCompatActivity {
     public final String ROOMNAME = "ROOMNAME";
     public final String NICKNAME = "NICKNAME";
-    public BaseAdapter userAdapter;
-    public ListView connectedUsers;
-    public ArrayList<Score> users;
+    public FakeClient client;
     public String message;
 
     @Override
@@ -27,43 +28,65 @@ public class RoomActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("In room "+getIntent().getStringExtra(ROOMNAME));
         TextView title = (TextView) findViewById(R.id.room_title);
-        connectedUsers = (ListView) findViewById(R.id.connected_players);
-        users = new ArrayList<>();
+        UserData.connectedUsers = (ListView) findViewById(R.id.connected_players);
+        UserData.users = new ArrayList<>();
+        UserData.username = getIntent().getStringExtra(NICKNAME);
+        UserData.roomName = getIntent().getStringExtra(ROOMNAME);
+        MultiplayerNumbers.setState(MultiplayerState.INROOM);
+        /*client = new FakeClient();
+        client.view = title;*/
         initUsers();
+        //listener();
     }
 
     public void initUsers(){
-        users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
-        userAdapter = new HighScoreAdapter(getApplicationContext(),users);
-        connectedUsers.setAdapter(userAdapter);
+        UserData.users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
+        UserData.userAdapter = new HighScoreAdapter(getApplicationContext(),UserData.users);
+        UserData.connectedUsers.setAdapter(UserData.userAdapter);
     }
 
-    public void listener(){
-        Runnable run = new Runnable(){
+    /*public void listener(){
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void run(){
-                while(true){
-                    if(message.split(" ").equals("ROOMCONNECT") && message.split(" ")[3]
-                            .equals(getIntent().getStringExtra(ROOMNAME)+"")){
-
-                        users.add(new Score(message.split(" ")[2],true));
-
+            public void run() {
+                while (true) {
+                    try {
+                        String message = FakeClient.br.readLine();
+                        users.add(new Score("jimmy",true));
+                        userAdapter = new HighScoreAdapter(getApplicationContext(),users);
+                        userAdapter.notifyDataSetChanged();
+                        if (message.split(" ")[0].equals("ROOMCONNECT") && message.split(" ")[2].equals(getRoomName())) {
+                            users.add(new Score(message.split(" ")[1],true));
+                            userAdapter = new HighScoreAdapter(getApplicationContext(),users);
+                            userAdapter.notifyDataSetChanged();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
-        };
-        runOnUiThread(run);
-    }
+        });
+       thread.start();
+    }*/
+
     public String getRoomName(){
         return this.getIntent().getStringExtra(ROOMNAME);
     }
+
     public void addUser(String username){
-        this.users.add(new Score(username, true));
+        UserData.users.add(new Score(username, true));
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();
         return super.onOptionsItemSelected(item);
     }
 
+    public static final class UserData {
+        public static BaseAdapter userAdapter;
+        public static ListView connectedUsers;
+        public static ArrayList<Score> users;
+        public static String username, roomName;
+    }
 }
