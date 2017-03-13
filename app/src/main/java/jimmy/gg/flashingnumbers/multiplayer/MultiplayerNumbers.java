@@ -16,7 +16,6 @@ import android.widget.Toast;
 import jimmy.gg.flashingnumbers.R;
 import jimmy.gg.flashingnumbers.sockets.Client;
 import jimmy.gg.flashingnumbers.sockets.FakeClient;
-import jimmy.gg.flashingnumbers.sockets.IFakeClient;
 
 public class MultiplayerNumbers extends AppCompatActivity implements IMultiplayerNumbers{
 

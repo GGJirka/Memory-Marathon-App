@@ -23,7 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Start"
-        android:layout_below="@id/connected_players"/>
+        android:onClick="click"
+        android:layout_below="@id/connected_players"
+        />
 
     <TextView
         android:layout_width="wrap_content"

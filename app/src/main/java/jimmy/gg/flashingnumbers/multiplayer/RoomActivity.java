@@ -1,8 +1,10 @@
 package jimmy.gg.flashingnumbers.multiplayer;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +22,10 @@ public class RoomActivity extends AppCompatActivity {
     public final String NICKNAME = "NICKNAME";
     public FakeClient client;
     public String message;
+    public static Context context;
+    private ArrayList<Score> users;
+    private BaseAdapter adapter;
+    private ListView connectedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -28,21 +34,20 @@ public class RoomActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("In room "+getIntent().getStringExtra(ROOMNAME));
         TextView title = (TextView) findViewById(R.id.room_title);
-        UserData.connectedUsers = (ListView) findViewById(R.id.connected_players);
-        UserData.users = new ArrayList<>();
-        UserData.username = getIntent().getStringExtra(NICKNAME);
-        UserData.roomName = getIntent().getStringExtra(ROOMNAME);
+        connectedUsers = (ListView) findViewById(R.id.connected_players);
+        users = new ArrayList<>();
         MultiplayerNumbers.setState(MultiplayerState.INROOM);
         TextView room = (TextView) findViewById(R.id.room_title);
         client = MultiplayerNumbers.fakeClient;
-        client.setText(room);
-        initUsers();
+        initUsers(room);
     }
 
-    public void initUsers(){
-        UserData.users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
-        UserData.userAdapter = new HighScoreAdapter(getApplicationContext(),UserData.users);
-        UserData.connectedUsers.setAdapter(UserData.userAdapter);
+    public void initUsers(TextView room){
+        users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
+        adapter = new HighScoreAdapter(getApplicationContext(),users);
+        connectedUsers.setAdapter(adapter);
+        //client.setData(users, adapter, connectedUsers,room);
+        client.setList(users);
     }
 
     /*public void listener(){
@@ -68,6 +73,12 @@ public class RoomActivity extends AppCompatActivity {
         });
        thread.start();
     }*/
+
+    public void click(View view){
+        users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
+        //connectedUsers.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 
     public String getRoomName(){
         return this.getIntent().getStringExtra(ROOMNAME);
