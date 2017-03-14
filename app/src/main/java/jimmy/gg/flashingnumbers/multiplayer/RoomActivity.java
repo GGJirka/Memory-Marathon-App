@@ -37,7 +37,8 @@ public class RoomActivity extends AppCompatActivity {
         connectedUsers = (ListView) findViewById(R.id.connected_players);
         users = new ArrayList<>();
         MultiplayerNumbers.setState(MultiplayerState.INROOM);
-        TextView room = (TextView) findViewById(R.id.room_title);
+        TextView room = (TextView) findViewById(R.id.room_title_players);
+        room.setText("Connected players ("+users.size()+"): ");
         client = MultiplayerNumbers.fakeClient;
         initUsers(room);
     }
@@ -47,7 +48,22 @@ public class RoomActivity extends AppCompatActivity {
         adapter = new HighScoreAdapter(getApplicationContext(),users);
         connectedUsers.setAdapter(adapter);
         //client.setData(users, adapter, connectedUsers,room);
+
         client.setList(users);
+        client.setAdapter(adapter);
+        client.execute();
+        //checkForUpdate();
+    }
+
+    public void checkForUpdate(){
+        /*Runnable run = new Runnable(){
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        };
+        runOnUiThread(run);*/
+
     }
 
     /*public void listener(){
@@ -75,7 +91,7 @@ public class RoomActivity extends AppCompatActivity {
     }*/
 
     public void click(View view){
-        users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
+        //users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
         //connectedUsers.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

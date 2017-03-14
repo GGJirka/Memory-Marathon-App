@@ -21,8 +21,8 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
 
     public final String ROOMNAME = "ROOMNAME";
     public final String NICKNAME = "NICKNAME";
-    public Client         client;
-    public static FakeClient fakeClient;
+    public Client                       client;
+    public static FakeClient        fakeClient;
     public static MultiplayerState  GAMESTATE = MultiplayerState.INMENU;
 
     @Override
@@ -31,8 +31,11 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setContentView(R.layout.activity_multiplayer_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Multiplayer");
-        TextView vi = (TextView) findViewById(R.id.nik);
-        fakeClient = new FakeClient(vi);
+        startSocket();
+    }
+
+    public void startSocket(){
+        fakeClient = new FakeClient();
         fakeClient.startSocket();
     }
 
