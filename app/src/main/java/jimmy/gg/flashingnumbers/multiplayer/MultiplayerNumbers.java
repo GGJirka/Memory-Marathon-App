@@ -21,8 +21,8 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
 
     public final String ROOMNAME = "ROOMNAME";
     public final String NICKNAME = "NICKNAME";
-    public Client                       client;
-    public static FakeClient        fakeClient;
+    public Client                      client;
+    public static FakeClient       fakeClient;
     public static MultiplayerState  GAMESTATE = MultiplayerState.INMENU;
 
     @Override
