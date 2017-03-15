@@ -24,6 +24,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     public Client                      client;
     public static FakeClient       fakeClient;
     public static MultiplayerState  GAMESTATE = MultiplayerState.INMENU;
+    public boolean roomExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,6 +32,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setContentView(R.layout.activity_multiplayer_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Multiplayer");
+        setState(MultiplayerState.INMENU);
         startSocket();
     }
 
@@ -42,6 +44,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     @Override
     public void connectToRoom(View v) {
         final EditText nickname = (EditText) findViewById(R.id.nick);
+        final TextView nik = (TextView) findViewById(R.id.nik);
         if(!nickname.getText().toString().equals("")) {
             final View view = LayoutInflater.from(this).inflate(R.layout.edittext_alert, null);
             final EditText text = (EditText) view.findViewById(R.id.edittext_alert2);
@@ -60,12 +63,20 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v){
-                            if(!text.getText().toString().equals("")) {
+                            if(!text.getText().toString().equals("")){
                                 Thread thread = new Thread(new Runnable(){
                                     @Override
                                     public void run(){
                                         if(fakeClient.isConnected()){
+                                            fakeClient.setData(nickname,text,getApplicationContext(),roomExist,nik);
                                             fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
+                                            if(roomExist){
+                                                Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
+                                                roomIntent.putExtra(ROOMNAME, text.getText() + "");
+                                                roomIntent.putExtra(NICKNAME, nickname.getText() + "");
+                                                startActivity(roomIntent);
+                                                connectDialog.dismiss();
+                                            }
                                         }
                                     }
                                 });
@@ -106,7 +117,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                             if(!text.getText().toString().equals("")) {
                                 Thread thread = new Thread(new Runnable(){
                                     @Override
-                                    public void run() {
+                                    public void run(){
                                         try {
                                             if(fakeClient.isConnected()){
                                                fakeClient.sendMessage("ROOMNAME "+nickname.getText()+" "+text.getText());
