@@ -32,7 +32,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setContentView(R.layout.activity_multiplayer_numbers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Multiplayer");
-        setState(MultiplayerState.INMENU);
         startSocket();
     }
 
@@ -41,6 +40,11 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         fakeClient.startSocket();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        setState(MultiplayerState.INMENU);
+    }
     @Override
     public void connectToRoom(View v) {
         final EditText nickname = (EditText) findViewById(R.id.nick);
@@ -70,13 +74,25 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                         if(fakeClient.isConnected()){
                                             fakeClient.setData(nickname,text,getApplicationContext(),roomExist,nik);
                                             fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
-                                            if(roomExist){
-                                                Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
-                                                roomIntent.putExtra(ROOMNAME, text.getText() + "");
-                                                roomIntent.putExtra(NICKNAME, nickname.getText() + "");
-                                                startActivity(roomIntent);
-                                                connectDialog.dismiss();
+                                            Runnable run = new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getApplicationContext(),roomExist+"",Toast.LENGTH_LONG).show();
+                                                    if(nik.getText().equals("working")){
+                                                        Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
+                                                        roomIntent.putExtra(ROOMNAME, text.getText() + "");
+                                                        roomIntent.putExtra(NICKNAME, nickname.getText() + "");
+                                                        startActivity(roomIntent);
+                                                        connectDialog.dismiss();
+                                                    }
+                                                }
+                                            };
+                                            try {
+                                                Thread.sleep(1000);
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
                                             }
+                                            runOnUiThread(run);
                                         }
                                     }
                                 });

@@ -123,30 +123,10 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                         if (message != null){
                             if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INMENU)){
                                 //WHEN CONNECTING
-                                if(message.split(" ")[0].equals("NOEXISTROOM")){    z
-                                    if(message.split(" ")[1].equals(username.getText())
-                                            && message.split(" ")[2].equals(room.getText())){
-                                        roomExist = false;
-                                        Runnable run = new Runnable(){
-                                            public void run(){
-                                                room.setText("room doesnt exist lul");
-                                            }
-                                        };
-                                        runOnUiThread(run);
-                                    }
-                                    view.setText("no exist hah");
+                                if(message.split(" ")[0].equals("NOEXISTROOM")){
+                                    view.setText("no");
                                 }else{
-                                    view.setText("working hah");
-                                    roomExist = true;
-                                    room.setText("room doesnt exist lul");
-                                    username.setText("ajajjaj");
-                                    Runnable run = new Runnable(){
-                                        public void run(){
-                                            room.setText("room doesnt exist lul");
-                                            username.setText("ajajjaj");
-                                        }
-                                    };
-                                    runOnUiThread(run);
+                                    view.setText("working");
                                 }
                             }else if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INROOM)){
                                 //ADDING NEW USER TO LIST

@@ -33,7 +33,6 @@ public class RoomActivity extends AppCompatActivity {
         users = new ArrayList<>();
         client = MultiplayerNumbers.fakeClient;
         initUsers();
-        MultiplayerNumbers.setState(MultiplayerState.INROOM);
     }
 
     public void initUsers(){
@@ -43,7 +42,10 @@ public class RoomActivity extends AppCompatActivity {
         String message = getIntent().getStringExtra(ROOMNAME)+"";
         client.setData(users, adapter, message);
     }
-
+    public void onResume(){
+        super.onResume();
+        MultiplayerNumbers.setState(MultiplayerState.INROOM);
+    }
     public void click(View view){
         adapter.notifyDataSetChanged();
     }
