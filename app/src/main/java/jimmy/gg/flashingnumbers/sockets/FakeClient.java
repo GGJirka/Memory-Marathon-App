@@ -1,21 +1,18 @@
 package jimmy.gg.flashingnumbers.sockets;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -32,26 +29,25 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
     private BufferedWriter bw;
     private String message = "";
     public TextView view;
-    public String roomName;
+    public String nickname, roomName;
     public ArrayList<Score> users;
     public BaseAdapter adapter;
     public BufferedReader br;
     public Score score;
     public EditText username, room;
     public Context context;
-    public boolean roomExist;
 
-    public void setData(ArrayList<Score> users, BaseAdapter adapter, String roomNam){
+    public void setData(ArrayList<Score> users, BaseAdapter adapter, String username,String roomNam){
         this.users = users;
         this.adapter = adapter;
         this.roomName = roomNam;
+        this.nickname = username;
     }
 
-    public void setData(EditText username,EditText room,Context context, boolean roomExist,TextView view){
+    public void setData(EditText username,EditText room,Context context,TextView view){
         this.username = username;
         this.room = room;
         this.context = context;
-        this.roomExist = roomExist;
         this.view = view;
     }
 
@@ -123,35 +119,70 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                         if (message != null){
                             if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INMENU)){
                                 //WHEN CONNECTING
-                                if(message.split(" ")[0].equals("NOEXISTROOM")){
-                                    view.setText("no");
-                                }else{
-                                    view.setText("working");
-                                }
+                                Runnable run = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(message.split(" ")[0].equals("NOEXISTROOM")){
+                                            view.setText("no");
+                                        }else{
+                                            view.setText("working");
+                                        }
+                                    }
+                                };
+                                runOnUiThread(run);
                             }else if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INROOM)){
                                 //ADDING NEW USER TO LIST
-                                if(adapter != null && users!=null) {
-                                    if (message.split(" ")[0].equals("ROOMCONNECT")) {
-                                        if (roomName.equals(message.split(" ")[2])) {
-                                            Score score = new Score(message.split(" ")[1], true);
-                                            if (!findUserByName(score)) {
-                                                users.add(score);
-                                                Runnable run = new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        adapter.notifyDataSetChanged();
+                                try{
+                                    if(adapter != null && users!=null) {
+                                        if (message.split(" ")[0].equals("ROOMCONNECT")) {
+                                            if (roomName.equals(message.split(" ")[2])) {
+                                                if (message.split(" ")[1] != null) {
+                                                    Score score = new Score(message.split(" ")[1], true);
+                                                    if (!findUserByName(score) ) {
+                                                        users.add(score);
+                                                        Runnable run = new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                adapter.notifyDataSetChanged();
+                                                            }
+                                                        };
+                                                        runOnUiThread(run);
+                                                        try {
+                                                            Thread.sleep(600);
+                                                            sendMessage("ROOMCONNECT " + username + " " + message.split(" ")[2]);
+                                                        } catch (Exception e) {
+
+                                                        }
                                                     }
-                                                };
-                                                runOnUiThread(run);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }catch(Exception e){
+                                    //Log.d(TAG, "run: ");
+                                }
+                                    }else if(message.split(" ")[0].equals("USERSINROOM")){
+                                        if(adapter != null && users!=null) {
+                                            if(message.split(" ")[1].equals(message)
+                                                    || message.split(" ")[1].equals(message)) {
+                                                Score score = new Score(message.split(" ")[2], true);
+                                                if (!findUserByName(score)) {
+                                                    users.add(score);
+                                                    Runnable run = new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            adapter.notifyDataSetChanged();
+                                                        }
+                                                    };
+                                                    runOnUiThread(run);
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
+                        }catch(Exception e){
+                            e.printStackTrace();
                         }
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

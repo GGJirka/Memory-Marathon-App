@@ -72,27 +72,33 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                     @Override
                                     public void run(){
                                         if(fakeClient.isConnected()){
-                                            fakeClient.setData(nickname,text,getApplicationContext(),roomExist,nik);
-                                            fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
-                                            Runnable run = new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast.makeText(getApplicationContext(),roomExist+"",Toast.LENGTH_LONG).show();
-                                                    if(nik.getText().equals("working")){
-                                                        Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
-                                                        roomIntent.putExtra(ROOMNAME, text.getText() + "");
-                                                        roomIntent.putExtra(NICKNAME, nickname.getText() + "");
-                                                        startActivity(roomIntent);
-                                                        connectDialog.dismiss();
-                                                    }
-                                                }
-                                            };
                                             try {
-                                                Thread.sleep(1000);
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
+                                                fakeClient.setData(nickname, text, getApplicationContext(), nik);
+                                                fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
+                                                Runnable run = new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        if (nik.getText().equals("working")) {
+                                                            Intent roomIntent = new Intent(MultiplayerNumbers.this, RoomActivity.class);
+                                                            roomIntent.putExtra(ROOMNAME, text.getText() + "");
+                                                            roomIntent.putExtra(NICKNAME, nickname.getText() + "");
+                                                            startActivity(roomIntent);
+                                                            connectDialog.dismiss();
+                                                            fakeClient.sendMessage("NEWUSERROOM " + nickname.getText() + " " + text.getText());
+                                                        }else{
+                                                            Toast.makeText(getApplicationContext(),"Room does not exist.",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                };
+                                                try {
+                                                    Thread.sleep(500);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                runOnUiThread(run);
+                                            }catch(Exception e){
+
                                             }
-                                            runOnUiThread(run);
                                         }
                                     }
                                 });

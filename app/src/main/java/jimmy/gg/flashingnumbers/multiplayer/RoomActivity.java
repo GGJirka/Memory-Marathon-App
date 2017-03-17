@@ -36,16 +36,19 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     public void initUsers(){
-        users.add(new Score(getIntent().getStringExtra(NICKNAME), true));
         adapter = new HighScoreAdapter(getApplicationContext(),users);
         connectedUsers.setAdapter(adapter);
         String message = getIntent().getStringExtra(ROOMNAME)+"";
-        client.setData(users, adapter, message);
+        client.setData(users, adapter,getIntent().getStringExtra(NICKNAME)+"", message);
+        client.sendMessage("ROOMCONNECT "+getIntent().getStringExtra(NICKNAME)+" "
+                +getIntent().getStringExtra(ROOMNAME));
     }
+
     public void onResume(){
         super.onResume();
         MultiplayerNumbers.setState(MultiplayerState.INROOM);
     }
+
     public void click(View view){
         adapter.notifyDataSetChanged();
     }
