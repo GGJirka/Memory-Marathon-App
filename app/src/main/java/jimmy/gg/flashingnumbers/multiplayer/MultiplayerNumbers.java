@@ -84,7 +84,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                                             roomIntent.putExtra(NICKNAME, nickname.getText() + "");
                                                             startActivity(roomIntent);
                                                             connectDialog.dismiss();
-                                                            fakeClient.sendMessage("NEWUSERROOM " + nickname.getText() + " " + text.getText());
+                                                            //fakeClient.sendMessage("NEWUSERROOM " + nickname.getText() + " " + text.getText());
                                                         }else{
                                                             Toast.makeText(getApplicationContext(),"Room does not exist.",Toast.LENGTH_SHORT).show();
                                                         }
