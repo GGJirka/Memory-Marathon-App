@@ -1,6 +1,7 @@
 package jimmy.gg.flashingnumbers.sockets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,11 +21,14 @@ import java.util.ArrayList;
 import jimmy.gg.flashingnumbers.highscore.Score;
 import jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers;
 import jimmy.gg.flashingnumbers.multiplayer.MultiplayerState;
+import jimmy.gg.flashingnumbers.multiplayer.RoomActivity;
 
 /*praise jimmy*/
 
 public class FakeClient extends AppCompatActivity implements IFakeClient{
 
+    public final String ROOMNAME = "ROOMNAME";
+    public final String NICKNAME = "NICKNAME";
     private Socket clientSocket;
     private BufferedWriter bw;
     private String message = "";
@@ -35,7 +39,7 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
     public BufferedReader br;
     public Score score;
     public EditText username, room;
-    public Context context;
+    public MultiplayerNumbers main;
 
     public void setData(ArrayList<Score> users, BaseAdapter adapter, String username,String roomNam){
         this.users = users;
@@ -44,13 +48,16 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
         this.nickname = username;
     }
 
-    public void setData(EditText username,EditText room,Context context,TextView view){
+    public void setData(EditText username,EditText room,TextView view){
         this.username = username;
         this.room = room;
-        this.context = context;
         this.view = view;
     }
-
+    public void setData(String username, String roomName, MultiplayerNumbers main){
+        this.nickname = username;
+        this.roomName = roomName;
+        this.main = main;
+    }
     @Override
     public void startSocket(){
         new Thread(new SocketThread()).start();

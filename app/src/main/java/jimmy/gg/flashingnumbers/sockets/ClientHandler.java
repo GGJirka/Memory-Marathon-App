@@ -26,7 +26,7 @@ public class ClientHandler extends Thread {
         this.br = br;
         this.bw = bw;
     }
-
+    //LISTENING THREAD
     @Override
     public void run() {
         while (true) {
@@ -42,31 +42,39 @@ public class ClientHandler extends Thread {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+                //WHEN ROOM CREATED
                 if(manageMessage.equals("ROOMNAME")){
                     Room room = new Room(receivedMessage.split(" ")[2]);
-                    room.addUser(receivedMessage.split(" ")[1]);
                     server.getRooms().add(room);
 
+                //WHEN SOMEONE CONNECT TO ROOM
                 }else if(manageMessage.equals("ROOMCONNECT")){
                     if(server.roomExist(receivedMessage.split(" ")[2])){
                         System.out.println(receivedMessage.split(" ")[2]+" exists");
-                        server.findRoomByName(receivedMessage.split(" ")[2]).addUser(
-                                receivedMessage.split(" ")[1]);
-                        System.out.println(receivedMessage.split(" ")[1]+" added");
-                        /*server.sendToAllClients(receivedMessage.split(" ")[1]+" "+
-                                receivedMessage.split(" ")[2]);*/
-                        server.sendToAllClients(receivedMessage+"\r\n");
+                        if(!server.findRoomByName(receivedMessage.split(" ")[2]).getUsers()
+                                .contains(receivedMessage.split(" ")[1])){
+                            server.findRoomByName(receivedMessage.split(" ")[2]).addUser(
+                                    receivedMessage.split(" ")[1]);
+                            System.out.println(receivedMessage.split(" ")[1]+" added");
+
+                            server.sendToAllClients(receivedMessage+"\r\n");
+                        }
                     }else{
+                        //WHEN THE ROOM SOMEONE CONNECTING TO DOES NOT EXISTS
                         server.sendToAllClients("NOEXISTROOM "+receivedMessage.split(" ")[1]+" "+receivedMessage.split(" ")[2]);
                     }
+                    //WHEN SOMEONE DISCONNECT
                 }else if(manageMessage.equals("ROOMDISCONNECT")){
                     server.findRoomByName(receivedMessage.split(" ")[2])
                             .removeUser(receivedMessage.split(" ")[1]);
+                    System.out.println(server.findRoomByName(receivedMessage.split(" ")[2]).getUsers().size());
                     if(server.findRoomByName(receivedMessage.split(" ")[2])
                             .getUsers().isEmpty()){
                         server.getRooms().remove(server.findRoomByName(receivedMessage.split(" ")[2]));
+                        System.out.println("removed "+receivedMessage.split(" ")[2]);
+                    }else{
+                        server.sendToAllClients(receivedMessage);
                     }
-                    server.sendToAllClients(receivedMessage);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

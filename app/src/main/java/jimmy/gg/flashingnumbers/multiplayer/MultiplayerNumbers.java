@@ -73,7 +73,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                     public void run(){
                                         if(fakeClient.isConnected()){
                                             try {
-                                                fakeClient.setData(nickname, text, getApplicationContext(), nik);
+                                                fakeClient.setData(nickname, text, nik);
                                                 fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
                                                 Runnable run = new Runnable() {
                                                     @Override
@@ -167,11 +167,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         }else{
             Toast.makeText(getApplicationContext(),"Enter nickname",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void changeFragment(int fragment) {
-
     }
 
     @Override
