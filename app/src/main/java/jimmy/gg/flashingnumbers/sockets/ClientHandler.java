@@ -75,6 +75,8 @@ public class ClientHandler extends Thread {
                     }else{
                         server.sendToAllClients(receivedMessage);
                     }
+                }else if(manageMessage.equals("ROOMSTART")){
+                    server.sendToAllClients(receivedMessage);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

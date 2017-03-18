@@ -24,7 +24,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     public Client                      client;
     public static FakeClient       fakeClient;
     public static MultiplayerState  GAMESTATE = MultiplayerState.INMENU;
-    public boolean roomExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,7 +33,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
         setTitle("Multiplayer");
         startSocket();
     }
-
     public void startSocket(){
         fakeClient = new FakeClient();
         fakeClient.startSocket();

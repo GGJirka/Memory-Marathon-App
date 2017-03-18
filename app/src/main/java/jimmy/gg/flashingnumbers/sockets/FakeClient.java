@@ -39,7 +39,7 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
     public BufferedReader br;
     public Score score;
     public EditText username, room;
-    public MultiplayerNumbers main;
+    public Context context;
 
     public void setData(ArrayList<Score> users, BaseAdapter adapter, String username,String roomNam){
         this.users = users;
@@ -53,10 +53,14 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
         this.room = room;
         this.view = view;
     }
-    public void setData(String username, String roomName, MultiplayerNumbers main){
+    public void setData(String username, String roomName,Context context){
         this.nickname = username;
         this.roomName = roomName;
-        this.main = main;
+        this.context = context;
+    }
+    public void setData(String roomname, Context context){
+        this.roomName = roomname;
+        this.context = context;
     }
     @Override
     public void startSocket(){
@@ -182,12 +186,17 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                                                     }
                                                 };
                                                 runOnUiThread(run);
+                                            }else if(message.split(" ")[0].equals("ROOMSTART")){
+                                                if(roomName.equals(message.split(" ")[1])){
+                                                    Intent intent = new Intent(context, RoomActivity.class);
+                                                    context.startActivity(intent);
+                                                }
                                             }
                                         }
                                     } catch (Exception e) {
                                         //Log.d(TAG, "run: ");
                                     }
-                                } else if (message.split(" ")[0].equals("USERSINROOM")) {
+                                }else if (message.split(" ")[0].equals("USERSINROOM")) {
                                     if (adapter != null && users != null) {
                                         if (message.split(" ")[1].equals(message)) {
                                             Score score = new Score(message.split(" ")[2], true);

@@ -1,5 +1,6 @@
 package jimmy.gg.flashingnumbers.multiplayer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -49,7 +50,8 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     public void click(View view){
-        adapter.notifyDataSetChanged();
+        client.setData(getRoomName(),this);
+        client.sendMessage("ROOMSTART "+getRoomName());
     }
 
     public String getRoomName(){

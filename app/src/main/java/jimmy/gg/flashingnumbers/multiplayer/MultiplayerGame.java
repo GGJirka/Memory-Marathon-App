@@ -17,6 +17,12 @@ public class MultiplayerGame extends AppCompatActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        MultiplayerNumbers.setState(MultiplayerState.INGAME);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();
         return super.onOptionsItemSelected(item);
