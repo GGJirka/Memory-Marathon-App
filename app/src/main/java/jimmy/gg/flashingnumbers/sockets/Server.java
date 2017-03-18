@@ -67,17 +67,24 @@ public class Server {
         listenThread.start();
     }
 
-    public void sendToAllClients(String message) {
-        if (message != "" || message != null) {
-            for (BufferedWriter bw : writer) {
-                try {
-                    bw.write(message + "\r\n");
-                    bw.flush();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+    public void sendToAllClients(final String message) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                if (message != "" || message != null) {
+                    for (BufferedWriter bw : writer) {
+                        try {
+                            bw.write(message + "\r\n");
+                            bw.flush();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
             }
-        }
+        });
+        thread.start();
+
     }
 
     public void tryToReconnect() throws IOException {

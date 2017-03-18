@@ -103,7 +103,10 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
         }
         return false;
     }
-
+    /*
+    * Starting socket - must be run on new thread,
+    * Starting reading from server and making operations
+    * */
     public class SocketThread implements Runnable{
         @RequiresPermission(android.Manifest.permission.INTERNET)
         @Override
@@ -112,76 +115,89 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                 clientSocket = new Socket(InetAddress.getByName("192.168.1.101"), 4758);
                 bw = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
                 br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-                while (true){
+                //sick code
+                while (clientSocket.isConnected()){
                     message = br.readLine();
-                    try {
-                        if (message != null){
-                            if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INMENU)){
-                                //WHEN CONNECTING
-                                Runnable run = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if(message.split(" ")[0].equals("NOEXISTROOM")){
-                                            view.setText("no");
-                                        }else{
-                                            view.setText("working");
+                        try {
+                            if (message != null) {
+                                if (MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INMENU)) {
+                                    //WHEN CONNECTING
+                                    Runnable run = new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (message.split(" ")[0].equals("NOEXISTROOM")) {
+                                                view.setText("no");
+                                            } else {
+                                                view.setText("working");
+                                            }
                                         }
-                                    }
-                                };
-                                runOnUiThread(run);
-                            }else if(MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INROOM)){
-                                //ADDING NEW USER TO LIST
-                                try{
-                                    if(adapter != null && users!=null) {
-                                        if (message.split(" ")[0].equals("ROOMCONNECT")) {
-                                            if (roomName.equals(message.split(" ")[2])) {
-                                                if (message.split(" ")[1] != null) {
-                                                    Score score = new Score(message.split(" ")[1], true);
-                                                    if (!findUserByName(score) ) {
-                                                        users.add(score);
-                                                        Runnable run = new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                adapter.notifyDataSetChanged();
-                                                            }
-                                                        };
-                                                        runOnUiThread(run);
-                                                        try {
-                                                            Thread.sleep(600);
-                                                            if(nickname != null) {
-                                                                sendMessage("ROOMCONNECT " + nickname + " " + message.split(" ")[2]);
-                                                            }
-                                                        } catch (Exception e) {
+                                    };
+                                    runOnUiThread(run);
+                                } else if (MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INROOM)) {
+                                    //ADDING NEW USER TO LIST
+                                    try {
+                                        if (adapter != null && users != null) {
+                                            if (message.split(" ")[0].equals("ROOMCONNECT")) {
+                                                if (roomName.equals(message.split(" ")[2])) {
+                                                    if (message.split(" ")[1] != null) {
+                                                        Score score = new Score(message.split(" ")[1], true);
+                                                        if (!findUserByName(score)) {
+                                                            users.add(score);
+                                                            Runnable run = new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    adapter.notifyDataSetChanged();
+                                                                }
+                                                            };
+                                                            runOnUiThread(run);
+                                                            try {
+                                                                Thread.sleep(600);
+                                                                if (nickname != null) {
+                                                                    sendMessage("ROOMCONNECT " + nickname + " " + message.split(" ")[2]);
+                                                                }
+                                                            } catch (Exception e) {
 
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }
-                                    }
-                                }catch(Exception e){
-                                    //Log.d(TAG, "run: ");
-                                }
-                                    }else if(message.split(" ")[0].equals("USERSINROOM")){
-                                        if(adapter != null && users!=null) {
-                                            if(message.split(" ")[1].equals(message)
-                                                    || message.split(" ")[1].equals(message)) {
-                                                Score score = new Score(message.split(" ")[2], true);
-                                                if (!findUserByName(score)) {
-                                                    users.add(score);
-                                                    Runnable run = new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            adapter.notifyDataSetChanged();
-                                                        }
-                                                    };
-                                                    runOnUiThread(run);
+                                            }else if(message.split(" ")[0].equals("ROOMDISCONNECT")) {
+                                                for (int i = 0; i < users.size(); i++) {
+                                                    String user = users.get(i).getText();
+                                                    if (user.equals(message.split(" ")[1])) {
+                                                        users.remove(i);
+                                                    }
                                                 }
+                                                Runnable run = new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                };
+                                                runOnUiThread(run);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        //Log.d(TAG, "run: ");
+                                    }
+                                } else if (message.split(" ")[0].equals("USERSINROOM")) {
+                                    if (adapter != null && users != null) {
+                                        if (message.split(" ")[1].equals(message)) {
+                                            Score score = new Score(message.split(" ")[2], true);
+                                            if (!findUserByName(score)) {
+                                                users.add(score);
+                                                Runnable run = new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                };
+                                                runOnUiThread(run);
                                             }
                                         }
                                     }
                                 }
+                            }
                         }catch(Exception e){
                             e.printStackTrace();
                         }

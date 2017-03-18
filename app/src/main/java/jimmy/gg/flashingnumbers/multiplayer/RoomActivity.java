@@ -28,7 +28,7 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("In room "+getIntent().getStringExtra(ROOMNAME));
+        setTitle("In room "+getRoomName());
         connectedUsers = (ListView) findViewById(R.id.connected_players);
         users = new ArrayList<>();
         client = MultiplayerNumbers.fakeClient;
@@ -38,10 +38,9 @@ public class RoomActivity extends AppCompatActivity {
     public void initUsers(){
         adapter = new HighScoreAdapter(getApplicationContext(),users);
         connectedUsers.setAdapter(adapter);
-        String message = getIntent().getStringExtra(ROOMNAME)+"";
-        client.setData(users, adapter,getIntent().getStringExtra(NICKNAME)+"", message);
-        client.sendMessage("ROOMCONNECT "+getIntent().getStringExtra(NICKNAME)+" "
-                +getIntent().getStringExtra(ROOMNAME));
+        String message = getRoomName()+"";
+        client.setData(users, adapter,getNickname()+"", message);
+        client.sendMessage("ROOMCONNECT "+getNickname()+" " +getRoomName());
     }
 
     public void onResume(){
@@ -56,14 +55,18 @@ public class RoomActivity extends AppCompatActivity {
     public String getRoomName(){
         return this.getIntent().getStringExtra(ROOMNAME);
     }
-
+    public String getNickname(){
+        return this.getIntent().getStringExtra(NICKNAME);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
     public void onDestroy(){
-        //client.cancel(true);
+        client.sendMessage("ROOMDISCONNECT "+getNickname()+" "+getRoomName());
         super.onDestroy();
     }
 }

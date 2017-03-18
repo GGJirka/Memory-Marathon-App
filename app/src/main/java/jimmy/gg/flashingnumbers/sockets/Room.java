@@ -21,6 +21,9 @@ public class Room {
     public void addUser(String user){
         this.users.add(user);
     }
+    public void removeUser(String user){
+        this.users.remove(user);
+    }
     public String getRoomName(){
         return this.roomName;
     }
