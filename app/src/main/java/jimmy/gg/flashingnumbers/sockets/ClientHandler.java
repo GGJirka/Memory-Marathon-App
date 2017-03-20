@@ -56,9 +56,8 @@ public class ClientHandler extends Thread {
                             server.findRoomByName(receivedMessage.split(" ")[2]).addUser(
                                     receivedMessage.split(" ")[1]);
                             System.out.println(receivedMessage.split(" ")[1]+" added");
-
-                            server.sendToAllClients(receivedMessage+"\r\n");
                         }
+                        server.sendToAllClients(receivedMessage+"\r\n");
                     }else{
                         //WHEN THE ROOM SOMEONE CONNECTING TO DOES NOT EXISTS
                         server.sendToAllClients("NOEXISTROOM "+receivedMessage.split(" ")[1]+" "+receivedMessage.split(" ")[2]);
