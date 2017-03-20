@@ -45,6 +45,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
     }
     @Override
     public void connectToRoom(View v) {
+        final MultiplayerNumbers main = this;
         final EditText nickname = (EditText) findViewById(R.id.nick);
         final TextView nik = (TextView) findViewById(R.id.nik);
         if(!nickname.getText().toString().equals("")) {
@@ -72,7 +73,7 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                         if(fakeClient.isConnected()){
                                             try {
                                                 fakeClient.setData(nickname, text, nik);
-                                                fakeClient.sendMessage("ROOMCONNECT " + nickname.getText() + " " + text.getText());
+                                                fakeClient.sendMessage("ROOMEXISTS " + nickname.getText() + " " + text.getText());
                                                 Runnable run = new Runnable() {
                                                     @Override
                                                     public void run() {
@@ -82,8 +83,6 @@ public class MultiplayerNumbers extends AppCompatActivity implements IMultiplaye
                                                             roomIntent.putExtra(NICKNAME, nickname.getText() + "");
                                                             startActivity(roomIntent);
                                                             connectDialog.dismiss();
-                                                        }else{
-                                                            Toast.makeText(getApplicationContext(),"Room does not exist.",Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 };

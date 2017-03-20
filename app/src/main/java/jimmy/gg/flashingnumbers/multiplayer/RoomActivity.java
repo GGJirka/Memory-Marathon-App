@@ -1,11 +1,16 @@
 package jimmy.gg.flashingnumbers.multiplayer;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import jimmy.gg.flashingnumbers.R;
@@ -30,6 +35,7 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        MultiplayerNumbers.setState(MultiplayerState.INROOM);
         setTitle("In room "+getRoomName());
         connectedUsers = (ListView) findViewById(R.id.connected_players);
         users = new ArrayList<>();
@@ -42,6 +48,7 @@ public class RoomActivity extends AppCompatActivity {
         connectedUsers.setAdapter(adapter);
         String message = getRoomName()+"";
         client.setData(users, adapter,getNickname()+"", message);
+        client.setData(getRoomName(),this);
         client.sendMessage("ROOMCONNECT "+getNickname()+" " +getRoomName());
     }
 
@@ -51,8 +58,29 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     public void click(View view){
-        //client.setData(getRoomName(),this);
-        //client.sendMessage("ROOMSTART "+getRoomName());
+        View selects = LayoutInflater.from(this).inflate(R.layout.room_start_select,null);
+        final EditText round = (EditText) selects.findViewById(R.id.amount_rounds_edit);
+        final EditText numbers = (EditText) selects.findViewById(R.id.amount_numbers_edit);
+
+        new AlertDialog.Builder(this)
+                .setView(selects)
+                .setPositiveButton("START", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        if(round.getText().length()!=0){
+                            Toast.makeText(getApplicationContext(),"Enter amount of rounds",Toast.LENGTH_SHORT).show();
+                            if(numbers.getText().length()!=0){
+                                client.sendMessage("ROOMSTART "+getRoomName()+" "+round.getText()+" "+numbers.getText());
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Enter amount of numbers",Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Enter amount of rounds",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setCancelable(true)
+                .show();
     }
 
     public String getRoomName(){

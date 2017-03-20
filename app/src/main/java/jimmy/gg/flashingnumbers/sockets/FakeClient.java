@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,8 +28,10 @@ import jimmy.gg.flashingnumbers.multiplayer.RoomActivity;
 
 public class FakeClient extends AppCompatActivity implements IFakeClient{
 
-    public final String ROOMNAME = "ROOMNAME";
-    public final String NICKNAME = "NICKNAME";
+    /*public final String ROOMNAME = "ROOMNAME";
+    public final String NICKNAME = "NICKNAME";*/
+    public final String ROOMROUNDS = "ROOMROUNDS";
+    public final String ROOMNUMBERS = "ROOMNUMBERS";
     private Socket clientSocket;
     private BufferedWriter bw;
     private String message = "";
@@ -47,21 +50,18 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
         this.roomName = roomNam;
         this.nickname = username;
     }
-
-    public void setData(EditText username,EditText room,TextView view){
+    public void setData(EditText username,EditText room,TextView view/*Context contex*/){
         this.username = username;
         this.room = room;
+        this.context = context;
         this.view = view;
     }
-    public void setData(String username, String roomName,Context context){
-        this.nickname = username;
-        this.roomName = roomName;
-        this.context = context;
-    }
+
     public void setData(String roomname, Context context){
         this.roomName = roomname;
         this.context = context;
     }
+
     @Override
     public void startSocket(){
         new Thread(new SocketThread()).start();
@@ -133,13 +133,19 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                             if (message != null) {
                                 if (MultiplayerNumbers.GAMESTATE.equals(MultiplayerState.INMENU)) {
                                     //WHEN CONNECTING
-                                    Runnable run = new Runnable() {
+                                    Runnable run = new Runnable(){
                                         @Override
-                                        public void run() {
+                                        public void run(){
                                             if (message.split(" ")[0].equals("NOEXISTROOM")) {
+                                                Toast.makeText(context,"Room doesnt exist.",Toast.LENGTH_SHORT).show();
                                                 view.setText("no");
-                                            } else {
+                                            } else{
                                                 view.setText("working");
+                                               /* Intent intent = new Intent(context,RoomActivity.class);
+                                                intent.putExtra(ROOMNAME, username.getText() + "");
+                                                intent.putExtra(NICKNAME, room.getText() + "");
+                                                context.startActivity(intent);
+                                                MultiplayerNumbers.setState(MultiplayerState.INROOM);*/
                                             }
                                         }
                                     };
@@ -188,7 +194,9 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                                                 runOnUiThread(run);
                                             }else if(message.split(" ")[0].equals("ROOMSTART")){
                                                 if(roomName.equals(message.split(" ")[1])){
-                                                    Intent intent = new Intent(context, RoomActivity.class);
+                                                    Intent intent = new Intent(context, MultiplayerNumbers.class);
+                                                    intent.putExtra(ROOMROUNDS,message.split(" ")[2]);
+                                                    intent.putExtra(ROOMNUMBERS,message.split(" ")[3]);
                                                     context.startActivity(intent);
                                                 }
                                             }
@@ -202,13 +210,12 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                                             Score score = new Score(message.split(" ")[2], true);
                                             if (!findUserByName(score)) {
                                                 users.add(score);
-                                                Runnable run = new Runnable() {
+                                                runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
                                                         adapter.notifyDataSetChanged();
                                                     }
-                                                };
-                                                runOnUiThread(run);
+                                                });
                                             }
                                         }
                                     }
