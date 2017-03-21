@@ -68,7 +68,6 @@ public class RoomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         if(round.getText().length()!=0){
-                            Toast.makeText(getApplicationContext(),"Enter amount of rounds",Toast.LENGTH_SHORT).show();
                             if(numbers.getText().length()!=0){
                                 client.sendMessage("ROOMSTART "+getRoomName()+" "+round.getText()+" "+numbers.getText());
                             }else{
@@ -86,9 +85,11 @@ public class RoomActivity extends AppCompatActivity {
     public String getRoomName(){
         return this.getIntent().getStringExtra(ROOMNAME);
     }
+
     public String getNickname(){
         return this.getIntent().getStringExtra(NICKNAME);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         this.finish();

@@ -15,7 +15,7 @@
         android:textAlignment="center"
         android:textSize="25dp"
         android:textColor="@color/black"
-        android:text="545461215"
+        android:text="54546121551515651548489"
         android:id="@+id/multiplayer_numbers_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"/>
@@ -27,5 +27,6 @@
         android:layout_below="@+id/multiplayer_numbers_text"
         android:id="@+id/multiplayer_remember_button"
         android:layout_centerHorizontal="true"
+        android:onClick="onRemember"
         android:layout_marginTop="20dp"/>
 </RelativeLayout>

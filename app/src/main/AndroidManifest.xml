@@ -109,7 +109,8 @@
             android:name=".multiplayer.RoomActivity"
             android:theme="@style/NumbersStyle" />
         <activity android:name=".multiplayer.MP" />
-        <activity android:name=".multiplayer.MultiplayerGame"></activity>
+        <activity android:name=".multiplayer.MultiplayerGame"
+            android:theme="@style/NumbersStyle"/>
     </application>
 
 </manifest>

@@ -18,8 +18,10 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 
 import jimmy.gg.flashingnumbers.highscore.Score;
+import jimmy.gg.flashingnumbers.multiplayer.MultiplayerGame;
 import jimmy.gg.flashingnumbers.multiplayer.MultiplayerNumbers;
 import jimmy.gg.flashingnumbers.multiplayer.MultiplayerState;
 import jimmy.gg.flashingnumbers.multiplayer.RoomActivity;
@@ -194,9 +196,15 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                                                 runOnUiThread(run);
                                             }else if(message.split(" ")[0].equals("ROOMSTART")){
                                                 if(roomName.equals(message.split(" ")[1])){
-                                                    Intent intent = new Intent(context, MultiplayerNumbers.class);
-                                                    intent.putExtra(ROOMROUNDS,message.split(" ")[2]);
-                                                    intent.putExtra(ROOMNUMBERS,message.split(" ")[3]);
+                                                    Intent intent = new Intent(context, MultiplayerGame.class);
+                                                    int rounds = Integer.parseInt(message.split(" ")[2]);
+                                                    int numbers = Integer.parseInt(message.split(" ")[3]);
+
+                                                    StringBuilder builder = new StringBuilder();
+                                                    for(int i=0;i<numbers;i++){
+                                                        builder.append(new Random().nextInt(10));
+                                                    }
+                                                    intent.putExtra(ROOMNUMBERS,builder.toString());
                                                     context.startActivity(intent);
                                                 }
                                             }
