@@ -162,7 +162,7 @@ public class FakeClient extends AppCompatActivity implements IFakeClient{
                                                             };
                                                             runOnUiThread(run);
                                                             try {
-                                                                Thread.sleep(600);
+                                                                Thread.sleep(2000);
                                                                 if (nickname != null) {
                                                                     sendMessage("ROOMCONNECT " + nickname + " " + message.split(" ")[2]);
                                                                 }

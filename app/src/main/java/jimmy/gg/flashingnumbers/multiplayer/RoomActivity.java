@@ -42,7 +42,7 @@ public class RoomActivity extends AppCompatActivity {
         connectedUsers.setAdapter(adapter);
         String message = getRoomName()+"";
         client.setData(users, adapter,getNickname()+"", message);
-        client.sendMessage("ROOMCONNECT "+getNickname()+" " +getRoomName());
+        client.sendMessage("ROOMCONNECT "+getNickname()+" "+getRoomName());
     }
 
     public void onResume(){
